@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="css/semantic.min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<meta charset="UTF-8">
+	<title>Alta - Alojamiento</title>
+</head>
+
+<body>
+	<!-- Steps container -->
+	<div class="ui container">
+		<div class="ui four steps">
+			<div class="completed step">
+				<i class="calendar icon"></i>
+				<div class="content">
+					<div class="title">Fechas y ocupantes</div>
+				</div>
+			</div>
+			<div class="active step">
+				<i class="home icon"></i>
+				<div class="content">
+					<div class="title">Alojamiento</div>
+				</div>
+			</div>
+			<!--<div class="disabled step">
+				<i class="user icon"></i>
+				<div class="content">
+					<div class="title">Huésped</div>
+				</div>
+			</div>-->
+			<div class="disabled step">
+				<i class="payment icon"></i>
+				<div class="content">
+					<div class="title">Resumen y tarifas</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Contenedor de formulario -->
+	<div class="ui raised container segment">
+		<h2 class="ui dividing header">
+			<i class="home icon"></i>
+			Habitaciones disponibles
+		</h2>
+
+		<div class="ui three stackable cards">
+			<div class="card">
+				<div class="image">
+					<img src="images/habitacion_1.jpg">
+				</div>
+				<div class="content">
+					<div class="header">Habitación 12</div>
+					<div class="description">
+						Esta habitación ofrece una mezcla de innovación con detalles clásicos.
+					</div>
+				</div>
+				<div class="extra content">
+					<span>
+						<i class="bed icon"></i>
+						1 matrimonio / 2 individuales
+					</span>
+					<span class="right floated">
+						<i class="user icon"></i>
+						2 adultos<br />
+						<i class="child icon"></i>
+						2 niños
+					</span>
+				</div>
+				<div class="ui green bottom attached button">
+					<i class="add to cart icon"></i>
+					Seleccionar
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="image">
+					<img src="images/habitacion_2.jpg">
+				</div>
+				<div class="content">
+					<div class="header">Habitación 23</div>
+					<div class="description">
+						Para quién quiere experimentar la naturaleza en estado puro, esta es su elección.
+					</div>
+				</div>
+				<div class="extra content">
+					<span>
+						<i class="bed icon"></i>
+						2 individuales
+					</span>
+					<span class="right floated">
+						<i class="user icon"></i>
+						2 adultos<br />
+						<i class="child icon"></i>
+						0 niños
+					</span>
+				</div>
+				<div class="ui green bottom attached button">
+					<i class="add to cart icon"></i>
+					Seleccionar
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="image">
+					<img src="images/habitacion_3.jpg">
+				</div>
+				<div class="content">
+					<div class="header">Habitación 34</div>
+					<div class="description">
+						Detalles clásicos hacen de esta habitación el lugar de descanso ideal.
+					</div>
+				</div>
+				<div class="extra content">
+					<span>
+						<i class="bed icon"></i>
+						1 matrimonio / 2 individuales
+					</span>
+					<span class="right floated">
+						<i class="user icon"></i>
+						4 adultos<br />
+						<i class="child icon"></i>
+						2 niños
+					</span>
+				</div>
+				<div class="ui green bottom attached button">
+					<i class="add to cart icon"></i>
+					Seleccionar
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="ui right aligned container">
+		<div class="ui buttons botonera">
+			<button class="ui red labeled icon button" onClick="$('.ui.basic.modal').modal('show');">
+				<i class="remove icon"></i>
+				Cancelar
+			</button>
+			<button class="ui primary labeled icon button" onClick="document.location = 'reserva1.html'">
+				<i class="left arrow icon"></i>
+				Anterior
+			</button>
+			<div class="or" data-text=""></div>
+			<button class="ui green right labeled icon button" onClick="document.location = 'reserva4.html'">
+				<i class="right arrow icon"></i>
+				Siguiente
+			</button>
+		</div>
+	</div>
+
+	<div class="ui basic small modal">
+		<div class="ui icon header">
+			<i class="warning sign icon"></i>
+			Cancelar la reserva
+		</div>
+		<div class="content">
+			<p>Actualmente, hay una reserva en curso. Si decides continuar se cancelará dicha reserva. ¿Quieres continuar?</p>
+		</div>
+		<div class="actions">
+			<div class="ui red cancel inverted button">
+				<i class="remove icon"></i>
+				No
+			</div>
+			<div class="ui green ok inverted button">
+				<i class="checkmark icon"></i>
+				Sí
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery-1.12.4.min.js"></script>
+	<script src="js/semantic.min.js" /></script>
+</body>
+</html>

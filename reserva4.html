@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="css/semantic.min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/print.css" media="print" />
+	<meta charset="UTF-8">
+	<title>Reserva 34592 - José Antonio Fuentes Santiago</title>
+</head>
+<body>
+	<!-- Steps container -->
+	<div class="ui container">
+		<div class="ui four steps">
+			<div class="completed step">
+				<i class="calendar icon"></i>
+				<div class="content">
+					<div class="title">Fechas y ocupantes</div>
+				</div>
+			</div>
+			<div class="completed step">
+				<i class="home icon"></i>
+				<div class="content">
+					<div class="title">Alojamiento</div>
+				</div>
+			</div>
+			<!--<div class="completed step">
+				<i class="user icon"></i>
+				<div class="content">
+					<div class="title">Huésped</div>
+				</div>
+			</div>-->
+			<div class="active step">
+				<i class="payment icon"></i>
+				<div class="content">
+					<div class="title">Resumen y tarifas</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Contenedor de formulario -->
+	<div class="ui raised container segment form">
+		<h2 class="ui dividing header">
+			<i class="file text outline icon"></i>
+			Resumen de la reserva 34592
+		</h2>
+
+		<!-- Formulario -->
+		<table class="ui definition unstackable table">
+			<tbody>
+				<tr>
+					<td class="four wide column">Fechas</td>
+					<td>21/12/2020 - 26/12/2020 (4 noches)</td>
+				</tr>
+				<tr>
+					<td class="four wide column">Huéspedes</td>
+					<td>3 personas</td>
+				</tr>
+				<tr>
+					<td class="four wide column">Habitación seleccionada</td>
+					<td>Habitación 12</td>
+				</tr>
+				<tr>
+					<td class="four wide colum">Nombre y apellidos</td>
+					<td>José Antonio Fuentes Santiago</td>
+				</tr>
+				<tr>
+					<td class="four wide colum">País</td>
+					<td>España</td>
+				</tr>
+				<tr>
+					<td class="four wide colum">Documento identificativo</td>
+					<td>99123456A</td>
+				</tr>
+				<tr>
+					<td class="four wide colum"> Teléfono / Móvil</td>
+					<td>+34666111222</td>
+				</tr>
+				<tr>
+					<td class="four wide colum"> E-mail</td>
+					<td>jose_antonio_fuentes_santiago@unemail.com</td>
+				</tr>
+				<tr>
+					<td class="four wide colum">Observaciones</td>
+					<td>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit sem eu magna tristique pretium. Nullam egestas, turpis vehicula luctus malesuada, enim dolor ullamcorper justo, eget dapibus diam dolor non est. Quisque pulvinar sapien vel aliquet tempor. Integer et tellus enim. In consectetur pellentesque pretium. Pellentesque nec lobortis risus. Duis non placerat risus, ut ultricies sapien. Praesent ullamcorper lacus dapibus ex venenatis, sed ultrices ipsum dignissim. Pellentesque a massa ut justo lacinia convallis a at nulla. Nullam fringilla, arcu venenatis ultrices sollicitudin, massa lectus facilisis neque, et lacinia nulla est fermentum dolor. Suspendisse condimentum molestie convallis. Cras dictum purus eu convallis faucibus. Cras ornare vitae ligula eu egestas.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h2 class="ui dividing header">
+			<i class="euro icon"></i>
+			Precio del alojamiento
+		</h2>
+
+		<table class="ui unstackable table">
+			<thead>
+				<tr>
+					<th>Tarifa</th>
+					<th>Concepto</th>
+					<th class="two wide column">Importe</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Temporada baja</td>
+					<td>Noches 21 a 23</td>
+					<td class="positive">180,00 €</td>
+				</tr>
+				<tr>
+					<td>Temporada alta</td>
+					<td>Noches 24 y 25</td>
+					<td class="positive">140,00 €</td>
+				</tr>
+				<tr>
+					<td>Descuento</td>
+					<td>Familia numerosa (20 %)</td>
+					<td class="negative">-64,00 €</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="2" class="right aligned"><strong>Total:</strong></th>
+					<th><strong>256,00 €</strong></th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+	<div class="ui right aligned container">
+		<div class="ui buttons botonera">
+			<button class="ui red labeled icon button" onClick="$('.ui.basic.modal').modal('show');">
+				<i class="remove icon"></i>
+				Cancelar
+			</button>
+			<button class="ui primary labeled icon button" onClick="document.location = 'reserva2.html'">
+				<i class="left arrow icon"></i>
+				Anterior
+			</button>
+			<div class="or" data-text=""></div>
+			<button class="ui green right labeled icon button">
+				<i class="right arrow icon"></i>
+				Confirmar
+			</button>
+
+			<button class="ui labeled icon button separated" onClick="window.print();">
+				<i class="print icon"></i>
+				Imprimir
+			</button>
+		</div>
+	</div>
+
+	<div class="ui basic small modal">
+		<div class="ui icon header">
+			<i class="warning sign icon"></i>
+			Cancelar la reserva
+		</div>
+		<div class="content">
+			<p>Actualmente, hay una reserva en curso. Si decides continuar se cancelará dicha reserva. ¿Quieres continuar?</p>
+		</div>
+		<div class="actions">
+			<div class="ui red cancel inverted button">
+				<i class="remove icon"></i>
+				No
+			</div>
+			<div class="ui green ok inverted button">
+				<i class="checkmark icon"></i>
+				Sí
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery-1.12.4.min.js"></script>
+	<script src="js/semantic.min.js" /></script>
+</body>
+</html>

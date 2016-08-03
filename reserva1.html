@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="css/semantic.min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<meta charset="UTF-8">
+	<title>Alta - Fechas y ocupantes</title>
+</head>
+
+<body>
+	<!-- Steps container -->
+	<div class="ui container">
+		<div class="ui four steps">
+			<div class="active step">
+				<i class="calendar icon"></i>
+				<div class="content">
+					<div class="title">Fechas y ocupantes</div>
+				</div>
+			</div>
+			<div class="disabled step">
+				<i class="home icon"></i>
+				<div class="content">
+					<div class="title">Alojamiento</div>
+				</div>
+			</div>
+			<!--<div class="disabled step">
+				<i class="user icon"></i>
+				<div class="content">
+					<div class="title">Huésped</div>
+				</div>
+			</div>-->
+			<div class="disabled step">
+				<i class="payment icon"></i>
+				<div class="content">
+					<div class="title">Resumen y tarifas</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Contenedor de formulario -->
+	<div class="ui raised container segment form">
+		<h2 class="ui dividing header">
+			<i class="calendar icon"></i>
+			Fechas y ocupantes
+		</h2>
+
+		<!-- Formulario -->
+		<div class="fields">
+			<div class="six wide field">
+				<label for="start_date">Fecha de entrada</label>
+				<div class="ui action input">
+					<input type="text" placeholder="Fecha de entrada" id="start_date"  value="26/12/2020">
+					<button class="ui primary icon button">
+						<i class="calendar icon"></i>
+					</button>
+				</div>
+			</div>
+
+			<div class="six wide field">
+				<label for="end_date">Fecha de salida</label>
+				<div class="ui action input">
+					<input type="text" placeholder="Fecha de salida" id="end_date" value="26/12/2020">
+					<button class="ui primary icon button">
+						<i class="calendar icon"></i>
+					</button>
+				</div>
+			</div>
+			
+			<div class="four wide field">
+				<label for="adults">Huéspedes</label>
+				<div class="ui left icon input">
+					<input type="text" id="adults" value="2" />
+					<i class="user icon"></i>
+				</div>
+			</div>
+		</div>
+		
+		<h2 class="ui dividing header">
+			<i class="user icon"></i>
+			Huésped/a principal
+		</h2>
+
+		<!-- Formulario -->
+		<div class="field">
+			<label>Nombre y apellidos</label>
+			<div class="two fields">
+				<div class="field">
+					<input type="text" name="nombre" placeholder="Nombre" value="José Antonio">
+				</div>
+				<div class="field">
+					<input type="text" name="apellidos" placeholder="Apellidos" value="Fuentes Santiago">
+				</div>
+			</div>
+		</div>
+
+		<div class="three fields">
+			<div class="field">
+				<label>País</label>
+				<div class="ui selection dropdown">
+					<input type="hidden" name="country" value="es">
+					<i class="dropdown icon"></i>
+					<div class="default text">Selecciona el país</div>
+					<div class="menu">
+						<div class="item" data-value="al"><i class="al flag"></i>Albania</div>
+						<div class="item" data-value="de"><i class="de flag"></i>Alemania</div>
+						<div class="item" data-value="ad"><i class="ad flag"></i>Andorra</div>
+						<div class="item" data-value="am"><i class="am flag"></i>Armenia</div>
+						<div class="item" data-value="at"><i class="at flag"></i>Austria</div>
+						<div class="item" data-value="be"><i class="be flag"></i>Bélgica</div>
+						<div class="item" data-value="by"><i class="by flag"></i>Bielorrusia</div>
+						<div class="item" data-value="ba"><i class="ba flag"></i>Bosnia</div>
+						<div class="item" data-value="bg"><i class="bg flag"></i>Bulgaria</div>
+						<div class="item" data-value="cy"><i class="cy flag"></i>Chipre</div>
+						<div class="item" data-value="hr"><i class="hr flag"></i>Croacia</div>
+						<div class="item" data-value="dk"><i class="dk flag"></i>Dinamarca</div>
+						<div class="item" data-value="si"><i class="si flag"></i>Eslovenia</div>
+						<div class="item" data-value="es"><i class="es flag"></i>España</div>
+						<div class="item" data-value="ee"><i class="ee flag"></i>Estonia</div>
+						<div class="item" data-value="fr"><i class="fr flag"></i>Francia</div>
+						<div class="item" data-value="gi"><i class="gi flag"></i>Gibraltar</div>
+						<div class="item" data-value="gr"><i class="gr flag"></i>Grecia</div>
+						<div class="item" data-value="nl"><i class="nl flag"></i>Holanda</div>
+						<div class="item" data-value="ie"><i class="ie flag"></i>Irlanda</div>
+						<div class="item" data-value="it"><i class="it flag"></i>Italia</div>
+						<div class="item" data-value="lu"><i class="lu flag"></i>Luxemburgo</div>
+						<div class="item" data-value="mt"><i class="mt flag"></i>Malta</div>
+						<div class="item" data-value="pl"><i class="pl flag"></i>Polonia</div>
+						<div class="item" data-value="pt"><i class="pt flag"></i>Portugal</div>
+						<div class="item" data-value="gb"><i class="gb flag"></i>Reino Unido</div>
+						<div class="item" data-value="cz"><i class="cz flag"></i>República Checa</div>
+						<div class="item" data-value="ro"><i class="ro flag"></i>Rumanía</div>
+						<div class="item" data-value="ru"><i class="ru flag"></i>Rusia</div>
+						<div class="item" data-value="cs"><i class="cs flag"></i>Serbia</div>
+						<div class="item" data-value="se"><i class="se flag"></i>Suecia</div>
+						<div class="item" data-value="ch"><i class="ch flag"></i>Suiza</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="field">
+				<label for="nif">Documento identificativo</label>
+				<div class="ui action input">
+					<input type="text" id="nif" value="99123456A" />
+					<button class="ui primary button">Buscar...</button>
+				</div>
+			</div>
+
+			<div class="field">
+				<label for="phone">Teléfono / Móvil</label>
+				<input type="text" class="ui input" id="phone" value="+34666111222" />
+			</div>
+		</div>
+
+		<div class="field">
+			<label for="email">E-mail</label>
+			<input type="text" class="ui input" id="email" value="jose_antonio_fuentes_santiago@unemail.com" />
+		</div>
+
+		<div class="field">
+			<label for="observations">Observaciones</label>
+			<textarea id="observations" class="ui input" rows="3"></textarea>
+		</div>
+	</div>
+
+	<div class="ui right aligned container">
+		<div class="ui buttons botonera">
+			<button class="ui red labeled icon button" onClick="$('.ui.basic.modal').modal('show');">
+				<i class="remove icon"></i>
+				Cancelar
+			</button>
+
+			<button class="ui green right labeled icon button" onClick="document.location = 'reserva2.html'">
+				<i class="right arrow icon"></i>
+				Siguiente
+			</button>
+		</div>
+	</div>
+
+
+	<div class="ui basic small modal">
+		<div class="ui icon header">
+			<i class="warning sign icon"></i>
+			Cancelar la reserva
+		</div>
+		<div class="content">
+			<p>Actualmente, hay una reserva en curso. Si decides continuar se cancelará dicha reserva. ¿Quieres continuar?</p>
+		</div>
+		<div class="actions">
+			<div class="ui red cancel inverted button">
+				<i class="remove icon"></i>
+				No
+			</div>
+			<div class="ui green ok inverted button">
+				<i class="checkmark icon"></i>
+				Sí
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery-1.12.4.min.js"></script>
+	<script src="js/semantic.min.js" /></script>
+</body>
+</html>

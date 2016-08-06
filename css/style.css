@@ -39,3 +39,24 @@ h3 {
 .ui.steps .step:last-child:after {
 	visibility: hidden;
 }
+
+
+@media (max-width: 480px) {
+	.botonera {
+		width: 100%;
+	}
+
+	.ui.buttons.botonera .ui.button {
+		width: 33%;
+		display: block;
+		padding-left: 3em !important;
+	}
+
+	.ui.buttons.botonera .ui.button:first-child {
+		width: calc(33% - 10px);
+	}
+
+	.ui.buttons.botonera .ui.button:last-child {
+		padding-left: 1em !important;
+	}
+}

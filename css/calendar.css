@@ -10,9 +10,17 @@ caption .ui.label {
 	height: calc(100% - 37px);
 }
 
+.calendar-table tbody td {
+	height: 98px;
+}
+
 @media only screen and (max-width: 500px) {
 	.ui.mini.horizontal.statistic>.value, .ui.mini.statistic>.value {
-		font-size: 1.2rem;
+		font-size: 0.8rem;
+	}
+
+	.calendar-table tbody td {
+		height: 84px;
 	}
 }
 
@@ -24,10 +32,6 @@ caption .ui.label {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-}
-
-.calendar-table tbody td {
-	height: 98px;
 }
 
 .calendar-table.ui.table {

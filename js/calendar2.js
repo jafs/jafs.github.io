@@ -188,7 +188,7 @@ $('.calendar-table').on('click', 'td', function(event) {
 		var day = event.currentTarget.getAttribute('data-day');
 		var html = '<div class="header">Habitación ' + room + '</div>';
 
-		if (event.currentTarget.getAttribute('class') === 'negative') {
+		if (event.currentTarget.getAttribute('class') === 'positive') {
 			html += '<div class="content">La habitación está libre</div>';
 		} else {
 			html += '<div class="content"><a href="#" title="Detalles de la reserva" ' +

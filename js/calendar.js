@@ -27,12 +27,9 @@ function createCell(day) {
 
 	ocupadas = Math.floor(Math.random() * 100 % 10) % 4;
 
-	if (ocupadas === 3) {
+	if (ocupadas > 0) {
 		status = 'positive';
 		color = 'green';
-	} else if (ocupadas >= 1) {
-		status = 'warning';
-		color = 'orange';
 	}
 
 	div = document.createElement('a');

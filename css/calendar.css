@@ -43,11 +43,7 @@ caption .ui.label {
 }
 
 .calendar-table.ui.table td.negative {
-	background: #FFF0F0 !important;
-}
-
-.calendar-table.ui.table td.warning {
-	background: #EFEAC6 !important
+	background: #FFE0E0 !important;
 }
 
 .calendar-table .ui.statistics>.statistic {

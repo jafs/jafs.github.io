@@ -1,15 +1,17 @@
 body {
-	background-color: #DADADA;
-}
+  background-color: #DADADA; }
 
-body > .grid {
-	height: 100%;
-}
+.ui.grid.loginCtrl {
+  padding-top: 5vh;
+  width: 400px;
+  max-width: 100%;
+  margin-left: calc(50% - 200px); }
+  @media (max-width: 480px) {
+    .ui.grid.loginCtrl {
+      margin-left: 0;
+      height: 100vh;
+      padding-top: 0; } }
+  .ui.grid.loginCtrl .languages {
+    width: 100%; }
 
-.column {
-	max-width: 450px;
-}
-
-.ui.fixed.menu+.ui.grid.loginCtrl {
-	padding-top: 120px;
-}
+/*# sourceMappingURL=styles.css.map */

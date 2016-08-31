@@ -1,0 +1,18 @@
+<div class="ui top fixed menu">
+	<div class="ui header brown item">
+		<img src="images/logo.png" class="image">
+		{{i18n.root.loginTitle}}
+	</div>
+	<div class="right aligned item">
+		<div class="ui selection dropdown languages">
+			<input type="hidden" name="lang">
+			<i class="dropdown icon"></i>
+			<div class="default text">{{selectLanguage}}</div>
+			<div class="menu">
+				{{#langs}}
+					<div class="item" data-value="{{data}}"><i class="{{flag}} flag"></i>{{lang}}</div>
+				{{/langs}}
+			</div>
+		</div>
+	</div>
+</div>

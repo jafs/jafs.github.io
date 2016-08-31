@@ -1,0 +1,16 @@
+.ui.grid.loginCtrl {
+	padding-top: 5vh;
+	width: 400px;
+	max-width: 100%;
+	margin-left: calc(50% - 200px);
+
+	@media (max-width: 480px) {
+		margin-left: 0;
+		height: 100vh;
+		padding-top: 0;
+	}
+
+	.languages {
+		width: 100%;
+	}
+}

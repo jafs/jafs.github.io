@@ -21,6 +21,8 @@ var app = new function() {
 		}
 	};
 
+	this.version = '0.0.0.2';
+
 	this.showLoading = function() {
 		_$body.dimmer({closable: false}).dimmer('show');
 	};
@@ -75,6 +77,19 @@ var app = new function() {
 			callback();
 		});
 	};
+
+	this.loadController = function(name) {
+		var _this = this;
+
+		this.showLoading();
+
+		require(['controllers/' + name], function (Controller) {
+			var controller = new Controller();
+
+			_this.hideLoading();
+			controller.init();
+		});
+	};
 };
 
 app.loadConfig();
@@ -82,6 +97,7 @@ app.loadConfig();
 
 require.config({
 	baseUrl: 'src',
+	urlArgs: 'no-cache=' + app.version,
 	config: {
 		// Set the config for the i18n module ID
 		i18n: {
@@ -90,10 +106,10 @@ require.config({
 	}
 });
 
-app.showLoading();
+app.loadController('LoginCtrl');
 
-require(['controllers/LoginCtrl'], function (LoginCtrl) {
+/*require(['controllers/LoginCtrl'], function (LoginCtrl) {
 	var loginCtrl = new LoginCtrl();
 	loginCtrl.init();
 	app.hideLoading();
-});
+});*/

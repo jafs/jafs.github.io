@@ -15,7 +15,7 @@ define(['i18n!src/nls/login.js?_=' + new Date().toISOString(), 'models/languages
 			};
 
 			app.loadView(this.VIEW_NAME, data, this._onViewLoaded.bind(this));
-		},
+		};
 
 		this._onViewLoaded = function() {
 			this._prepareForm();
@@ -57,8 +57,8 @@ define(['i18n!src/nls/login.js?_=' + new Date().toISOString(), 'models/languages
 					}
 				},
 				onSuccess: function(event) {
-					app.showLoading();
 					event.preventDefault();
+					app.loadController('HomeCtrl');
 				}
 			});
 		};

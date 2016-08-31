@@ -14,4 +14,10 @@ body {
   .ui.grid.loginCtrl .languages {
     width: 100%; }
 
+.ui.grid.home-ctrl {
+  background-color: #FFF;
+  margin: 0; }
+  .ui.grid.home-ctrl > .container {
+    margin-top: 10px; }
+
 /*# sourceMappingURL=styles.css.map */

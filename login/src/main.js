@@ -99,17 +99,12 @@ require.config({
 	baseUrl: 'src',
 	urlArgs: 'no-cache=' + app.version,
 	config: {
-		// Set the config for the i18n module ID
 		i18n: {
 			locale: app.getSetting('language')
 		}
 	}
 });
 
-app.loadController('LoginCtrl');
 
-/*require(['controllers/LoginCtrl'], function (LoginCtrl) {
-	var loginCtrl = new LoginCtrl();
-	loginCtrl.init();
-	app.hideLoading();
-});*/
+// TODO: descomentar en producción
+app.loadController('LoginCtrl');

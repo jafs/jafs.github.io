@@ -41,9 +41,16 @@
 			Habitaciones disponibles
 		</h2>
 
-		<div class="ui three stackable cards">
+		<div class="ui four stackable cards">
 			<div class="card">
 				<div class="image">
+					<div class="ui dimmer">
+						<div class="content">
+							<div class="center">
+								<div class="ui inverted button">Más información</div>
+							</div>
+						</div>
+					</div>
 					<img src="images/habitacion_1.jpg">
 				</div>
 				<div class="content">
@@ -167,5 +174,10 @@
 
 	<script src="js/jquery-1.12.4.min.js"></script>
 	<script src="js/semantic.min.js" /></script>
+	<script>
+		$('.image').dimmer({
+			on: 'hover'
+		});
+	</script>
 </body>
 </html>

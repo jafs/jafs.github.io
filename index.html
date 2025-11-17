@@ -4,33 +4,71 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>José Antonio Fuentes Santiago</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dist.css">
 </head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title">José Antonio Fuentes Santiago</h1>
-      <nav>
-        <a href="/index.html">Inicio</a>
-        <a href="/articles/">Artículos</a>
-        <a href="/books/">Libros</a>
-        <a href="/about.html">Sobre mí</a>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-gray-800 text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <h1 class="text-2xl font-bold">JAFS</h1>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-white font-semibold">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    <section>
-      <h3>Último artículo</h3>
-      <article class="teaser">
-        <h4><a href="/articles/posts/20240301.html">Aritmética binaria</a> — <time>2024-03-01</time></h4>
-        <p>Hoy vamos a ver algo que se sale un poco de la tónica habitual de este blog. Pero, siempre viene bien volver a las bases de la informática. Así que espero que esta pequeña introducción al sistema binario y a su aritmética, pueda serte útil.</p>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <!-- Anuncio del libro -->
+    <section class="mb-8 bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-500 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
+      <div class="flex flex-col md:flex-row gap-6">
+        <a href="/books/" class="flex-shrink-0 mx-auto md:mx-0">
+          <img src="/images/survive-zombi-mini.webp" alt="Portada: Guía de Programación en un Apocalipsis Zombie" class="shadow-lg rounded hover:scale-110 transition-transform" style="width: 146px; height: 200px" />
+        </a>
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <h2 class="text-2xl font-bold text-gray-900">¡Nuevo libro disponible!</h2>
+          </div>
+          <p class="text-gray-700 mb-3">
+            <a href="/books/" class="hover:underline"><strong>Guía de Programación en un Apocalipsis Zombie</strong></a> — Aprende TypeScript mientras sobrevives al fin del mundo.
+          </p>
+          <p class="text-gray-600 mb-4">
+            Una experiencia inmersiva que combina narrativa, práctica y metáforas visuales para aprender programación moderna.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="https://amzn.eu/d/fddQ4Fe" class="inline-block text-blue-600 hover:text-blue-800 font-semibold px-4 py-2 rounded transition-colors">
+              Tapa dura
+            </a>
+            <a href="https://amzn.eu/d/9vzHsil" class="inline-block text-blue-600 hover:text-blue-800 font-semibold px-4 py-2 rounded transition-colors">
+              Tapa blanda
+            </a>
+            <a href="https://leanpub.com/guadeprogramacinenunapocalipsiszombi" class="inline-block text-blue-600 hover:text-blue-800 font-semibold px-4 py-2 rounded transition-colors">
+              eBook
+            </a>
+            <a href="/books/" class="inline-block text-gray-600 hover:text-gray-800 font-semibold px-4 py-2 rounded transition-colors">
+              Más información
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-8">
+      <h3 class="text-2xl font-bold mb-6">Último artículo</h3>
+      <article class="border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow bg-white">
+        <h4 class="text-xl font-bold mb-2">
+          <a href="/articles/posts/20240301.html" class="text-blue-600 hover:text-blue-800">Aritmética binaria</a>
+          <span class="text-gray-400 font-normal">—</span>
+          <time class="text-gray-600 text-sm font-normal">2024-03-01</time>
+        </h4>
+        <p class="text-gray-700 leading-relaxed">Hoy vamos a ver algo que se sale un poco de la tónica habitual de este blog. Pero, siempre viene bien volver a las bases de la informática. Así que espero que esta pequeña introducción al sistema binario y a su aritmética, pueda serte útil.</p>
       </article>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">© 2025 — Mi Blog</div>
+  <footer class="bg-gray-800 text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
   </footer>
 
   <script src="/js/main.js"></script>

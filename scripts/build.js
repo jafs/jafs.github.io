@@ -16,25 +16,27 @@ function template(title, content) {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>${title} — Mi Blog</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dist.css">
 </head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title">Mi Blog</h1>
-      <nav>
-        <a href="/index.html">Inicio</a>
-        <a href="/articles/">Artículos</a>
-        <a href="/books/">Libros</a>
-        <a href="/about.html">Sobre mí</a>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-gray-800 text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <h1 class="text-2xl font-bold">Mi Blog</h1>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
       </nav>
     </div>
   </header>
-  <main class="container post">
-    ${content}
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      ${content}
+    </article>
   </main>
-  <footer class="site-footer">
-    <div class="container">© 2025 — Mi Blog</div>
+  <footer class="bg-gray-800 text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
   </footer>
   <script src="/js/main.js"></script>
 </body>
@@ -77,7 +79,7 @@ async function build() {
       const slug = (meta.slug && String(meta.slug)) || path.basename(f, '.md') + '.html';
 
       const outPath = path.join(OUTPUT_POSTS_DIR, slug);
-      const content = `<article><h2>${title}</h2><p class="meta">${dateDisplay}</p>${html}</article>`;
+      const content = `<h1 class="text-4xl font-bold mb-2">${title}</h1><p class="text-gray-600 text-sm mb-6">${dateDisplay}</p>${html}`;
       await fs.writeFile(outPath, template(title, content), 'utf8');
       posts.push({ title, dateTimestamp, dateDisplay, slug });
       console.log('Built', outPath);
@@ -86,37 +88,37 @@ async function build() {
     // generate index
     // sort by timestamp (descending). Missing timestamps go last.
     posts.sort((a, b) => (b.dateTimestamp || 0) - (a.dateTimestamp || 0));
-    const list = posts.map(p => `<li><a href="/articles/posts/${p.slug}">${p.title}</a> — ${p.dateDisplay}</li>`).join('\n');
+    const list = posts.map(p => `<li class="py-2 border-b border-gray-200"><a href="/articles/posts/${p.slug}" class="text-blue-600 hover:text-blue-800 font-semibold">${p.title}</a> <span class="text-gray-400">—</span> <span class="text-gray-600 text-sm">${p.dateDisplay}</span></li>`).join('\n        ');
     const indexHtml = `<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Artículos — Mi Blog</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dist.css">
 </head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title">Artículos</h1>
-      <nav>
-        <a href="/index.html">Inicio</a>
-        <a href="/articles/">Artículos</a>
-        <a href="/books/">Libros</a>
-        <a href="/about.html">Sobre mí</a>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-gray-800 text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <h1 class="text-2xl font-bold">Artículos</h1>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-white font-semibold">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
       </nav>
     </div>
   </header>
-  <main class="container">
-    <section>
-      <h2>Listado de artículos</h2>
-      <ul class="posts">
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <section class="py-8">
+      <h2 class="text-3xl font-bold mb-6">Listado de artículos</h2>
+      <ul class="list-none space-y-2 bg-white rounded-lg shadow-sm p-6">
         ${list}
       </ul>
     </section>
   </main>
-  <footer class="site-footer">
-    <div class="container">© 2025 — Mi Blog</div>
+  <footer class="bg-gray-800 text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
   </footer>
   <script src="/js/main.js"></script>
 </body>

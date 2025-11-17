@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "scripts": {
     "build": "node scripts/build.js",
-    "start": "npx http-server -p 8080",
-    "build:css": "npx @tailwindcss/cli -i ./css/style.css -o ./css/dist.css --minify",
-    "watch:css": "npx @tailwindcss/cli -i ./css/style.css -o ./css/dist.css --watch"
+    "build:css": "tailwindcss -i ./css/style.css -o ./css/dist.css --minify",
+    "watch:css": "tailwindcss -i ./css/style.css -o ./css/dist.css --watch",
+    "build:all": "npm run build:css && npm run build",
+    "start": "npx http-server -p 8080"
   },
   "dependencies": {
     "gray-matter": "4.0.3",
     "marked": "5.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "0.5.19",
+    "tailwindcss": "3.4.18"
   }
 }

@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
+@tailwind colors;
 @tailwind utilities;
+
+@layer base {
+  .prose code::before,
+  .prose code::after {
+    content: none;
+  }
+}
+
+/* Enlaces azules por defecto, excepto en el header */
+main a,
+footer a:not(header a) {
+	color: #2563eb;
+}
+
+main a:hover,
+footer a:not(header a):hover {
+	color: #1e40af;
+}

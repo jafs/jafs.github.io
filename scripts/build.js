@@ -5,7 +5,8 @@ const matter = require('gray-matter');
 const { marked } = require('marked');
 
 const ROOT = path.resolve(__dirname, '..');
-const POSTS_DIR = path.join(ROOT, 'articles', 'posts');
+const INPUT_POSTS_DIR = path.join(ROOT, 'posts');
+const OUTPUT_POSTS_DIR = path.join(ROOT, 'articles', 'posts');
 const ARTICLES_INDEX = path.join(ROOT, 'articles', 'index.html');
 
 function template(title, content) {
@@ -42,29 +43,50 @@ function template(title, content) {
 
 async function build() {
   try {
-    const files = await fs.readdir(POSTS_DIR);
+    // ensure output directory exists and read markdown source from `posts/`
+    await fs.mkdir(OUTPUT_POSTS_DIR, { recursive: true });
+    const files = await fs.readdir(INPUT_POSTS_DIR);
     const posts = [];
     for (const f of files) {
       if (!f.endsWith('.md')) continue;
-      const full = path.join(POSTS_DIR, f);
+      const full = path.join(INPUT_POSTS_DIR, f);
       const raw = await fs.readFile(full, 'utf8');
       const parsed = matter(raw);
       const html = marked(parsed.content);
       const meta = parsed.data || {};
       const title = meta.title || path.basename(f, '.md');
-      const date = meta.date || '';
-      const slug = meta.slug || path.basename(f, '.md') + '.html';
+      // Normalize date: meta.date can be a Date object (gray-matter parses YAML dates)
+      let dateVal = meta.date || '';
+      let dateTimestamp = 0;
+      let dateDisplay = '';
+      if (dateVal instanceof Date) {
+        dateTimestamp = dateVal.getTime();
+        dateDisplay = dateVal.toISOString().replace('T', ' ').replace(/:\d{2}Z$/, '');
+      } else if (typeof dateVal === 'string' && dateVal.trim()) {
+        const dv = new Date(dateVal);
+        if (!isNaN(dv.getTime())) {
+          dateTimestamp = dv.getTime();
+          dateDisplay = dv.toISOString().replace('T', ' ').replace(/:\d{2}Z$/, '');
+        } else {
+          dateDisplay = dateVal;
+        }
+      } else {
+        dateDisplay = '';
+      }
 
-      const outPath = path.join(POSTS_DIR, slug);
-      const content = `<article><h2>${title}</h2><p class="meta">${date}</p>${html}</article>`;
+      const slug = (meta.slug && String(meta.slug)) || path.basename(f, '.md') + '.html';
+
+      const outPath = path.join(OUTPUT_POSTS_DIR, slug);
+      const content = `<article><h2>${title}</h2><p class="meta">${dateDisplay}</p>${html}</article>`;
       await fs.writeFile(outPath, template(title, content), 'utf8');
-      posts.push({ title, date, slug });
+      posts.push({ title, dateTimestamp, dateDisplay, slug });
       console.log('Built', outPath);
     }
 
     // generate index
-    posts.sort((a,b)=> (b.date||'').localeCompare(a.date||''));
-    const list = posts.map(p => `<li><a href="/articles/posts/${p.slug}">${p.title}</a> — ${p.date}</li>`).join('\n');
+    // sort by timestamp (descending). Missing timestamps go last.
+    posts.sort((a, b) => (b.dateTimestamp || 0) - (a.dateTimestamp || 0));
+    const list = posts.map(p => `<li><a href="/articles/posts/${p.slug}">${p.title}</a> — ${p.dateDisplay}</li>`).join('\n');
     const indexHtml = `<!doctype html>
 <html lang="es">
 <head>

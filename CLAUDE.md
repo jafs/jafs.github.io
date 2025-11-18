@@ -104,7 +104,7 @@ npm start           # Inicia servidor local en puerto 8080
 
 El proyecto usa **utilidades de Tailwind puras**, sin clases CSS personalizadas. Los estilos se aplican directamente en el HTML usando clases como:
 
-- `bg-gray-800 text-white py-4` - Header con fondo oscuro
+- `bg-cyan-800  text-white py-4` - Header con fondo oscuro
 - `max-w-4xl mx-auto px-4` - Contenedor centrado con ancho máximo
 - `prose prose-lg` - Estilos tipográficos para contenido markdown (plugin typography)
 - `hover:text-white transition-colors` - Estados interactivos

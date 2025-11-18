@@ -6,4 +6,6 @@ document.addEventListener('DOMContentLoaded', function(){
       if(location.pathname === a.getAttribute('href')) a.classList.add('active');
     });
   }catch(e){/* no-op */}
+
+  hljs.highlightAll();
 });

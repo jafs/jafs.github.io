@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hablemos de acoplamiento y cohesión. Parte 1 — Mi Blog</title>
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-cyan-800 text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <h1 class="text-2xl font-bold">Mi Blog</h1>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Hablemos de acoplamiento y cohesión. Parte 1</h1><p class="text-gray-600 text-sm mb-6">2023-03-24</p><h2 id="un-poco-de-historia">Un poco de historia</h2>
+<p>Ya hemos hablado del <a href="https://jafs.es/3427/principios-solid-capitulo-s-single-responsibility-principle/">Principio de Responsabilidad Única</a>, y no, no es una idea original de <a href="https://blog.cleancoder.com/">Robert C. Martin</a>, sino que este principio parte del concepto de &quot;<strong>cohesión</strong>&quot;. Es más, el <a href="https://jafs.es/3588/principios-solid-capitulo-d-dependency-inversion-principle/">Principio de Inversión de Dependencias</a>, tampoco es algo original y lo que nos habla es de &quot;<strong>acoplamiento</strong>&quot;.</p>
+<p>Las primeras personas que hablaron de estos dos conceptos, fueron <a href="https://en.wikipedia.org/wiki/Wayne_Stevens_(software_engineer)">Wayne P. Stevens</a>, <a href="https://en.wikipedia.org/wiki/Glenford_Myers">Glenford Myers</a> y <a href="https://en.wikipedia.org/wiki/Larry_Constantine">Larry Constantine</a> en su artículo &quot;<strong>Structured Design</strong>&quot; publicado en 1968 en la revista <em>IBM Systems Journal</em>. Más tarde, en 1978, <a href="https://www.tomdemarco.com/">Tom DeMarco</a>, en su libro &quot;<strong>Structured Analysis and System Specification</strong>&quot;, también describió la importancia de la cohesión como un factor clave para la calidad del software.</p>
+<p>Por lo que a lo largo de este artículo veremos que los conceptos de acoplamiento y cohesión, son la base y el origen de otros principios y patrones que ya conocemos.</p>
+<h2 id="¿qué-es-la-cohesión">¿Qué es la cohesión?</h2>
+<p>La cohesión se refiere a la medida en que los elementos de un módulo((Con el término módulo nos estamos refiriendo a una parte de código con nombre que puede ser llamada desde otra parte y, preferentemente tiene su propio conjunto de variables)) están relacionados y trabajan juntos para cumplir una única función.  Por lo tanto, podemos pensar en ella como un rompecabezas: cuanto mejor encajen las piezas, más alta será la cohesión.</p>
+<p>¿Y qué significa esto? Pues ya que la cohesión nos dice cómo están relacionadas las diferentes partes de un módulo. Si las partes trabajan juntas de manera efectiva para cumplir una tarea específica, se dice que el sistema tiene alta cohesión. Pero si las partes no están bien conectadas o si cada parte hace muchas cosas diferentes, el sistema tendrá baja cohesión.</p>
+<p>Y como un ejemplo en código vale más que mil palabras. Comencemos con esta clase, en la que dejaremos los métodos vacíos porque lo importante es el nombre de éstos:</p>
+<pre><code class="language-typescript">class Library {
+  public lendBook(book: Book, client: Client) { }
+  public returnBook(book: Book, client: Client) { }
+
+  public searchBookByAuthor(author: string) { }
+  public searchBookByTitle(title: string) { }
+
+  public addClient(client: Client) { }
+  public deleteClient(client: Client) { }
+}
+</code></pre>
+<p>Se puede ver que la clase Library hace demasiadas cosas. Si la introducimos en un módulo para gestión de bibliotecas, básicamente hará todo el trabajo ella. Y cualquier en cualquier tipo de gestión de la biblioteca, implicará un cambio en la propia clase. Para poder aumentar la cohesión del módulo necesitamos separar responsabilidades, para que haya distintas clases cada una con la suya, pero puedan trabajar en conjunto para conseguir el objetivo de gestionar una biblioteca.</p>
+<pre><code class="language-typescript">class LibraryClientsList {
+  public addClient(client: Client) { }
+  public deleteCliente(client: Client) { }
+}
+
+class BookLoan {
+  public lendBook() { }
+  public returnBook() { }
+}
+
+class BookSearch {
+  public searchByAuthor(autor: string) { }
+  public searchByTitle(titulo: string) { }
+}
+</code></pre>
+<p>Como habéis podido ver tras el ejemplo en código... ¿esto no os suena del Principio de Responsabilidad Única? Efectivamente, en otras palabras, el principio nos dice que necesitamos tener una alta cohesión.</p>
+<h2 id="¿y-el-acoplamiento">¿Y el acoplamiento?</h2>
+<p>Con acoplamiento nos referimos a la forma de definir cómo están conectadas las diferentes partes de un sistema. Si dos módulos están altamente acoplados, significa que están muy interconectados y que cualquier cambio en uno de ellos puede afectar el funcionamiento del otro. Por otro lado, si dos módulos tienen un bajo acoplamiento, significa que están menos interconectados y que los cambios en uno de ellos no afectarán al otro.</p>
+<p>De forma que, lo ideal es que los módulos tengan un bajo acoplamiento, ya que al minimizar las conexiones entre módulos también se reducen los caminos por lo que se pueden propagar los cambios y los errores a otras partes del sistema. De este modo, se elimina el efecto de que un cambio en un módulo pueda causar errores en otro, así evitando realizar modificaciones adicionales para solventarlo.</p>
+<p>De todas formas, voy a poner un ejemplo para simplificarlo. En este caso, vamos a dos funciones que hacen los mismo (calcular el área de un cuadrado), pero tienen dos niveles de acoplamiento distinto.</p>
+<pre style="background: #0d1117; padding: 0"><code class="language-typescript">// Función con alto acoplamiento
+function calculateSquareArea(input: HTMLInputElement): number {
+  const side: number = parseInt(input.value);
+  return side * side;
+}
+
+// Función con bajo acoplamiento
+function calculateSquareArea(side: number): number {
+  return side * side;
+}
+</code></pre>
+<p>La primera función depende de recibir un input HTML del que se va a leer el valor del lado del cuadrado, para posteriormente devolver el área calculada. Si cambiamos el método de entrada, no nos quedará otra que modificar la función. Así que esta función representa un alto acoplamiento. Sin embargo, en la segunda función, no importa como se haya obtenido el dato que representa el lado del cuadrado, es por ello que presenta un bajo acoplamiento.</p>
+<p>Resumiendo, cuando hay un alto acoplamiento, es la señal de que debemos abstraer de la existencia de otros módulos en la medida de lo posible. Y como comentamos en el primer párrafo de este artículo, ¿esto a que os suena? Efectivamente, al Principio de Inversión de Dependencias.</p>
+<h2 id="bajo-acoplamiento-alta-cohesión">Bajo acoplamiento, alta cohesión</h2>
+<p>El acoplamiento y la cohesión, son dos conceptos muy importantes y estrechamente relacionados. Ya que como vimos en los apartados anteriores, si los módulos de nuestro programa están altamente acoplados, significa que cualquier cambio en uno de ellos puede afectar a los demás y hacer que el código sea difícil de entender y mantener. Por otro lado, si los módulos tienen alta cohesión, significa que están altamente relacionados entre sí y que trabajan juntos para lograr una tarea específica.</p>
+<p>Por lo tanto, el objetivo es tener un código con alta cohesión y bajo acoplamiento. Esto hace que el código sea fácil de entender, modificar y mantener, lo que conduce a un software de mayor calidad y eficiencia. Es como tener un equipo de trabajo bien coordinado, donde cada miembro sabe exactamente lo que tiene que hacer y trabaja en armonía con los demás para conseguir un objetivo común.</p>
+<p>En resumen, podemos decir que el acoplamiento y la cohesión son dos caras de la misma moneda en la programación. Una buena gestión de ambos conceptos puede llevar a un código limpio, fácil de entender y mantener. Así que ya sabes, ¡reduce el acoplamiento y aumenta la cohesión para subir un nivel en el mundo de la programación! (con pareado de regalo).</p>
+<p>Espero que esta primera parte os haya servido para comprender los conceptos. En la segunda parte, veremos más en detalle cada una de ellas, centrándonos en los tipos de acoplamiento y cohesión existentes, incluyendo ejemplos de cada tipo.</p>
+
+    </article>
+  </main>
+  <footer class="bg-cyan-800 text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -8,15 +8,20 @@
   .prose code::after {
     content: none;
   }
+
+  .prose pre {
+    background-color: #0d1117;
+    padding: 0;
+  }
 }
 
 /* Enlaces azules por defecto, excepto en el header */
 main a,
 footer a:not(header a) {
-	color: #2563eb;
+	color: #005f78;
 }
 
 main a:hover,
 footer a:not(header a):hover {
-	color: #1e40af;
+	color: #003f58;
 }

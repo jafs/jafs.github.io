@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Caso práctico TDD — Mi Blog</title>
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-cyan-800 text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <h1 class="text-2xl font-bold">Mi Blog</h1>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Caso práctico TDD</h1><p class="text-gray-600 text-sm mb-6">2023-03-10</p><p>Por poner el broche de oro a esta mini-serie de <a href="https://jafs.es/4060/testing-y-tdd/">artículos sobre TDD</a>, vamos a ver un caso práctico con algo muy sencillo que todos conocéis: una pila. Por si queda algún despistado o despistada, una pila es una lista ordenada que permite almacenar y recuperar valores. El acceso a estos datos sigue el patrón LIFO (del inglés Last In, First Out, &quot;el último en entrar es el primero en salir&quot;). Básicamente, podéis pensar en la típica pila de platos, en la que el último plato que se pone encima, será el primero que quitemos.</p>
+<p>Para este caso, se usará JavaScript estándar, haciendo uso de clases. De todas formas, si alguien tiene dudas sobre algo del lenguaje, podéis preguntarme en comentarios que responderé con todo gusto.</p>
+<h2 id="primer-test-crear-una-instancia">Primer test. Crear una instancia</h2>
+<p>Como estamos usando TDD, lo primero de todo será definir el test a probar:</p>
+<pre><code class="language-typescript">describe(&quot;Stack&quot;, () =&gt; {
+    test(&quot;should create a stack instance&quot;, () =&gt; {
+        const stack = new Stack();
+        expect(typeof stack).toBe(&quot;object&quot;);
+     });
+});
+</code></pre>
+<p>Si ahora ejecutamos el test, fallará como cabe espera:</p>
+<pre><code class="language-text">    ReferenceError: Stack is not defined
+
+      1 | describe(&quot;Stack&quot;, () =&gt; {
+      2 |       test(&quot;should create a stack instance&quot;, () =&gt; {
+    &gt; 3 |               const stack = new Stack();
+        |                             ^
+      4 |
+      5 |               expect(typeof stack).toBe(&quot;object&quot;);
+      6 |       });
+
+      at Object.&lt;anonymous&gt; (stack.test.js:3:17)
+</code></pre>
+<p>Tenemos que escribir el código mínimo para que el test pase, así que, crearemos la clase:</p>
+<pre><code class="language-typescript">class Stack {
+}
+</code></pre>
+<p>Y tendremos nuestro test pasado:</p>
+<pre><code class="language-text"> PASS  ./stack.test.js
+  Stack
+    √ should create a stack instance (2 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.412 s, estimated 1 s
+</code></pre>
+<p>De aquí en adelante, ya no os pondré la salida de error y de passed por consola 😉.</p>
+<h2 id="segundo-test-null-al-quitar-un-elemento-de-la-pila-vacía">Segundo test. Null al quitar un elemento de la pila vacía</h2>
+<p>En este segundo test, vamos a verificar que si ejecutamos la operación de quitar un elemento de la pila, y esta se encuentra vacía, se devuelve el valor <code>null</code>.</p>
+<pre><code class="language-typescript">test(&quot;should return null when pop an empty stack&quot;, () =&gt; {
+    const stack = new Stack();
+
+    expect(stack.pop()).toBeNull();
+});
+</code></pre>
+<p>Para hacer que el test pase, como tenemos que escribir el código mínimo, simplemente crearemos un método <code>pop()</code> que devolverá <code>null</code> al ejecutarlo.</p>
+<pre><code class="language-typescript">class Stack {
+    pop() {
+        return null;
+    }
+}
+</code></pre>
+<h2 id="tercer-test-añadir-un-valor-y-eliminarlo">Tercer test. Añadir un valor y eliminarlo</h2>
+<p>Ahora tenemos que probar que si añadimos un valor y lo eliminamos se obtiene ese mismo valor.</p>
+<pre><code class="language-typescript">test(&quot;should add value in the top of the stack and return this value when do a pop&quot;, () =&gt; {
+    const stack = new Stack();
+
+    stack.push(&quot;hello&quot;);
+
+    expect(stack.pop()).toBe(&quot;hello&quot;);
+});
+</code></pre>
+<p>Ahora el código de la clase debería seguir haciendo lo mínimo posible, pero vamos a ir un paso más allá (para no eternizar el ejemplo), y nos vamos a la fase de refactor, tras la que tendríamos:</p>
+<pre><code class="language-typescript">class Stack {
+    #lastValue = null;
+
+    push(value) {
+        this.#lastValue = value;
+    }
+
+    pop() {
+        return this.#lastValue;
+    }
+}
+</code></pre>
+<h2 id="cuarto-test-devolver-null-si-no-quedan-elementos-por-quitar">Cuarto test. Devolver null si no quedan elementos por quitar</h2>
+<pre><code class="language-typescript">test(&quot;should return null after pop the last element&quot;, () =&gt; {
+    const stack = new Stack();
+
+    stack.push(&quot;value&quot;);
+    stack.pop();
+
+    expect(stack.pop()).toBeNull();
+});
+
+class Stack {
+    #lastValue = null;
+
+    push(value) {
+        this.#lastValue = value;
+    }
+
+    pop() {
+        const lastValue = this.#lastValue;
+        this.#lastValue = null;
+        return lastValue;
+    }
+}
+</code></pre>
+<p>Obsérvese que como aún no hemos gestionado más de un objeto en la cola, no estamos controlando que haya varios, es por ello que en este paso, asignaremos a <code>null</code> el valor, en cuanto llamemos a <code>pop()</code>. Y esto es por la regla de escribir el mínimo código posible.</p>
+<h2 id="quinto-test-añadir-y-eliminar-varios-valores-a-la-pila">Quinto test. Añadir y eliminar varios valores a la pila</h2>
+<pre><code class="language-typescript">test(&quot;should add several values to the top and remove then until arrive to null&quot;, () =&gt; {
+    const stack = new Stack();
+
+    stack.push(&quot;value1&quot;);
+    stack.push(&quot;value2&quot;);
+    stack.push(&quot;value3&quot;);
+
+    expect(stack.pop()).toBe(&quot;value3&quot;);
+    expect(stack.pop()).toBe(&quot;value2&quot;);
+    expect(stack.pop()).toBe(&quot;value1&quot;);
+    expect(stack.pop()).toBeNull();
+});
+</code></pre>
+<p>Es necesario hacer una aclaración en esta parte, ya que si en el test, sólo hubiésemos añadido la última comprobación, omitiendo el resto de <code>expects</code>, no se hubiera podido verificar la pila nos devuelve cada valor eliminado, y según el código que ya teníamos, el test pasaría. Es por ello, que tenemos que dar mucha importancia a qué se quiere probar, porque un test que no esté bien escrito, es como si no existiera. En estos casos también es importante tener en cuenta, que si escribimos un test, y pasa sin tocar nada de código, puede que no estemos probando lo que queremos.</p>
+<p>Tras un refactor, en este caso tendremos lo siguiente:</p>
+<pre><code class="language-typescript">class StackElement {
+    #value = null;
+    #previousElement = null;
+
+    constructor(value, previousElement) {
+        this.#value = value;
+        this.#previousElement = previousElement;
+    }
+
+    get Value() {
+        return this.#value;
+    }
+
+    get PreviousElement() {
+        return this.#previousElement;
+    }
+}
+
+class Stack {
+    #lastElement = null;
+
+    push(value) {
+        this.#lastElement = new StackElement(value, this.#lastElement);
+    }
+
+    pop() {
+        if (!this.#lastElement) {
+            return null;
+        }
+
+        const lastValue = this.#lastElement.Value;
+        this.#lastElement = this.#lastElement.PreviousElement;
+        return lastValue;
+    }
+}
+</code></pre>
+<p>Se ha incluido una nueva clase, y en este caso, no hemos añadido tests para dicha clase, ya que es un getter/setter. Añadir tests en estos casos no tendría mucho sentido. Sin embargo, si hubiésemos necesitado una clase más compleja. Si que en este momento pausaríamos el test actual, para comenzar el desarrollo de la nueva clase con TDD. Una vez que hiciera todo lo que necesitamos, volveríamos a este test.</p>
+<h2 id="sexto-test-devolver-longitud-0-cuando-la-pila-está-vacía">Sexto test. Devolver longitud 0 cuando la pila está vacía</h2>
+<pre><code class="language-typescript">test(&quot;should return zero when stack is empty&quot;, () =&gt; {
+    const stack = new Stack();
+
+    expect(stack.Length).toBe(0);
+});
+
+class Stack {
+    #lastElement = null;
+
+    get Length() {
+        return 0;
+    }
+    
+    // El resto del código no tiene cambios
+}
+</code></pre>
+<h2 id="séptimo-test-obtener-el-número-de-elementos-añadidos">Séptimo test. Obtener el número de elementos añadidos</h2>
+<pre><code class="language-typescript">test(&quot;should return the number of elements in stack after add some values&quot;, () =&gt; {
+    const stack = new Stack();
+
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+
+    expect(stack.Length).toBe(3);
+});
+
+class Stack {
+    #lastElement = null;
+    #length = 0;
+
+    get Length() {
+        return this.#length;
+    }
+
+    push(value) {
+        this.#lastElement = new StackElement(value, this.#lastElement);
+        ++this.#length;
+    }
+
+    // El resto del código no tiene cambios
+}
+</code></pre>
+<p>En este punto, como el test sólo ha probado el añadir elementos, no tenemos que tocar el resto del código, sólo la parte de añadir. Aunque sea cansino, recordad que vamos a mínimos en cada paso.</p>
+<h2 id="último-test-obtener-el-número-de-elementos-tras-añadir-y-eliminar-varios-elementos">Último test. Obtener el número de elementos tras añadir y eliminar varios elementos</h2>
+<pre><code class="language-typescript">test(&quot;should return the number of elements in stack after add and remove some values&quot;, () =&gt; {
+    const stack = new Stack();
+
+    stack.push(1);
+    stack.push(2);
+    stack.pop();
+    stack.push(3);
+    stack.pop();
+
+    expect(stack.Length).toBe(1);
+});
+
+class Stack {
+    #lastElement = null;
+    #length = 0;
+
+    get Length() {
+        return this.#length;
+    }
+
+    push(value) {
+        this.#lastElement = new StackElement(value, this.#lastElement);
+        ++this.#length;
+    }
+
+    pop() {
+        if (!this.#lastElement) {
+            return null;
+        }
+
+        const lastValue = this.#lastElement.Value;
+        this.#lastElement = this.#lastElement.PreviousElement;
+        --this.#length;
+        return lastValue;
+    }
+}
+</code></pre>
+<h2 id="conclusiones">Conclusiones</h2>
+<p>Después de haber visto un caso de uso de TDD, creo que podemos concluir que esta técnica es una herramienta valiosa para garantizar la calidad del software y mejorar la eficiencia del proceso de desarrollo. Al escribir las pruebas antes de escribir el código, se obliga a pensar cuidadosamente en los requisitos del software y en cómo se comportará en diferentes situaciones. El enfoque incremental de TDD también significa que el software se desarrolla en pequeños pasos, lo que facilita la detección de errores y la resolución de problemas antes de que se conviertan en problemas mayores.</p>
+<p>¿Os ha parecido interesante? ¿tenéis dudas o sugerencias? Pues ya sabéis, podéis dejar un mensajito en la caja de comentarios.</p>
+
+    </article>
+  </main>
+  <footer class="bg-cyan-800 text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

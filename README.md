@@ -1,4 +1,4 @@
-# Mi Blog
+# JAFS
 
 Este repositorio ahora alberga un sitio estático para un blog simple.
 

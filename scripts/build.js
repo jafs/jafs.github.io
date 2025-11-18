@@ -15,14 +15,14 @@ function template(title, content) {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>${title} — Mi Blog</title>
+  <title>${title} — JAFS</title>
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
 </head>
 <body class="bg-gray-50 text-gray-900">
   <header class="bg-cyan-800 text-white py-4 shadow-md">
     <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-      <h1 class="text-2xl font-bold">Mi Blog</h1>
+      <h1 class="text-2xl font-bold">JAFS</h1>
       <nav class="flex gap-4">
         <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
         <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
@@ -185,7 +185,7 @@ async function build() {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Artículos — Mi Blog</title>
+  <title>Artículos — JAFS</title>
   <link rel="stylesheet" href="/css/dist.css">
 </head>
 <body class="bg-gray-50 text-gray-900">

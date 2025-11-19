@@ -13,6 +13,11 @@
     background-color: #0d1117;
     padding: 0;
   }
+
+  .prose blockquote > p::before,
+  .prose blockquote > p::after {
+    content: none;
+  }
 }
 
 /* Enlaces azules por defecto, excepto en el header */

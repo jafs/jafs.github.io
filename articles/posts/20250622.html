@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Introducción a las neuronas artificiales — JAFS</title>
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-cyan-800 text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <h1 class="text-2xl font-bold">JAFS</h1>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Introducción a las neuronas artificiales</h1><p class="text-gray-600 text-sm mb-6">2025-06-22</p><p>Para bien o para mal, la Inteligencia Artificial hoy está en todas partes. Muchas personas se centran en explicar los distintos modelos, pero en este artículo me gustaría que llegáramos hasta el nivel más bajo de este mundillo, lo que es la mínima unidad de inteligencia artificial: <strong>una neurona</strong>.</p>
+<p>A continuación aprenderemos desde los conceptos básicos, hasta como hacer que una sola neurona resuelva un problema lógico como una sencilla operación booleana AND.</p>
+<p>Y como quiero innovar un poco, esta última parte más práctica no será con código Python (del cual hay miles de ejemplos), sino con JavaScript, ya que la idea es demostrar que con cualquier lenguaje podemos llevar a cabo la mayor parte de ideas en general.</p>
+<h2 id="¿qué-es-una-neurona-artificial">¿Qué es una neurona artificial?</h2>
+<p>Básicamente, una neurona artificial es un modelo matemático inspirado en nuestras neuronas biológicas.</p>
+<p>Su algoritmo más básico consiste en lo siguiente:</p>
+<ul>
+<li><strong>Empieza su aprendizaje con ejemplos</strong>. Le damos una lista de combinaciones de entradas junto con la salida que esperamos. Por ejemplo, para enseñarle la operación lógica AND:</li>
+</ul>
+<pre><code class="language-text">Entradas | Salida
+[0, 0]   | 0
+[0, 1]   | 0
+[1, 0]   | 0
+[1, 1]   | 1
+</code></pre>
+<ul>
+<li><strong>Ajusta los “pesos” de cada entrada</strong>. Estos pesos determinan cuánto influye cada entrada en el resultado. Al principio son aleatorios, pero tras ver muchos ejemplos, los va ajustando para acercarse cada vez más a la salida correcta según los errores que vaya obteniendo.
+-- <strong>Cuando ya ha practicado lo suficiente</strong>, le damos una nueva entrada y la neurona predice el resultado. Y sí, hablamos de una <strong>predicción</strong>, no de una fórmula exacta. A veces acierta, otras se aproxima... como cualquier modelo de IA.</li>
+</ul>
+<p>A este último paso, es decir, al de proporcionar entradas para obtener una salida lo llamamos <strong>activar</strong> la neurona. El usar dicho verbo viene directamente de cómo funcionan las neuronas reales en nuestro cerebro: una neurona recibe señales a través de sus conexiones, las procesa, y si la señal es suficientemente fuerte, <strong>se activa</strong> y dispara una respuesta eléctrica.</p>
+<p>El siguiente esquema muestra el flujo básico de aprendizaje:</p>
+<p><img src="/images/funcionamiento_neurona.webp" alt="Esquema funcionamiento neurona"></p>
+<h2 id="¿pero-cómo-aprende">¿Pero cómo “aprende”?</h2>
+<p>El aprendizaje de una neurona artificial no es más que un proceso de prueba y error. Le damos ejemplos, calcula una salida, ve cuánto se ha equivocado y <strong>ajusta sus parámetros internos</strong> para hacerlo mejor la próxima vez. Este proceso seguro que te suena, pues lo que hacemos cuando aprendemos una habilidad nueva, ya sea programar, aprender a tocar un instrumento musical, etc.</p>
+<p>Pero yendo a la parte más técnica. ¿Qué parámetros son los que ajusta la neurona?</p>
+<ul>
+<li><strong>Pesos</strong>: cada entrada tiene un peso asociado. Es como decirle a la neurona “esta entrada es más importante que esta otra”. Al principio, esos pesos son aleatorios, pero la neurona los ajusta poco a poco durante el entrenamiento.</li>
+<li><strong>Sesgo</strong> (o <strong>bias</strong>): es un valor adicional que se suma al total antes de aplicar la función de activación. Sirve como una especie de empujón extra, permitiendo que la neurona genere salidas más flexibles. Piensa en él como el “estado de ánimo” base de la neurona: si está muy alto o muy bajo, afecta al resultado aunque las entradas sean las mismas.</li>
+<li><strong>Función de activación</strong>: una vez sumamos todas las entradas multiplicadas por sus pesos y le añadimos el sesgo, ese valor pasa por dicha función, que lo que hace básicamente, es convertir ese número a algo que tenga sentido como “respuesta”. Le da <strong>no linealidad</strong> al sistema, permitiendo que aprenda comportamientos complejos.</li>
+</ul>
+<p>Entonces, en cada iteración de la fase de aprendizaje, la neurona:</p>
+<ul>
+<li><strong>Predice un resultado</strong> a partir de las entradas y los pesos que tenga guardados.</li>
+<li>Compara ese resultado con la salida esperada, o lo que es lo mismo <strong>calcula el error</strong>.</li>
+<li>Usa el error de la salida para <strong>ajustar los pesos y el sesgo</strong>, guiándose por la derivada de la función de activación.</li>
+<li>Repite el proceso.</li>
+</ul>
+<h2 id="¿cuántas-veces-hay-que-entrenarla">¿Cuántas veces hay que entrenarla?</h2>
+<p>Una pregunta común es: <strong>¿cuántas veces hay que entrenar una neurona artificial?</strong></p>
+<p>Para eso usamos el número de <strong>épocas</strong> o <strong>iteraciones</strong>, es decir, cuántas veces la neurona recorre todos los ejemplos para ajustar sus pesos y su sesgo.</p>
+<p>Si usamos <em>muy pocas iteraciones</em>, la neurona apenas aprende. Los pesos se quedan mal ajustados y la predicción será incorrecta en muchos casos. Pero si usamos <em>demasiadas</em>, también puede ser un problema. ¿Por qué?</p>
+<ul>
+<li><strong>Sobreajuste (overfitting)</strong>: Aunque en un problema tan simple como un AND o un OR esto no se nota mucho, en problemas reales con muchos datos, entrenar en exceso puede hacer que la neurona “memorice” los datos de entrenamiento y no sea capaz de generalizar cuando le damos datos nuevos.</li>
+<li><strong>Pérdida de tiempo y recursos</strong>: Cada iteración consume tiempo y potencia de cálculo. Si después de cierto punto el modelo ya no mejora, seguir entrenando es simplemente ineficiente.</li>
+<li><strong>Oscilación de pesos</strong>: Si no se ha afinado bien la <strong>tasa de aprendizaje</strong>, demasiadas iteraciones pueden provocar que los pesos “se pasen de largo” en cada ajuste, impidiendo que la neurona estabilice una solución.</li>
+</ul>
+<p>Por eso, <strong>buscar el equilibrio es la clave</strong>. ¿Siempre deberemos usar el mismo número de iteraciones? Pues como diría Pau Donés: &quot;depende&quot;. En ejemplos sencillos como las operaciones AND u OR, 1000 iteraciones funcionan bien. Pero en problemas más grandes, elegir el número de iteraciones se convierte en toda una ciencia.</p>
+<h2 id="caso-práctico">Caso práctico</h2>
+<h3 id="la-clase-neuron">La clase Neuron</h3>
+<p>Esta clase representa una neurona artificial, y tiene todo lo necesario para poder entrenarse y activarse posteriormente.</p>
+<p>Sus atributos son los siguientes:</p>
+<ul>
+<li><code>learningRate</code>: tasa o ratio de aprendizaje. Permite ajustar la desviación de los pesos en cada iteración del entrenamiento.</li>
+<li><code>bias</code>: almacena el sesgo calculado. Puedes ver más arriba información sobre el sesgo.</li>
+<li><code>weights</code>: almacena los pesos. Igualmente, puedes ver en qué consisten más arriba.</li>
+<li><code>inputsNumber</code>: es importante almacenar el número de entradas que permite la neurona. Esté será el atributo que lo guarde.</li>
+<li><code>activationFunction</code>: función que actuará como una especie de &quot;filtro&quot; que transforma el resultado en crudo calculado por la neurona es un valor normalizado. Hay varios tipos de funciones de activación según el uso que se le quiera dar a la neurona. Algo que comentaremos en futuros artículos.</li>
+<li><code>derivateFunction</code>: sería la función derivada de la de activación. Nos servirá para ajustar el sesgo. Es por ello, que siempre dependerá de la función de activación.</li>
+</ul>
+<p>Además de los métodos:</p>
+<ul>
+<li><code>activate</code>: se encarga de activar la neurona, es decir, darnos un resultado a partir de una serie de entradas.</li>
+<li><code>training</code>: inicia el entrenamiento de la neurona. Recibe un conjunto de datos (por cada dato tenemos una o varias entradas y una salida). Además, recibe el número de iteraciones que hay que realizar para entrenar cada dato.</li>
+<li><code>train</code>: método privado que realiza el entrenamiento de un dato.</li>
+<li><code>adjust</code>: como su nombre indica, este método, se encargará de ajustar tanto los pesos como el sesgo a partir del error entre la salida real y la esperada.</li>
+<li><code>calculateError</code>: nos devuelve el error entre la salida esperada y la generada por la neurona.</li>
+<li><code>calculateAdjust</code>: obtiene el valor ajuste que hay que realizar a partir del error.</li>
+</ul>
+<pre><code class="language-javascript">class Neuron {
+  #learningRate = 0.1;
+  #bias;
+  #weights;
+  #inputsNumber;
+  #activationFunction;
+  #derivateFunction;
+
+  activate(inputs) { }
+  training(dataset, epocas) { }
+  #train(inputs, expectedOutput) { }
+  #adjust(inputs, gradient, learningRate) { }
+  #calculateError(expectedOutput, obtainedOutput) { }
+  #calculateAdjust(error, generatedOutput, derivateFunction) { }
+}
+</code></pre>
+<h3 id="entrenamiento">Entrenamiento</h3>
+<p>Para cada paso del entrenamiento tendríamos lo siguiente:</p>
+<pre><code class="language-javascript">#train(inputs, expectedOutput) {
+  const computedOutput = this.activate(inputs);
+  const error = expectedOutput - obtainedOutput;
+  const adjustValue = error * derivateFunction(computedOutput);
+
+  this.#adjust(inputs, adjustValue, this.#learningRate);
+}
+</code></pre>
+<p>Este método hace cuatro cosas muy importantes:</p>
+<ul>
+<li><strong>Activa</strong> la neurona con las entradas actuales. O lo que es lo mismo, obtiene la salida calculada por la neurona con los pesos que tenemos actualmente (<em>computedOutput</em>)</li>
+<li><strong>Calcula el error</strong> comparando lo que salió con lo que esperábamos.</li>
+<li>Usa la derivada de la función de activación para <strong>calcular cuánto debe ajustarse</strong>.</li>
+<li>Finalmente, <strong>ajusta pesos y sesgo</strong>.</li>
+</ul>
+<p>Para este ajuste de pesos tenemos el método privado <code>#adjust</code>.</p>
+<blockquote>
+<p><strong>NOTA</strong> <br>En JavaScript los atributos y métodos privados usan como prefijo la almohadilla <code>#</code>.</p>
+</blockquote>
+<pre><code class="language-javascript">#adjust(inputs, adjustValue, learningRate) {
+  for (let i = 0; i &lt; this.#inputsNumber; i++) {
+    this.#weights[i] += inputs[i] * adjustValue * learningRate;
+  }
+  this.#bias += adjustValue * learningRate;
+}
+</code></pre>
+<p>Este es el método crucial para que funcione el proceso de aprendizaje de la neurona. Realiza el ajuste de pesos según el valor que calculamos de desviación con la derivada. Lo que debería ir reduciendo los errores entre la salida esperada y la obtenida.</p>
+<p>Además, en esta parte incluimos el ratio de aprendizaje (<code>learningRate</code> en el código), que será un ajuste para poder usarlo en la desviación.</p>
+<p>Ahora para entrenar a nuestra neurona para realizar operaciones AND. Usaríamos los datos siguientes:</p>
+<pre><code class="language-javascript">const andData = [
+  { inputs: [0, 0], output: 0 },
+  { inputs: [0, 1], output: 0 },
+  { inputs: [1, 0], output: 0 },
+  { inputs: [1, 1], output: 1 }
+];
+
+exports.andData = andData;
+</code></pre>
+<p>De forma que a partir de esos datos y de usar la función de activación sigmoide, podríamos comenzar el entrenamiento:</p>
+<pre><code class="language-javascript">const neuron = new Neuron(2, activationSigmoid, derivateSigmoid, 0.1);
+neuron.training(andData, 1000);
+</code></pre>
+<p>En este caso, estamos diciendo que la neurona:</p>
+<ul>
+<li>Tiene dos entradas</li>
+<li>Usa como función de activación, la función sigmoide y su derivada.</li>
+<li>Tiene una tasa de aprendizaje de 0.1. O lo que es lo mismo, irá haciendo ajustes de pesos de 0.1 por cada iteracion.</li>
+</ul>
+<p>Finalmente, le damos los datos con los que entrenar y le indicamos que itere 1000 veces con dichos datos.</p>
+<h3 id="activación">Activación</h3>
+<p>Como indicamos anteriormente, cuando activamos la neurona, hacemos referencia al momento en el que &quot;piensa&quot; y da una respuesta. No está aprendiendo, está actuando según lo que ya aprendió.</p>
+<p>En nuestro código JavaScript la activación consistiría en lo siguiente:</p>
+<pre><code class="language-javascript">activate(inputs) {
+  let sum = this.#bias;
+
+  for (let i = 0; i &lt; this.#inputsNumber; i++) {
+    sum += inputs[i] * this.#weights[i];
+  }
+
+  return this.#activationFunction(sum);
+}
+</code></pre>
+<ul>
+<li><strong>Recibe los inputs</strong>, por ejemplo [1, 1].</li>
+<li>El valor inicial parte del sesgo que calculamos durante el aprendizaje.</li>
+<li><strong>Multiplica cada input por su peso correspondiente</strong>, ya que durante el entrenamiento a cada entrada le dimos &quot;una importancia&quot; diferente.</li>
+<li>Suma la multiplicación de todos los pesos con el sesgo.</li>
+<li><strong>Pasa ese resultado por la función de activación</strong>, que como vimos terminará actuando como un filtro. En este caso, al usar como función de activación, la función sigmoide, transforma ese número crudo en un valor entre 0 y 1.</li>
+</ul>
+<p>Con lo que al método anterior, si le damos [1, 1] como entrada, y está bien entrenada, nos devolverá algo cercano a 1. Si le damos [0, 1] o [1, 0], nos devolverá algo cercano a 0. Y es que cabe destacar que la salida <strong>no es un uno o un cero exacto</strong>. En nuestro ejemplo, como la función de activación devuelve valores continuos, puede darnos algo como 0.97 (que interpretamos como &quot;casi 1&quot;) o 0.04 (que interpretamos como &quot;casi 0&quot;).</p>
+<p>En nuestro caso real, la salida será algo como:</p>
+<pre><code class="language-text">Inputs: [0, 0] - Output: 0.01681626098863126
+Inputs: [0, 1] - Output: 0.19194909494974405
+Inputs: [1, 0] - Output: 0.19261658021780448
+Inputs: [1, 1] - Output: 0.768161278046628
+</code></pre>
+<h3 id="finalmente">Finalmente</h3>
+<p>El código que he generado durante el desarrollo de este artículo lo he publicado en <a href="https://github.com/jafs/mini-ai">GitHub</a>. En intentado poner bastantes comentarios, principalmente en la clase Neuron, para que os pueda ser más sencillo seguirlo. Ya que explicarlo al completo en este artículo se haría demasiado extenso.</p>
+<p>Aún nos queda mucho por aprender, por lo que en futuros artículos:</p>
+<ul>
+<li>Veremos que aunque con nuestro código actual podemos obtener buenos resultados para las operaciones AND y OR. Cuando pasamos a una operación XOR debemos subir un nivel y crear nuestra primera red neuronal.</li>
+<li>Hablaremos un poco más de las distintas funciones de activación y en qué casos deberíamos usar cada una.</li>
+<li>Aprenderemos a persistir la información de las neuronas, para evitar entrenarlas cada vez.</li>
+</ul>
+<p>Para terminar, como ejercicio sencillo si descargáis el código: probad a entrenar una neurona para que funcione con las operaciones OR.</p>
+
+    </article>
+  </main>
+  <footer class="bg-cyan-800 text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

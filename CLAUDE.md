@@ -58,8 +58,33 @@ title: "Título del artículo"
 date: "YYYY-MM-DD" o Date object
 slug: "nombre-archivo.html" (opcional, por defecto: nombre-md.html)
 categories: ["Categoría1", "Categoría2"]
+
+# Campos opcionales para SEO (recomendados)
+description: "Descripción breve del artículo (máx. 160 caracteres)"
+keywords: "palabra1, palabra2, palabra3"
+author: "Nombre del autor" (opcional, por defecto: José Antonio Fuentes Santiago)
+dateModified: "YYYY-MM-DD" (opcional, fecha de última modificación)
+image: "https://jafs.github.io/images/imagen.jpg" (opcional, imagen destacada)
 ---
 ```
+
+**Notas sobre SEO**:
+
+- **description**: Si no se proporciona, se extrae automáticamente el primer párrafo del contenido
+- **keywords**: Se combinan automáticamente con las categorías y "José Antonio Fuentes Santiago, JAFS"
+- **categories**: Se usan tanto para organización como para keywords SEO
+- **image**: Si se proporciona, mejora la previsualización en redes sociales (Open Graph, Twitter Cards)
+- **dateModified**: Útil para indicar a buscadores cuándo se actualizó el contenido
+
+El sistema genera automáticamente para cada artículo:
+
+- Meta tags SEO (description, keywords, author)
+- Open Graph tags (Facebook, LinkedIn)
+- Twitter Cards
+- JSON-LD structured data (Schema.org Article)
+- Canonical URLs
+- Enlaces a favicons
+- Fechas de publicación y modificación
 
 ### Compilación de CSS (Tailwind)
 
@@ -72,6 +97,7 @@ npm run build:all    # Compila CSS y luego los posts
 ```
 
 **IMPORTANTE**:
+
 - Los archivos HTML deben referenciar `/css/dist.css`, que es el archivo compilado
 - El archivo `css/style.css` contiene solo las directivas de Tailwind
 - Todos los estilos usan utilidades de Tailwind directamente en el HTML
@@ -82,7 +108,8 @@ npm run build:all    # Compila CSS y luego los posts
 npm run build       # Compila posts de Markdown a HTML
 npm run build:css   # Compila Tailwind CSS (minificado)
 npm run watch:css   # Compila CSS en modo watch (útil durante desarrollo)
-npm run build:all   # Compila CSS y posts (orden correcto para deploy)
+npm run sitemap     # Genera sitemap.xml con todas las URLs del sitio
+npm run build:all   # Compila CSS, posts y sitemap (orden correcto para deploy)
 npm start           # Inicia servidor local en puerto 8080
 ```
 
@@ -110,6 +137,7 @@ El proyecto usa **utilidades de Tailwind puras**, sin clases CSS personalizadas.
 - `hover:text-white transition-colors` - Estados interactivos
 
 **Ventajas de este enfoque**:
+
 - Sin CSS personalizado que mantener
 - Fácil de modificar directamente en HTML
 - Purge automático elimina CSS no usado
@@ -118,15 +146,26 @@ El proyecto usa **utilidades de Tailwind puras**, sin clases CSS personalizadas.
 ## Estado del Proyecto (Actualizado)
 
 ✅ **Completado**:
+
 - Todos los archivos HTML migrados a utilidades de Tailwind puras
 - Referencias CSS unificadas a `/css/dist.css`
 - Tailwind CSS v3 instalado como dependencia
 - Plugin `@tailwindcss/typography` configurado para posts
 - Templates en `build.js` actualizados con clases de Tailwind
 - Configuración de Tailwind optimizada (evita escanear `node_modules`)
-- Script `build:all` para compilar CSS y posts en orden correcto
+- Script `build:all` para compilar CSS, posts y sitemap en orden correcto
+- **SEO completo implementado**:
+  - Meta tags SEO en todas las páginas
+  - Open Graph y Twitter Cards
+  - JSON-LD structured data (Schema.org)
+  - Canonical URLs
+  - Favicons configurados
+  - sitemap.xml generado automáticamente
+  - robots.txt configurado
+  - Metadata automática en artículos generados
 
 ⚠️ **Notas**:
+
 - Los warnings de `marked` sobre deprecations son informativos, no afectan funcionalidad
 - El warning de `browserslist` es informativo, puede actualizarse con `npx update-browserslist-db@latest`
 

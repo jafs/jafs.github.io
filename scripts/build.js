@@ -9,20 +9,108 @@ const INPUT_POSTS_DIR = path.join(ROOT, 'posts');
 const OUTPUT_POSTS_DIR = path.join(ROOT, 'articles', 'posts');
 const ARTICLES_INDEX = path.join(ROOT, 'articles', 'index.html');
 
-function template(title, content) {
+function template(title, content, meta = {}) {
+  const {
+    description = '',
+    author = 'José Antonio Fuentes Santiago',
+    keywords = '',
+    datePublished = '',
+    dateModified = '',
+    categories = [],
+    slug = '',
+    image = ''
+  } = meta;
+
+  const fullUrl = `https://jafs.github.io/articles/posts/${slug}`;
+  const truncatedDescription = description.length > 160
+    ? description.substring(0, 157) + '...'
+    : description;
+
+  // Generar keywords combinando categories y keywords del meta
+  const allKeywords = [
+    'José Antonio Fuentes Santiago',
+    'JAFS',
+    ...categories,
+    ...(keywords ? keywords.split(',').map(k => k.trim()) : [])
+  ].join(', ');
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "author": {
+      "@type": "Person",
+      "name": author
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "José Antonio Fuentes Santiago"
+    },
+    "description": truncatedDescription,
+    "url": fullUrl,
+    "inLanguage": "es"
+  };
+
+  if (datePublished) jsonLd.datePublished = datePublished;
+  if (dateModified) jsonLd.dateModified = dateModified;
+  if (image) jsonLd.image = image;
+
   return `<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>${title} — JAFS</title>
+  <title>${title} — José Antonio Fuentes Santiago</title>
+  <meta name="description" content="${truncatedDescription}" />
+  <meta name="author" content="${author}" />
+  <meta name="keywords" content="${allKeywords}" />
+  ${datePublished ? `<meta name="article:published_time" content="${datePublished}" />` : ''}
+  ${dateModified ? `<meta name="article:modified_time" content="${dateModified}" />` : ''}
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="${fullUrl}" />
+  <meta property="og:title" content="${title}" />
+  <meta property="og:description" content="${truncatedDescription}" />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  ${image ? `<meta property="og:image" content="${image}" />` : ''}
+  ${datePublished ? `<meta property="article:published_time" content="${datePublished}" />` : ''}
+  ${dateModified ? `<meta property="article:modified_time" content="${dateModified}" />` : ''}
+  <meta property="article:author" content="${author}" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="${image ? 'summary_large_image' : 'summary'}" />
+  <meta name="twitter:title" content="${title}" />
+  <meta name="twitter:description" content="${truncatedDescription}" />
+  ${image ? `<meta name="twitter:image" content="${image}" />` : ''}
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="${fullUrl}" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  ${JSON.stringify(jsonLd, null, 2)}
+  </script>
 </head>
 <body class="bg-gray-50 text-gray-900">
-  <header class="bg-cyan-800 text-white py-4 shadow-md">
+  <header class="bg-black text-white py-4 shadow-md">
     <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-      <h1 class="text-2xl font-bold"><a href="/">JAFS</a></h1>
+      <h1 class="text-2xl font-bold">
+        <a href="/">
+          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+        </a>
+      </h1>
       <nav class="flex gap-4">
         <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
         <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
@@ -141,7 +229,23 @@ async function build() {
         // Compile only if HTML doesn't exist
         const html = marked(parsed.content);
         const content = `<h1 class="text-4xl font-bold mb-2">${title}</h1><p class="text-gray-600 text-sm mb-6">${dateDisplay}</p>${html}`;
-        await fs.writeFile(outPath, template(title, content), 'utf8');
+
+        // Extract description from content or use metadata
+        const description = meta.description || extractFirstParagraph(parsed.content);
+
+        // Prepare meta object for SEO
+        const metaData = {
+          description,
+          author: meta.author || 'José Antonio Fuentes Santiago',
+          keywords: meta.keywords || '',
+          datePublished: dateTimestamp ? new Date(dateTimestamp).toISOString() : '',
+          dateModified: meta.dateModified || '',
+          categories: meta.categories || [],
+          slug,
+          image: meta.image || ''
+        };
+
+        await fs.writeFile(outPath, template(title, content, metaData), 'utf8');
         console.log('Built', outPath);
       } else {
         console.log('Skipped (already exists)', outPath);
@@ -185,13 +289,59 @@ async function build() {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Artículos — JAFS</title>
+  <title>Artículos — José Antonio Fuentes Santiago</title>
+  <meta name="description" content="Artículos de José Antonio Fuentes Santiago sobre programación, TypeScript, arquitectura de software, inteligencia artificial y desarrollo web." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, artículos programación, TypeScript, desarrollo software, arquitectura" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jafs.github.io/articles/" />
+  <meta property="og:title" content="Artículos — José Antonio Fuentes Santiago" />
+  <meta property="og:description" content="Artículos de José Antonio Fuentes Santiago sobre programación, TypeScript, arquitectura de software, inteligencia artificial y desarrollo web." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Artículos — José Antonio Fuentes Santiago" />
+  <meta name="twitter:description" content="Artículos sobre programación, TypeScript y arquitectura de software." />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
   <link rel="stylesheet" href="/css/dist.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Artículos",
+    "description": "Artículos de José Antonio Fuentes Santiago sobre programación y desarrollo de software",
+    "url": "https://jafs.github.io/articles/",
+    "author": {
+      "@type": "Person",
+      "name": "José Antonio Fuentes Santiago"
+    }
+  }
+  </script>
 </head>
 <body class="bg-gray-50 text-gray-900">
-  <header class="bg-cyan-800 text-white py-4 shadow-md">
+  <header class="bg-black text-white py-4 shadow-md">
     <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-      <h1 class="text-2xl font-bold">Artículos</h1>
+      <h1 class="text-2xl font-bold">
+        <a href="/">
+          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+        </a>
+      </h1>
       <nav class="flex gap-4">
         <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
         <a href="/articles/" class="text-white font-semibold">Artículos</a>

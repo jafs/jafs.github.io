@@ -5,7 +5,9 @@
     "build": "node scripts/build.js",
     "build:css": "tailwindcss -i ./css/style.css -o ./css/dist.css --minify",
     "watch:css": "tailwindcss -i ./css/style.css -o ./css/dist.css --watch",
-    "build:all": "npm run build:css && npm run build",
+    "sitemap": "node scripts/generate-sitemap.js",
+    "update:seo": "node scripts/update-seo.js",
+    "build:all": "npm run build:css && npm run build && npm run sitemap",
     "start": "npx http-server -p 8080"
   },
   "dependencies": {

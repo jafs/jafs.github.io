@@ -65,15 +65,17 @@ keywords: "palabra1, palabra2, palabra3"
 author: "Nombre del autor" (opcional, por defecto: José Antonio Fuentes Santiago)
 dateModified: "YYYY-MM-DD" (opcional, fecha de última modificación)
 image: "https://jafs.github.io/images/imagen.jpg" (opcional, imagen destacada)
+image-mini: "/images/imagen-mini.webp" (opcional, miniatura para el listado de artículos)
 ---
 ```
 
-**Notas sobre SEO**:
+**Notas sobre SEO y presentación**:
 
 - **description**: Si no se proporciona, se extrae automáticamente el primer párrafo del contenido
 - **keywords**: Se combinan automáticamente con las categorías y "José Antonio Fuentes Santiago, JAFS"
 - **categories**: Se usan tanto para organización como para keywords SEO
 - **image**: Si se proporciona, mejora la previsualización en redes sociales (Open Graph, Twitter Cards)
+- **image-mini**: Miniatura de 96x96px que aparece en el listado de artículos. Si no se proporciona, el artículo se muestra sin imagen
 - **dateModified**: Útil para indicar a buscadores cuándo se actualizó el contenido
 
 El sistema genera automáticamente para cada artículo:

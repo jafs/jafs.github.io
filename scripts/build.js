@@ -158,17 +158,19 @@ async function parseExistingIndex() {
     const indexContent = await fs.readFile(ARTICLES_INDEX, 'utf8');
     const posts = [];
 
-    // Match each <li> block with title, date, and excerpt
-    const liRegex = /<li class="py-2 border-b border-gray-200">\s*<a href="\/articles\/posts\/([^"]+)"[^>]*>([^<]+)<\/a>[^<]*<span[^>]*>—<\/span>[^<]*<span[^>]*>([^<]+)<\/span>\s*(?:<p[^>]*>([^<]*)<\/p>)?\s*<\/li>/g;
+    // Match each <li> block with the new structure (article > figure? > div)
+    // Capture: image-mini (optional), slug, title, dateDisplay, excerpt
+    const liRegex = /<li class="py-2 border-b border-gray-200">\s*<article class="flex gap-4">\s*(?:<figure[^>]*>\s*<img src="([^"]+)"[^>]*>\s*<\/figure>\s*)?<div class="flex-1">\s*<header>\s*<a href="\/articles\/posts\/([^"]+)"[^>]*>([^<]+)<\/a>\s*<span[^>]*>—<\/span>\s*<time[^>]*>([^<]+)<\/time>\s*<\/header>\s*<p[^>]*>([^<]*)<\/p>\s*<\/div>\s*<\/article>\s*<\/li>/g;
 
     let match;
     while ((match = liRegex.exec(indexContent)) !== null) {
-      const [, slug, title, dateDisplay, excerpt] = match;
+      const [, imageMini, slug, title, dateDisplay, excerpt] = match;
       posts.push({
         slug,
         title,
         dateDisplay,
         excerpt: excerpt || '',
+        imageMini: imageMini || '',
         html: match[0]
       });
     }
@@ -254,7 +256,8 @@ async function build() {
       // Add to newPosts if not already in index
       if (!existingSlugs.has(slug)) {
         const excerpt = extractFirstParagraph(parsed.content);
-        newPosts.push({ title, dateTimestamp, dateDisplay, slug, excerpt });
+        const imageMini = meta['image-mini'] || '';
+        newPosts.push({ title, dateTimestamp, dateDisplay, slug, excerpt, imageMini });
       }
     }
 
@@ -269,7 +272,8 @@ async function build() {
           dateTimestamp: new Date(p.dateDisplay).getTime() || 0,
           dateDisplay: p.dateDisplay,
           slug: p.slug,
-          excerpt: p.excerpt
+          excerpt: p.excerpt,
+          imageMini: p.imageMini || ''
         })),
         ...newPosts
       ];
@@ -278,9 +282,26 @@ async function build() {
       allPosts.sort((a, b) => (b.dateTimestamp || 0) - (a.dateTimestamp || 0));
 
       const list = allPosts.map(p => {
-        const excerptHtml = p.excerpt ? `\n          <p class="text-gray-700 leading-relaxed">${p.excerpt}</p>` : '';
+        // Nueva estructura con flex, mostrando imagen solo si existe image-mini
+        const imageHtml = p.imageMini ? `<figure class="w-24 h-24">
+              <img src="${p.imageMini}" alt="${p.title}" class="object-cover rounded w-full h-full" />
+            </figure>
+            ` : '';
+
         return `<li class="py-2 border-b border-gray-200">
-          <a href="/articles/posts/${p.slug}" class="font-semibold">${p.title}</a> <span class="text-gray-400">—</span> <span class="text-gray-600 text-sm">${p.dateDisplay}</span>${excerptHtml}
+          <article class="flex gap-4">
+            ${imageHtml}<div class="flex-1">
+              <header>
+                <a href="/articles/posts/${p.slug}" class="font-semibold text-lg">${p.title}</a>
+                <span class="text-gray-400">—</span>
+                <time datetime="${p.dateDisplay}" class="text-gray-600 text-sm">${p.dateDisplay}</time>
+              </header>
+
+              <p class="text-gray-700 leading-relaxed mt-1">
+                ${p.excerpt}
+              </p>
+            </div>
+          </article>
         </li>`;
       }).join('\n        ');
 
@@ -289,7 +310,7 @@ async function build() {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Artículos — José Antonio Fuentes Santiago</title>
+  <title>Artículos — JAFS</title>
   <meta name="description" content="Artículos de José Antonio Fuentes Santiago sobre programación, TypeScript, arquitectura de software, inteligencia artificial y desarrollo web." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, artículos programación, TypeScript, desarrollo software, arquitectura" />

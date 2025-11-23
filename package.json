@@ -1,9 +1,0 @@
-{
-  "name": "jafs.github.io",
-  "version": "1.0.0",
-  "scripts": {
-    "start": "npx http-server -p 8080"
-  },
-  "dependencies": {},
-  "devDependencies": {}
-}

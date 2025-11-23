@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Testing y TDD. Algunos consejos — José Antonio Fuentes Santiago</title>
+  <meta name="description" content="Tras la introducción a TDD que tuvimos hace un tiempo, he creído conveniente ampliar un poco la información del anterior artículo, para exponer algunas anota..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, testing, TDD" />
+  <meta name="article:published_time" content="2023-02-25T10:50:26.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20230225.html" />
+  <meta property="og:title" content="Testing y TDD. Algunos consejos" />
+  <meta property="og:description" content="Tras la introducción a TDD que tuvimos hace un tiempo, he creído conveniente ampliar un poco la información del anterior artículo, para exponer algunas anota..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  
+  <meta property="article:published_time" content="2023-02-25T10:50:26.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Testing y TDD. Algunos consejos" />
+  <meta name="twitter:description" content="Tras la introducción a TDD que tuvimos hace un tiempo, he creído conveniente ampliar un poco la información del anterior artículo, para exponer algunas anota..." />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20230225.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Testing y TDD. Algunos consejos",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Tras la introducción a TDD que tuvimos hace un tiempo, he creído conveniente ampliar un poco la información del anterior artículo, para exponer algunas anota...",
+  "url": "https://jafs.github.io/articles/posts/20230225.html",
+  "inLanguage": "es",
+  "datePublished": "2023-02-25T10:50:26.000Z"
+}
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <h1 class="text-2xl font-bold">
+        <a href="/">
+          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+        </a>
+      </h1>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Testing y TDD. Algunos consejos</h1><p class="text-gray-600 text-sm mb-6">2023-02-25</p><p>Tras la introducción a <a href="/articles/posts/20221211.html">TDD</a> que tuvimos hace un tiempo, he creído conveniente ampliar un poco la información del anterior artículo, para exponer algunas anotaciones sobre esta técnica.</p>
+<p>Si hacemos un repaso rápido, podemos recordar que con TDD tendremos los pasos siguientes (de forma resumida):</p>
+<ul>
+<li><strong>Análiza</strong>: antes de escribir el primer test, nos conviene estudiar que comportamiento deseamos probar, sus posibles entradas y salidas, restricciones, etc.</li>
+<li><strong>Escribir un test que falle</strong>: escribe un test que va a fallar. Ya sea porque falta código, o porque aunque ya existe parte de ese código aún no tiene todas las funcionalidades que se esperan de él.</li>
+<li><strong>Haz que el test pase</strong>: realiza los cambios mínimos para que el test pase correctamente.</li>
+<li><strong>Refactoriza</strong>: ahora puedes cambiar el código para mejorarlo. En este punto hay que probar todos los tests para asegurar que no se ha roto nada con el refactor.</li>
+<li><strong>Escribir el siguiente test que falle</strong>.</li>
+</ul>
+<p>Una vez visto este mini-repaso, pasemos a realizar algunas anotaciones sobre TDD.</p>
+<h2 id="anotación-1-conjunto-de-datos-de-testing-incompleto">Anotación 1. Conjunto de datos de testing incompleto</h2>
+<p>Uno de los puntos más importantes a tener en cuenta a la hora de trabajar con TDD, es tener un conjunto de datos de entrada y salida que nos dé la seguridad de tener todas las posibilidades probadas (al menos dentro de lo razonablemente posible). Y es que tener pocos datos, puede provocar que haya casos específicos que no sean correctos.</p>
+<p>Como norma general deberíamos tener casos de prueba para lo siguientes tipos de datos:</p>
+<ul>
+<li><strong>Datos límite</strong>: esto es, el mínimo y máximo permitido. Aplicado a nivel de valores, parámetros de entrada variables, elementos en una lista, etc.</li>
+<li><strong>Datos erróneos</strong>: datos que podrían generar una excepción en el código.</li>
+<li><strong>Datos que difieran para cubrir lo máximo posible</strong>: por ejemplo, en el caso de que la entrada sea un usuario, podrían ser combinaciones dejando campos vacíos.</li>
+<li><strong>Datos que provoquen distintas lógicas</strong>: en el caso de una cesta de la compra, deberíamos tener pruebas con los distintos métodos de pago.</li>
+</ul>
+<h2 id="anotación-2-refactorizar-dividiendo-el-código">Anotación 2. Refactorizar dividiendo el código</h2>
+<p>Puede que durante un refáctor de una clase o función con TDD, veas necesario separar la lógica, ya que el código ha crecido mucho y puede que esté comenzando a incumplir alguno de los principios <a href="articles/posts/20220107.html">SOLID</a>.</p>
+<p>Aquí tenemos dos posibilidades la lógica y un poco más costosa y la ilógica pero más rápida:</p>
+<ul>
+<li><strong>La opción lógica</strong>, sería comenzar a hacer TDD con esa nueva clase o función. Lo bueno es que puedes aprovechar seguramente parte de los casos que tienes y que afectaban al código que ibas a extraer. Así se mantiene todo el flujo de TDD, teniendo tests independientes para esta nueva parte.</li>
+<li><strong>La opción ilógica</strong>, implica seguir manteniendo los tests en el componente inicial para que prueben la otra parte. Es más rápido porque no requiere cambiar los tests, pero a cambio, tienes tests de una parte de tu código en otro elemento. Si este nuevo componente comienza a crecer, el mantenimiento comenzará a flaquear por todos lados, además de que no estarán bien organizados. Y recordemos que el código de tests, debe ser tan &quot;limpio&quot; como el código del proyecto.</li>
+</ul>
+<h2 id="anotación-3-actuación-ante-errores">Anotación 3. Actuación ante errores</h2>
+<p>Pese a seguir la técnica de TDD, pueden surgir bugs, por ejemplo por casuísticas que no se habían tenido en cuenta. En este caso, no resuelvas el problema directamente. Añade un test con la lógica para provocar el fallo. Una vez hecho esto, comienza a corregir el código.</p>
+<h2 id="anotación-4-tests-de-código-externo-previo-a-una-actualización">Anotación 4. Tests de código externo previo a una actualización</h2>
+<p>En este caso, la técnica es parecida a la de la anotación anterior. Si vamos a actualizar un código externo (por ejemplo, una librería) y queremos usar una funcionalidad nueva. Nos podemos asegurar de que sabemos llamar a esa funcionalidad y que devuelve lo que esperamos, escribiendo primero un test que la intente usar. Posteriormente, actualizaremos la librería y probaremos de nuevo para ver si hemos entendido como funciona.</p>
+<p>Crear tests para código externo también nos permite asegurarnos de que al actualizar la versión de éste, no rompe ninguno de los flujos y comportamientos que esperábamos. Como ejemplo: se cambia una entrada de la API pública y ahora pasa a ser obligatorio un parámetro que antes era opcional. Al actualizar la librería y lanzar los tests, todos aquellos que no pasen ese parámetro obligatorio se romperán. Gracias a ello, estaremos en preaviso de que no somos aún compatibles con esa versión.</p>
+<p>En este caso, hablar de código externo daría casi para otro artículo.</p>
+<h2 id="conclusiones">Conclusiones</h2>
+<p>TDD es una herramienta muy potente y permite cierta libertad a la hora de tomar algunas decisiones. Pero ello, no implica que usemos el martillo cogiendo la cabeza en lugar del mango. Es importante tener en cuenta los datos y la utilidad de los tests que estamos creando.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

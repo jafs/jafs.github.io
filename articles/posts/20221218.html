@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Plantilla de proyecto TypeScript — José Antonio Fuentes Santiago</title>
+  <meta name="description" content="A la hora de comenzar un nuevo proyecto, suele costar bastante configurar todo. Es por ello, que por simplificar un poco las cosas, acabo de crear una planti..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, TypeScript, plantilla" />
+  <meta name="article:published_time" content="2022-12-18T18:10:29.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20221218.html" />
+  <meta property="og:title" content="Plantilla de proyecto TypeScript" />
+  <meta property="og:description" content="A la hora de comenzar un nuevo proyecto, suele costar bastante configurar todo. Es por ello, que por simplificar un poco las cosas, acabo de crear una planti..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  
+  <meta property="article:published_time" content="2022-12-18T18:10:29.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Plantilla de proyecto TypeScript" />
+  <meta name="twitter:description" content="A la hora de comenzar un nuevo proyecto, suele costar bastante configurar todo. Es por ello, que por simplificar un poco las cosas, acabo de crear una planti..." />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20221218.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Plantilla de proyecto TypeScript",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "A la hora de comenzar un nuevo proyecto, suele costar bastante configurar todo. Es por ello, que por simplificar un poco las cosas, acabo de crear una planti...",
+  "url": "https://jafs.github.io/articles/posts/20221218.html",
+  "inLanguage": "es",
+  "datePublished": "2022-12-18T18:10:29.000Z"
+}
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <h1 class="text-2xl font-bold">
+        <a href="/">
+          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+        </a>
+      </h1>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Plantilla de proyecto TypeScript</h1><p class="text-gray-600 text-sm mb-6">2022-12-18</p><p>A la hora de comenzar un nuevo proyecto, suele costar bastante configurar todo. Es por ello, que por simplificar un poco las cosas, acabo de crear una plantilla, basada en <a href="https://www.typescriptlang.org">TypeScript</a>, <a href="https://vitejs.dev/">Vite</a> y <a href="https://jestjs.io/es-ES/">Jest</a>. Para usarla, podéis crear un fork o descargar el código y ajustarlo a vuestras necesidades libremente. Este código lo podéis encontrar en <a href="https://github.com/jafs/typescript-boilerplate">GitHub</a>. Esta plantilla necesita de node en su versión 16.0.0 como mínimo.</p>
+<h2 id="comandos">Comandos</h2>
+<p>Una vez que tengáis el proyecto, podréis ejecutar distintos comandos anteponiendo <code>npm run</code>.</p>
+<ul>
+<li><code>dev</code>: Modo de desarrollo, lanza un servidor de live-preview, que va actualizándose según hacéis cambios en el código: compilando el código TypeScript y actualizando las referencias.</li>
+<li><code>build</code>: Compila y minifica el código, de forma que lo deja listo para usar en el entorno de distribución. El resultado final lo podrás encontrar en el directorio <strong>dist</strong>.</li>
+<li><code>preview</code>: Lanza un servidor para poder ver los cambios del distribuible generado.</li>
+<li><code>test</code>: Lanza los tests unitarios.</li>
+</ul>
+<h2 id="estructura">Estructura</h2>
+<p>La estructura del proyecto es muy sencilla. En la carpeta raíz se tiene el fichero <code>index.html</code>, que hace de punto de partida, y todo el código fuente se almacena en el directorio <code>src</code>. Dicho directorio, a su vez, contiene la carpeta <code>__tests__</code>, donde se incluir los tests unitarios a desarrollar con Jest.</p>
+<p>Enlace al repositorio <a href="https://github.com/jafs/typescript-boilerplate">typescript-boilerplate</a>.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

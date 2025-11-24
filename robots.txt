@@ -3,9 +3,3 @@ Allow: /
 
 # Sitemap
 Sitemap: https://jafs.github.io/sitemap.xml
-
-# Disallow build artifacts and dev files
-Disallow: /node_modules/
-Disallow: /.git/
-Disallow: /scripts/
-Disallow: /posts/

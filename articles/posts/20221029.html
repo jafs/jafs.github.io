@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cosas que quizás no sabías de CSS — JAFS</title>
+  <meta name="description" content="Con la reciente encuesta del estado de CSS, vamos a comentar algunas características que pueden ser menos conocidas de CSS. Espero que os sirva de ayuda &#x1..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, CSS" />
+  <meta name="article:published_time" content="2022-10-29T17:15:30.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20221029.html" />
+  <meta property="og:title" content="Cosas que quizás no sabías de CSS" />
+  <meta property="og:description" content="Con la reciente encuesta del estado de CSS, vamos a comentar algunas características que pueden ser menos conocidas de CSS. Espero que os sirva de ayuda &#x1..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  
+  <meta property="article:published_time" content="2022-10-29T17:15:30.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Cosas que quizás no sabías de CSS" />
+  <meta name="twitter:description" content="Con la reciente encuesta del estado de CSS, vamos a comentar algunas características que pueden ser menos conocidas de CSS. Espero que os sirva de ayuda &#x1..." />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20221029.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cosas que quizás no sabías de CSS",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Con la reciente encuesta del estado de CSS, vamos a comentar algunas características que pueden ser menos conocidas de CSS. Espero que os sirva de ayuda &#x1...",
+  "url": "https://jafs.github.io/articles/posts/20221029.html",
+  "inLanguage": "es",
+  "datePublished": "2022-10-29T17:15:30.000Z"
+}
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Cosas que quizás no sabías de CSS</h1><p class="text-gray-600 text-sm mb-6">2022-10-29</p><p>Con la reciente <a href="https://stateofcss.com/en-us/">encuesta del estado de CSS</a>, vamos a comentar algunas características que pueden ser menos conocidas de CSS. Espero que os sirva de ayuda &#x1f603;.</p>
+<h2 id="1-visualizar-texto-en-vertical">1. Visualizar texto en vertical</h2>
+<p>¿Alguna vez has querido poner un texto en vertical y has estado jugando con los filtros de CSS? Pues, una forma muy sencilla de situar un texto en vertical es con la propiedad <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode">writing-mode</a>.</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="CSS: writing-mode" src="https://codepen.io/jafs-developer/embed/zYaGXPp?default-tab=html%2Cresult&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true">
+  Ver el Pen <a href="https://codepen.io/jafs-developer/pen/zYaGXPp">
+  CSS: writing-mode</a> by José Antonio Fuentes Santiago (<a href="https://codepen.io/jafs-developer">@jafs-developer</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<h2 id="2-espacio-entre-elementos">2. Espacio entre elementos</h2>
+<p>¿Recuerdas los tiempos en los que para diseños con varias filas y columnas usabas las propiedades margin y padding para dejar espacio entre ellas? Pues eso es cosa del pasado gracias a la propiedad <a href="https://developer.mozilla.org/es/docs/Web/CSS/gap"><code>gap</code></a>. Quizás, ya conocías esto, pero lo que menos gente sabe es que, por un lado, gap, es unalias de <code>grid-gap</code> (puedes usar ambas de forma indistinta); y por otro que ambos son un <a href="https://developer.mozilla.org/es/docs/Web/CSS/Shorthand_properties">shorthand</a> o propiedad abreviada de <code>grid-row-gap</code>, y <code>column-row-gap</code>. Por lo que podemos especificar un espaciado distinto para filas y columnas, algo que podéis comprobar en el ejemplo siguiente:</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="CSS: gap" src="https://codepen.io/jafs-developer/embed/xxzwKYv?default-tab=html%2Cresult&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true">
+  Ver el Pen <a href="https://codepen.io/jafs-developer/pen/xxzwKYv">
+  CSS: gap</a> by José Antonio Fuentes Santiago (<a href="https://codepen.io/jafs-developer">@jafs-developer</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<p>Esta propiedad la podréis usar con flex, grid y columnas (algo que veremos en el punto siguiente).</p>
+<h2 id="3-texto-en-columnas-de-forma-sencilla">3. Texto en columnas de forma sencilla</h2>
+<p>Lo primero que se te vendrá a la cabeza al hablar de texto en columnas, puede que sea un periódico. Y es que si necesitamos aplicar ese estilo, ya no nos tenemos que romper la cabeza, pues la propiedad <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/column-count"><code>column-count</code></a> viene al rescate. Con ella, básicamente podemos indicar en cuantas columnas se dividirá el texto.</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="CSS: column-count" src="https://codepen.io/jafs-developer/embed/JjZYPBj?default-tab=html%2Cresult&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true">
+  Ver el Pen <a href="https://codepen.io/jafs-developer/pen/JjZYPBj">
+  CSS: column-count</a> by José Antonio Fuentes Santiago (<a href="https://codepen.io/jafs-developer">@jafs-developer</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<h2 id="4-filtros">4. Filtros</h2>
+<p>Ya llevan varios años entre nosotros, pero por si no lo sabías puedes aplicar una gran cantidad de efectos gráficos mediante el uso de CSS con la propiedad <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter"><code>filter</code></a>. Esta propiedad permite un sinfín de posibilidades, tantas que darían para un artículo (o varios). Ya que podemos combinar distintos efectos en un único filtro.</p>
+<p>En el código de ejemplo, os pongo una imagen (aunque se puede aplicar a cualquier elemento sea o no una imagen), a la que se aplican distintos filtros con CSS.</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="CSS: filter" src="https://codepen.io/jafs-developer/embed/XWYmrow?default-tab=html%2Cresult&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true">
+  Ver el Pen <a href="https://codepen.io/jafs-developer/pen/XWYmrow">
+  CSS: filter</a> by José Antonio Fuentes Santiago (<a href="https://codepen.io/jafs-developer">@jafs-developer</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<h2 id="5-ajustar-el-alto-y-el-ancho-al-contenido">5. Ajustar el alto (y el ancho) al contenido</h2>
+<p>Una de los valores predefinidos menos conocidos de CSS es <a href="https://developer.mozilla.org/es/docs/Web/CSS/fit-content"><code>fit-content</code></a>. Aplicado al alto o al ancho de un componente, lo que hace es ajustar el tamaño del bloque HTML (ya sea ancho, alto o ambos) a su contenido. Un ejemplo lo podéis ver a continuación, donde al usar en éste flex, el alto de cada elemento se &quot;estira&quot; para igualarse al que tenga un alto mayor. Con la función <code>fit-content</code>, lo que haremos es que el componente que menos altura tiene se quede con ésta, en lugar de estirarse.</p>
+<p>Esta función se puede usar sin parámetros o de una forma más compleja, especificando el mínimo y el máximo.</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="CSS: fit-content" src="https://codepen.io/jafs-developer/embed/dyKYyyO?default-tab=html%2Cresult&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true">
+  Ver el Pen <a href="https://codepen.io/jafs-developer/pen/dyKYyyO">
+  CSS: fit-content</a> by José Antonio Fuentes Santiago (<a href="https://codepen.io/jafs-developer">@jafs-developer</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<h2 id="6-cambiar-el-color-de-fondo-de-algunos-controles">6. Cambiar el color de fondo de algunos controles</h2>
+<p>Seguro que más de una vez has visto que se oculta un checkbox con CSS para poner una especie de capa por encima que deje el checkbox con otro estilo u otros colores. Desde hace un tiempo, al menos si lo hacía por cambiar los colores, ya no es necesario. En este caso, con la propiedad <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color"><code>accent-color</code></a>, podrás modificar el color de fondo de checkbox, radio buttons, rangos y barras de progreso.</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="CSS: accent-color" src="https://codepen.io/jafs-developer/embed/oNyjjXz?default-tab=html%2Cresult&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true">
+  Ver el Pen <a href="https://codepen.io/jafs-developer/pen/oNyjjXz">
+  CSS: accent-color</a> by José Antonio Fuentes Santiago (<a href="https://codepen.io/jafs-developer">@jafs-developer</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<h2 id="7-aplicar-estilos-según-el-tema-de-color-del-sistema-operativo">7. Aplicar estilos según el tema de color del sistema operativo</h2>
+<p>CSS ha avanzado mucho en los últimos tiempos, y prueba de ello es que ahora podemos aplicar distintos estilos según el tema de color del sistema operativo. Para ello, disponemos de la media-query <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme"><code>prefers-color-scheme</code></a>. Con ella podemos comprobar si el usuario ha seleccionado un tema claro u oscuro (valores <code>light</code> y <code>dark</code>), y según esto aplicar distintos estilos.</p>
+<p>Para probar el ejemplo siguiente, cambia el tema de color de tu sistema operativo. Si el navegador con el que estás viendo esta página lo soporta, deberías ver como cambian los colores del fondo y el texto.</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="CSS: prefers-color-scheme" src="https://codepen.io/jafs-developer/embed/rNKOOLB?default-tab=html%2Cresult&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true">
+  Ver el Pen <a href="https://codepen.io/jafs-developer/pen/rNKOOLB">
+  CSS: prefers-color-scheme</a> by José Antonio Fuentes Santiago (<a href="https://codepen.io/jafs-developer">@jafs-developer</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<p>Y con esto terminamos esta compilación de cosillas que quizás no sabías de CSS. ¿Os han resultado interesantes? ¿Os gustaría que habláramos del alguna en un artículo más detallado? Como siempre, espero vuestros comentarios &#x1f609;.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Web Workers en JavaScript — JAFS</title>
+  <meta name="description" content="Estarás acostumbrado o acostumbrada a escuchar que JavaScript corre sobre un único hilo de ejecución. Esto puede en ocasiones acarrear problemas si una tarea..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, JavaScript" />
+  <meta name="article:published_time" content="2022-09-14T13:55:26.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220914.html" />
+  <meta property="og:title" content="Web Workers en JavaScript" />
+  <meta property="og:description" content="Estarás acostumbrado o acostumbrada a escuchar que JavaScript corre sobre un único hilo de ejecución. Esto puede en ocasiones acarrear problemas si una tarea..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  
+  <meta property="article:published_time" content="2022-09-14T13:55:26.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Web Workers en JavaScript" />
+  <meta name="twitter:description" content="Estarás acostumbrado o acostumbrada a escuchar que JavaScript corre sobre un único hilo de ejecución. Esto puede en ocasiones acarrear problemas si una tarea..." />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220914.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Web Workers en JavaScript",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Estarás acostumbrado o acostumbrada a escuchar que JavaScript corre sobre un único hilo de ejecución. Esto puede en ocasiones acarrear problemas si una tarea...",
+  "url": "https://jafs.github.io/articles/posts/20220914.html",
+  "inLanguage": "es",
+  "datePublished": "2022-09-14T13:55:26.000Z"
+}
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Web Workers en JavaScript</h1><p class="text-gray-600 text-sm mb-6">2022-09-14</p><p>Estarás acostumbrado o acostumbrada a escuchar que JavaScript corre sobre un único hilo de ejecución. Esto puede en ocasiones acarrear problemas si una tarea es demasiada pesada, pues dejará bloqueado el hilo.</p>
+<p>Para solventar ese problema, se dispone de los <a href="https://developer.mozilla.org/es/docs/Web/API/Web_Workers_API/Using_web_workers">Web Workers</a>, que permiten ejecutar código JavaScript en hilos que se lanzan en segundo plano. Cabe destacar que estos workers utilizan un contexto global distinto al de la ventana (o worker) que lo lanza. Como consejo puedes usar <code>globalThis</code> para reducir dependencias de usar <code>window</code>, <code>self</code>, etc.</p>
+<p>El método de comunicación del worker con su creador es a través de mensajes gestionados como eventos. De forma muy parecida al sistema de comunicación entre iframes.</p>
+<p>Pero como siempre, será mejor que veamos el funcionamiento de los workers con varios ejemplos.</p>
+<h2 id="hola-mundo-de-los-workers">Hola mundo de los workers</h2>
+<pre><code class="language-javascript">// Fichero index.js
+// El constructor del worker recibe la ruta en la que se encuentra el fichero de
+// JavaScript con el código del worker.
+const worker = new Worker(&quot;worker.js&quot;);
+
+// Definimos el callback para recibir los mensajes
+worker.onmessage = function(event) {
+  console.log(&quot;Message received from worker: &quot; + event.data);
+};
+
+// Fichero worker.js
+postMessage(&quot;Hello from the worker&quot;);
+</code></pre>
+<p>En el código superior se puede ver lo sencillo que es crear un Web Worker. La ejecución del código terminará mostrando en la consola: <code>&quot;Message received from worker: Hello from the worker&quot;</code>.</p>
+<p>A la hora de definir un worker, se especifica la ruta en la que se encuentra el script que se ejecutará en segundo plano.</p>
+<p>Posteriormente, se pasa a escuchar los mensajes que envíe el worker asignando un callback al atributo <code>onmessage</code>. El callback asignado, recibirá como un objeto como parámetro que contendrá el atributo <code>data</code> con el contenido del mensaje enviado por el worker. Este contenido puede ser de cualquier tipo de dato.</p>
+<h2 id="mensajería-entre-worker-y-creador">Mensajería entre Worker y creador</h2>
+<p>En el caso de enviar un objeto en los mensajes, no hay problema de recursos compartidos, ya que se hace automáticamente un deep clone de dicho objeto. Este clonado se lleva a cabo gracias a la función <a href="https://developer.mozilla.org/en-US/docs/Web/API/structuredClone"><code>structuredClone</code></a>, que por si la desconoces, permite clonar objetos.</p>
+<p>Todo esto lo veremos con un ejemplo que incluye algo de sobreingeniería, pero nos servirá para verificar que no hay paso de objetos por referencia.</p>
+<pre><code class="language-javascript">// Fichero index.js
+const worker = new Worker(&quot;worker.js&quot;);
+
+const data = { value: 3 };
+
+worker.onmessage = function(event) {
+  console.log(&quot;Result&quot;, event.data);
+  console.log(&quot;Old data&quot;, data);
+};
+
+worker.postMessage(data);
+
+// Fichero worker.js
+// Podemos omitir self o  globalThis para recibir mensajes en el worker.
+onmessage = function(event) {
+  const data = event.data;
+  data.value = 123;
+  postMessage(data);
+};
+</code></pre>
+<p>Al ejecutar el código anterior, se podrá comprobar como en <code>result</code> se recibe un objeto con atributo value igual a 123; por otro lado el objeto <code>data</code> sigue teniendo el atributo value con valor 3. Esto es por lo que hemos comentado al principio de este apartado, los valores de los mensajes se pasan por valor y no por referencia.</p>
+<h2 id="control-de-errores">Control de errores</h2>
+<p>Aparte de la mensajería estándar, es posible capturar aquellos errores que generen los Web Workers. Para ello asignaremos al atributo <code>onerror</code> del worker un callback que recibirá el evento con el error.</p>
+<pre><code class="language-javascript">// Fichero index.js
+const worker = new Worker(&quot;worker.js&quot;);
+
+worker.onmessage = function(event) {
+  console.log(&quot;Result&quot;, event.data);
+};
+
+worker.onerror = function(event) {
+  console.error(&quot;Error on worker&quot;, event);
+}
+
+worker.postMessage(3);
+worker.postMessage(-1);
+
+// Fichero worker.js
+onmessage = function(event) {
+  const result = factorial(event.data);
+  postMessage(result);
+};
+
+function factorial(value) {
+  if (value &amp;lt; 0) {
+    throw new Error(&quot;Factorial can&#39;t use negative values: &quot; + value);
+  }
+
+  if (value === 0) {
+    return 1;
+  }
+
+  let result = value;
+
+  for (let index = value - 1; index &gt; 0; --index) {
+    result *= index;
+  }
+
+  return result;
+}
+</code></pre>
+<p>La ejecución superior mostrará en consola:</p>
+<pre><code class="language-text">Result: 6
+Error on worker {
+  colno: 15,
+  composed: false,
+  eventPhase: 0,
+  filename: &quot;http://127.0.0.1:8080/worker.js&quot;,
+  lineno: 10,
+  message: &quot;Error: Factorial can&#39;t use negative values: -1&quot;,
+  type: &quot;error&quot;
+}
+</code></pre>
+<p>Como se puede apreciar, se recibe aparte del error generado, el fichero, así como la línea y columna en la que éste ha ocurrido.</p>
+<h2 id="finalizar-un-worker">Finalizar un worker</h2>
+<p>En el caso que queramos dar por finalizado un worker desde el creador, llamaremos al método <code>terminate()</code>, de forma que en este caso se termine la ejecución del worker, sin darle tiempo a realizar un &quot;cierre ordenado&quot;.</p>
+<p>Por otro lado, un worker puede indicar que ha terminado llamando a <code>globalThis.close()</code> (o <code>self.close()</code>).</p>
+<p>En ambos casos, aunque se intenten enviar mensajes entre creado y worker, ya se habrá cerrado ese canal de comunicación.</p>
+<h2 id="conclusión">Conclusión</h2>
+<p>Los Web Worker permiten llevar a cabo tareas pesadas fuera del hilo principal de JavaScript, y como habréis podido comprobar, es posible definirlos de  forma muy sencilla. Tan sólo hay que especificar el fichero a utilizar como worker, y comunicar el creador y el worker con mensajes.</p>
+<p>Finalmente, tan sólo remarcar, que no todos los objetos globales están disponibles en los Web Workers, puedes encontrar el listado completo en <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers">MDN</a>.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

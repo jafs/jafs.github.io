@@ -70,6 +70,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://jafs.github.io/articles/posts/20221220.html</loc>
+    <lastmod>2022-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://jafs.github.io/articles/posts/20221218.html</loc>
     <lastmod>2022-12-18</lastmod>
     <changefreq>monthly</changefreq>

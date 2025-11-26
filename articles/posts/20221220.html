@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BDD y Gherkin. Una pequeña introducción — JAFS</title>
+  <meta name="description" content="BDD (Behavior Driven Development) o Desarrollo Dirigido por Comportamiento es una metodología que lleva varios años en el tintero, pero día a día va cobrando..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Testing" />
+  <meta name="article:published_time" content="2022-12-20T17:18:46.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20221220.html" />
+  <meta property="og:title" content="BDD y Gherkin. Una pequeña introducción" />
+  <meta property="og:description" content="BDD (Behavior Driven Development) o Desarrollo Dirigido por Comportamiento es una metodología que lleva varios años en el tintero, pero día a día va cobrando..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  
+  <meta property="article:published_time" content="2022-12-20T17:18:46.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="BDD y Gherkin. Una pequeña introducción" />
+  <meta name="twitter:description" content="BDD (Behavior Driven Development) o Desarrollo Dirigido por Comportamiento es una metodología que lleva varios años en el tintero, pero día a día va cobrando..." />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20221220.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "BDD y Gherkin. Una pequeña introducción",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "BDD (Behavior Driven Development) o Desarrollo Dirigido por Comportamiento es una metodología que lleva varios años en el tintero, pero día a día va cobrando...",
+  "url": "https://jafs.github.io/articles/posts/20221220.html",
+  "inLanguage": "es",
+  "datePublished": "2022-12-20T17:18:46.000Z"
+}
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">BDD y Gherkin. Una pequeña introducción</h1><p class="text-gray-600 text-sm mb-6">2022-12-20</p><p>BDD (Behavior Driven Development) o Desarrollo Dirigido por Comportamiento es una metodología que lleva varios años en el tintero, pero día a día va cobrando más fuerza. En este artículo aprenderemos más sobre ella.</p>
+<h2 id="historia-de-bdd">Historia de BDD</h2>
+<p>BDD partió de distintas metodologías ágiles, que primero fueron comentadas sobre los años 2000 por <a href="https://dannorth.net/">Dan North</a>. Posteriormente, Dan publicó un artículo llamado <a href="https://dannorth.net/introducing-bdd/">Introducing BDD</a>, donde comenzó a desarrollar más el tema. Finalmente, el concepto de BDD terminó haciéndose un estándar, con la ayuda de <a href="https://twitter.com/lunivore">Elizabeth Keogh</a> en las charlas que dieron durante la <strong>&quot;Agile specifications, BDD and Testing eXchange&quot;</strong> celebrada en el año 2009.</p>
+<p>Y es que BDD nació como respuesta a los problemas que surgían al empezar con TDD (Desarrollo Dirigido por Pruebas). Ya que la mayoría de programadores y programadoras se encontraban con las mismas preguntas:</p>
+<ul>
+<li>¿Dónde comienza el proceso de tests?</li>
+<li>¿Qué probar y qué no probar?</li>
+<li>¿Cuánto abarca una prueba?</li>
+<li>¿Cómo llamar a las pruebas?</li>
+<li>¿Cómo entender por qué falla una prueba?</li>
+</ul>
+<h2 id="conceptos-de-bdd">Conceptos de BDD</h2>
+<p>Inicialmente, la idea de nuestros amigos Dan y Liz era que los tests más complejos se definieran de forma similar a las historias de usuario. Por lo que cualquier persona sin conocimientos técnicos podría plantear las pruebas. Es por ello, que partiendo de la típica definición de historia en el desarrollo ágil:</p>
+<pre><code class="language-text">Como [rol que ejecuta la prueba]
+Quiero [pasos a realizar]
+Por lo que [resultado esperado]
+</code></pre>
+<p>Se pasó a una definición de comportamientos y escenarios. Así que ya no definiremos una prueba como tal, sino que pensaremos en el comportamiento que debería tener dicha aplicación. Es por ello, que al desarrollar con BDD, debemos pensar: &quot;¿cuál es la función más importante que la aplicación no hace?&quot;. Con esa idea en mente, podremos pasar de pensar &quot;no sé que probar&quot; a tener un comportamiento con &quot;la aplicación debería hacer X&quot;.</p>
+<p>Una vez que pensamos en comportamientos, en BDD se plantea el siguiente esquema:</p>
+<pre><code class="language-text">Comportamiento: qué se espera que haga el sistema
+  Escenario: caso que define el comportamiento
+  Requisitos previos
+  Operaciones para lograrlo
+  Resultado esperado
+</code></pre>
+<p>Esta definición comprende las siguientes partes:</p>
+<ul>
+<li><strong>Comportamiento</strong> a probar, o funcionalidad que se espera que cumpla el sistema. Por ejemplo, si estamos en una tienda online, el funcionamiento del carrito de la compra. Un comportamiento se compone de distintos escenarios.</li>
+<li>Los <strong>escenarios</strong> son los casos que ayudan a verificar el comportamiento. Siguiendo con el ejemplo anterior, pueden ser escenarios: añadir un artículo, eliminar un artículo, cambiar la cantidad, etc. Un escenario se compone de lo que se llama pasos, éstos se encuentran agrupados en:<ul>
+<li><strong>Requisitos</strong>, es aquel estado inicial que deja el escenario listo para probar.</li>
+<li>Las <strong>operaciones</strong> son los pasos a seguir para probar el escenario.</li>
+<li>El <strong>resultado</strong>, tal y como su nombre indica, es lo que se desea verificar tras seguir los pasos.</li>
+</ul>
+</li>
+</ul>
+<p>El conjunto de pasos de cada escenario, se pueden relacionar con el sistema de <a href="http://xunitpatterns.com/Four%20Phase%20Test.html">tests en cuatro fases</a> de la forma siguiente:</p>
+<p><img src="/images/bdd-four-phase.webp" alt="BDD and Four Phase Testing"></p>
+<p>Se puede observar como la fase &quot;Tear down&quot;, no existe de base en BDD, lo que no quita que frameworks como Cucumber permitan tener esta fase en BDD.</p>
+<h2 id="ventajas-de-bdd">Ventajas de BDD</h2>
+<p>Tras haber visto un poco la introducción a BDD, lo siguiente que podéis pensar es ¿qué ventajas puede acarear el definir así las pruebas?</p>
+<ul>
+<li><p><strong>Define un estándar para que negocio y desarrollo puedan entenderse</strong>: Para ello, se utiliza un lenguaje natural, o muy aproximado al lenguaje natural, de forma que cualquiera puede aprenderlo sin tener conocimientos técnicos.</p>
+</li>
+<li><p><strong>Ayuda a comprender mejor qué se espera del desarrollo de la historia</strong>: Gracias a la naturalización de los conceptos y las definiciones (sin tener abreviaturas y huyendo de los términos técnicos de cada tecnología), se puede tener un objetivo claro en mente que ayude a comprender que se debe llevar a cabo.</p>
+</li>
+<li><p><strong>Cualquier persona relacionada con la aplicación puede definir los casos de uso</strong>: Tal y como comentamos antes, al usarse un lenguaje sencillo, no importa que la persona que quiera definir los comportamientos no tenga conocimientos técnicos. Eso sí, será importante que sí tenga conocimiento de negocio para evitar casos innecesarios o poco definidos. Ya lo decía Martin Fowler en su charla <a href="https://www.youtube.com/watch?v=4E3xfR6IBII">Not Just Code Monkeys</a>:</p>
+<blockquote>
+<p>&quot;No es tan importante saber determinados lenguajes, estos van y vienen, y en realidad no son tan diferentes entre sí. Aprender el dominio en el que estás trabajando. Esa sí que es una habilidad muy útil.&quot; <br><em>Martin Fowler</em></p>
+</blockquote>
+</li>
+<li><p><strong>En independiente del framework de pruebas utilizado</strong>: BDD nos da una serie de pautas para definir los comportamientos, es por ello que, al igual que los patrones de diseño se pueden aplicar a prácticamente cualquier lenguaje, todos los frameworks que usemos para BDD serán muy similares.</p>
+</li>
+<li><p><strong>Es muy fácil convertir la definición de una historia en casos BDD y viceversa</strong>: Ya hemos visto que los pasos que definen un escenario partían de la definición estándar de historias en el desarrollo ágil. Es por ello, que la transcripción de una historia a BDD es algo casi automático, si hemos definido la historia de forma correcta.</p>
+</li>
+</ul>
+<h2 id="bdd--tdd">BDD + TDD</h2>
+<p>Recapitulando, hemos visto hasta ahora que, con BDD tenemos una forma estándar de poder definir casos de prueba, así como de llevarlos a cabo. Pero ¿cómo encaja esto en un flujo de desarrollo habitual? Pues bien, BDD, se basa en los mismos principios que TDD, es decir, se escribe un caso que falle, se desarrolla y/o se refactoriza hasta hacer que funcione.</p>
+<p><img src="/images/BDDyTDD.webp" alt="BDD y TDD"></p>
+<p>Como podéis ver en la imagen anterior:</p>
+<ul>
+<li>Escribimos un escenario que falle.</li>
+<li>Comenzamos con TDD hasta que todos los tests pasen.</li>
+<li>Una vez que pasen todos los test de lo que podríamos decir, que es la parte TDD, volvemos al escenario para ver si el escenario se prueba correctamente. Si no es así, seguiremos refactorizando.</li>
+</ul>
+<h2 id="bdd-en-la-pirámide-de-tests">BDD en la pirámide de tests</h2>
+<p>No hemos mandado a BDD de viaje por Egipto como si fuera una historia de Astérix, sino que vamos a ver como se integraría BDD en la famosa pirámide introducida por <a href="https://www.mountaingoatsoftware.com/">Mike Cohn</a> en su libro <a href="https://www.amazon.es/Succeeding-Agile-Software-Development-Signature/dp/0321579364">Succeeding with Agile</a>.</p>
+<p><img src="/images/piramidetests.webp" alt="Pirámide de tests"></p>
+<p>Para aquellas personas que no conozcáis la pirámide de test, básicamente nos indica que peso en la aplicación debe tener cada tipo de test. De forma que, de forma resumida, debe haber más tests unitarios y menos tests manuales. La pirámide de la imagen tiene algunos cambios respecto a la original, basado en mi experiencia, así que la podríamos llamar la pirámide V2.</p>
+<p>Paso a comentaros que es cada escalón:</p>
+<ul>
+<li><strong>Tests unitarios</strong>: permiten probar pequeños componentes o funcionalidades sencillas para verificar que funcionan como se espera de forma aislada.</li>
+<li><strong>Tests de componentes</strong>: siguen siendo tests unitarios pero que agrupan varias funcionalidades en una. Por ejemplo, un test unitario puede aplicarse a un elemento de un menú, y un test de componente lo podríamos ejecutar sobre todo un menú compuesto de distintos elementos. En el caso de un servicio REST, un test unitario podría ser la creación de un usuario, y un test de componente, toda la API para gestión de usuarios.</li>
+<li><strong>Tests de integración</strong>: hasta ahora, los dos tipos de tests anteriores si requerían de alguna entidad externa, se creaban mocks para simularla. Sin embargo, con este tipo de tests lo que hacemos es verificar que el comportamiento de nuestro sistema es el esperado cuando interacciona con elementos externos. Por ejemplo, tenemos un servicio REST que llama a otro servicio. Este tipo de tests pueden requerir bastante configuración, es por ello que aunque importantes, no tienen tanto peso como los dos escalones anteriores.</li>
+<li><strong>Tests de sistema o de aceptación</strong>: se aplicaría o a la interfaz de usuario, pero también implica pruebas en sistemas sin interfaz gráfica. En este escalón lo que queremos es probar que todo el conjunto de nuestro sistema opera correctamente. Son los tests automáticos que tardan más en ejecutarse, es por ello que normalmente habrá menos tests de sistema.</li>
+<li><strong>Test manuales</strong>: toda prueba que realiza una persona. Este tipo de tests dependen mucho de quién los realice, es por ello que puede darse el caso que no sean todo lo fiable que nos gustaría.</li>
+</ul>
+<p>Esta pirámide no es algo obligatorio a seguir, incluso dependiendo del tipo de aplicación, puede que se llegue a dar incluso una pirámide invertida, donde los tests de sistema tengan más peso que los unitarios, una en formato trofeo, donde los de integración sean los importantes, etc. Como todo en el mundo de la programación, no viene prefijado y se puede ajustar según necesidad.</p>
+<p>Tras el inciso para hablar de la pirámide, podéis ver que BDD se integraría en los tests de componentes, integración y sistema. No tendrían sentido a nivel de tests unitarios, puesto que tendríamos que definir con BDD hasta el más mínimo comportamiento del método más pequeño, esto sería algo muy engorroso.</p>
+<p>Por otro lado, respecto a los tests manuales, a una persona se le puede dejar los comportamientos de BDD para que los pruebe, pero es mejor evitar guiar a quien testea, puesto que siempre tenderá a ceñirse a los escenarios definidos en BDD. Sobre como plantear los test manuales podemos profundizar más en otro artículo, sí así gustáis.</p>
+<h2 id="gherkin-un-lenguaje-para-dominarlos-a-todos">Gherkin. Un lenguaje para dominarlos a todos</h2>
+<p>Una vez que sabemos como proceder, nos falta conocer el estándar. A nivel conceptual con BDD, no es obligatorio casarse con ningún lenguaje, pero prácticamente el que ha prevalecido sobre los demás, es Gherkin. Éste permite definir las pruebas de una forma natural y expresiva. Pero como todo lenguaje tiene ciertas palabras clave. Y estas son:</p>
+<pre><code class="language-bash">Feature: comportamiento a probar.
+  Scenario: especifica un casos de uso del comportamiento.
+  Given condiciones previas al escenario.
+  When acciones a ejecutar en el escenario.
+  Then resultados esperados.
+</code></pre>
+<p>Ya habéis podido comprobar como esa estructura se parece mucho a lo que vimos al principio, y que como la definición de una historia de usuario puede fácilmente adaptarse a ese esquema.</p>
+<p>De ahora en adelante, los ejemplos tendrán las definiciones en inglés, simplemente para que podáis ver algo más real, aunque hay librerías como Cucumber que permiten usar otros idiomas, como por ejemplo, el español. De todas formas, en la mayoría de los casos seguro que os encontráis con definiciones en inglés.</p>
+<p>Comencemos con un ejemplo de un caso de prueba en la especificación de un supuesto reproductor de vídeo podría ser:</p>
+<pre><code class="language-bash">Feature: Video Player
+  Scenario: pause a video
+    Given a playing video
+    When user pauses the video
+    Then the video becomes paused
+</code></pre>
+<p>Esta claro que la especificación anterior podría ser escrita por cualquier persona sin conocimientos técnicos. Y es por ello que Gherkin es tan potente.</p>
+<p>Pero claro, seguro que echas en falta poder indicar valores a las pruebas, pues bien, en Gherkin se pueden indicar valores para que sean tenidos en cuenta en las pruebas. Sigamos con nuestro reproductor de vídeo y pensemos en un botón que salte un segundo hacia delante. Un escenario podría ser:</p>
+<pre><code class="language-bash">Scenario: move one second forward
+    Given a video that is paused in timecode &quot;00:00:00&quot;
+    When user advanced the video one second
+    Then the video remains paused and timecode is &quot;00:00:01&quot;
+</code></pre>
+<p>Ese valor entrecomillado es un atributo que nuestras pruebas podrán leer, aunque por ejemplo, con los valores numéricos no es necesario.</p>
+<p>Eso sí, podemos ir más allá, y trabajar incluso con tablas. Lo siguiente ejecutará una prueba por cada fila de la tabla:</p>
+<pre><code class="language-bash">Scenario Outline: multiply two numbers
+  Given the &lt;multiplier&gt; multiplier
+  When the multiplying is &lt;multiplying&gt;
+  Then then the result is &lt;result&gt;
+
+Examples:
+  | multiplying | multiplier | result |
+  | 12          | 4          | 48     |
+  | 137         | 23         | 2921   |
+  | 34          | 89         | 3026   |
+</code></pre>
+<p>En este caso, se puede apreciar como es posible recoger los valores de cada columna encerrando el nombre de ésta entre los símbolos <code>&lt;</code> y <code>&gt;</code>.</p>
+<p>Pero esto no termina aquí. Gherkin tiene muchos más operadores y palabras clave:</p>
+<ul>
+<li><code>And</code>: permite añadir una condición a cualquiera de los pasos</li>
+<li><code>But</code>: condición negativa para cualquier paso</li>
+<li><code>Background</code>: define una condición que se cumple antes de todos los escenarios.</li>
+<li><code>Scenario Outline</code>: permite repetir un escenario varias veces con un conjunto de datos.</li>
+<li><code>|</code>: se usa para delimitar tablas.</li>
+<li><code>@</code>: define etiquetas para filtrar escenarios.</li>
+<li><code>#</code>: al inicio de una línea indica comentario.</li>
+<li><code>&quot;&quot;&quot;</code>: permite definir un texto de varias líneas.</li>
+</ul>
+<p>Y con todo lo anterior podemos tener casos todo lo complejos que queramos, como por ejemplo, el siguiente, en el que vamos a simular un almacenamiento en la nube:</p>
+<pre><code class="language-bash">@nocturnal
+Feature: Online Files Management
+  This feature specify how to opérate with files in our cloud drive.
+
+  # Con el outline definimos pasos a realizar antes de los test, es como
+  # por ejemplo, beforeEach en jest o, SetUp en NUnit.
+  Background: login as user
+    Given the login page
+    When username is &quot;pepito&quot;
+    And password is &quot;abcd&quot;
+    And user logins in
+
+  Scenario: download file from existing asset
+    Given a filepath &quot;/autores/Cervantes&quot;
+    When open options of file &quot;El Quijote.pdf&quot;
+    And download the file
+    Then file starts to download
+</code></pre>
+<h2 id="qué-evitar-hacer-en-gherkin">Qué evitar hacer en Gherkin</h2>
+<p>Para mejorar nuestras definiciones de comportamientos hay dos cosillas que deberíamos evitar siempre:</p>
+<h3 id="usa-lenguaje-de-negocio-no-tecnológico">Usa lenguaje de negocio no tecnológico</h3>
+<p>Hay que evitar definir los pasos de los escenarios de forma dependiente a la tecnología, es decir, deberiamos evitar frases como &quot;haz click&quot;, &quot;realiza una llamada POST&quot;, etc. Por un lado, porque podremos reutilizar los escenarios entre distintas partes del proyecto; y por otro, y más importante, porque quién defina la historia, ya dijimos que puede que no tenga conocimientos técnicos, de forma que no tiene por qué saber que por ejemplo una llamada va por API REST, por WS, etc.</p>
+<pre><code class="language-bash">  Scenario: create a user
+    Given the hability to create users
+    When user is &quot;newUser&quot;
+    And password is &quot;newPassword&quot;
+    And create the user
+    Then the user is created
+</code></pre>
+<p>Con el ejemplo anterior podemos ver como el segundo escenario es posible utilizarlo en una parte back y front. En la primera se tomarán credenciales de un rol que pueda crear usuarios y el test terminará realizando una llamada a un API, y en la segunda se realizarán todos los pasos necesarios para crear el usuario desde interfaz.</p>
+<h3 id="evitar-pasos-que-puedan-tener-doble-sentido">Evitar pasos que puedan tener doble sentido</h3>
+<p>Es importante evitar utilizar nombres de steps que tengan distintos contextos. Si por ejemplo, tenemos un paso con el contenido &quot;se borra el texto&quot;, seguramente dependerá del escenario en qué se use. Es por ello, que es preferible tenemos pasos con contenidos como &quot;se borra el nombre de usuario&quot;, &quot;se borra el título del artículo&quot;, etc. Por un lado, queda mucho más claro qué hace el paso, y por otro permite evitar confusiones.</p>
+<h2 id="antes-de-terminar">Antes de terminar</h2>
+<p>Una vez que hemos aprendido algo sobre BDD y Gherkin es manos de ponerse a la obra, así que ¿cómo podemos seguir? Pues, para aplicar esto tenéis frameworks como <a href="https://cucumber.io/">Cucumber</a> que nos ayuda a implementar BDD. Pero, recordad que BDD es una metodología, por lo que no os obliga a casaros con ningún framework y lo podéis implementar libremente.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

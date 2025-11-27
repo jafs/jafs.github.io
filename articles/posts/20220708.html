@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Decorator para gente novata — JAFS</title>
+  <meta name="description" content="Si hay un patrón de diseño que suele provocar algunas dudas, es el patrón Decorator. Pero básicamente, este patrón nos permite añadir responsabilidades a obj..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, diseño y arquitectura" />
+  <meta name="article:published_time" content="2022-08-07T15:07:19.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220708.html" />
+  <meta property="og:title" content="Decorator para gente novata" />
+  <meta property="og:description" content="Si hay un patrón de diseño que suele provocar algunas dudas, es el patrón Decorator. Pero básicamente, este patrón nos permite añadir responsabilidades a obj..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  
+  <meta property="article:published_time" content="2022-08-07T15:07:19.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Decorator para gente novata" />
+  <meta name="twitter:description" content="Si hay un patrón de diseño que suele provocar algunas dudas, es el patrón Decorator. Pero básicamente, este patrón nos permite añadir responsabilidades a obj..." />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220708.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Decorator para gente novata",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Si hay un patrón de diseño que suele provocar algunas dudas, es el patrón Decorator. Pero básicamente, este patrón nos permite añadir responsabilidades a obj...",
+  "url": "https://jafs.github.io/articles/posts/20220708.html",
+  "inLanguage": "es",
+  "datePublished": "2022-08-07T15:07:19.000Z"
+}
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Decorator para gente novata</h1><p class="text-gray-600 text-sm mb-6">2022-08-07</p><h2 id="introducción">Introducción</h2>
+<p>Si hay un patrón de diseño que suele provocar algunas dudas, es el patrón Decorator. Pero básicamente, este patrón nos permite añadir responsabilidades a objetos de forma dinámica, es decir, que podemos ajustar el comportamiento de los objetos durante la ejecución de la aplicación. Con ello podemos ir añadiendo o quitando los cambios en el comportamiento en tiempo real. Esto por ejemplo, no sería posible con herencia, ya que se realiza de forma estática y no podemos cambiarla en tiempo de ejecución. La herencia tampoco nos permitiría tener varias clases madre (en la mayoría de lenguajes), por lo que no podemos &quot;unir&quot; varios de esos cambios de comportamiento.</p>
+<h2 id="ejemplo">Ejemplo</h2>
+<p>Para entenderlo un poco mejor, partamos de un ejemplo sencillo del mundo &quot;videojueguil&quot;. Pensemos en un juego como el reboot de Tomb Raider, en el que las armas tienen modificaciones. Estas modificaciones incrementan el daño de las armas, la precisión, etc.</p>
+<p>Lo anterior podríamos resolverlo de muchas formas, pero una de ellas es con decoradores, podemos tener el arco base, al que si le añadimos &quot;Palas Reforzadas&quot;, se incrementa el daño, si aparte le añadimos &quot;Cuerda Trenzada&quot; incrementamos más el daño, etc.</p>
+<p>Pues bien, cada tipo de &quot;añadido&quot; sería un decorador que modificaría las propiedades del arco, y lo mejor de todo, es que podremos tener varios decoradores de forma simultánea. De forma que un arco, siguiendo el ejemplo anterior podrá tener las &quot;Palas Reforzadas&quot; y la &quot;Cuerda Trenzada&quot; de forma simultánea.</p>
+<h2 id="diagrama">Diagrama</h2>
+<pre><code class="language-mermaid">classDiagram
+    class Componente {
+        &lt;&lt;interface&gt;&gt;
+        +operación1()
+        +operaciónN()
+    }
+
+    class ComponenteConcreto {
+        +operación1()
+        +operaciónN()
+    }
+
+    class Decorador {
+        +operación1()
+        +operaciónN()
+    }
+
+    class DecoradorConcretoA {
+        +operación1()
+        +operaciónN()
+    }
+
+    class DecoradorConcretoN {
+        +operación1()
+        +operaciónN()
+    }
+
+    Componente --o Decorador
+
+    Componente &lt;|.. ComponenteConcreto
+    Componente &lt;|.. Decorador
+
+    Decorador &lt;|-- DecoradorConcretoA
+    Decorador &lt;|-- DecoradorConcretoN
+</code></pre>
+<p>En el diagrama UML, vemos que básicamente hay una interfaz que implementa las operaciones públicas de la clase que queremos &quot;envolver&quot; con decoradores, y que dicha clase, pasará a implementar la interfaz. Por otro lado, tenemos la parte de decoradores, en la que tenemos un decorador base y los decoradores hijos, todos ellos implementando la interfaz inicial.</p>
+<h2 id="paso-a-paso">Paso a paso</h2>
+<p>Con todo lo anterior, tendríamos los pasos siguientes para implementar el patrón Decorator:</p>
+<ul>
+<li>Extraer a una interfaz los métodos de la clase o las clases que queremos decorar.</li>
+<li>Crear un decorador base que implemente la interfaz y que reciba además dicha interfaz como parámetro en su constructor.</li>
+<li>Crear clases hijas del decorador, que se encargarán de actuar sobre la clase base.</li>
+</ul>
+<h2 id="ejemplo-de-código">Ejemplo de código</h2>
+<p>Ahora que tenemos las nociones, hemos visto el UML, y tenemos &quot;la chuleta&quot; para aplicarlo, vamos a ver un ejemplo muy sencillo a aplicar en un juego de naves. Nuestra nave parte de un arma base que puede modificarse, y también puede tener mini-naves a los lados que le ayuden.</p>
+<p>Si seguimos el primer paso del apartado anterior, lo primero que haremos será sacar a una interfaz los métodos públicos de nuestra clase.</p>
+<pre><code class="language-typescript">interface Nave {
+  getDano(): number;
+  getMiniNaves(): number;
+}
+
+class NaveEspacial implements Nave {
+  private dano: number;
+  private miniNaves: number;
+  
+  public constructor(dano: number, miniNaves: number) {
+    this.dano = dano;
+    this.miniNaves = miniNaves;
+  }
+  
+  public getDano(): number {
+    return this.dano;
+  }
+  
+  public getMiniNaves(): number {
+    return this.miniNaves;
+  }
+}
+</code></pre>
+<p>El segundo paso es crear un decorador base:</p>
+<pre><code class="language-typescript">// Este decorador base vemos que simplemente llama al objeto que ha recibido como parámetro.
+class BaseDecorator implements Nave {
+  private nave: Nave;
+  
+  public constructor(nave: Nave) {
+    this.nave = nave;
+  }
+  
+  public getDano() {
+    return this.nave.getDano();
+  }
+  
+  public getMiniNaves() {
+    return this.nave.getMiniNaves();
+  }
+}
+</code></pre>
+<p>Y finalmente, definimos los decoradores que necesitamos, En nuestro caso, tenemos la posibilidad de añadir misiles y lásers, además de mini-naves. Como podéis ver en este ejemplo, los decoradores no tienen por qué modificar siempre todos los métodos públicos:</p>
+<pre><code class="language-typescript">class MisilesDecorator extends BaseDecorator {
+  public getDano() {
+    return super.getDano() + 20;
+  }
+}
+
+class LaserDecorator extends BaseDecorator {
+  public getDano() {
+    return super.getDano() + 50;
+  }
+}
+
+class MiniNaveDecorator extends BaseDecorator {
+   public getMiniNaves() {
+    return this.nave.getMiniNaves() + 1;
+  }
+}
+</code></pre>
+<p>Ahora que tenemos los tres decoradores, pasemos a jugar con ellos para ver los resultados.</p>
+<pre><code class="language-typescript">function logNave(nombre: string, nave: Nave) {
+  console.log(`La nave &quot;${nombre}&quot; hace un daño ${nave.getDano()} unidades y tiene ${nave.getMiniNaves()} mini nave/s`);
+}
+
+const nave = new NaveEspacial(100, 0);
+logNave(&quot;Sencilla&quot;, nave);
+// La nave &quot;Sencilla&quot; hace un daño 100 unidades y tiene 0 mini nave/s
+
+logNave(&quot;Con Mini&quot;, new MiniNaveDecorator(nave));
+// La nave &quot;Con Mini&quot; hace un daño 100 unidades y tiene 1 mini nave/s
+
+logNave(&quot;Con 2 Minis&quot;, new MiniNaveDecorator(new MiniNaveDecorator(nave)));
+// La nave &quot;Con 2 Minis&quot; hace un daño 100 unidades y tiene 2 mini nave/s
+
+logNave(&quot;Con Misiles&quot;, new MisilesDecorator(nave));
+// La nave &quot;Con Misiles&quot; hace un daño 120 unidades y tiene 0 mini nave/s
+
+logNave(&quot;Con Láser&quot;, new LaserDecorator(nave));
+// La nave &quot;Con Láser&quot; hace un daño 150 unidades y tiene 0 mini nave/s
+
+logNave(&quot;Con Misiles y Mini&quot;, new MisilesDecorator(new MiniNaveDecorator(nave)));
+// La nave &quot;Con Misiles y Mini&quot; hace un daño 120 unidades y tiene 1 mini nave/s
+</code></pre>
+<p>Y listo, ya tenemos nuestro primer ejemplo de patrón Decorator listo para entregar.</p>
+<h2 id="desventajas">Desventajas</h2>
+<ul>
+<li>Hay que tener mucho cuidado con el uso del objeto original, ya que si en algún momento lo hemos decorado, pero en otros sitios del código estamos usando el objeto sin decoración, puede provocar problemas y ser complejo de encontrar si no lo recordamos.</li>
+<li>Puede que se necesiten generar demasiados decoradores para unas clases, lo que nos generará muchísimas clases pequeñas, que si no están bien organizadas, serán difíciles de seguir.</li>
+<li>Si se necesitan llamadas a métodos públicos que no van a ser usados por decoradores, tocará implementar igualmente la llamada del decorador base. Por ejemplo, si en tu clase sólo necesitas decorar, 1 o 2 métodos, y tienes otros 10 métodos públicos para los que no es necesario, quizás debas de darle una vuelta al código.</li>
+<li>En algunos casos los decoradores deben tener un orden específico para usarse, si no provocarán otro tipo de resultados. Es por ello, que estos casos hay que documentarlos muy bien y dejar el mínimo margen de error.</li>
+<li>Es complejo poder quitar un decorador de la pila aplicada al objeto base. Por lo que o cada vez que haya que cambiar decoradores los aplicas de nuevo uno a uno, o debes implementar un sistema para poder quitar decoradores intermedios.</li>
+</ul>
+<h2 id="conclusiones">Conclusiones</h2>
+<p>El patrón Decorator, como todos los patrones, ofrece mucha potencia para ciertos casos, pero hay que tener cuidado con saber distinguirlos bien, puesto que como hemos visto en las desventajas, su uso libre en todas las ocasiones que lo sugieran puede complicar las cosas en lugar de hacerlas más sencillas. Es por ello, que te recomiendo que experimentes y analices bien cada situación que lo requiera. Eso sí, como habéis podido comprobar, es muy sencillo de llevar a cabo.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

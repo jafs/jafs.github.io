@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Principios SOLID. Capítulo S: Single Responsibility Principle — JAFS</title>
+  <meta name="description" content="En el principio Dahl y Nygaard crearon la programación orientada a objetos. Y esta se encontraba desordenada y vacía, y las tinieblas estaban sobre la faz de..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, Diseño y arquitectura" />
+  <meta name="article:published_time" content="2022-01-07T12:00:19.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220107.html" />
+  <meta property="og:title" content="Principios SOLID. Capítulo S: Single Responsibility Principle" />
+  <meta property="og:description" content="En el principio Dahl y Nygaard crearon la programación orientada a objetos. Y esta se encontraba desordenada y vacía, y las tinieblas estaban sobre la faz de..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/solid-logo.png" />
+  
+  <meta property="article:published_time" content="2022-01-07T12:00:19.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Principios SOLID. Capítulo S: Single Responsibility Principle" />
+  <meta name="twitter:description" content="En el principio Dahl y Nygaard crearon la programación orientada a objetos. Y esta se encontraba desordenada y vacía, y las tinieblas estaban sobre la faz de..." />
+  <meta name="twitter:image" content="/images/solid-logo.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220107.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Principios SOLID. Capítulo S: Single Responsibility Principle",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En el principio Dahl y Nygaard crearon la programación orientada a objetos. Y esta se encontraba desordenada y vacía, y las tinieblas estaban sobre la faz de...",
+  "url": "https://jafs.github.io/articles/posts/20220107.html",
+  "inLanguage": "es",
+  "datePublished": "2022-01-07T12:00:19.000Z",
+  "image": "/images/solid-logo.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Principios SOLID. Capítulo S: Single Responsibility Principle</h1><p class="text-gray-600 text-sm mb-6">2022-01-07</p><h2>Introducción</h2>
+<p>En el principio <a href="https://es.wikipedia.org/wiki/Ole-Johan_Dahl">Dahl</a> y <a href="https://es.wikipedia.org/wiki/Kristen_Nygaard">Nygaard</a> crearon la programación orientada a objetos. Y esta se encontraba desordenada y vacía, y las tinieblas estaban sobre la faz de la programación. Pero entonces <a href="https://es.wikipedia.org/wiki/Robert_C._Martin">Robert C. Martin</a>, habló a los congregados y les dijo:</p>
+<blockquote>
+<p>&quot;Aquí tenéis los 5 mandamientos de la programación orientada a objetos. No son verdades absolutas y no siempre podrán vivir conjuntamente. Usadlos con mi beneplácito&quot;.</p>
+</blockquote>
+<p>Ejem.... perdón, que quería realizar una idealización de nuestro pasado en la programación. Así que dejemos las introducciones grandilocuentes para comenzar a hablar de <a href="http://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html">SOLID</a>. ¿Qué es? ¿Con que fin nace?.</p>
+<p>SOLID es un conjunto de prácticas propuestas por Robert C. Martin con el fin de resolver los problemas existentes en las aplicaciones desarrolladas mediante programación orientada a objetos (POO), y así hacerlas más sencillas de leer, mantener y testear. El acrónimo se compone de las iniciales de cada uno de los cinco principios o prácticas que lo conforman:</p>
+<ul>
+<li><strong class="text-red-500">S</strong>: Single Responsibility Principle o Principio de responsabilidad única</li>
+<li><strong class="text-orange-500">O</strong>: <a href="/articles/posts/20220115.html">Open-Closed Principle o Principio abierto/cerrado</a></li>
+<li><strong class="text-green-500">L</strong>: <a href="/articles/posts/20220121.html">Liskov Substitution Principle o Principio de sustitución de Liskov</a></li>
+<li><strong class="text-pink-500">I</strong>: <a href="/articles/posts/20220124.html">Interface Segregation Principle o Principio de segregación de interfaces</a></li>
+<li><strong class="text-violet-500">D</strong>: <a href="/articles/posts/20220131.html">Dependency Inversion Principle o Principio de inversión de dependencias</a></li>
+</ul>
+<p>En muchas ocasiones, al buscar información sobre estos principios en la red, se encuentran datos poco claros o artículos demasiado extensos que generan más dudas que respuestas. Por esta razón, hemos creado una serie de cinco artículos en los que explicaremos cada uno de los principios de forma clara y práctica, para que puedas saber cuándo, cómo y por qué aplicarlos en tus proyectos.</p>
+<blockquote>
+<p>Cabe destacar que estos principios, no quedan relegados a las clases, se puede aplicar a otros ámbitos.</p>
+</blockquote>
+<h2>(<strong class="text-red-500"><code>S</code></strong>) Principio de responsabilidad única</h2>
+<blockquote>
+<p>&quot;Una clase debería tener una, y sólo una, razón para cambiar&quot; <br><em>Robert C. Martin</em></p>
+</blockquote>
+<p>Una clase sólo debería hacer una única cosa, es decir, tener sólo una responsabilidad. Si hacemos que una clase se encargue de todo, cualquier cambio en la funcionalidad requerirá de modificaciones en dicha clase, e incluso en partes en las que no debería cambiar.</p>
+<p>Para detectar si estamos cumpliendo este principio, podemos hacernos varias preguntas:</p>
+<ul>
+<li><strong>¿La clase es muy grande?</strong> Normalmente, esto puede indicar que está haciendo demasiadas cosas.</li>
+<li><strong>¿Cualquier cambio en otras capas del código requieren cambios en la clase?</strong> Esto implica que la clase está llevando a cabo funciones de capas de la arquitectura que no debería ni saber que existen. Por ejemplo, que una clase con información de usuario tenga métodos de guardado de en base de datos. ¿Por qué debería cambiar la clase Usuario si cambia la base de datos o las consultas?</li>
+<li><strong>¿Por qué tengo &quot;grupos&quot; de atributos en la clase que no parecen estar relacionados entre sí?</strong> Volviendo al ejemplo del punto anterior, ¿qué hace un atributo dbConnector en mi clase Usuario?</li>
+<li><strong>¿Por qué tengo que configurar medio entorno para testear sólo esta clase?</strong> A excepción de que quisieras hacer una prueba de la clase que carga toda tu aplicación, en la clase Usuario no debería ser necesario configurar o mockear una gran cantidad de elementos para crear pruebas unitarias.</li>
+</ul>
+<p>Para ilustrar este punto, podemos tomar como ejemplo una clase mal diseñada llamada TextDocument, que contiene las propiedades de un documento y también se encarga de compartirlos:</p>
+<p><img src="/images/solid-s-01-03.png" alt="Clase TextDocument"></p>
+<p>La clase presenta un problema al tener dos responsabilidades. Por un lado, gestiona el documento y, por otro, se encarga de compartirlo. ¿Realmente es algo que el documento debe saber? Y es que el compartir no es algo relativo a las propiedades de un documento, sino es una acción para realizar otro fin, por lo que esta responsabilidad no debería ser del documento. Es más, esta parte estaría muy acoplada a la forma de compartir, no es lo mismo enviar por correo electrónico que compartir por Bluetooth. Por lo que volvemos a preguntarnos, ¿un documento debe saber que hay correo electrónico y Bluetooth en nuestro proyecto? La respuesta es bien sencilla, no debe saber nada del exterior o de lo que puedan hacer con él. Debe vivir en su mundo aislado cual hikikomori.</p>
+<p>Para solucionar este problema, dejamos que TextDocument tenga sólo la responsabilidad de operar con un documento, y además creamos una clase que se encargue exclusivamente de compartir documentos. Yendo más allá, En lugar de tener una sola clase, podemos separar las responsabilidades en diferentes clases, como EmailSharer y BluetoothSharer. De esta forma, tenemos una estructura que se puede probar fácilmente y que además está desacoplada por funcionalidades.</p>
+<p><img src="/images/solid-s-02-02.png" alt="Clase TexDocument e interfaz ISharer"></p>
+<p>En resumen, el Principio de Responsabilidad Única nos ayuda a crear clases más cohesivas y modulares, lo que facilita la comprensión, mantenimiento y prueba de nuestro código.</p>
+<hr>
+<p>En el siguiente artículo pasaremos a la letra <strong class="text-orange-500">O</strong>: Open/Closed Principle.</p>
+<p>Si eres de esas personas que prefieren un resumen, puedes verlo en este <a href="https://www.instagram.com/p/CYbTBAzIcrO/">post de Instagram</a>.</p>
+<p><strong>Más artículos de esta serie</strong></p>
+<ul>
+<li><a href="/articles/posts/20220115.html"><strong class="text-orange-500">Capítulo O</strong>: Open-Closed Principle o Principio abierto/cerrado</a></li>
+<li><a href="/articles/posts/20220121.html"><strong class="text-green-500">Capítulo L</strong>: Liskov Substitution Principle o Principio de sustitución de Liskov</a></li>
+<li><a href="/articles/posts/20220124.html"><strong class="text-pink-500">Capítulo I</strong>: Interface Segregation Principle o Principio de segregación de interfaces</a></li>
+<li><a href="/articles/posts/20220131.html"><strong class="text-violet-500">Capítulo D</strong>: Dependency Inversion Principle o Principio de inversión de dependencias</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

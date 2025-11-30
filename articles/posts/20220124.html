@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Principios SOLID. Capítulo I: Interface-Segregation Principle — JAFS</title>
+  <meta name="description" content="Si en el capítulo anterior vimos como una mala herencia puede provocar que haya clases con métodos que no deberían implementar, para este cuarto principio te..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, diseño y arquitectura, SOLID" />
+  <meta name="article:published_time" content="2022-01-24T22:12:52.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220124.html" />
+  <meta property="og:title" content="Principios SOLID. Capítulo I: Interface-Segregation Principle" />
+  <meta property="og:description" content="Si en el capítulo anterior vimos como una mala herencia puede provocar que haya clases con métodos que no deberían implementar, para este cuarto principio te..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/solid-logo.png" />
+  
+  <meta property="article:published_time" content="2022-01-24T22:12:52.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Principios SOLID. Capítulo I: Interface-Segregation Principle" />
+  <meta name="twitter:description" content="Si en el capítulo anterior vimos como una mala herencia puede provocar que haya clases con métodos que no deberían implementar, para este cuarto principio te..." />
+  <meta name="twitter:image" content="/images/solid-logo.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220124.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <style>
+table td:first-child {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+  </style>
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Principios SOLID. Capítulo I: Interface-Segregation Principle",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Si en el capítulo anterior vimos como una mala herencia puede provocar que haya clases con métodos que no deberían implementar, para este cuarto principio te...",
+  "url": "https://jafs.github.io/articles/posts/20220124.html",
+  "inLanguage": "es",
+  "datePublished": "2022-01-24T22:12:52.000Z",
+  "image": "/images/solid-logo.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Principios SOLID. Capítulo I: Interface-Segregation Principle</h1><p class="text-gray-600 text-sm mb-6">2022-01-24</p><p>Si en el capítulo anterior vimos como una mala herencia puede provocar que haya clases con métodos que no deberían implementar, para este cuarto principio tenemos un ejemplo muy parecido, pero con el caso de las interfaces.</p>
+<p>Su nacimiento se remonta a los tiempos en los que Robert C. Martin trabajaba en la empresa Xerox. Dicha empresa había creado un software que llevaba a cabo la mayor parte de tareas que puede llevar a cabo un sistema de impresión. El problema es que había una sola clase que hacía todo el trabajo, algo que ya también incumplía varios de los principios que hemos visto (como el Principio de Responsabilidad Única). Pues bien, tras ver como cada cambio implicaba cada un mayor tiempo de desarrollo, se optó por crear varias interfaces que acotaran las tareas: grapado, envío de fax, impresión, etc. Y de ahí salió la definición del Principio de Segregación de Interfaces:</p>
+<blockquote>
+<p>Los clientes no deberían estar forzados a depender de interfaces que no van a usar. <br><em>Robert C. Martin</em> ~ <a href="https://web.archive.org/web/20090306160252/http://www.objectmentor.com/resources/articles/isp.pdf">The Interface Segregation Principle</a></p>
+</blockquote>
+<p>Y como siempre, vamos a intentar definir de una forma más &quot;mundana&quot; este principio. En este caso, lo que viene a decir, es que las clases no deberían implementar métodos de interfaces que no van a usar; algo muy parecido al problema que provocaba el que tuviéramos que usar el Principio de Sustitución de Liskov, pero aplicado a relaciones con interfaces, en lugar de con herencia de clases.</p>
+<p>En nuestro ejemplo, partiremos de un ejemplo videojueguil que casi todo el mundo conoceréis.</p>
+<p>En Super Mario tenemos entre otros estos enemigos:</p>
+<table>
+<thead>
+<tr>
+<th>Enemigo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="/images/goomba.png" alt="Goomba"> Goombas</td>
+<td>Son los champiñones que sólo avanzan.</td>
+</tr>
+<tr>
+<td><img src="/images/koopatroopa.png" alt="Koopa Troopa"> Koopa Troopa</td>
+<td>Las tortugas que al saltar sobre ellas se esconden.</td>
+</tr>
+<tr>
+<td><img src="/images/koopaparatroopa.png" alt="Koopa Paratroopa"> Koopa Paratroopa</td>
+<td>Tortugas con alas que van dando saltos, también al saltar sobre ellas se esconden.</td>
+</tr>
+<tr>
+<td><img src="/images/hermanomartillo.png" alt="Hermano martillo"> Hermanos Martillo</td>
+<td>Con forma de tortuga. Lanzan martillos y dan saltos</td>
+</tr>
+</tbody></table>
+<p>Vale, pues imaginad que tenemos esta interfaz para los enemigos:</p>
+<pre><code class="language-typescript">interface IEnemigo {
+  avanzar(): void;
+  esconder(): void;
+  saltar(): void;
+}
+</code></pre>
+<p>Si usamos esa interfaz con todos los personajes tendríamos un problema, ya que el código quedaría tal que así:</p>
+<pre><code class="language-typescript">class Goomba implements IEnemigo {
+  public avanzar(): void {
+    console.log(&quot;Goomba avanza&quot;);
+  }
+
+  public esconder(): void {
+    throw new Error(&quot;Los Goomba no se esconden&quot;);
+  }
+
+  public saltar(): void {
+    throw new Error(&quot;Los Goomba no saltan&quot;);
+  }
+}
+
+class KoopaTroopa implements IEnemigo {
+  public avanzar(): void {
+    console.log(&quot;Koopa Troopa avanza&quot;);
+  }
+
+  public esconder(): void {
+    console.log(&quot;Koopa Troopa se esconde&quot;);
+  }
+
+  public saltar(): void {
+    throw new Error(&quot;Los Koopa Troopa no saltan&quot;);
+  }
+}
+
+class KoopaParatroopa implements IEnemigo {
+  public avanzar(): void {
+    console.log(&quot;Koopa Paratroopa avanza&quot;);
+  }
+
+  public esconder(): void {
+    console.log(&quot;Koopa Paratroopa se esconde&quot;);
+  }
+
+  public saltar(): void {
+    console.log(&quot;Koopa Paratroopa salta&quot;);
+  }
+}
+
+class HermanoMartillo implements IEnemigo {
+  public avanzar(): void {
+    console.log(&quot;Hermano Martillo avanza&quot;);
+  }
+
+  public esconder(): void {
+    throw new Error(&quot;Los Hermanos Martillo no se esconden&quot;);
+  }
+
+  public saltar(): void {
+    console.log(&quot;Hermano Martillo salta&quot;);
+  }
+}
+</code></pre>
+<p>Como se puede apreciar, hay una interfaz que obliga a las clases (los clientes según el término de este principio) a implementar métodos que no tiene sentido que usen. Esto a la larga dará muchos quebraderos de cabeza, tal y como se vio con el principio anterior. ¿Cómo se podría solventar este problema? Pues creando interfaces más específicas que obliguen a desglosar las tareas (o en este caso acciones) a realizar por las clases:</p>
+<pre><code class="language-typescript">interface IEnemigo {
+  avanzar(): void;
+}
+
+interface IEnemigoCobarde {
+  esconder(): void;
+}
+
+interface IEnemigoSalarin {
+  saltar(): void;
+}
+</code></pre>
+<p>Como anotación importante, en nuestro ejemplo quedan tres interfaces, cada una con un método, esto no significa que en todos los casos se tengan mini interfaces &quot;uni-metodales&quot;, sino que dependerá del caso.</p>
+<p>Tras la aclaración anterior, ahora nuestros enemigos quedarían con esta definición:</p>
+<pre><code class="language-typescript">class Goomba implements IEnemigo {
+  public avanzar(): void {
+    console.log(&quot;Goomba avanza&quot;);
+  }
+}
+
+class KoopaTroopa implements IEnemigo, IEnemigoCobarde {
+  public avanzar(): void {
+    console.log(&quot;Koopa Troopa avanza&quot;);
+  }
+
+  public esconder(): void {
+    console.log(&quot;Koopa Troopa se esconde&quot;);
+  }
+}
+
+class KoopaParatroopa implements IEnemigo, IEnemigoCobarde, IEnemigoSaltarin {
+  public avanzar(): void {
+    console.log(&quot;Koopa Paratroopa avanza&quot;);
+  }
+
+  public esconder(): void {
+    console.log(&quot;Koopa Paratroopa se esconde&quot;);
+  }
+
+  public saltar(): void {
+    console.log(&quot;Koopa Paratroopa salta&quot;);
+  }
+}
+
+
+class HermanoMartillo implements IEnemigo, IEnemigoSaltarin {
+  public avanzar(): void {
+    console.log(&quot;Hermano Martillo avanza&quot;);
+  }
+
+  public saltar(): void {
+    console.log(&quot;Hermano Martillo salta&quot;);
+  }
+}
+</code></pre>
+<p>Ahora las clases sólo implementan lo que necesitan, evitando en este caso añadir métodos vacíos, que devuelvan valores &quot;sin sentido&quot;, o que lancen excepciones. Aparte se han dejado mejor agrupadas las acciones u operaciones a las que representa cada interfaz, dando algo más de semántica al código.</p>
+<p>Como extra seguramente se podría añadir una clase base que implemente la interfaz IEnemigo, ya que todas las clases tienen un avanzar que en el ejemplo de este artículo, hace prácticamente lo mismo, pero tampoco era el objetivo salir de la explicación del principio en sí, y así os lo podía comentar mejor.</p>
+<p>Pues básicamente este es el Principio de Segregación de Interfaces. En el próximo artículo terminaremos la serie de principios SOLID. Ya sabéis que podéis encontrar un resumen de este principio en <a href="https://www.instagram.com/p/CZIM6n8orzQ/">Instagram</a>.</p>
+<hr>
+<p><strong>Más artículos de esta serie</strong></p>
+<ul>
+<li><a href="/articles/posts/20220107.html"><strong class="text-red-500">Capítulo S</strong>: Single Responsibility Principle o Principio de responsabilidad única</a></li>
+<li><a href="/articles/posts/20220115.html"><strong class="text-orange-500">Capítulo O</strong>: Open-Closed Principle o Principio abierto/cerrado</a></li>
+<li><a href="/articles/posts/20220121.html"><strong class="text-green-500">Capítulo L</strong>: Liskov Substitution Principle o Principio de sustitución de Liskov</a></li>
+<li><a href="/articles/posts/20220131.html"><strong class="text-violet-500">Capítulo D</strong>: Dependency Inversion Principle o Principio de inversión de dependencias</a></li>
+</ul>
+<p>Si quieres leer algo más de Robert C. Martin, aparte de su <a href="http://cleancoder.com">web</a>, tiene varios libros interesantes:</p>
+<ul>
+<li><a href="https://amzn.to/3nQUMrZ">La Artesanía del Código Limpio</a></li>
+<li><a href="https://amzn.to/3tXkwaa">Código Limpio</a></li>
+<li><a href="https://amzn.to/349XhyY">Clean Architecture</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

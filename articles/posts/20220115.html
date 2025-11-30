@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Principios SOLID. Capítulo O: Open/Closed Principle — JAFS</title>
+  <meta name="description" content="En esta segunda parte de los principio SOLID, vamos a ver el llamado principio abierto/cerrado (open/closed)." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, diseño y arquitectura, SOLID" />
+  <meta name="article:published_time" content="2022-01-15T10:28:38.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220115.html" />
+  <meta property="og:title" content="Principios SOLID. Capítulo O: Open/Closed Principle" />
+  <meta property="og:description" content="En esta segunda parte de los principio SOLID, vamos a ver el llamado principio abierto/cerrado (open/closed)." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/solid-logo.png" />
+  
+  <meta property="article:published_time" content="2022-01-15T10:28:38.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Principios SOLID. Capítulo O: Open/Closed Principle" />
+  <meta name="twitter:description" content="En esta segunda parte de los principio SOLID, vamos a ver el llamado principio abierto/cerrado (open/closed)." />
+  <meta name="twitter:image" content="/images/solid-logo.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220115.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Principios SOLID. Capítulo O: Open/Closed Principle",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En esta segunda parte de los principio SOLID, vamos a ver el llamado principio abierto/cerrado (open/closed).",
+  "url": "https://jafs.github.io/articles/posts/20220115.html",
+  "inLanguage": "es",
+  "datePublished": "2022-01-15T10:28:38.000Z",
+  "image": "/images/solid-logo.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Principios SOLID. Capítulo O: Open/Closed Principle</h1><p class="text-gray-600 text-sm mb-6">2022-01-15</p><p>En esta segunda parte de los principio SOLID, vamos a ver el llamado principio abierto/cerrado (open/closed).</p>
+<h2>Introducción</h2>
+<p>Este principio fue formulado por uno de los grandes <a href="https://bertrandmeyer.com/">Bertrand Meyer</a>, en su libro <a href="https://www.amazon.es/gp/product/0136291554">Object-Oriented Software Construction</a>. Si nos vamos a la definición que hay dada sería:</p>
+<blockquote>
+<p>Las entidades de software (clases, módulos, funciones, etc.) deben estar abiertas para su extensión, pero cerradas para su modificación. <br><em>Bertrand Meyer</em></p>
+</blockquote>
+<p>Cuando un cambio en una aplicación provoca cambios en cascada en múltiples módulos interdependientes que no deberían ser modificados, esto indica un problema de diseño en el programa. Este acoplamiento excesivo hace que cada cambio sea una tarea difícil y compleja, especialmente en proyectos grandes.</p>
+<p>El principio &quot;Open/Closed&quot; nos insta a desarrollar elementos de software que realicen su función sin la necesidad de modificaciones en el futuro. Al seguir este principio, podemos evitar modificar código que funciona correctamente y evitar la introducción de errores innecesarios.</p>
+<p>La implementación de este principio requiere una planificación cuidadosa y una arquitectura adecuada para asegurar que los elementos de software estén diseñados para ser extensibles sin necesidad de ser modificados. De esta manera, podemos reducir la complejidad del código y mejorar la capacidad de mantenimiento y extensibilidad del software.</p>
+<h2>Ejemplo</h2>
+<p>Comencemos con el siguiente código en TypeScript. Aunque los conceptos son genéricos, aquellos familiarizados con lenguajes como Java, C++, o C# encontrarán la sintaxis similar.</p>
+<p>En este ejemplo, tenemos un controlador de dispositivos inteligentes capaz de ejecutar los comandos de encendido y apagado de dispositivos. En un mundo ideal, hasta el momento, ha funcionado correctamente con todos los dispositivos probados:</p>
+<pre><code class="language-typescript">class Device {
+  public on() {
+    this.deviceProtocol.executeOn();
+  }
+  
+  public off() {
+    this.deviceProtocol.executeOff();
+  }
+}
+</code></pre>
+<p>Pero llega un aciago día en el que nos toca controlar un nuevo tipo de dispositivo inteligente, por ejemplo una estufa. Y en este caso, para apagarla, primero es necesario ponerla en modo suspensión. Debido a esta nueva funcionalidad, es necesario realizar un cambio en nuestro código anterior:</p>
+<pre><code class="language-typescript">class Device {
+  public on(): void {
+    this.deviceProtocol.on();
+  }
+  
+  public off(): void {
+    if (this.deviceType === &amp;quot;stove&amp;quot;) {
+      this.deviceProtol.executeSuspend();
+    }
+    this.deviceProtocol.executeOff();
+  }
+}
+</code></pre>
+<p>En este caso, hemos tenido que modificar el código debido a un único caso adicional, lo cual va en contra del principio de diseño que estamos tratando de seguir. De acuerdo con éste, debemos evitar realizar modificaciones en el código existente. En su lugar, debemos asegurarnos de que nuestras clases estén abiertas para su extensión.</p>
+<p>Es por ello, que para resolver este problema podemos hacer uso de la herencia. En lugar de modificar la clase existente, crearemos una clase que herede de <code>Device</code> y extienda su funcionalidad para manejar la estufa:</p>
+<pre><code class="language-typescript">class Device {
+  public on(): void {
+    this.deviceProtocol.on();
+  }
+  
+  public off(): void {
+    this.deviceProtol.executeSuspend();
+  }
+}
+
+class StoveDevice extends Device {
+  public off(): void {
+    this.deviceProtol.executeSuspend();
+    super.off();
+  }
+}
+</code></pre>
+<p>De esta manera, cumplimos con el principio abierto/cerrado. La clase original permanece intacta y cerrada para su modificación, mientras que hemos creado una nueva clase que extiende su funcionalidad y está abierta para su extensión. Esto nos ha permitido modificar código que ya funcionaba correctamente y había sido probado exhaustivamente.</p>
+<p>Imaginemos lo que habría sucedido en el caso de haber modificado la clase original para incluir la funcionalidad adicional requerida: si hubiésemos cometido un error en ese proceso, no solo la estufa no se apagaría correctamente, sino que también todos los dispositivos que antes se apagaban correctamente quizás ahora hubieran dejado de hacerlo.</p>
+<p>Es importante tener en cuenta que, aunque este principio no impide que en el futuro tengamos que hacer cambios en la clase, estos cambios deberían estar orientados principalmente a solucionar errores que puedan surgir, en lugar de añadir funcionalidades que la clase original no debería manejar.</p>
+<h2>Conclusión</h2>
+<p>El principio abierto/cerrado es esencial para el desarrollo de software de calidad. Al seguir este principio, podemos diseñar elementos de software que sean flexibles y extensibles sin comprometer su estabilidad o eficacia, lo que resulta en un código más limpio y fácil de mantener.</p>
+<p>Y aquí terminamos la explicación del segundo principio SOLID. Como siempre, cualquier duda, sugerencia o corrección, será bienvenida. Nos vemos en el capítulo <strong class="text-green-500">L</strong> (seguro que a quien sea fan de Death Note le ha hecho ilusión el nombre).</p>
+<p>Puedes ver un resumen en esta <a href="https://www.instagram.com/p/CYvzJL1o0-H/">entrada de Instagram</a>.</p>
+<p><strong>Más artículos de esta serie</strong></p>
+<ul>
+<li><a href="/articles/posts/20220107.html"><strong class="text-red-500">Capítulo S</strong>: Single Responsibility Principle o Principio de responsabilidad única</a></li>
+<li><a href="/articles/posts/20220121.html"><strong class="text-green-500">Capítulo L</strong>: Liskov Substitution Principle o Principio de sustitución de Liskov</a></li>
+<li><a href="/articles/posts/20220124.html"><strong class="text-pink-500">Capítulo I</strong>: Interface Segregation Principle o Principio de segregación de interfaces</a></li>
+<li><a href="/articles/posts/20220131.html"><strong class="text-violet-500">Capítulo D</strong>: Dependency Inversion Principle o Principio de inversión de dependencias</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

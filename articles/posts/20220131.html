@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Principios SOLID. Capítulo D: Dependency Inversion Principle — JAFS</title>
+  <meta name="description" content="Terminamos los principios SOLID con el Principio de Inversión de Dependencias, que viene a decir:" />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, diseño y arquitectura, SOLID" />
+  <meta name="article:published_time" content="2022-01-31T22:17:23.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220131.html" />
+  <meta property="og:title" content="Principios SOLID. Capítulo D: Dependency Inversion Principle" />
+  <meta property="og:description" content="Terminamos los principios SOLID con el Principio de Inversión de Dependencias, que viene a decir:" />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/solid-logo.png" />
+  
+  <meta property="article:published_time" content="2022-01-31T22:17:23.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Principios SOLID. Capítulo D: Dependency Inversion Principle" />
+  <meta name="twitter:description" content="Terminamos los principios SOLID con el Principio de Inversión de Dependencias, que viene a decir:" />
+  <meta name="twitter:image" content="/images/solid-logo.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220131.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Principios SOLID. Capítulo D: Dependency Inversion Principle",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Terminamos los principios SOLID con el Principio de Inversión de Dependencias, que viene a decir:",
+  "url": "https://jafs.github.io/articles/posts/20220131.html",
+  "inLanguage": "es",
+  "datePublished": "2022-01-31T22:17:23.000Z",
+  "image": "/images/solid-logo.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Principios SOLID. Capítulo D: Dependency Inversion Principle</h1><p class="text-gray-600 text-sm mb-6">2022-01-31</p><p>Terminamos los principios SOLID con el Principio de Inversión de Dependencias, que viene a decir:</p>
+<blockquote>
+<p>Los módulos de alto nivel no deberían depender de los módulos de bajo nivel. Ambos deberían depender de abstracciones.</p>
+<p>Las abstracciones no deberían depender de los detalles. Los detalles deben depender de abstracciones.</p>
+<p><em>Robert C. Martin</em> ~ <a href="https://web.archive.org/web/20110714224327/http://www.objectmentor.com/resources/articles/dip.pdf">The Dependency Inversion Principle</a></p>
+</blockquote>
+<p>Aunque parezca un trabalenguas, lo que viene a decir el tío Bob en esta ocasión es que las clases que utilizan otras no deberían depender de como funcionen. Estas a su vez, tendrán interfaces genéricas que no hagan depender a la clase de alto nivel de cada una.</p>
+<p>Pero como siempre veamos todo con un ejemplo.</p>
+<p>Imaginad una clase para compartir datos que en su inicio sólo sirva para compartir por Bluetooth:</p>
+<pre><code class="language-typescript">class ShareAction {
+  private bluetoothConnection: BluetoothConnection;
+
+  ...
+
+  private share(data: BluetoothStream, deviceId: string): void {
+    this.bluetoothConnection.sendTo(data, deviceId);
+  }
+}
+</code></pre>
+<p>¿Qué pasa si queremos el día de mañana compartir por email, por ftp, etc? ¿Tener un atributo de cada tipo? ¿Consultar de forma externa añadiendo una dependencia no necesaria? Pues justo, con esto nos va a ayudar la inversión de dependencias. Lo primero que haríamos es crear una interfaz a la que poder llamar de una forma genérica:</p>
+<pre><code class="language-typescript">interface IConnection {
+  send(data: ArrayBuffer, destination: string): void;
+}
+</code></pre>
+<p>El siguiente paso será pasar a nuestra clase la interfaz como parámetro, de forma que nuestra clase o (en la cita del principio, módulo de alto nivel) deja de depender de la clase que utiliza (módulo de bajo nivel). Así que recibirá la implementación específica de la interfaz que necesite en cada momento, sin tener que cambiar su contenido:</p>
+<pre><code class="language-typescript">class ShareAction {
+  private connection: IConnection;
+
+  public constructor(connection: IConnection) {
+    this.connection = connection;
+  }
+
+  private share(data: ArrayBuffer, destination: string): void {
+    this.connection.send(data, destination);
+  }
+}
+</code></pre>
+<p>Pero... seguramente cada tipo de conexión no requiera exactamente los mismos datos, pues bien aquí entra en juego un segundo componente en juego, que serían los adaptadores (patrón adapter). Estos harían de interfaz entre cada tipo de conexión y la interfaz que tenemos, haciendo que &quot;la abstracción no dependa de los detalles&quot;.</p>
+<p>Y es que imaginad para este caso que con cada tipo de conexión (bluetooth, email, etc), usamos librerías. Cada librería tendrá una API distinta, y diferentes formas de poder enviar datos. Pues bien, crearemos un adaptador por cada una para que se pueden comunicar con nuestro sistema con la misma interfaz. Por ejemplo, en el caso de la conexión Bluetooth:</p>
+<pre><code class="language-typescript">class BluetoothConnectionAdapter implements IConnection {
+  private bluetoothConnection: BluetoothConnection;
+
+  private send(data: ArrayBuffer, destination: string): void {
+    const bluetoothStream = BluetoothConnectionAdapter.bufferToStream(data);
+    this.bluetoothConnection.sendTo(bluetoothStream, destination);
+  }
+}
+</code></pre>
+<p>Esto quedaría con un esquema del tipo:</p>
+<p><img src="/images/diagrama_solid_d.png" alt="Diagrama"></p>
+<p>¿Y al final en qué se traduce todo esto? Pues que en nuestro ejemplo, hemos hecho que la clase ShareAction, al recibir sus dependencias del exterior deje de depender de la implementación de dichas clases. Permitiéndonos poder cambiar de un tipo de conexión a otra sin que ShareAction se vea modificada. Si el día de mañana se añade otro tipo de conexión, sólo hay que pasar en el constructor la referencia al nuevo adaptador y listo.</p>
+<p>Por otro lado, no necesitamos las clases &quot;reales&quot; para testear, podemos usar mocks que pasaremos a la clase ShareAction, de forma que si hay un fallo en un test sabremos que es de la clase ShareAction y no de la dependencia que le hemos pasamdo.</p>
+<p>Finalmente, cabe aclarar que la inyección de dependencias no es lo mismo que la inversión de dependencias. La primera es una herramienta con la que conseguir la segunda.</p>
+<p>Podéis ver un resumen de todo lo que hemos visto en este artículo en este <a href="https://www.instagram.com/p/CZhm_A_LURF/">post de Instagram</a>.</p>
+<h2>Conclusiones</h2>
+<p>Con este artículo hemos terminado de ver los principios SOLID. Quiero aclarar una cosilla para terminar, aunque los principios ofrecen ideas muy buenas, no siempre tienen que aplicarse desde el comienzo, sobre todo si no se sabe como evolucionará el proyecto; sino que se pueden aplicar cuando llegue el momento. Si tenemos una buena cobertura de test, refactorizar el código para adaptar algún principio no debería ser problema. Y es que en mi experiencia hay algunos casos que nunca cambian en la vida de un proyecto, por lo que aplicar desde el inicio estos principios puede resultar en una sobre-ingeniería que puede complicar de más el proyecto innecesariamente. Al final son herramientas que hay que saber cuando es el momento oportuno de usarlas, y eso se consigue con práctica y experiencia.</p>
+<p>Espero que os haya gustado esta serie de artículos y ¡nos vemos en el próximo!</p>
+<hr>
+<p><strong>Más artículos de esta serie</strong></p>
+<ul>
+<li><a href="/articles/posts/20220107.html"><strong class="text-red-500">Capítulo S</strong>: Single Responsibility Principle o Principio de responsabilidad única</a></li>
+<li><a href="/articles/posts/20220115.html"><strong class="text-orange-500">Capítulo O</strong>: Open-Closed Principle o Principio abierto/cerrado</a></li>
+<li><a href="/articles/posts/20220121.html"><strong class="text-green-500">Capítulo L</strong>: Liskov Substitution Principle o Principio de sustitución de Liskov</a></li>
+<li><a href="/articles/posts/20220124.html"><strong class="text-pink-500">Capítulo I</strong>: Interface Segregation Principle o Principio de segregación de interfaces</a></li>
+</ul>
+<p>Si quieres leer algo más de Robert C. Martin, aparte de su <a href="http://cleancoder.com/">web</a>, tiene varios libros interesantes:</p>
+<ul>
+<li><a href="https://amzn.to/3nQUMrZ">La Artesanía del Código Limpio</a></li>
+<li><a href="https://amzn.to/3tXkwaa">Código Limpio</a></li>
+<li><a href="https://amzn.to/349XhyY">Clean Architecture</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

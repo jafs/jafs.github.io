@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Principios SOLID. Capítulo L: Liskov Substitution Principle — JAFS</title>
+  <meta name="description" content="En el capítulo :strong[L]{.text-green-500}, hablaremos del Principio de Sustitución de Liskov, una idea formulada por Barbara Liskov y Jeannette M. Wing, en ..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, diseño y arquitectura, programación, SOLID" />
+  <meta name="article:published_time" content="2022-01-21T18:52:34.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220121.html" />
+  <meta property="og:title" content="Principios SOLID. Capítulo L: Liskov Substitution Principle" />
+  <meta property="og:description" content="En el capítulo :strong[L]{.text-green-500}, hablaremos del Principio de Sustitución de Liskov, una idea formulada por Barbara Liskov y Jeannette M. Wing, en ..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/solid-logo.png" />
+  
+  <meta property="article:published_time" content="2022-01-21T18:52:34.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Principios SOLID. Capítulo L: Liskov Substitution Principle" />
+  <meta name="twitter:description" content="En el capítulo :strong[L]{.text-green-500}, hablaremos del Principio de Sustitución de Liskov, una idea formulada por Barbara Liskov y Jeannette M. Wing, en ..." />
+  <meta name="twitter:image" content="/images/solid-logo.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220121.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Principios SOLID. Capítulo L: Liskov Substitution Principle",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En el capítulo :strong[L]{.text-green-500}, hablaremos del Principio de Sustitución de Liskov, una idea formulada por Barbara Liskov y Jeannette M. Wing, en ...",
+  "url": "https://jafs.github.io/articles/posts/20220121.html",
+  "inLanguage": "es",
+  "datePublished": "2022-01-21T18:52:34.000Z",
+  "image": "/images/solid-logo.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Principios SOLID. Capítulo L: Liskov Substitution Principle</h1><p class="text-gray-600 text-sm mb-6">2022-01-21</p><p>En el capítulo <strong class="text-green-500">L</strong>, hablaremos del Principio de Sustitución de Liskov, una idea formulada por <a href="https://es.wikipedia.org/wiki/Barbara_Liskov">Barbara Liskov</a> y <a href="https://es.wikipedia.org/wiki/Jeannette_Wing">Jeannette M. Wing</a>, en su artículo <a href="https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.39.1223">A Behavioral Notion of Subtyping</a> de 1994. Si quieres entender cómo formalizar los conceptos abstractos que manejamos, te recomiendo que lo leas.</p>
+<p>Este principio está escrito con varias fórmulas que no entraremos a detallar, pero que de forma resumida dirían lo siguiente:</p>
+<blockquote>
+<p>Dado un conjunto de clases que heredan de otra. Todas las clases hijas pueden ser sustituidas por la clase madre, y viceversa, sin requerir de cambios en el código que las usa.</p>
+</blockquote>
+<p>En otras palabras, cualquier clase o sus subclases en una relación de herencia deberían ser intercambiables sin afectar la funcionalidad de la aplicación.</p>
+<p>La violación del principio de sustitución de Liskov se puede detectar cuando las clases hijas contienen métodos vacíos, devuelven valores sin sentido o lanzan excepciones que indican que no están implementados.</p>
+<p>Para entender mejor este principio, consideremos el ejemplo de una clase <code>Vehículo</code> que tiene las operaciones <code>acelerar()</code> y <code>volar()</code>. Si queremos usar estas operaciones en una función <code>despegar()</code>, deberíamos ser capaces de hacerlo con cualquier objeto de tipo <code>Vehículo</code> o sus subtipos, sin importar la clase específica del objeto.</p>
+<pre><code class="language-typescript">class Vehiculo {
+  public acelerar(): void { console.log(&quot;Estoy acelerando&quot;); }
+  public volar(): void { console.log(&quot;Estoy volando&quot;); }
+}
+
+class Coche extends Vehiculo {
+  public acelerar(): void { console.log(&quot;Soy un coche que acelera&quot;); }
+
+  public volar(): void {
+    throw new Error(&quot;Los coches no pueden volar&quot;);
+    // ...de momento 😛
+  }
+}
+
+function despegar(vehiculo: Vehiculo) {
+  vehiculo.acelerar();
+  vehiculo.volar();
+}
+
+const vehiculo: Vehiculo = new Vehiculo();
+despegar(vehiculo);
+// Estoy acelerando
+// Estoy volando
+
+const coche: Coche = new Coche();
+despegar(coche);
+// Soy un coche que acelera
+// Uncaught Error: Los coches no pueden volar
+</code></pre>
+<p>En el código anterior, podemos observar que si se recibe un objeto de tipo <code>Coche</code> en la función <code>despegar()</code>, se producirá una excepción y se romperá el flujo de ejecución. Esto significa que tendríamos que cambiar el código de <code>despegar()</code> para adaptarlo al comportamiento particular de la clase hija.</p>
+<p>Sin embargo, este enfoque viola el principio de sustitución de Liskov, que es fundamental para mantener la flexibilidad y la extensibilidad del código. Es más, no solo estamos incumpliendo dicho principio, sino que también estamos violando el <a href="/articles/posts/20220115.html">principio Abierto/Cerrado</a>, que establece que un módulo debe estar abierto para su extensión pero cerrado para su modificación.</p>
+<p>Para resolver este problema, debemos buscar un comportamiento común para todas las clases que se utilizan en la función <code>despegar()</code>. En el ejemplo dado, podemos crear una nueva clase hija llamada <code>VehículoVolador</code> que extienda de la clase <code>Vehículo</code> y que implemente el método <code>volar()</code>. De esta manera, podemos mantener la funcionalidad común en la clase <code>Vehículo</code> y agregar el comportamiento específico en las clases hijas.</p>
+<pre><code class="language-typescript">class Vehiculo {
+  public acelerar(): void { console.log(&quot;Estoy acelerando&quot;); }
+}
+
+class VehiculoVolador extends Vehiculo {
+  public volar(): void { console.log(&quot;Estoy volando&quot;); }
+}
+
+class Avion extends VehiculoVolador {
+  public acelerar(): void { console.log(&quot;Soy un avión que acelera&quot;); }
+  public volar(): void { console.log(&quot;Libre al fin...&quot;); }
+}
+
+function despegar(volador: VehiculoVolador ) {
+  volador.acelerar();
+  volador.volar();
+}
+
+const volador: VehiculoVolador = new VehiculoVolador();
+despegar(volador);
+// Estoy acelerando
+// Estoy volando
+
+const avion: Avion = new Avion();
+despegar(avion);
+// Soy un avión que acelera
+// Libre al fin...
+</code></pre>
+<p>Ahora al añadir clases como: Dron, Aeroplano, Helicóptero, etc. Si hacemos que todas ellas hereden de <code>VehículoVolador</code>, ya no será necesario modificar el código de la función <code>despegar()</code>.</p>
+<p>Con esto terminamos el tercero de los principios SOLID, en el capítulo siguiente pasaremos a ver el Principio de Segregación de Interfaces. Y si queréis un resumen de todo esto, podéis verlo en <a href="https://www.instagram.com/p/CZAE4fGI8zp/">Instagram</a>.</p>
+<hr>
+<p><strong>Más artículos de esta serie</strong></p>
+<ul>
+<li><a href="/articles/posts/20220107.html"><strong class="text-red-500">Capítulo S</strong>: Single Responsibility Principle o Principio de responsabilidad única</a></li>
+<li><a href="/articles/posts/20220115.html"><strong class="text-orange-500">Capítulo O</strong>: Open-Closed Principle o Principio abierto/cerrado</a></li>
+<li><a href="/articles/posts/20220124.html"><strong class="text-pink-500">Capítulo I</strong>: Interface Segregation Principle o Principio de segregación de interfaces</a></li>
+<li><a href="/articles/posts/20220131.html"><strong class="text-violet-500">Capítulo D</strong>: Dependency Inversion Principle o Principio de inversión de dependencias</a></li>
+</ul>
+<p>Si quieres leer algo más de Barbara Liskov, tiene un libro muy completo para aquellas personas que programan en Java: <a href="https://amzn.to/3AdbU0d">Program Development in Java: Abstraction, Specification, and Object-Oriented Design</a>.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

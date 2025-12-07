@@ -118,6 +118,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://jafs.github.io/articles/posts/20220601.html</loc>
+    <lastmod>2022-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://jafs.github.io/articles/posts/20220414.html</loc>
     <lastmod>2022-04-14</lastmod>
     <changefreq>monthly</changefreq>

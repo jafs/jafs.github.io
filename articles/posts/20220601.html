@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aprendiendo a usar JavaScript Proxy — JAFS</title>
+  <meta name="description" content="Los Proxies en JavaScript son, sin lugar a dudas, una característica poco utilizada en JavaScript. Al menos eso se desprende de la encuesta anual The State o..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, JavaScript, patrón proxy" />
+  <meta name="article:published_time" content="2022-06-01T18:13:33.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220601.html" />
+  <meta property="og:title" content="Aprendiendo a usar JavaScript Proxy" />
+  <meta property="og:description" content="Los Proxies en JavaScript son, sin lugar a dudas, una característica poco utilizada en JavaScript. Al menos eso se desprende de la encuesta anual The State o..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript-proxy.webp" />
+  
+  <meta property="article:published_time" content="2022-06-01T18:13:33.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Aprendiendo a usar JavaScript Proxy" />
+  <meta name="twitter:description" content="Los Proxies en JavaScript son, sin lugar a dudas, una característica poco utilizada en JavaScript. Al menos eso se desprende de la encuesta anual The State o..." />
+  <meta name="twitter:image" content="/images/javascript-proxy.webp" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220601.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Aprendiendo a usar JavaScript Proxy",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Los Proxies en JavaScript son, sin lugar a dudas, una característica poco utilizada en JavaScript. Al menos eso se desprende de la encuesta anual The State o...",
+  "url": "https://jafs.github.io/articles/posts/20220601.html",
+  "inLanguage": "es",
+  "datePublished": "2022-06-01T18:13:33.000Z",
+  "image": "/images/javascript-proxy.webp"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Aprendiendo a usar JavaScript Proxy</h1><p class="text-gray-600 text-sm mb-6">2022-06-01</p><h2>Introducción</h2>
+<p>Los Proxies en JavaScript son, sin lugar a dudas, una característica poco utilizada en JavaScript. Al menos eso se desprende de la encuesta anual <a href="https://2021.stateofjs.com/en-US/features">The State of JS</a>.</p>
+<p>La verdad es que es una herramienta muy potente, que en ocasiones nos puede ayudar a tener unas clases más sencillas, abstrayendo funcionalidad extra mediante lo que se conoce como manejador o interceptor.</p>
+<p>Su uso principal puede venir condicionado en el caso de que por cuestiones de diseño, queramos evitar el tener que definir clases para realizar operaciones muy específicas, es más, aunque no es exactamente lo mismo, nos puede servir como aproximación para aplicar una especie de decoradores, mientras éstos <a href="https://github.com/tc39/proposal-decorators">llegan realmente a JavaScript</a>.</p>
+<p>¿Y qué es lo que nos permite hacer un interceptor? Pues bien, con él podemos capturar el instante en que se va a guardar o leer un atributo, interceptar cuando se añade o elimina un atributo, etc.</p>
+<p>A los métodos que definiremos en nuestro interceptor y que estarán encargados de hacer esas capturas se les llama <strong>trap</strong>, ya que &quot;atrapan&quot; la llamada al objeto destino e interactúan con él.</p>
+<h2>Primer ejemplo: interceptar una operación get</h2>
+<p>Para no aburriros con tanta teoría, veamos un ejemplo práctico muy sencillo.</p>
+<p>Imaginad que cada persona conectada a nuestra aplicación puede consultar su contraseña en todo momento. Pero temporalmente, durante una actualización, queremos evitar que quien no tenga permisos administrativos pueda verla.</p>
+<p>Normalmente, este caso implicaría hacer cambios en nuestro código que podrían afectar a otras partes. Y además, luego tendríamos que quitar dichos cambios al terminar. Pues con este sencillo código podremos utilizar:</p>
+<pre><code class="language-javascript">const interceptor = {
+  // Intercepta el momento en que se quiere leer un atributo del objeto.
+  get(target, prop) {
+    // Esta sencilla condición verifica que recibamos cualquier atributo que no
+    // sea password, y que en el caso de recibir éste, para devolver el valor se
+    // tengan privilegios administrativos.
+    if (prop !== &quot;password&quot; || target.isAdmin) {
+      return Reflect.get(target, prop);
+    }
+    
+    return null;
+  }
+};
+
+const proxy1 = new Proxy({
+  name: &quot;perico_palotes&quot;,
+  isAdmin: true,
+  password: &quot;contraseña1&quot;
+}, interceptor);
+
+// Como es admin, en consola veremos: &quot;contraseña1&quot;
+console.log(proxy1.password);
+
+const userNoAdmin = {
+  name: &quot;juanita_banana&quot;,
+  isAdmin: false,
+  password: &quot;contraseña2&quot;
+};
+
+const proxy2 = new Proxy(userNoAdmin, interceptor);
+
+// Como no es admin, en consola veremos: &quot;null&quot;
+console.log(proxy2.password);
+
+// Importante, debemos usar el objeto proxy, ya que si usamos el objeto
+// original, no se aplican las restricciones. Esto mostraría por consola:
+// &quot;contraseña2&quot;
+console.log(userNoAdmin.password);
+</code></pre>
+<p>Analicemos poco a poco el código anterior:</p>
+<ul>
+<li>El interceptor es un objeto que según los métodos que defina atrapará un momento de ejecución del código sobre el objeto sobre el que realizar el proxy. Cabe destacar, que se pueden usar clases, siendo este código de interceptor equivalente al que habéis visto en el ejemplo:</li>
+</ul>
+<pre><code class="language-javascript">class Interceptor {
+  get(target, prop) {
+    if (prop !== &quot;password&quot; || target.isAdmin) {
+      return Reflect.get(target, prop);
+    }
+    
+    return null;
+  }
+}
+
+const interceptor = new Interceptor();
+</code></pre>
+<ul>
+<li>El uso de Reflect, es por aportar robustez, ya que podríamos haber escrito <code>return target[prop]</code>, teniendo el mismo resultado. En otro artículo si queréis podemos comentar las ventajas de usar Reflect vs Object.- Para utilizar un Proxy, se crea una instancia de este a la que se le pasa el objeto para el que queremos atrapar sus operaciones, junto con el objeto del interceptor. La instancia que devuelve es la que deberemos utilizar.- A nivel de llamadas al interceptor podéis comprobar como entra en juego la condición que especificamos.- Finalmente, se pone como ejemplo, que en el momento de llamar al objeto original, no se tendrán en cuenta las reglas de interceptor. Esto es muy importante, puesto que si terminamos utilizando el objeto erróneo, perderemos ese control intermedio.</li>
+</ul>
+<h2>Segundo ejemplo: interceptar una operación set</h2>
+<p>Ahora veamos un ejemplo, de lo que podría ser el inicio de un mini-framework tipo React. En este caso queremos que cuando se cambie un atributo de la clase, ésta se vuelva a renderizar:</p>
+<pre><code class="language-javascript">class ViewInterceptor {
+  set(obj, prop, value) {
+    // En el momento en que cambia el valor de una propiedad de la clase, se vuelve a lanzar el render
+    if (obj[prop] !== value) {
+      Reflect.set(obj, prop, value);
+      // En este caso, sabemos que el interceptor va a recibir objetos de un tipo determinado,
+      // con ello podríamos llamar a un método bien conocido. Se podrían incluir comprobaciones antes
+      // de llegar aquí para saber si realmente hay un método render en el objeto recibido.
+      obj.render();
+    }
+
+    // Se devuelve true para indicar que el set ha terminado correctamente.
+    return true;
+  }
+}
+
+class BaseView {
+  state;
+  
+  constructor() {
+    const self = this;
+    const viewInterceptor = new ViewInterceptor();
+
+    // Jugamos con un truco de JavaScript para que al instanciar la clase, se obtenga en realidad la
+    // instancia del proxy, en lugar de la instancia de la clase.
+    const viewProxy = new Proxy(this, viewInterceptor);
+    return viewProxy;
+  }
+  
+  setState(newState) {
+    this.state = newState;
+    console.log(&quot;Cambiado el estado a&quot;, this.state);
+  }
+  
+  render = () =&gt; {
+    console.log(&quot;Haciendo un render&quot;);
+  }
+}
+
+const viewWithProxy = new BaseView();
+
+viewWithProxy.setState({
+  name: &quot;John&quot;,
+  loading: true
+});
+
+// Tras establecer el estado, veremos lo siguiente por la consola:
+// &#39;Cambiado el estado a&#39; { name: &#39;John&#39;, loading: true }
+// &#39;Haciendo un render&#39;
+
+// Ahora vamos a probar a introducir dos veces el mismo estado...
+const newState = {
+  name: &quot;Jane&quot;,
+  loading: false
+};
+
+viewWithProxy.setState(newState);
+
+// En la consola tendremos:
+// &#39;Cambiado el estado a&#39; { name: &#39;Jane&#39;, loading: false }
+// &#39;Haciendo un render&#39;
+
+// Ahora ponemos el mismo estado:
+viewWithProxy.setState(newState);
+
+// Teniendo por consola:
+// &#39;Cambiado el estado a&#39; { name: &#39;Jane&#39;, loading: false }
+</code></pre>
+<p>Como hemos visto en el ejemplo anterior, interceptamos el momento en el que se intenta establecer el valor de un atributo. Y cuando el valor de este, es el mismo, se evita llamar a render de nuevo.</p>
+<h2>Tercer ejemplo: definir propiedades &quot;virtuales&quot;</h2>
+<pre><code class="language-javascript">const car = {
+  brand: &quot;Renault&quot;,
+  model: &quot;Megane&quot;,
+  registration: &quot;1234-ASDF&quot;
+}
+
+const carProxy = new Proxy(car, {
+  get(obj, prop) {
+    if (prop === &quot;information&quot;) {
+      return `${obj.brand} ${obj.model} ${obj.registration}`;
+    }
+    
+    return Reflect.get(obj, prop);
+  },
+
+  set(obj, prop, value) {
+    if (prop === &quot;information&quot;) {
+      const informationParts = value.split(&quot; &quot;);
+      obj.brand = informationParts[0];
+      obj.model = informationParts[1];
+      obj.registration = informationParts[2];
+    } else {
+      Reflect.set(obj, prop, value);
+    }
+
+    return true;
+  },
+});
+
+console.log(carProxy.information);
+// Mostrará por consola: &quot;Renault Megane 1234-ASDF&quot;;
+
+carProxy.information = &quot;Ford Focus 4321-FDSA&quot;;
+
+console.log(carProxy.brand);
+// Mostrará por consola: &quot;Ford&quot;;
+console.log(carProxy.model);
+// Mostrará por consola: &quot;Focus&quot;;
+console.log(carProxy.registration);
+// Mostrará por consola: &quot;4321-FDSA&quot;;
+</code></pre>
+<p>En esta ocasión hemos aprovechado para añadir lógica extra como si existiera una propiedad llamada &quot;information&quot; en el objeto Car. De esta forma podemos llamar a dicha propiedad como si realmente estuviera definida.</p>
+<h2>Algunos métodos trap útiles</h2>
+<h3>apply(obj, method, parameters)</h3>
+<p>Este trap es un tanto especial pues sirve para interceptar llamadas a funciones.</p>
+<pre><code class="language-javascript">const interceptor = {
+  apply(target, thisInstance, parameters) {
+    console.log(`FUNCTION CALL ${target} ${parameters}`);
+    return target(parameters[0]);
+  }
+};
+
+function isPair(value) {
+  return !(value % 2);
+};
+
+const isPairProxy = new Proxy(isPair, interceptor);
+
+isPairProxy(2);
+// En consola:
+// &#39;FUNCTION CALL function isPair(value) {
+//    return !(value % 2);
+// } 2&#39;
+
+isPairProxy(5);
+// En consola:
+// &#39;FUNCTION CALL function isPair(value) {
+//    return !(value % 2);
+// } 5&#39;
+</code></pre>
+<h3>get(obj, prop)</h3>
+<p>Se ejecuta en el momento en que se quiere leer un atributo de la clase. Como parámetros recibe el objeto interceptado, y el nombre del atributo.</p>
+<h3>set(obj, prop, value)</h3>
+<p>Intercepta el cambio de valores en los atributos de un objeto. Recibe como primer parámetro el objeto interceptado, como segundo parámetro el nombre del atributo y como tercer parámetro el valor a guardar.</p>
+<h3>deleteProperty(obj, prop)</h3>
+<p>Captura el instante en que se ejecuta el borrado de una propiedad del objeto, por ejemplo, <code>delete myObject.myProperty</code>. Recibe el objeto y el nombre de la propiedad.</p>
+<h3>ownKeys(obj)</h3>
+<p>Se ejecutará cuando se use <code>Object.keys()</code>, o por ejemplo lancemos un <code>for...in</code>. Recibe el objeto.</p>
+<h3>has(obj, prop)</h3>
+<p>En este caso, el método se ejecutará cuando llamemos a una sentencia <code>in</code> (menos el bucle <code>for..in</code>). Por ejemplo <code>&quot;property&quot; in myObject</code>.</p>
+<h3>defineProperty(obj, prop, descriptor)</h3>
+<p>Llamado en el momento en que se declara una nueva propiedad para el objeto. Hay que tener en cuenta, que si hay un trap para set, no se llegará a llamar a este método. Cuando definamos la propiedad directamente, en ese caso sí se llamará cuando usamos el método <code>defineProperties</code> de Object.</p>
+<pre><code class="language-javascript">const interceptor = {
+  set(obj, prop, value) {
+    console.log(`SET ${prop} =&gt; ${value}`);
+    return true;
+  },
+  defineProperty(obj, prop, descriptor) {
+    console.log(`DEFINE_PROPERTY ${prop}`)
+    return true;
+  }
+};
+
+const digimon = {};
+const proxy = new Proxy(digimon, interceptor);
+
+proxy.name = &quot;Agumon&quot;;
+// En consola: &#39;SET name =&gt; Agumon&#39;
+
+Object.defineProperties(proxy,  {
+  type: {
+    value: &quot;Fuego&quot;,
+    writable: false
+  }
+});
+// En consola: &#39;DEFINE_PROPERTY type&#39;
+</code></pre>
+<p>Si al código anterior le quitamos el trap de set, veríamos lo siguiente:</p>
+<pre><code class="language-javascript">const interceptor = {
+  defineProperty(obj, prop, descriptor) {
+    console.log(`DEFINE_PROPERTY ${prop}`)
+    return true;
+  }
+};
+
+const digimon = {};
+const proxy = new Proxy(digimon, interceptor);
+
+proxy.name = &quot;Agumon&quot;;
+// En consola: &#39;DEFINE_PROPERTY name&#39;
+
+Object.defineProperties(proxy,  {
+  type: {
+    value: &quot;Fuego&quot;,
+    writable: false
+  }
+});
+// En consola: &#39;DEFINE_PROPERTY type&#39;
+</code></pre>
+<h3>construct(constructorType, parameters)</h3>
+<p>Este trap permite captura el momento de instanciación de una clase, es ideal para simular decoradores sobre la misma.</p>
+<pre><code class="language-javascript">const interceptor = {
+  construct(constructorType, parameters) {
+    console.log(&quot;CONSTRUCTOR&quot;, constructorType, parameters);
+    const instance = new constructorType();
+    instance.setName(parameters[0]);
+    return instance;
+  }
+};
+
+class Digimon {
+  #name;
+  
+  getName() {
+    return this.#name;
+  }
+  
+  setName(newName) {
+    this.#name = newName;
+  }
+}
+
+const DigimonProxy = new Proxy(Digimon, interceptor);
+
+const digimon = new DigimonProxy(&quot;Agumon&quot;);
+// En consola: &#39;CONSTRUCTOR&#39; ƒ Digimon() [ &#39;Agumon&#39; ]
+
+digimon.getName();
+// En consola: &#39;Agumon&#39;
+</code></pre>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

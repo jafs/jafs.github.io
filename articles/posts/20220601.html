@@ -154,12 +154,14 @@ const interceptor = new Interceptor();
 <p>Ahora veamos un ejemplo, de lo que podría ser el inicio de un mini-framework tipo React. En este caso queremos que cuando se cambie un atributo de la clase, ésta se vuelva a renderizar:</p>
 <pre><code class="language-javascript">class ViewInterceptor {
   set(obj, prop, value) {
-    // En el momento en que cambia el valor de una propiedad de la clase, se vuelve a lanzar el render
+    // En el momento en que cambia el valor de una propiedad de la clase, se
+    // vuelve a lanzar el render
     if (obj[prop] !== value) {
       Reflect.set(obj, prop, value);
-      // En este caso, sabemos que el interceptor va a recibir objetos de un tipo determinado,
-      // con ello podríamos llamar a un método bien conocido. Se podrían incluir comprobaciones antes
-      // de llegar aquí para saber si realmente hay un método render en el objeto recibido.
+      // En este caso, sabemos que el interceptor va a recibir objetos de un
+      // tipo determinado, con ello podríamos llamar a un método bien conocido.
+      // Se podrían incluir comprobaciones antes de llegar aquí para saber si
+      // realmente hay un método render en el objeto recibido.
       obj.render();
     }
 
@@ -175,8 +177,9 @@ class BaseView {
     const self = this;
     const viewInterceptor = new ViewInterceptor();
 
-    // Jugamos con un truco de JavaScript para que al instanciar la clase, se obtenga en realidad la
-    // instancia del proxy, en lugar de la instancia de la clase.
+    // Jugamos con un truco de JavaScript para que al instanciar la clase, se
+    // obtenga en realidad la instancia del proxy, en lugar de la instancia de
+    // la clase.
     const viewProxy = new Proxy(this, viewInterceptor);
     return viewProxy;
   }

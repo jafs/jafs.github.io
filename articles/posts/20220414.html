@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Patrón observer — JAFS</title>
+  <meta name="description" content="Para hablar del patrón Observer, antes deberíamos "empezar por el principio" (me encanta cuando la gente utiliza esa expresión redudante). En la teoría del s..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, patrón observer, diseño y arquitectura, patrones de diseño, programación" />
+  <meta name="article:published_time" content="2022-04-14T10:23:53.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220414.html" />
+  <meta property="og:title" content="Patrón observer" />
+  <meta property="og:description" content="Para hablar del patrón Observer, antes deberíamos "empezar por el principio" (me encanta cuando la gente utiliza esa expresión redudante). En la teoría del s..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript_proxy.png" />
+  
+  <meta property="article:published_time" content="2022-04-14T10:23:53.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Patrón observer" />
+  <meta name="twitter:description" content="Para hablar del patrón Observer, antes deberíamos "empezar por el principio" (me encanta cuando la gente utiliza esa expresión redudante). En la teoría del s..." />
+  <meta name="twitter:image" content="/images/javascript_proxy.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220414.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Patrón observer",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Para hablar del patrón Observer, antes deberíamos \"empezar por el principio\" (me encanta cuando la gente utiliza esa expresión redudante). En la teoría del s...",
+  "url": "https://jafs.github.io/articles/posts/20220414.html",
+  "inLanguage": "es",
+  "datePublished": "2022-04-14T10:23:53.000Z",
+  "image": "/images/javascript_proxy.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Patrón observer</h1><p class="text-gray-600 text-sm mb-6">2022-04-14</p><p>Para hablar del patrón Observer, antes deberíamos &quot;empezar por el principio&quot; (me encanta cuando la gente utiliza esa expresión redudante). En la teoría del software, los patrones de diseño nos ayudan a resolver los problemas más comunes a los que nos enfrentamos con una serie de soluciones a éstos. Podríamos hacer un poco de historia, pero no es el objetivo de este artículo contaros batallitas &#x1f61b;. De forma resumida, hace muchos años ya se conocían bastantes patrones pero dicho conocimiento estaba disperso, de forma que la conocida como &quot;Banda de los Cuatro&quot; (Erich Gamma, Richard Helm, Ralph Johnson y John Vlissides) decidieron escribir un libro que recogiera la definición de cada uno de los 23 patrones que se conocían en su momento. Dicho libro se llama <a href="https://amzn.to/3jEL8Gt">Patrones de Diseño</a>, por lo que es un buen punto de partida para quienes queráis ahondar más en este tema.</p>
+<p>Estos patrones se clasificaron en tres categorías:</p>
+<ul>
+<li>Patrones creacionales: como su nombre indica, permiten ayudar en la instanciación de clases.</li>
+<li>Patrones estructurales: estos patrones, permiten definir las relaciones entre clases y su composición.</li>
+<li>Patrones de comportamiento: definen como pueden interaccionar y comportarse las clases.</li>
+</ul>
+<p>En el artículo de hoy, aprenderemos en qué consiste el Patrón Observer, atendiendo primero a su definición estricta, y luego viendo un ejemplo del mundo real. Como siempre, cualquier duda, comentario o corrección que queráis hacer la podéis dejar en comentarios.</p>
+<h2>Teoría del patrón Observer</h2>
+<p>Si atendemos a la definición estricta. Este patrón:</p>
+<blockquote>
+<p>Define una dependencia uno a muchos entre objetos. De forma que cuando un objeto (subject) cambie de estado, este cambio se notificará a aquellos otros objetos (observers) que estén &quot;suscritos&quot; a él.</p>
+</blockquote>
+<p><img src="/images/observer-diagram-01.png" alt="Diagrama de clases del Patrón Observer"></p>
+<p>En el diagrama superior podemos distinguir las siguientes clases:</p>
+<ul>
+<li><strong>Subject</strong>: esta clase gestiona la suscripción de los observadores. Guardará la lista de objetos suscritos para poder notificarles cuando hay cambios.</li>
+<li><strong>Observer</strong>: tendrá un método público al que los sujetos podrán llamar cuando le quieran notificar.</li>
+<li><strong>ConcreteSubject</strong>: almacena un estado concreto para una serie de observadores.</li>
+<li><strong>ConcreteObserver</strong>: se suscribe a un sujeto concreto y se encarga de actualizar su estado interno a partir del estado del sujeto, cuando éste último le notifique.</li>
+</ul>
+<p>La secuencia que seguiría el flujo original del patrón sería la siguiente:</p>
+<p><img src="/images/observer-diagram-02.png" alt="Diagrama de secuencia"></p>
+<p>Tras tanto diagrama os explico un poco. Prácticamente lo que hacemos es que el observador se suscriba al sujeto. En el momento en que el sujeto cambia su estado (en la definición del patrón, este cambio lo hace el propio observador), éste notifica a todos los observadores para que puedan consultar el nuevo estado del sujeto.</p>
+<h2>Un ejemplo práctico</h2>
+<p>Voy a simplificar mucho el código en TypeScript para que veáis un ejemplo muy tontorrón quitando algunas clases, pero que creo que os puede ayudar a entenderlo mejor:</p>
+<pre><code class="language-typescript">interface IObserver {
+  update(): void;
+}
+
+class Sujeto {
+  private name: string;
+  private observers: IObserver[] = [];
+
+  public addObserver(observer: IObserver): void {
+    this.observers.push(observer);
+  }
+
+  public getName(): string {
+    return this.name;
+  }
+
+  // Cuando cambia el estado, pasamos a notificar a todos los observadores.
+  public setName(newName: string): void {
+    this.name = newName;
+    this.notify();
+  }
+
+  private notify(): void {
+    for (const observer of this.observers) {
+      observer.update();
+    }
+  }
+}
+
+class Observador implements IObserver {
+  private id: string;
+  private name: string;
+  private sujeto: Sujeto;
+
+  public constructor(id: string, sujeto: Sujeto) {
+    this.id = id;
+    this.sujeto = sujeto;
+    this.name = this.sujeto.getName();
+
+    // Suscripción al sujeto para poder recibir sus notificaciones cuando cambie su estado.
+    sujeto.addObserver(this);
+  }
+
+  // Implementación de la interface IObserver para que el sujeto nos pueda notificar.
+  public update(): void {
+    console.log(&quot;Notificado &quot; + this.id);
+    this.name = this.sujeto.getName();
+    console.log(&quot;En &quot; + this.id +  &quot; ahora el nombre es &quot; + this.name);
+  }
+}
+</code></pre>
+<p>Pues bien, una vez que hemos definido las dos clases simplonas, veamos que pasaría si ejecutamos algo de código para probarlo:</p>
+<pre><code class="language-typescript">const sujeto: Sujeto = new Sujeto();
+const observador1: Observador = new Observador(&quot;observador1&quot;, sujeto);
+const observador2: Observador = new Observador(&quot;observador2&quot;, sujeto);
+
+sujeto.setName(&quot;Pepito&quot;);
+
+// Por consola veremos lo siguiente:
+// &#39;Notificado observador1&#39;
+// &#39;Notificado observador2&#39;
+// &#39;En observador1 ahora el nombre es Pepito&#39;
+// &#39;En observador2 ahora el nombre es Pepito&#39;
+</code></pre>
+<p>Se puede ver como en cuanto realizamos un cambio de estado en el sujeto, este notifica a todos los observadores que se hayan suscrito. Así que, aunque hemos visto el patrón de forma muy simplificada, creo que os puede dar una pista de como es su funcionamiento.</p>
+<h2>Un ejemplo del mundo real</h2>
+<p>Si eres una persona nueva en el mundo de la programación, más exactamente si acabas de empezar con JavaScript, quizás no sepas que has estado usando el patrón observer de forma continua. Y lo has usado cuando has llamado al método <code>addEventListener()</code>.</p>
+<blockquote>
+<p>Para gente que lo desconozca, hacemos un breve inciso. En JavaScript podemos escuchar eventos que se lancen sobre un componente HTML, por ejemplo, podemos escuchar el evento &quot;click&quot; sobre un botón, de forma que cada vez que se haga clic en dicho botón, seamos notificados. Esto lo conseguimos con este tipo de llamadas:</p>
+<p><code>elementoHTML.addEventListener(&quot;tipoDeEvento&quot;, funcionALaQueNotificar);</code></p>
+<p>Y seguimos tras esta breve aclaración &#x1f609;.</p>
+</blockquote>
+<p>El sistema que se utiliza en JavaScript para ser notificados cuando ocurre un evento, podríamos decir que es una patrón Observer &quot;mutado&quot;, ya que tiene cuatro diferencias principalmente:</p>
+<ul>
+<li>Por un lado, la suscripción se realiza sobre un &quot;cambio&quot; concreto del sujeto, en lugar de realizar una suscripción general. En este caso te suscribes al evento para el que quieres ser notificado.</li>
+<li>Muchos de los patrones de diseño se pueden aplicar a funciones, por lo que no estamos limitados a utilizar siempre clases para utilizarlos. Precisamente este es un ejemplo del funcionamiento del patrón Observer con funciones, ya que al suscribirse se indicará la función que será llamada.</li>
+<li>La notificación también cambia, ya que en lugar de sólo avisar que hay un cambio por parte del sujeto, éste lo que hará es enviar directamente los datos involucrados en el cambio, con lo que la función que hemos usado como observadora, recibirá, en este caso, los datos del evento lanzado.</li>
+<li>Finalmente, el sujeto no notifica cambios en su estado. Es decir, que en el evento que recibimos, se incluyen los datos básicos del sujeto. Pero los datos del evento en sí, no son parte del estado del sujeto, sino una acción llevada a cabo sobre este.</li>
+</ul>
+<p>Un diagrama muy básico de como funciona sería el siguiente:</p>
+<p><img src="/images/observer-diagram-03.png" alt="Diagrama de secuencia del patrón observer"></p>
+<h2>Cosillas a tener en cuenta</h2>
+<p>Hemos visto la definición estándar del patrón, así como una implementación del mundo real con algunos cambios. Precisamente, una de las cosas a tener en cuenta es que los patrones de diseño no son algo cerrado que debas seguir al 100%, ya que dependiendo del caso, puede que te interese hacer algunos ajustes. En el caso del patrón observer, hemos visto como se puede expandir con: suscripciones a datos en particular, notificaciones con datos en la llamada, suscripción de funciones en lugar de clases y que los observadores (las funciones en este caso), no están lanzando el cambio que provoca las notificaciones. Como conclusión podemos decir que los patrones son los planos con los que trabajar, pero no impide que podamos hacer correcciones a éstos para ajustarlos a nuestras necesidades.</p>
+<p>Otro de los puntos importantes en este patrón, es que los observadores no saben el coste de actualizar el sujeto, ya que no conocer al resto de observadores. Me explico: si cada observador trata la notificación de forma síncrona, cualquier observador que bloquee el hilo principal con algún proceso que lleve demasiado tiempo, dejará al resto en espera. De ahí que es ideal evitar el tener observadores bloqueantes sin vamos a trabajar en modo síncrono.</p>
+<p>Y bien, hasta aquí los datos básicos del patrón Observer, espero que os pueda ayudar cuando surja la necesidad de utilizarlo en vuestro proyectos. Y sin más, me despido hasta el próximo artículo.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12 text-center">
+    <div class="max-w-4xl mx-auto px-4">© 2025 — José Antonio Fuentes Santiago</div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -82,34 +82,42 @@
   </header>
   <main class="max-w-4xl mx-auto px-4 py-8">
     <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">Optimiza tus transacciones con ACID</h1><p class="text-gray-600 text-sm mb-6">2022-03-23</p><p>En el desarrollo de software definimos una transacción como un conjunto de pasos que deben ejecutarse de forma ordenada. El ejemplo más común en el que solemos pensar es en las transacciones de las bases de datos, pero se utilizan en muchos más ambitos, como por ejemplo: una transacción distribuida en micro-servicios, blockchains o incluso puede que debamos desarrollar un sistema de transacciones que hayamos creado de cero para nuestro proyecto.</p>
-<p>Es por ello que si deseamos disponer de transacciones que operen de la forma más estable posible, lo ideal es que cumplan las características <strong class="text-green-500">A</strong><strong class="text-red-500">C</strong><strong class="text-sky-700">I</strong><strong class="text-yellow-500">D</strong>.</p>
+      <h1 class="text-4xl font-bold mb-2">Optimiza tus transacciones con ACID</h1>
+      <p class="text-gray-600 text-sm mb-6">2022-03-23</p>
+      <p>En el desarrollo de software definimos una transacción como un conjunto de pasos que deben ejecutarse de forma ordenada. El ejemplo más común suele ser una transacción en una base de datos, pero ese mismo concepto se utiliza en muchos más ámbitos: como por ejemplo: transacciones distribuidas en microservicios, blockchains o incluso sistemas de transacciones propios desarrollados para un proyecto.</p>
+      <p>Es por ello que si deseamos disponer de transacciones que operen de la forma más estable posible, lo ideal es que cumplan las características <strong class="text-green-500">A</strong><strong class="text-red-500">C</strong><strong class="text-sky-700">I</strong><strong class="text-yellow-500">D</strong>.</p>
+      <p>Estas características o propiedades no son un estándar formal, sino un conjunto de garantías que un sistema transaccional debería proporcionar.</p>
+
 <h2><strong class="text-green-500">A</strong><span>tomicity</span> (atomicidad)</h2>
 <p>La definición original sería la siguiente:</p>
 <blockquote>
-<p>Por cada paso en una secuencia de acciones realizada dentro de los límites de una transacción, ésta debe, o completarse correctamente, o en caso contrario todo el trabajo debería ser revertido. <br><em>Martin Fowler ~ Patterns of Enterprise Application Architecture</em></p>
+  <p>Por cada paso en una secuencia de acciones realizada dentro de los límites de una transacción, ésta debe, o completarse correctamente, o en caso contrario todo el trabajo debería ser revertido. <br><em>Martin Fowler ~ Patterns of Enterprise Application Architecture</em></p>
 </blockquote>
-<p>Esta característica, viene a indicar que sólo podemos dar una transacción como completada, cuando todos los pasos que la componen finalicen correctamente. Si hay un problema en cualquiera de los pasos, habrá que desechar todos los pasos realizados hasta ahora.</p>
+<p>Esta característica, viene a indicar que sólo podemos dar una transacción como completada, cuando todos los pasos que la componen finalicen correctamente. Si hay un problema en cualquiera de los pasos, habrá que revertir todos los cambios realizados.</p>
 <p><img src="/images/transacciones1.png" alt="Transacción correcta e incorrecta"></p>
+
+
 <h2><strong class="text-red-500">C</strong><span>onsistency</span> (consistencia)</h2>
 <blockquote>
-<p>Los recursos de un sistema deben permanecer en un estado consistente y no corrupto, tanto al principio como al final. <br><em>Martin Fowler ~ Patterns of Enterprise Application Architecture</em></p>
+  <p>Los recursos de un sistema deben permanecer en un estado consistente y no corrupto, tanto al principio como al final. <br><em>Martin Fowler ~ Patterns of Enterprise Application Architecture</em></p>
 </blockquote>
-<p>Este principio, lo que nos viene a decir, es que no deberíamos tener datos que incongruentes o incorrectos en cualquier paso de la transacción. Cada paso, debe dejar el estado totalmente consistente.</p>
+<p>Este principio, lo que nos viene a decir es que no deberíamos tener datos inconsistentes o incorrectos en ningún punto de la transacción. El sistema debe pasar de un estado consistente a otro estado consistente. Puede haber estados intermedios inconsistentes siempre que no sean visibles externamente.</p>
+
 <h2><strong class="text-sky-700">I</strong><span>solation</span> (aislamiento)</h2>
 <blockquote>
-<p>El resultado de una transacción no debe ser visible a otras transacciones abiertas hasta que no termine correctamente. <br><em>Martin Fowler ~ Patterns of Enterprise Application Architecture</em></p>
+  <p>El resultado de una transacción no debe ser visible a otras transacciones abiertas hasta que no termine correctamente. <br><em>Martin Fowler ~ Patterns of Enterprise Application Architecture</em></p>
 </blockquote>
-<p>Al aislar las transacciones hasta que finalicen, conseguiremos aumentar la consistencia de nuestro sistema. Ya que si no cumplimos esta norma, imaginad que hay un error en un paso de una transacción y otra accede en ese momento a los datos. La transacción que haya fallado, revertiría los cambios, con lo que la segunda transacción tendrá datos incorrectos. Es por ello que hasta que no termine la primera, la segunda no podrá acceder al resultado ni la información generada.</p>
+<p>Al aislar las transacciones hasta que finalicen conseguimos aumentar la consistencia del sistema. Si no se respeta esta norma, podría ocurrir que una transacción accediera a datos generados por otra que más tarde falla. En ese caso, al revertirse la transacción fallida, la segunda habría leído datos incorrectos. Por ello, una transacción no debería ver los resultados de otra hasta que ésta termine correctamente.</p>
 <p><img src="/images/transacciones2.png" alt="Transacción que lanza otra transacción"></p>
+
 <h2><strong class="text-yellow-500">D</strong><span>urability</span> (durabilidad)</h2>
 <blockquote>
-<p>Cualquier resultado de una transacción que haya terminado correctamente debe ser permanente. <br><em>Martin Fowler ~ Patterns of Enterprise Application Architecture</em></p>
+  <p>Cualquier resultado de una transacción que haya terminado correctamente debe ser permanente. <br><em>Martin Fowler ~ Patterns of Enterprise Application Architecture</em></p>
 </blockquote>
-<p>Finalmente, con el último de los principios, lo que se viene a decir es que una vez que una transacción ha terminado, los datos deben quedan realizados de forma permanente, es decir, que para modificarlos, debe lanzarse otra transacción que opere con ellos, pero éstos no deben ser revertidos parcialmente si la transacción finalizó correctamente.</p>
+<p>El último principio establece que, una vez completada una transacción, sus cambios datos deben persistir de forma permanente, es decir, que para modificarlos, debe lanzarse otra transacción que opere con ellos, pero estos no deben revertirse ni perderse tras su confirmación si la transacción finalizó correctamente.</p>
 <h2>Conclusión</h2>
 <p>Si tienes que trabajar con transacciones, ya conoces los principios ACID, que se deberían cumplir para mantener un sistema lo más consistente y robusto posible.</p>
-<p>Todo esto ha sido extraído de un libro que es prácticamente de lectura obligada si queréis profundizar en la arquitectura del software. El autor es el gran maestro <a href="https://www.martinfowler.com/">Martin Fowler</a>, y el libro en cuestión es <a href="https://amzn.to/3NddXrh">Patterns of Enterprise Application Architecture</a>.</p>
+<p>Todo esto ha sido extraído de un libro que es prácticamente de lectura obligada si quieres profundizar en la arquitectura del software. El autor es el gran maestro <a href="https://www.martinfowler.com/">Martin Fowler</a>, y el libro en cuestión es <a href="https://amzn.to/3NddXrh">Patterns of Enterprise Application Architecture</a>.</p>
 
     </article>
   </main>

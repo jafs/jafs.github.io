@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Buscar — JAFS</title>
+  <meta name="description" content="Buscar artículos en el blog de José Antonio Fuentes Santiago" />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="robots" content="noindex, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jafs.github.io/search.html" />
+  <meta property="og:title" content="Buscar — JAFS" />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/search.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <section class="py-8">
+      <h1 class="text-3xl font-bold mb-4">Resultados de búsqueda</h1>
+
+      <form id="search-form" class="mb-6">
+        <input
+          type="search"
+          id="search-input"
+          name="q"
+          placeholder="Buscar artículos..."
+          class="w-full px-4 py-4 rounded-lg bg-white border-2 border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500"
+          aria-label="Buscar artículos"
+          autocomplete="off"
+        />
+      </form>
+
+      <p id="search-info" class="text-gray-600 mb-6"></p>
+
+      <!-- Loading indicator -->
+      <div id="loading" class="text-center py-8">
+        <p class="text-gray-600">Cargando...</p>
+      </div>
+
+      <!-- No results message -->
+      <div id="no-results" class="hidden bg-white rounded-lg shadow-sm p-6">
+        <p class="text-gray-700">No se encontraron resultados para tu búsqueda.</p>
+        <p class="text-gray-600 mt-2">Intenta con otros términos o <a href="/articles/" class="text-cyan-700 hover:underline">explora todos los artículos</a>.</p>
+      </div>
+
+      <!-- Results container -->
+      <ul id="results-list" class="list-none space-y-2 bg-white rounded-lg shadow-sm p-6 hidden">
+        <!-- Results will be inserted here by JavaScript -->
+      </ul>
+
+      <!-- Pagination -->
+      <div id="pagination" class="hidden mt-6 flex justify-center gap-2"></div>
+    </section>
+  </main>
+
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+
+  <!-- Fuse.js from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+  <script src="/js/search.js"></script>
+</body>
+</html>

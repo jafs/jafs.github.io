@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Curiosidades del objeto global console — JAFS</title>
+  <meta name="description" content="Seguro que estás harto o harta de usar console.log, console.warn, etc, para ver mensajes por consola mientras desarrollas en JavaScript. Sin embargo, hay alg..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, JavaScript" />
+  <meta name="article:published_time" content="2022-03-19T20:10:23.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220319.html" />
+  <meta property="og:title" content="Curiosidades del objeto global console" />
+  <meta property="og:description" content="Seguro que estás harto o harta de usar console.log, console.warn, etc, para ver mensajes por consola mientras desarrollas en JavaScript. Sin embargo, hay alg..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2022-03-19T20:10:23.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Curiosidades del objeto global console" />
+  <meta name="twitter:description" content="Seguro que estás harto o harta de usar console.log, console.warn, etc, para ver mensajes por consola mientras desarrollas en JavaScript. Sin embargo, hay alg..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220319.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Curiosidades del objeto global console",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Seguro que estás harto o harta de usar console.log, console.warn, etc, para ver mensajes por consola mientras desarrollas en JavaScript. Sin embargo, hay alg...",
+  "url": "https://jafs.github.io/articles/posts/20220319.html",
+  "inLanguage": "es",
+  "datePublished": "2022-03-19T20:10:23.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Curiosidades del objeto global console</h1><p class="text-gray-600 text-sm mb-6">2022-03-19</p><p>Seguro que estás harto o harta de usar console.log, console.warn, etc, para ver mensajes por consola mientras desarrollas en JavaScript. Sin embargo, hay algunos métodos del objeto global <code>console</code> que quizás no conoces y pueden llegar a ser muy útiles. En este artículo vamos a ver algunos de los métodos más útiles.</p>
+<h2>console.assert</h2>
+<pre><code class="language-javascript">// Muestra un mensaje de error si no se cumple la condición que recibe:
+console.assert(false, &quot;Mensaje&quot;); // &quot;Assertion failed: Mensaje&quot;
+</code></pre>
+<p>Uno de sus usos puede ser para controlados casos que sea muy raros que ocurran. Por ejemplo, tenemos una zona de código en la que pensemos que es imposible que llegue un array vacío. Y quizás el código falla en un punto difícil de depurar, pues si esperamos que siempre llegue un array con contenido, no nos cuesta dejar un assert en el código:</p>
+<pre><code class="language-javascript">console.assert(enemies.length, &quot;Nos hemos quedado sin enemigos&quot;);
+</code></pre>
+<h2>console.clear</h2>
+<p>El nombre ya lo dice todo. Al igual que el comando <code>clear</code> en Linux, o cls en Windows, borra el contenido de la consola.</p>
+<h2>console.count</h2>
+<p>Cada vez que se ejecuta incrementa un contador que muestra en la consola. Se puede indicar un nombre para el contador.</p>
+<pre><code class="language-javascript">console.count(); // default: 1
+console.count(); // default: 2
+
+console.count(&quot;label&quot;); // label: 1
+console.count(&quot;label&quot;); // label: 2
+console.count(&quot;label&quot;); // label: 3
+
+console.countReset(&quot;label&quot;);
+console.count(&quot;label&quot;); // label: 1
+</code></pre>
+<p>Se puede reiniciar la cuenta con <code>console.countReset()</code>, indicando el nombre del contador en el caso de que se quiera resetear uno nombreado.</p>
+<h2>console.dirxml</h2>
+<p>Seguro que ya has mostrado el contenido de objetos por consola, ya sea con <code>console.dir()</code> o usando el objeto como argumento en los métodos <code>log</code>, <code>info</code>, etc. Pero ¿recuerdas que ocurre cuando lo haces por ejemplo con un elemento HTML? Sí, normalmente veremos el objeto que representa el nodo XML en sí, en lugar de la estructura. Así que con este fin existe <code>dirxml</code>:</p>
+<pre><code class="language-javascript">console.dir(document.body)
+
+// Si imprimimos nodos XML directamente tenemos algo de este estilo:
+// body
+//   aLink: &quot;&quot;
+//   accessKey: &quot;&quot;
+//   ariaAtomic: null
+//   ariaAutoComplete: null
+//   ariaBusy: null
+// ...
+
+console.dirxml(document.body);
+// En cambio, console.dirxml muestra una estructura por la que podemos navegar.
+// &lt;body&gt;
+//   &lt;div id=​&quot;root&quot;&gt;
+//   ​  &lt;div class=​&quot;app&quot;&gt;​​&lt;/div&gt;
+//   &lt;/div&gt;
+// ​​&lt;/body&gt;​
+</code></pre>
+<h2>console.time</h2>
+<p>Cuando quieras medir tiempos en tu aplicación, puedes jugar haciendo diferencias con objetos de tipo <code>Date</code>, pero hay una forma mucho más sencilla para hacerlo en JavaScript. Con <code>time</code> y <code>timeEnd</code> podremos ver el tiempo transcurrido entre las dos llamadas. Podemos llamarlo sin parámetros, o pasando un parámetro para darle un nombre el contador.</p>
+<pre><code class="language-javascript">console.time(&quot;benchmark&quot;);
+
+... // Operaciones cuyo tiempo queremos medir
+
+console.timeEnd(&quot;benchmark&quot;); // benchmark: 98.097ms
+</code></pre>
+<h2>console.group</h2>
+<p>Puede que alguna vez hayas querido indentar los mensajes que muestras por consola. Para ello, en el objeto console tienes los métodos <code>group</code> y <code>groupEnd</code>. Con el primero incrementas un nivel la indentación y con el segundo lo quitas.</p>
+<pre><code class="language-javascript">console.group(&quot;Inicio de la subida&quot;);
+console.log(&quot;Subiendo datos&quot;);
+console.log(&quot;Revisando datos&quot;);
+console.group(&quot;Comienzo del análisis&quot;);
+console.log(&quot;Revisando datos a fondo&quot;);
+console.groupEnd(&quot;Comienzo del análisis&quot;);
+console.log(&quot;Fin del análisis&quot;);
+console.groupEnd(&quot;Comienzo del análisis&quot;);
+console.log(&quot;Fin de la subida&quot;);
+
+// Inicio de la subida
+//   Subiendo datos
+//   Revisando datos
+//   Comienzo del análisis
+//     Revisando datos a fondo
+//   Fin del análisis
+// Fin de la subida
+</code></pre>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

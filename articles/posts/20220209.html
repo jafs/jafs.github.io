@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Métodos del objeto Promise en JavaScript — JAFS</title>
+  <meta name="description" content="Como hasta ahora no hemos hablado de promesas en este blog, vamos a comenzar haciendo una pequeña introducción a la breve pero apasionante historia de las pr..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, JavaScript, asincronía, programación" />
+  <meta name="article:published_time" content="2022-02-09T20:29:28.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220209.html" />
+  <meta property="og:title" content="Métodos del objeto Promise en JavaScript" />
+  <meta property="og:description" content="Como hasta ahora no hemos hablado de promesas en este blog, vamos a comenzar haciendo una pequeña introducción a la breve pero apasionante historia de las pr..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2022-02-09T20:29:28.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Métodos del objeto Promise en JavaScript" />
+  <meta name="twitter:description" content="Como hasta ahora no hemos hablado de promesas en este blog, vamos a comenzar haciendo una pequeña introducción a la breve pero apasionante historia de las pr..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220209.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Métodos del objeto Promise en JavaScript",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Como hasta ahora no hemos hablado de promesas en este blog, vamos a comenzar haciendo una pequeña introducción a la breve pero apasionante historia de las pr...",
+  "url": "https://jafs.github.io/articles/posts/20220209.html",
+  "inLanguage": "es",
+  "datePublished": "2022-02-09T20:29:28.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Métodos del objeto Promise en JavaScript</h1><p class="text-gray-600 text-sm mb-6">2022-02-09</p><blockquote>
+<p>“Había permanecido en la sombra, esperando, sin prisa, a que alguna fuerza lo trajese de nuevo al mundo de los vivos. Y nada tiene tanta fuerza como una promesa…” <br><em>Carlos Ruiz Zafón - El Príncipe de la Niebla</em></p>
+</blockquote>
+<p>Como hasta ahora no hemos hablado de promesas en este blog, vamos a comenzar haciendo una pequeña introducción a la breve pero apasionante historia de las promesas en JavaScript, para a continuación ver los distintos métodos para trabajar con promesas.</p>
+<p>En caso de que os interese el tema, principalmente el caso de <code>async...await</code> que puede llegar a ser confuso en algunos ámbitos, podéis escribir en comentarios las dudas, y puedo preparar un artículo para ampliarlas.</p>
+<h2>Introducción</h2>
+<p>En un principio, al trabajar con JavaScript, cuando nos encontrábamos con un código que se debía ejecutar de forma asíncrona se utilizaban callbacks para controlar cuando había terminado la ejecución del código asíncrono. Pondremos en los siguientes ejemplos, el mismo código evolucionando:</p>
+<pre><code class="language-javascript">function onFileListReceived(fileList) {}
+function onFileListFail(errorMessage) {}
+
+fetchFileList(onFileListReceived, onFileListFail);
+</code></pre>
+<p>Con el paso del tiempo, la librería jQuery comenzó a usar lo que llamaban <code>deferreds</code>, un sistema con el que la gestión de las llamadas asíncronas pasa a ser un poco más descriptiva. Para ello se tenía un objeto al que se podían ir enlazando callbacks por cada resultado de la operación asíncrona.</p>
+<pre><code class="language-javascript">fetchFileList()
+ .done(onFileListReceived)
+ .fail(onFileListFail);
+</code></pre>
+<p>Con este esquema se paso a tener una estructura muy similar cuando llegaron las promesas al propio JavaScript:</p>
+<pre><code class="language-javascript">fetchFileList()
+  .then(onFileListReceived)
+  .catch(onFileListFail);
+</code></pre>
+<p>Cabe destacar que también existe la estructura <code>then()</code> con dos parámetros, en la que el primero funcionaría como callback cuando la promesa termina correctamente, y el segundo, cuando termina de forma errónea.</p>
+<p>La siguiente evolución en JavaScript fue la llegada de <code>async...await</code>. Esta estructura ayuda a &quot;leer&quot; el código asíncrono como si fuera síncrono:</p>
+<pre><code class="language-javascript">try {
+  const fileList = await fetchFileList();
+  // Realizar las operaciones deseadas
+} catch (fileListError) {
+  // Código en caso de fallo de la promesa.
+}
+</code></pre>
+<h2>Métodos del objeto Promise</h2>
+<h3>resolve() y reject()</h3>
+<p>Estos dos métodos son los más sencillos de utilizar y permiten generar una promesa resuelta (con resolve) o una promesa rechazada con (reject).</p>
+<pre><code class="language-javascript">function resolveName() {
+  return Promise.resolve(&quot;John&quot;);
+} 
+
+function rejectName() {
+  return Promise.reject(&quot;Error message&quot;);
+
+...
+
+// Con esto, resultado tendrá el valor &quot;John&quot;
+const name = await resolveName();
+
+try {
+  await rejectName();
+} catch (promiseError) {
+  // promiseError tendrá el valor &quot;Error message&quot;;
+}
+</code></pre>
+<h3>any()</h3>
+<p>Este método puede recibir varias promesas, y terminará en cuanto la primera de ellas se cumpla. El resto de promesas serán &quot;omitidas&quot;.</p>
+<pre><code class="language-javascript">const firstPromise = new Promise(
+  (resolve) =&gt; setTimeout(resolve, 50, &quot;Promesa a 50ms&quot;)
+);
+const secondPromise = Promise.reject(&quot;Esta no va a funcionar&quot;);
+const thirdPromise = new Promise(
+  (resolve) =&gt; setTimeout(resolve, 10, &quot;Promesa a 10ms&quot;)
+);
+
+const promises = [firstPromise, secondPromise, thirdPromise];
+
+// Esto mostrará en consola: &quot;Promesa a 10ms&quot; pues es la que termina primero
+console.log(await Promise.any(promises));
+</code></pre>
+<h3>race()</h3>
+<p>En esta ocasión, el método terminará en cuanto una promesa se cumpla o finalice erróneamente.</p>
+<pre><code class="language-javascript">const firstPromise = new Promise(
+  (resolve) =&gt; setTimeout(resolve, 50, &quot;Promesa a 50ms&quot;)
+);
+const secondPromise = Promise.reject(&quot;Esta no va a funcionar&quot;);
+const thirdPromise = new Promise(
+  (resolve) =&gt; setTimeout(resolve, 10, &quot;Promesa a 10ms&quot;)
+);
+
+const promises = [firstPromise, secondPromise, thirdPromise];
+
+// Esto mostrará en consola: &quot;Esta no va a funcionar&quot; puesto que termina primero
+// la promesa rechazada
+try {
+  await Promise.race(promises);
+} catch (error) {
+  console.log(error);
+}
+</code></pre>
+<p>Como resumen de los métodos <code>any()</code> y <code>race()</code>. Tenemos que, con <code>any</code> esperamos a que al menos una promesa termine bien, y si ninguna termina correctamente el flujo finalizará con la última promesa. Con <code>race</code>, sin embargo, el código se espera a que la promesa más rápida termine, ya sea correcta o erróneamente.</p>
+<h3>all()</h3>
+<p>Se resuelve cuando terminan todas las promesas correctamente. En caso de que una de ellas falle, la promesa generada por <code>all()</code> será rechazada.</p>
+<pre><code class="language-javascript">const firstPromise1 = Promise.resolve(&quot;first promise&quot;);
+const secondPromise = Promise.resolve(&quot;second promise&quot;;
+const thirdPromise = new Promise((resolve) =&gt; {
+  setTimeout(resolve, 100, &quot;third promise&quot;);
+});
+
+const promises = [firstPromise, secondPromise, thirdPromise];
+
+// Esto mostrará en consola
+// &#39;[&quot;first promise&quot;, &quot;second promise&quot;, &quot;third promise&quot;]&#39;.
+console.log(await Promise.all(promises));
+</code></pre>
+<h3>allSettled()</h3>
+<p>El último de los métodos de Promise, lo que hará es terminar cuando hayan acabado todas las promesas que recibe, ya sea correcta, o erróneamente. Para ello, el resultado será un array con las promesas.</p>
+<pre><code class="language-javascript">const firstPromise = Promise.resolve(&quot;first promise&quot;);
+const secondPromise = Promise.reject(&quot;failed promise&quot;);
+const promises = [firstPromise, secondPromise];
+
+// Imprimirá en la consola un array con dos promesas, una cumplida y otra
+// rechazada.
+// [
+//   { status: &quot;fulfilled&quot;, value: &quot;first promise&quot; }
+//   { status: &quot;rejected&quot;, reason: &quot;failed promise&quot; }
+// ]
+console.log(await Promise.allSettled(promises));
+</code></pre>
+<h2>Resumen</h2>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Explicación</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>resolve</code></td>
+<td>Genera una promesa resuelta automáticamente.</td>
+</tr>
+<tr>
+<td><code>reject</code></td>
+<td>Genera una promesa rechazada automáticamente.</td>
+</tr>
+<tr>
+<td><code>any</code></td>
+<td>Genera una promesa que se finaliza en cuanto termina correctamente una de las que recibe.</td>
+</tr>
+<tr>
+<td><code>race</code></td>
+<td>Genera una promesa que finaliza en cuanto termina una de las promesas que recibe, ya sea correcta o erróneamente.</td>
+</tr>
+<tr>
+<td><code>all</code></td>
+<td>Espera a que terminen todas las promesas. Si falla una de ellas, la promesa será rechaza.</td>
+</tr>
+<tr>
+<td><code>allSettled</code></td>
+<td>Espera a que terminen todas las promesas, independientemente de si terminan correctamente o fallan.</td>
+</tr>
+</tbody></table>
+<p>Para ampliar algo de información sobre las promesas podéis recurrir a los siguientes libros:</p>
+<ul>
+<li><a href="https://amzn.to/3oFemYL">Understanding JavaScript Promises – Nicholas C. Zakas</a></li>
+<li><a href="https://amzn.to/34NFOg0">JavaScript with Promises: Managing Asynchronous Code – Daniel Parker</a></li>
+<li><a href="https://amzn.to/3HHnAuW">Mastering JavaScript Promises – Muzzamil Hussain</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

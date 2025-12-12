@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>async y await: la magia del código asíncrono en JavaScript — JAFS</title>
+  <meta name="description" content="Para terminar de hablar de promesas en JavaScript (al menos por una temporada), veremos la forma de olvidarnos de los callbacks y comenzar a programar usando..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, JavaScript, asincronía, programación" />
+  <meta name="article:published_time" content="2022-02-23T19:51:30.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220223.html" />
+  <meta property="og:title" content="async y await: la magia del código asíncrono en JavaScript" />
+  <meta property="og:description" content="Para terminar de hablar de promesas en JavaScript (al menos por una temporada), veremos la forma de olvidarnos de los callbacks y comenzar a programar usando..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2022-02-23T19:51:30.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="async y await: la magia del código asíncrono en JavaScript" />
+  <meta name="twitter:description" content="Para terminar de hablar de promesas en JavaScript (al menos por una temporada), veremos la forma de olvidarnos de los callbacks y comenzar a programar usando..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220223.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "async y await: la magia del código asíncrono en JavaScript",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Para terminar de hablar de promesas en JavaScript (al menos por una temporada), veremos la forma de olvidarnos de los callbacks y comenzar a programar usando...",
+  "url": "https://jafs.github.io/articles/posts/20220223.html",
+  "inLanguage": "es",
+  "datePublished": "2022-02-23T19:51:30.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">async y await: la magia del código asíncrono en JavaScript</h1><p class="text-gray-600 text-sm mb-6">2022-02-23</p><p>Para terminar de hablar de promesas en JavaScript (al menos por una temporada), veremos la forma de olvidarnos de los callbacks y comenzar a programar usando <code>async</code> y <code>await</code>.</p>
+<blockquote>
+<p>Durante la escritura de este artículo ningún callback ha sufrido daño alguno.</p>
+</blockquote>
+<h2>Introducción</h2>
+<p>Seguramente, habrás oído hablar del infierno de los callbacks. No, ahí no es donde van los callbacks que se portan mal, sino que con esa expresión hacemos referencia a las ejecuciones de código asíncronas en JavaScript, que se van enlazando mediante callbacks.</p>
+<p>Por desgracia es común encontrar aún código con este aspecto:</p>
+<pre><code class="language-javascript">function requestCompleteUserInformation(userId) {
+  const userInformation = {
+    userId
+  };
+
+  this.userService.requestBasicUser(userId).then((userBasicInformation) =&gt; {
+    userInformation.basicInformation = userBasicInformation;
+
+    this.userService.requestuserAddress(userId).then((userAddress) =&gt; {
+      userInformation.address = userAddress;
+
+      this.userService.requestUserPhones(userId).then((userPhones) =&gt; {
+        userInformation.phones = userPhones;
+
+        // Etcétera, etcétera
+      }).catch(() =&gt; {})
+    }).catch(() =&gt; {})
+  }).catch(() =&gt; {})
+}
+</code></pre>
+<p>En el fragmento anterior no he añadido mucho código; pero imaginad lo que se complicaría, si además de todos esos callbacks tuviéramos más código de por medio. Ese es uno de los motivos por los que podemos usar <code>async...await</code>.</p>
+<p>Otro motivo, por ejemplo, puede ser por claridad. En el caso de que no nos guste tener callbacks, ya sea definidos inline o como llamadas a funciones. Pero realmente, <code>async...await</code> es una herramienta que viene a ayudarnos en ciertos casos, y puede depender mucho de las preferencias de quién esté programando, el usarlos o no.</p>
+<h2>Primer ejemplo</h2>
+<p>Para comenzar veamos el código anterior traducido a async...await:</p>
+<pre><code class="language-javascript">async function requestCompleteUserInformation(userId) {
+  const userInformation = {
+    userId
+  };
+
+  try {
+    userInformation.basicInformation = await this.userService.requestBasicUser(userId);
+    userInformation.address = await this.userService.requestuserAddress(userId);
+    userInformation.phones = await this.userService.requestUserPhones(userId);
+  } catch (error) {
+    // Código para la gestión de errores
+  }
+}
+</code></pre>
+<p>Vale, &quot;nos has puesto dos ejemplos de código, y el segundo parece que queda más bonito, pero ¿qué hace?&quot;. Tranquilos y tranquilas que ya voy a la explicación &#x1f600;.</p>
+<h2>¿Qué hacen async y await?</h2>
+<p>Cuando tenemos una promesa, en lugar de que tener que usar callbacks como hasta ahora, podemos utilizar la palabra clave <code>await</code> delante de la promesa. Esto hará que el código quede esperando a que termine la promesa, siempre se suele decir que permite tener código asíncrono, definido como código síncrono.</p>
+<p>Si la promesa se resuelve y además, lo hace con un valor, podremos asignarlo (como en las líneas 7, 8 y 9 del código anterior).</p>
+<p>Si la promesa es rechazada, se lanzará como excepción. De forma que tendremos que envolver la o las sentencias que usen <code>await</code>, con un bloque <code>try...catch</code> si queremos controlar las excepciones rechazadas. Puede que nos interese que estas excepciones se controlen en un bloque superior, por lo que no es obligatorio poner el <code>try...catch</code> junto al <code>await</code>. Pero eso sí, recuerda que si la promesa puede ser rechazada, en alguna parte del código deberías capturarla.</p>
+<p>Recapitulando, tenemos <code>await</code> que se espera a que termine una promesa, y los bloques <code>try...catch</code> para capturar las promesas rechazadas. Entonces, ¿para que sirve <code>async</code>? Pues bien, <code>await</code> sólo se puede utilizar en funciones que haya declarado como asíncronas (obsérverse la primera línea del código anterior). Es decir, no se puede utilizar <code>await</code> fuera de una función que no sea asíncrona.</p>
+<p>Con todo lo anterior, ahora puedes volver a subir al código que usa <code>async...await</code> y revisarlo. Si me he explicado bien en los párrafos anteriores, ahora entenderás un poquito más el funcionamiento de éstas palabras.</p>
+<h2>Detalle extra sobre las funciones asíncronas</h2>
+<p>Así que prácticamente, eso sería todo, o al menos, eso es lo que suelen explicarse casi siempre. Pero aparte las funciones asíncronas tienen una peculiaridad más que mucha gente omite, y es que devuelven automáticamente una promesa.</p>
+<pre><code class="language-javascript">async function voidPromise() {
+  await anotherAsyncFunction();
+  // Automáticamente se transforma en return Promise.resolve();
+  // Lo mismo aplicaría si no hacemos ningún return.
+  return;
+}
+
+async function promiseWithData() {
+  await anotherAsyncFunction();
+  // Automáticamente se transforma en return Promise.resolve(value);
+  return value;
+}
+</code></pre>
+<p>Con esto en mente, podemos esperar a que termine una función que ya es asíncrona sin tener que hacer código extra:</p>
+<pre><code class="language-javascript">// Se podría haber hecho return del await, pero he preferido definir constantes
+// intermedias para que podáis ver de forma más sencilla que estamos devolviendo
+// un objeto y no una promesa.
+
+async function loadUser(userId) {
+  const user = await this.userService.getById(userId);
+  return user;
+}
+
+async function loadUserConfig(userId) {
+  const userConfig = await this.userService.getConfigByUser(userId);
+  return userConfig;
+}
+
+// Obsérvese como podemos usar await con las funciones sin ningún problema.
+async function getUserAndConfig(userId) {
+  const user = await loadUser(userId);
+  const userConfig = await loadUserConfig(userId);
+}
+</code></pre>
+<p>Ahora sí, con esto terminamos nuestro repaso a las promesas en JavaScript. Como siempre, espero que os haya podido servir de ayuda, y cualquier pregunta que tengáis podéis dejarla en comentarios.</p>
+<hr>
+<p>Para ampliar algo de información sobre las promesas podéis recurrir a los siguientes libros:</p>
+<ul>
+<li><a href="https://amzn.to/3oFemYL">Understanding JavaScript Promises – Nicholas C. Zakas</a></li>
+<li><a href="https://amzn.to/34NFOg0">JavaScript with Promises: Managing Asynchronous Code – Daniel Parker</a></li>
+<li><a href="https://amzn.to/3HHnAuW">Mastering JavaScript Promises – Muzzamil Hussain</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

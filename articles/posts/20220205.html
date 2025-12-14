@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Clases vs Clases abstractas vs Interfaces — JAFS</title>
+  <meta name="description" content="En el artículo de hoy vamos a intentar resolver una duda bastante habitual: ¿cuándo usar clases base, cuándo clases abstractas y cuándo interfaces? Repasarem..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, diseño y arquitectura, programación orientada a objetos, POO, programación" />
+  <meta name="article:published_time" content="2022-02-05T20:14:14.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220205.html" />
+  <meta property="og:title" content="Clases vs Clases abstractas vs Interfaces" />
+  <meta property="og:description" content="En el artículo de hoy vamos a intentar resolver una duda bastante habitual: ¿cuándo usar clases base, cuándo clases abstractas y cuándo interfaces? Repasarem..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/uml.png" />
+  
+  <meta property="article:published_time" content="2022-02-05T20:14:14.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Clases vs Clases abstractas vs Interfaces" />
+  <meta name="twitter:description" content="En el artículo de hoy vamos a intentar resolver una duda bastante habitual: ¿cuándo usar clases base, cuándo clases abstractas y cuándo interfaces? Repasarem..." />
+  <meta name="twitter:image" content="/images/uml.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220205.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Clases vs Clases abstractas vs Interfaces",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En el artículo de hoy vamos a intentar resolver una duda bastante habitual: ¿cuándo usar clases base, cuándo clases abstractas y cuándo interfaces? Repasarem...",
+  "url": "https://jafs.github.io/articles/posts/20220205.html",
+  "inLanguage": "es",
+  "datePublished": "2022-02-05T20:14:14.000Z",
+  "image": "/images/uml.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Clases vs Clases abstractas vs Interfaces</h1><p class="text-gray-600 text-sm mb-6">2022-02-05</p><p>En el artículo de hoy vamos a intentar resolver una duda bastante habitual: ¿cuándo usar clases base, cuándo clases abstractas y cuándo interfaces? Repasaremos qué es cada una y en qué situaciones resulta más recomendable utilizarlas.</p>
+<h2>Clase</h2>
+<p>Heredaremos de una clase base, cuando tengamos otras clases que resulten en una especialización de la primera y no haya ninguna obligación de implementar métodos de la clase madre. Suele ser el caso más habitual de herencia.</p>
+<p>Por ejemplo, si tenemos una clase base con una serie de comportamientos ya predefinidos para todas las clases derivadas, cada clase hija puede sobrescribir únicamente las partes que necesite.</p>
+<pre><code class="language-typescript">class Personaje {
+  public mover(): void {
+    console.log(&quot;El personaje se mueve&quot;);
+  }
+
+  public saltar(): void {
+    console.log(&quot;El personaje salta&quot;);
+  }
+}
+
+class Mario extends Personaje {
+}
+
+class Luigi extends Personaje {
+  public saltar(): void {
+    console.log(&quot;Luigi salta más alto&quot;);
+  }
+}
+</code></pre>
+<p>En el ejemplo superior, tenemos una clase de la que heredan otras dos. 
+La primera no necesita sobrescribir ningún método, mientras que la segunda redefine el comportamiento de <code>saltar()</code>.</p>
+<p>Es decir, una clase base no obliga a implementar o, mejor dicho en este caso, sobrescribir ninguno de sus métodos.</p>
+<h2>Clase abstracta</h2>
+<p>Una clase abstracta es aquella en la que alguno de sus métodos es abstracto. A primera vista puede parecer una obviedad, pero conviene matizar el concepto. Un método abstracto dentro de una clase es aquel que no tiene &quot;contenido&quot; o cuerpo. Esto obliga a que todas las clases que hereden de una clase abstracta implementen esos métodos, salvo que también se declaren como abstractas.</p>
+<p>Veamos un ejemplo con nuestro amigo Super Mario de nuevo. Imaginad que tenemos esta clase abstracta:</p>
+<pre><code class="language-typescript">abstract class Enemigo {
+  public mover() {
+    // Lógica de mover
+  }
+
+  public abstract atacar(): number;
+}
+</code></pre>
+<p>Como se puede comprobar, tenemos un método <code>mover()</code>, que ya tendría una serie de lógica por defecto. Las clases hijas no tendrían por qué sobrescribir dicho método. Sin embargo, el método <code>atacar()</code> es abstracto, no tiene cuerpo; es por ello que se obliga a toda clase hija (que no sea abstracta) a tener que implementarlo:</p>
+<pre><code class="language-typescript">class Goomba extends Enemigo {
+  public atacar(): number {
+    // Lógica de atacar
+  }
+}
+</code></pre>
+<p>Por lo que podríamos decir que usaremos las clases abstractas cuando tengamos la necesidad de proporcionar una lógica común a las clases hijas, pero existan operaciones que queramos que cada clase hija deba implementar por su cuenta.</p>
+<h2>Interfaz</h2>
+<p>En el caso de las interfaces, podríamos pensar que son clases abstractas puras, es decir, clases con todos los métodos abstractos (y además con visibilidad pública). Es más, en el caso de lenguajes como C++, al no haber interfaces, éstas pasarían a definirse con clases abstractas puras.</p>
+<p>Las interfaces a nivel semántico no requieren tener obligatoriamente relación alguna con las clases, simplemente permiten definir comportamientos comunes sin imponer una jerarquía de herencia. Eso sí, las clases que implementan las interfaces están obligadas a implementar todos sus métodos.</p>
+<p>Veamos un ejemplo:</p>
+<pre><code class="language-typescript">interface Polígono {
+  getArea(): number;
+}
+
+class Cuadrado implements Polígono {
+  public getArea(): number {
+    return Math.pow(this.lado, 2);
+  }
+}
+
+class Rectángulo implements Polígono {
+  public getArea(): number {
+    return this.base * this.altura;
+  }
+}
+</code></pre>
+<blockquote>
+<p>🗒️ <strong>NOTA</strong> <br>En TypeScript, las interfaces pueden definir la <strong>forma de los datos</strong>, no solo comportamiento.</p>
+</blockquote>
+<h2>Resumen</h2>
+<p>Una vez vistos los conceptos, la siguiente tabla resume las principales diferencias entre clases, clases abstractas e interfaces:</p>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Clase</th>
+<th>Clase abstracta</th>
+<th>Interfaz</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>¿Puede tener implementación?</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No</td>
+</tr>
+<tr>
+<td>¿Puede tener métodos abstractos?</td>
+<td>No</td>
+<td>Sí</td>
+<td>Sí (todos)</td>
+</tr>
+<tr>
+<td>¿Obliga a implementar métodos?</td>
+<td>No</td>
+<td>Sí (los abstractos)</td>
+<td>Sí (todos)</td>
+</tr>
+<tr>
+<td>¿Herencia múltiple?</td>
+<td>No</td>
+<td>No</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Uso principal recomendado</td>
+<td>Reutilizar comportamiento</td>
+<td>Mezclar comportamiento común y obligación</td>
+<td>Definir contratos o capacidades</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>🗒️ <strong>NOTA</strong> <br>También puedes ver un resumen en <a href="https://www.instagram.com/p/CZm2CNeLhbR/">Instagram</a>.</p>
+</blockquote>
+<h2>Bibliografía</h2>
+<p>Aquí tenéis algunos libros sobre programación orientada a objetos con los que aprender más:</p>
+<ul>
+<li><a href="https://amzn.to/3rw2YjX">Introducción a Programación Orientada a Objetos</a> - Yolanda Blanco Fernández</li>
+<li><a href="https://books.google.es/books/about/Object_Oriented_Programming_in_C++.html?id=Hr73zQEACAAJ&redir_esc=y">Object Oriented Programming in C++</a> - Richard Baker</li>
+<li><a href="https://amzn.to/3rw6ACy">Practical Object-Oriented Design</a> - Metz Sandi</li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

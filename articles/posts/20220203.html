@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>5 cosas que haces mal en JavaScript — JAFS</title>
+  <meta name="description" content="JavaScript en ocasiones añade el ";" de forma explicita cuando hay un salto de línea. Si no tenemos cuidado con esto, puede haber comportamientos no esperado..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, JavaScript, programación" />
+  <meta name="article:published_time" content="2022-02-03T19:56:28.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220203.html" />
+  <meta property="og:title" content="5 cosas que haces mal en JavaScript" />
+  <meta property="og:description" content="JavaScript en ocasiones añade el ";" de forma explicita cuando hay un salto de línea. Si no tenemos cuidado con esto, puede haber comportamientos no esperado..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2022-02-03T19:56:28.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="5 cosas que haces mal en JavaScript" />
+  <meta name="twitter:description" content="JavaScript en ocasiones añade el ";" de forma explicita cuando hay un salto de línea. Si no tenemos cuidado con esto, puede haber comportamientos no esperado..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220203.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "5 cosas que haces mal en JavaScript",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "JavaScript en ocasiones añade el \";\" de forma explicita cuando hay un salto de línea. Si no tenemos cuidado con esto, puede haber comportamientos no esperado...",
+  "url": "https://jafs.github.io/articles/posts/20220203.html",
+  "inLanguage": "es",
+  "datePublished": "2022-02-03T19:56:28.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">5 cosas que haces mal en JavaScript</h1><p class="text-gray-600 text-sm mb-6">2022-02-03</p><h2>1. Añadir saltos de línea donde no corresponde</h2>
+<p>JavaScript en ocasiones añade el &quot;;&quot; de forma explicita cuando hay un salto de línea. Si no tenemos cuidado con esto, puede haber comportamientos no esperados en nuestra aplicación. Es por ello que se aconseja evitar, tanto partir líneas en algunos casos, como abrir las llaves en la línea siguiente. En el siguiente ejemplo podéis ver lo que ocurre:</p>
+<pre><code class="language-javascript">// Se añade &quot;;&quot; en el return, por lo que la línea `&quot;Hi &quot; + name` nunca se ejecuta.
+function returnDeCadenaConSaltoDeLinea(name) {
+  return
+    &quot;Hola &quot; + name;
+}
+
+// Funciona como se espera
+function returnEnLaMismaLinea(name) {
+  return &quot;Hola &quot; + name;
+}
+
+console.log(returnDeCadenaConSaltoDeLinea(&#39;John&#39;)); // undefined
+console.log(returnEnLaMismaLinea(&#39;John&#39;));          // Hola John
+</code></pre>
+<p>Como se puede ver en el ejemplo tenemos dos funciones que, en primera instancia, parece que debieran devolver una cadena anteponiendo el texto &quot;Hola &quot;. En realidad en la primera función obtendremos <code>undefined</code>. Esto es, porque JavaScript aplica una regla llamada Automatic Semicolon Insertion (ASI), que en ciertos contextos inserta un <code>;</code> implícitamente.</p>
+<h2>2. Usar siempre los bucles for tradicionales con arrays</h2>
+<p>Siempre que puedas, comienza a utilizar los bucles <code>for...of</code> (con aquellos elementos que sean iterables) o el método <code>forEach</code> en los arrays, ya que ofrecen una mejora en la legibilidad.</p>
+<p>En el siguiente código puedes ver un ejemplo sencillo de los tres bucles.</p>
+<pre><code class="language-javascript">for (let index = 0; index &lt; arrayToIterate.length; ++index) {
+  console.log(arrayToIterate[index]);
+}
+
+for (const element of arrayToIterate) {
+  console.log(element);
+}
+
+arrayToIterate.forEach((element) =&gt; {
+  console.log(element);
+});
+</code></pre>
+<ul>
+<li>Con <code>for</code>, debemos declarar el índice e indicar su incremento. Esto implica que para acceder a cada elemento necesitamos usar la nomenclatura <code>nombreArray[indice]</code>.</li>
+<li>Con <code>for..of</code> obtenemos el elemento de cada posición sin usar un contador. Además podemos usar <code>break</code> y <code>continue</code> para controlar el flujo del recorrido. En el caso de necesitar un índice, si que tendremos que llevar un control manual.</li>
+<li>Con <code>forEach</code> el recorrido del bucle será completo. Por lo que si tienes que interrumpir el recorrido es mejor la otra opción. El segundo parámetro del callback es la posición, así que podremos usarla sin llevar un control manual como en <code>for..of</code>.</li>
+</ul>
+<h2>3. Usar == y !=, en lugar de === y !==</h2>
+<p>Seguramente, esta te sonará. Y es que, a no ser que partas de un lenguaje tipado como TypeScript, el operadores de igualdad/desigualdad y no de identidad puede dar algún quebradero de cabeza. El uso de los operadores <code>==</code> y <code>!=</code> compara el valor de cada variable y realiza un casting a otro tipo de dato si fuera necesario. Por el contrario, los operadores de identidad (<code>===</code> y <code>!==</code>) aparte del valor, verifican que el tipo de dato sea el mismo.</p>
+<pre><code class="language-javascript">const result = 123.456;
+const expected = &quot;123.456&quot;;
+
+console.log(result === expected); // false
+console.log(result == expected);  // true
+</code></pre>
+<h2>4. Seguir usando funciones para definir las clases</h2>
+<p>A no ser que tengas que hacer desarrollos para un navegador como IE (por tu bienestar mental, espero que no sea así). Deberías comenzar a usar la definición nativa de clases en JavaScript.</p>
+<pre><code class="language-javascript">class Personaje {
+  #vida;
+  #ataque;
+
+  constructor(vidaInicial, ataqueInicial) {
+    this.#vida = vidaInicial;
+    this.#ataque = ataqueInicial;
+  }
+
+  mover() {
+    ...
+  }
+
+  #puedeMoverse() {
+    ...
+  }
+}
+</code></pre>
+<p>La nueva sintaxis de JavaScript para definición de clases te proporciona un estilo mucho más próximo a lo que puedes ver en otros lenguajes de programación, así que olvídate de manipular directamente <code>prototype</code>, salvo que tengas un motivo muy concreto. Las clases no cambian el modelo de herencia, solo lo hacen más legible.</p>
+<p>Puedes aprender más sobre esta sintaxis de JavaScript en la serie de artículos <a href="/articles/posts/20211128.html">Orientación a objetos con JavaScript</a>.</p>
+<h2>5. Usar var en lugar de let y const</h2>
+<p>¿Aún defines tus variables con var aunque nunca vayan a cambiar su valor? Pues bien, puedes usar <code>let</code> y <code>const</code> para evitar los problemas de <a href="https://www.w3schools.com/js/js_hoisting.asp">hoisting</a>; que se modifique lo que pensabas que era una constante; o, que pienses que una variable se encontraba en un ámbito acotado y es global. Al usar <code>let</code> o <code>const</code>, evitarás que las variables y constantes puedan usarse antes de su declaración.</p>
+<pre><code class="language-javascript">function letYConst(parametro) {
+  let variableGlobalALaFuncion;
+  const constanteNoSePuedeCambiar = 123;
+
+  // Si ahora escribiéramos:
+  // constanteNoSePuedeCambiar = 345;
+  // tendríamos un error.
+
+  if (parametro) {
+    let variableConAmbitoDeIf = true;
+  }
+
+  // Si ahora intentamos llamar a variableConAmbitoDeIf, tendríamos un error.
+}
+</code></pre>
+<p>Puedes ver más información sobre las diferencias entre let y var en <a href="/articles/posts/20211206.html">este artículo</a>.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

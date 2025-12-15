@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>3 formas extra de definir constantes con TypeScript — JAFS</title>
+  <meta name="description" content="Seguramente ya te has habituado al uso de `const` en TypeScript (y espero que en JavaScript también, no me declares constantes con `let` o `var` &#x1f609;). ..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, TypeScript" />
+  <meta name="article:published_time" content="2022-01-04T19:00:00.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220104.html" />
+  <meta property="og:title" content="3 formas extra de definir constantes con TypeScript" />
+  <meta property="og:description" content="Seguramente ya te has habituado al uso de `const` en TypeScript (y espero que en JavaScript también, no me declares constantes con `let` o `var` &#x1f609;). ..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/typescript.png" />
+  
+  <meta property="article:published_time" content="2022-01-04T19:00:00.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="3 formas extra de definir constantes con TypeScript" />
+  <meta name="twitter:description" content="Seguramente ya te has habituado al uso de `const` en TypeScript (y espero que en JavaScript también, no me declares constantes con `let` o `var` &#x1f609;). ..." />
+  <meta name="twitter:image" content="/images/typescript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220104.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "3 formas extra de definir constantes con TypeScript",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Seguramente ya te has habituado al uso de `const` en TypeScript (y espero que en JavaScript también, no me declares constantes con `let` o `var` &#x1f609;). ...",
+  "url": "https://jafs.github.io/articles/posts/20220104.html",
+  "inLanguage": "es",
+  "datePublished": "2022-01-04T19:00:00.000Z",
+  "image": "/images/typescript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">3 formas extra de definir constantes con TypeScript</h1><p class="text-gray-600 text-sm mb-6">2022-01-04</p><p>Seguramente ya te has habituado al uso de <code>const</code> en TypeScript (y espero que en JavaScript también, no me declares constantes con <code>let</code> o <code>var</code> &#x1f609;). Y sabemos que con elementos de tipo primitivo funciona de lujo:</p>
+<pre><code class="language-javascript">const NAME: string = &quot;Juan&quot;;
+// Esta sentencia da error, puesto que no puedes reasignar una primitiva
+// declarada con const.
+NAME = &quot;Pepe&quot;;
+</code></pre>
+<p>Pero quizás te has visto alguna vez con el caso siguiente:</p>
+<pre><code class="language-javascript">const person: Person = {
+  name: &quot;Juan&quot;,
+  hobbies: [&quot;nadar&quot;, &quot;leer&quot;, &quot;correr&quot;]
+};
+
+// Esto no falla...
+person.nombre = &quot;Pepe&quot;;
+person.hobbies = [&quot;mirar al horizonte pensativo&quot;];
+</code></pre>
+<p>Y es que el declarar como constante un objeto, lo que no permite es reasignar la referencia al objeto, pero sí podremos modificar el valor de sus atributos. Es decir, con el ejemplo superior, lo único que no podremos hacer es tener lo siguiente: <code>person = { nuevo contenido }</code> o <code>person = anotherPerson</code>.</p>
+<p>Hoy veremos varias formas de poder declarar objetos como constantes, de forma que no podamos tampoco cambiar sus atributos. Eso sí, sólo desde TypeScript, en JavaScript no existen estas restricciones, por desgracia.</p>
+<h2>Método 1. Declarando un objeto como const</h2>
+<p>En este caso, lo que usaremos es <code>const</code> como tipo del objeto. De esta forma ya no será posible modificar sus atributos.</p>
+<pre><code class="language-javascript">const person: Person = {
+ hobbies: [] as string[],
+ name: &quot;Pepito&quot;
+} as const; // Obsérvese su uso aquí
+
+// Da el error: Cannot assign to &#39;name&#39; because it is a read-only property.
+person.name = &quot;Hola&quot;;
+// Da el error: Cannot assign to &#39;hobbies &#39; because it is a read-only property.
+person.hobbies = [&quot;leer&quot;];
+
+// Eso sí, podemos seguir añadiendo y eliminando elementos del array con sus
+// propios métodos.
+person.contents.push(&quot;escribir&quot;);
+</code></pre>
+<h2>Método 2. Usando readonly</h2>
+<p>Si usamos el modificador <code>readonly</code> en un atributo de una clase, un tipo, o una interfaz. Éste pasará a ser de sólo lectura.</p>
+<pre><code class="language-typescript">// Ejemplo con tipos
+// -----------------
+type PersonType = {
+  age: number;
+  readonly hobbies: string[];
+  readonly name: string;
+};
+
+const person: PersonType = {
+  age: 38
+  hobbies: [&quot;leer&quot;],
+  name: &quot;Pepito&quot;
+};
+
+// Da el error: Cannot assign to &#39;name&#39; because it is a read-only property.
+person.name = &quot;Juanito&quot;;
+
+// Sin embargo, &#39;age&#39; podemos reasignarlo sin problema ya que no es readonly:
+person.age = 40;
+
+
+// Ejemplo con interfaces
+// ----------------------
+interface IPerson {
+  readonly name: string;
+}
+
+const person: IPerson = {
+  name: &quot;Pepito&quot;
+};
+
+// Da el error: Cannot assign to &#39;name&#39; because it is a read-only property.
+person.name = &quot;Juanito&quot;;
+
+
+// Ejemplo con clases
+// ------------------
+class Car {
+  private readonly WHEELS_NUMBER: number = 4;
+
+  // Da el error: Cannot assign to &#39;WHEELS_NUMBER&#39; because it is a read-only property.
+  public set Wheels(newWheelsNumber: number) {
+    this.WHEELS_NUMBER = newWheelsNumber;
+  }
+}
+</code></pre>
+<p>Eso sí, mucho cuidado en las clases, porque hay un caso que no falla. Y es la asignación dentro del constructor. Esto es debido a que en el constructor se permite inicializar todas las variables independientemente de que ya lo estuvieran:</p>
+<pre><code class="language-typescript">// Ejemplo con clases
+// ------------------
+class Car {
+  private readonly WHEELS_NUMBER: number = 4;
+
+  public constructor() {
+    // Esto no da error. Directamente omite la asignación de la línea 4.
+    this.WHEELS_NUMBER = 2;
+  }
+}
+
+// Si nos vamos al código compilado, lo que veremos es lo siguiente:
+// class Car {
+//   constructor() {
+//     this.WHEELS_NUMBER = 4;
+//     this.WHEELS_NUMBER = 2;
+//   }
+// }
+</code></pre>
+<p>En este caso te recomiendo que llegues a un consenso para o inicializar los atributos readonly de las clases nada más declararlos, o en el constructor, simplemente por claridad.</p>
+<h2>Método 3. Arrays constantes</h2>
+<p>Este es otro de los casos mágicos que nos permite TypeScript, y es tener arrays con elementos constantes. Es decir, que una vez creado el array, ya no podrá ser modificado. Para ello, los métodos <code>push</code>, <code>pop</code>, <code>splice</code>, etc, dejan de estar disponibles (es sólo a nivel de compilación de TypeScript, si accedes a ese array desde JavaScript será como cualquier otro).</p>
+<pre><code class="language-typescript">const hobbies: readonly string[] = [&quot;leer&quot;, &quot;nadar&quot;, &quot;series de ciencia ficción&quot;];
+
+// Da el error: Property &#39;push&#39; does not exist on type &#39;readonly string[]&#39;.
+hobbies.push(&quot;dormir&quot;);
+
+// Si intentamos, aunque sea con el anti-patrón de crear una nueva posición
+// usando el índice directamente, también nos dará error. En este caso: Index
+// signature in type &#39;readonly string[]&#39; only permits reading.
+hobbies[3] = &quot;pasear&quot;;
+</code></pre>
+<hr>
+<p>Si quieres ver un resumen puedes revisar este <a href="https://www.instagram.com/p/CYUftUCoEU4/">cheat sheet de atributos constantes  en Instagram</a>.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

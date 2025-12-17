@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>11 cosas que quizás no sabías de JavaScript — JAFS</title>
+  <meta name="description" content="Todo lenguaje de programación tiene sus pequeños secretos que no todo el mundo conoce. Hoy vamos a ver once características, cualidades, o mejoras de JavaScr..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, JavaScript" />
+  <meta name="article:published_time" content="2021-12-31T10:38:24.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20211231.html" />
+  <meta property="og:title" content="11 cosas que quizás no sabías de JavaScript" />
+  <meta property="og:description" content="Todo lenguaje de programación tiene sus pequeños secretos que no todo el mundo conoce. Hoy vamos a ver once características, cualidades, o mejoras de JavaScr..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2021-12-31T10:38:24.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="11 cosas que quizás no sabías de JavaScript" />
+  <meta name="twitter:description" content="Todo lenguaje de programación tiene sus pequeños secretos que no todo el mundo conoce. Hoy vamos a ver once características, cualidades, o mejoras de JavaScr..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20211231.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "11 cosas que quizás no sabías de JavaScript",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Todo lenguaje de programación tiene sus pequeños secretos que no todo el mundo conoce. Hoy vamos a ver once características, cualidades, o mejoras de JavaScr...",
+  "url": "https://jafs.github.io/articles/posts/20211231.html",
+  "inLanguage": "es",
+  "datePublished": "2021-12-31T10:38:24.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">11 cosas que quizás no sabías de JavaScript</h1><p class="text-gray-600 text-sm mb-6">2021-12-31</p><p>Todo lenguaje de programación tiene sus pequeños secretos que no todo el mundo conoce. Hoy vamos a ver once características, cualidades, o mejoras de JavaScript que son poco conocidas. No me enrollo más, y pasemos ¡al turrón! (buenas fechas para decirlo).</p>
+<h2>1. Cargar módulos sin librerías</h2>
+<p>De un tiempo a esta parte, es posible importar módulos en JavaScript sin necesidad de librerías externas gracias a la sentencia <code>import</code> (<a href="https://caniuse.com/mdn-javascript_statements_import">Ver compatibilidad en Can I Use?</a>). Veamos como funciona con un ejemplo sencillo:</p>
+<pre><code class="language-javascript">// Fichero module.js
+export function hiWorld() {
+  console.log(&quot;Hi world from module!!&quot;);
+}
+
+// Fichero main.js
+import(&quot;./module.js&quot;).then(function(module) {
+  module.hiWorld();
+}).catch(function(error) {
+  console.log(&quot;Error loading module: &quot; + error);
+});
+
+// Por consola veremos: Hi world from module!!
+</code></pre>
+<p>Si te gusta usar <code>await</code> estás de suerte, pues puedes hacer importaciones desde una función tal que así:</p>
+<pre><code class="language-javascript">// Fichero main.js
+async function loadModule() {
+  const module = await import(&quot;./module.js&quot;);
+  module.hiWorld();
+};
+
+loadModule();
+
+// Por consola veremos: Hi world from module!!
+</code></pre>
+<h2>2. Esperar a que terminen todas las promesas</h2>
+<p>El método <code>Promise.all()</code> (<a href="https://caniuse.com/mdn-javascript_builtins_promise_all">Ver compatibilidad en Can I Use?</a>) termina en cuanto una promesa de las que recibe falla. Sin embargo en ocasiones puede que nos interese esperar a que todas las promesas vayan bien o mal. Para ello podemos usar <code>Promise.allSettled()</code>.</p>
+<p>Como siempre veamos un ejemplo aprovechando los <code>import</code> que vimos antes (que devuelven una promesa):</p>
+<pre><code class="language-javascript">Promise.all([import(&quot;./module.js&quot;), import(&quot;./notexisting.js&quot;)])
+  .then(function(data) {
+    console.log(&quot;Esto no va a salir nunca por consola&quot;);
+  }).catch(function(error) {
+    console.error(&quot;Promise.all: Falla el segundo import&quot;);
+  });
+
+// La ejecución del código anterior mostrará lo siguiente por consola:
+// &quot;Promise.all: Falla el segundo import&quot;
+// Ya que la segunda promesa ha fallado.
+
+Promise.allSettled([import(&quot;./module.js&quot;), import(&quot;./notexisting.js&quot;)])
+  .then(function(data) {
+    console.log(&quot;Promise.allSettled&quot;, data);
+  }).catch(function(error) {
+    console.error(&quot;Como sólo hay un error no se mostrará este mensaje&quot;);
+  });
+
+// La ejecución del código anterior mostrará lo siguiente por consola:
+// Promise.allSettled,
+// [
+//   {status: &#39;fulfilled&#39;, value: Module},
+//   {
+//     status: &#39;rejected&#39;,
+//     reason: TypeError: Failed to fetch dynamically imported module: ...
+//   }
+// ]
+</code></pre>
+<p>Podemos ver como con <code>allSettled()</code>, recibimos un array de resultados de promesa como argumento de la función utilizada en <code>then</code>. Así podremos saber que llamadas han funcionado y las que han fallado.</p>
+<p>Una buen caso de uso para este ejemplo, se da en el caso de que necesitemos hacer varias llamadas REST de forma simultánea. Así aunque una falle, podremos saber el resultado de las demás.</p>
+<p>Un último apunte a destacar de <code>allSettled()</code>, y es que aunque fallen todas las promesas, siempre pasará por el camino <code>then</code>. En nuestro ejemplo lo pusimos a modo ilustrativo para ver que por ahí no pasa.</p>
+<h2>3. Dejar de esperar varias promesas en cuanto termine una</h2>
+<p>En esta ocasión, si lo que queremos es que se termine la espera en cuanto se resuelva una promesa de varias, lo que usaremos es <code>any()</code> (<a href="https://caniuse.com/mdn-javascript_builtins_promise_any%22">Ver compatibilidad en Can I Use?</a>). Con ella, para que el código pase por el <code>catch</code>, deberán fallar todas las promesas.</p>
+<pre><code class="language-javascript">Promise.any([import(&quot;./module.js&quot;), import(&quot;./alsoExisting.js&quot;)])
+  .then(function(data) {
+    console.log(&quot;Promise.any&quot;, data);
+  }).catch(function(error) {
+    console.error(&quot;Si existen los dos módulos no saldrá este mensaje&quot;);
+  });
+
+// La ejecución del código anterior mostrará lo siguiente por consola:
+// Promise.any, Module { hiWorld: (...) }
+
+Promise.any([import(&quot;./notExisting1.js&quot;), import(&quot;./notExisting2.js&quot;)])
+  .then(function(data) {
+    console.log(&quot;Promise.any&quot;, data);
+  }).catch(function(error) {
+    console.error(&quot;Como no existen los dos módulos ahora si sale este mensaje&quot;);
+  });
+
+// La ejecución del código anterior mostrará lo siguiente por consola:
+// Como no existen los dos módulos ahora si sale este mensaje
+</code></pre>
+<h2>4. Hay un this global, pero de verdad de la buena</h2>
+<p>Toda la gente que nos hemos peleado con JavaScript, hemos visto que dependiendo del entorno en que ejecutemos nuestros scripts, si llamamos a <code>this</code> a secas fuera de todo ámbito, el objeto global cambia. En los navegadores es <code>window</code>, en Node.js es <code>global</code> y en los WebWorker es <code>self</code>.</p>
+<p>Pues a partir de ahora, si queréis hacer algo más unificado, tan sólo tendréis que llamar a <code>globalThis</code> (<a href="https://caniuse.com/mdn-javascript_builtins_globalthis">Ver compatibilidad en Can I Use?</a>). Esta palabra clave tendrá la instancia del objeto global que corresponda sin depender del entorno.</p>
+<h2>5. Acceder a atributos que pueden ser nulos o indefinidos</h2>
+<p>A esta técnica se le llama Optional chaining. Y para ello usamos el operador <code>?.</code> (<a href="https://caniuse.com/mdn-javascript_operators_optional_chaining">Ver compatibilidad en Can I Use?</a>). Con esto ya no tendremos errores si un atributo no existe:</p>
+<pre><code class="language-javascript">const vehiculo = {
+  ruedas: 4,
+  motor: false,
+  modelo: null
+};
+
+vehiculo.alas?.tipo;    // undefined en lugar de error
+vehiculo.modelo?.marca; // undefined en lugar de error
+
+// Uncaught TypeError: Cannot read properties of undefined (reading &#39;tipo&#39;)
+vehiculo.alas.tipo;
+// Uncaught TypeError: Cannot read properties of null (reading &#39;tipo&#39;)
+vehiculo.modelo.marca; 
+</code></pre>
+<p>El operador provoca un “cortocircuito” cuando la propiedad a su izquierda no existe, o tiene valor <code>null</code>. Devolviendo automáticamente el valor <code>undefined</code>, en lugar de un error como ocurre si quitamos este nuevo operador.</p>
+<h2>6. &quot;Aplanar&quot; arrays</h2>
+<p>Otra cosita genial, es que ahora podemos pasar un array de varias dimensiones a sólo una, gracias el método <code>flat()</code> (<a href="https://caniuse.com/array-flat">Ver compatibilidad en Can I Use?</a>). En el código siguiente, pongo varios saltos de línea para que os quede más claro cada array de ejemplo:</p>
+<pre><code class="language-javascript">let arr = [
+  [1, 2],
+  [3, 4, 5]
+];
+arr.flat();  // Ahora tendremos: [1, 2, 3, 4, 5]
+
+arr = [
+  [1, 2],
+  [3, 4, 5],
+  [
+    [6],
+    [7]
+  ]
+];
+
+// Como hay un tercer nivel, el 6 y el 7 no se aplanan:
+// [1, 2, 3, 4, 5, Array(1), Array(1)]
+arr.flat();
+// Ahora le hemos dicho que profundice un nivel más: [1, 2, 3, 4, 5, 6, 7]
+arr.flat(2);
+</code></pre>
+<p>Si no pasamos parámetros, por defecto, sólo &quot;aplana&quot; la segunda dimensión (equivaldría a poner 1 como parámetro), pero le podemos pasar el número de dimensiones extra a comprobar.</p>
+<h2>7. El mágico operador ??</h2>
+<p>Este nuevo amiguito con nombre y apellidos, se llama <strong>nullish coalescing operator</strong> y viene representado por <code>??</code> (<a href="https://caniuse.com/mdn-javascript_operators_nullish_coalescing">Ver compatibilidad en Can I Use?</a>). En primera instancia puede parecer que su uso es como el operador <code>||</code>, que nos devuelve el primer valor que no sea <code>falsy</code>, pero es mejor, ya que sólo funciona con <code>null</code> y <code>undefined</code>, devolviendo el resto de valores <code>falsy</code>. Mejor que lo veáis con un ejemplo:</p>
+<pre><code class="language-javascript">// Con estos devuelve el primer valor
+&quot;&quot; ?? 123;        // &quot;&quot;
+false ?? 123;     // false
+0 ?? 123;         // 0
+NaN ?? 123;       // NaN
+
+// Aquí es donde pasa a actuar el operador
+null ?? 123;      // 123
+undefined ?? 123; // 123
+</code></pre>
+<h2>8. Operadores de asignación lógicos</h2>
+<p>El anterior operador más los ya conocidos <code>&amp;&amp;</code>, <code>||</code> ya se pueden utilizar en la asignación de valores, en este caso, se les llama <strong>operadores de asignación lógicos</strong> (<a href="https://caniuse.com/?search=logical%20assignment">Ver compatibilidad en Can I Use?</a>:</p>
+<pre><code class="language-javascript">// Operador ||=
+// Cuando tiene un valor falsy se asigna el valor tras la igualdad
+let increment = 0; 
+increment ||= 12; // 0 es falsy, se asigna 12
+
+increment = 234;  // 234 es truthy, se queda con el valor 234
+increment ||= 12;
+
+// Operador &amp;&amp;=
+// Cuando tiene un valor truthy se asigna el valor
+increment = 0;
+increment &amp;&amp;= 123; // 0 es falsy, se queda con el valor 0
+
+increment &amp;&amp;= 234;
+increment = 12;   // 234 es truthy, se asigna el valor 12.
+
+// Operador ??=
+// Se asigna el valor tras la igualdad cuando la variable es null o undefined
+increment = 12;
+increment ??= 234; // Se queda con el valor 12
+
+increment = null;
+increment ??= 234;  // Ahora tiene el valor 234
+
+increment = undefined;
+increment ??= 234; // Ahora tiene el valor 234
+</code></pre>
+<p>Hay que destacar que, en el momento de escribir este artículo, con las cadenas este tipo de operadores no funcionan como se espera (al menos con navegadores con motores Chromium y Gecko), ya que si probamos tenemos lo siguiente:</p>
+<pre><code class="language-javascript">// Operador ||=
+name = null;
+name ||= &quot;Juan&quot;; // Asigna la cadena &quot;null&quot;.
+
+name = undefined;
+name ||= &quot;Juan&quot;;  // Asigna la cadena &quot;undefined&quot;.
+
+// Operador &amp;&amp;=
+name = undefined;
+name &amp;&amp;= &quot;Juan&quot;;  // Funciona al contrario, se asigna el valor &quot;Juan&quot;
+
+name = null;
+name &amp;&amp;= &quot;Juan&quot;;  // Funciona al contrario, se asigna el valor &quot;Juan&quot;
+
+// Operador ??=
+name = null;
+name ??= &quot;Juan&quot;; // Asigna la cadena &quot;null&quot;
+
+name = undefined;
+name ??= &quot;Juan&quot;; // Asigna la cadena &quot;undefined&quot;
+</code></pre>
+<h2>9. Separador numérico</h2>
+<p>Puede que manejemos cifras que son grandes en nuestra aplicación, y queda a veces enrevesado poder distinguir que cifra hay escrita si no se pone cierta atención en su lectura. Pues el nuevo separador de miles de JavaScript acude en nuestra ayuda cual Chapulín Colorado. Es tan sencillo como poner el símbolo <code>_</code> (<a href="https://caniuse.com/mdn-javascript_grammar_numeric_separators">Ver compatibilidad en Can I Use?</a>) para separar los miles:</p>
+<pre><code class="language-javascript">// Hace más legibles números grandes como los siguientes:
+345_432_534.23         // 345.432.534,23
+10_343_039             // 10.343.039
+12_345_677_865_320.459 // 12.345.677.865.320,459
+</code></pre>
+<h2>10. Reemplazos en cadenas sin expresiones regulares</h2>
+<p>¿Cuántas veces hemos usado una expresión regular para reemplazar todas las veces que aparecía un texto en una cadena? Pues ¡el &quot;expresionar&quot; se va a acabar! (Aquellas personas de cierta edad entenderán el “chiste”).</p>
+<p>Ahora las cadenas tienen un método nuevo llamado <code>replaceAll()</code> (<a href="https://caniuse.com/mdn-javascript_builtins_string_replaceall">Ver compatibilidad en Can I Use?</a>) que hace todo el trabajo... sucio. Sólo hay que pasar el texto a reemplazar y el que queremos poner en su lugar, y hará toda la magia.</p>
+<pre><code class="language-javascript">const something = &quot;hola adios que tal hola que ase&quot;;
+
+// Así sólo reemplazamos la primera vez que aparece &quot;hola&quot;:
+something.replace(&quot;hola&quot;, &quot;####&quot;);     // &quot;#### adios que tal hola que ase&quot;
+
+// Lo que antes nos obligaba a usar una expresión regular:
+something.replace(/hola/g, &quot;#####&quot;);   // &quot;##### adios que tal ##### que ase&quot;
+
+// Pero ahora con el nuevo método:
+something.replaceAll(&quot;hola&quot;, &quot;#####&quot;); // &quot;##### adios que tal ##### que ase&quot;
+</code></pre>
+<h2>11. En los arrays no todo son corchetes</h2>
+<p>Seguro que muchas veces para acceder al último elemento de un array, has jugado con ir a la posición dada por <strong>la longitud del array - 1</strong>. Ahora tenemos el método <code>at()</code> (<a href="https://caniuse.com/mdn-javascript_builtins_array_at">Ver compatibilidad en Can I Use?</a>) que con posiciones positivas funciona como los corchetes, pero al que si le pasamos posiciones negativas, comienza desde la parte de atrás del array. Veamos a nuestro amiguito en acción:</p>
+<pre><code class="language-javascript">const myArray = [1, 2, 3, 4, 5];
+myArray.at(2);  // =&gt; 3 | De momento aquí nada nuevo
+myArray.at(-1); // =&gt; 5 | Ahora podemos obtener el último elemento
+myArray.at(-2); // =&gt; 4 | Y otros más contando desde el final
+</code></pre>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

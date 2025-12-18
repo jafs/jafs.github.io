@@ -417,6 +417,19 @@
     "imageMini": "/images/javascript-mini.webp"
   },
   {
+    "slug": "20211228.html",
+    "title": "Iteradores en JavaScript. Parte 2. Funciones generadoras",
+    "description": "Una función generadora es aquella que devuelve un generador. Si no has leído el artículo anterior estarás pensando: “Pues me he quedado igual” &#x1f602;, así que te recomiendo que le des una vuelta para ir poniéndote en situación.",
+    "url": "/articles/posts/20211228.html",
+    "date": "2021-12-28",
+    "categories": [
+      "programación",
+      "JavaScript"
+    ],
+    "content": "Una función generadora es aquella que devuelve un generador. Si no has leído el artículo anterior estarás pensando: “Pues me he quedado igual” &#x1f602;, así que te recomiendo que le des una vuelta para ir poniéndote en situación. Si pasamos a hacer una definición más formal: Una función generadora es aquella que actúa como un iterador con distintos puntos de salida. Esto es, al instanciarla, podemos ir llamando al método next() del iterador, que nos devolverá un valor y el estado para poder saber si hay más valores en ese iterador. Esto lo vamos a entender mejor con un ejemplo: En el ejemplo anterior, lo primero que habréis apreciado es que tras function aparece el carácter * . Esto indica que la función es de tipo generadora. Si no usáramos el asterisco, ya no actuaría como tal y tampoco podríamos utilizar la palabra clave yield dentro de ella. Pero, ¿qué hace yield ? Pues al usarla actúa como un return un tanto especial, ya que deja un marcador a la última posición en la que se llamó. De forma que al llamar al iterador con .next() , se continuará por la línea siguiente al último ejecutado. Tendríamos un flujo como el siguiente: En el ejemplo hemos visto un caso muy sencillo y poco práctico. Pero doblemos la apuesta y pasemos a algo más complicadillo: En esta ocasión tenemos un generador de números de Fibonnaci. Lo más interesante de este ejemplo, es que se puede comprobar como las variables internas a la función guardan sus valores en cada paso del iterador. Para terminar, si en lugar de hacer un bucle con los 10 primeros números, llegáramos a dejarlo en un bucle for...of , éste terminaría cuando el valor actual sea Infinity .",
+    "imageMini": "/images/javascript-mini.webp"
+  },
+  {
     "slug": "20211214.html",
     "title": "Receta: Validar valores numéricos en JavaScript",
     "description": "En muchas ocasiones nos interesa verificar que una variable contiene un valor numérico. Un atajo podría ser usar:",

@@ -430,6 +430,19 @@
     "imageMini": "/images/javascript-mini.webp"
   },
   {
+    "slug": "20211226.html",
+    "title": "Iteradores en JavaScript. Parte 1. Symbol.iterator",
+    "description": "En ocasiones tenemos algún tipo de lista de la que queremos recorrer su elementos de uno en uno. Para este menester vienen a ayudarnos nuestros amigos los iteradores. Y es que en JavaScript podemos hacer que cualquier objeto funcione como un iterador, de forma que podemos ir moviéndonos uno a uno por los elementos que lo componen.",
+    "url": "/articles/posts/20211226.html",
+    "date": "2021-12-26",
+    "categories": [
+      "programación",
+      "JavaScript"
+    ],
+    "content": "En ocasiones tenemos algún tipo de lista de la que queremos recorrer su elementos de uno en uno. Para este menester vienen a ayudarnos nuestros amigos los iteradores. Y es que en JavaScript podemos hacer que cualquier objeto funcione como un iterador, de forma que podemos ir moviéndonos uno a uno por los elementos que lo componen. Lo primero de todo es definir como es la estructura de un iterador en JavaScript, y es que es tan simple, como un objeto que tiene definido un método next() y devuelve un objeto con dos atributos: value : valor actual en la secuencia. done : valor booleano que será true cuando hemos terminado de recorrer la secuencia y false mientras podamos seguir recorriéndola. Como ejemplo para entender este concepto, se va a partir de una lista enlazada, en la que se podrá ir recorriendo sus elementos uno a uno. En el código he ido incluyendo comentarios con la explicación. Pero básicamente para que los objetos de nuestra clase se puedan iterar, necesitamos escribir un método cuyo nombre sea [Symbol.iterator]() . Con esto se indica a JavaScript que el objeto es iterable. Ahora que tenemos construida la definición vamos a ver lo que ocurriría al incluir el objeto en un bucle for...of : Como se puede ver, en cada vuelta del bucle for...of , obtenemos el atributo value que devolvimos con el método next() . Tras esto, si volvemos a escribir un bucle con nuestro objeto, se comenzará de nuevo el recorrido desde el primer elemento de la lista. Finalmente, se podría dar el caso de que necesitásemos convertir el iterador en un array. Pues bien, para eso podemos utilizar el método Array.from() . En la segunda parte de esta mini-guía aprenderemos a iterar mediante el uso de funciones generadoras.",
+    "imageMini": "/images/javascript-mini.webp"
+  },
+  {
     "slug": "20211214.html",
     "title": "Receta: Validar valores numéricos en JavaScript",
     "description": "En muchas ocasiones nos interesa verificar que una variable contiene un valor numérico. Un atajo podría ser usar:",

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Orientación a objetos con JavaScript (ES6). Parte 4. Método valueOf() — JAFS</title>
+  <meta name="description" content="En ocasiones puede que tengamos un objeto que represente un valor que podría ser de tipo primitivo, es decir, un boolean, string o number (principalmente). P..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, JavaScript, POO, Programación Orientada a Objetos" />
+  <meta name="article:published_time" content="2021-12-08T19:23:46.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20211208.html" />
+  <meta property="og:title" content="Orientación a objetos con JavaScript (ES6). Parte 4. Método valueOf()" />
+  <meta property="og:description" content="En ocasiones puede que tengamos un objeto que represente un valor que podría ser de tipo primitivo, es decir, un boolean, string o number (principalmente). P..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2021-12-08T19:23:46.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Orientación a objetos con JavaScript (ES6). Parte 4. Método valueOf()" />
+  <meta name="twitter:description" content="En ocasiones puede que tengamos un objeto que represente un valor que podría ser de tipo primitivo, es decir, un boolean, string o number (principalmente). P..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20211208.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Orientación a objetos con JavaScript (ES6). Parte 4. Método valueOf()",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En ocasiones puede que tengamos un objeto que represente un valor que podría ser de tipo primitivo, es decir, un boolean, string o number (principalmente). P...",
+  "url": "https://jafs.github.io/articles/posts/20211208.html",
+  "inLanguage": "es",
+  "datePublished": "2021-12-08T19:23:46.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Orientación a objetos con JavaScript (ES6). Parte 4. Método valueOf()</h1><p class="text-gray-600 text-sm mb-6">2021-12-08</p><p>En ocasiones puede que tengamos un objeto que represente un valor que podría ser de tipo primitivo, es decir, un boolean, string o number (principalmente). Para acceder a este valor podríamos tener un método que llamemos &quot;manualmente&quot; cuando queramos usar el objeto como valor primitivo, pero JavaScript nos proporciona un atajo, y es sobrescribir el método <code>valueOf()</code>. Si tenemos dicho método implementado, cuando sea necesario usar el objeto como si fuera un tipo primitivo, el intérprete pasará a llamarlo de forma transparente para nosotros.</p>
+<p>Veamos primero un ejemplo de una posible clase que representara un instante de tiempo con horas, minutos y segundos.</p>
+<pre><code class="language-javascript">class Time {
+  #hours = 0;
+  #minutes = 0;
+  #seconds = 0;
+
+  constructor(hours, minutes, seconds) {
+    this.#hours = hours;
+    this.#minutes = minutes;
+    this.#seconds = seconds;
+  }
+
+  getSeconds() {
+    return (
+        TimeWithoutValueOf.getSecondsInHours(this.#hours) +
+        TimeWithoutValueOf.getSecondsInMinutes(this.#minutes) +
+        this.#seconds
+    );
+  }
+
+  static getSecondsInHours(hours) {
+    return hours * 3600;
+  }
+
+  static getSecondsInMinutes(minutes) {
+    return minutes * 60;
+  }
+}
+
+const timeWithoutValueOf = new Time(1, 30, 45);
+
+// Muestra por consola: Without valueOf(): [object Object]10
+console.log(&quot;Without valueOf(): &quot;, timeWithoutValueOf + 10);
+
+// Muestra por consola: With valueOf(): 5455
+console.og(&quot;getSeconds(): &quot;, timeWithoutValueOf.getSeconds() + 10);
+</code></pre>
+<p>Como podemos observar en el ejemplo anterior, si intentamos operar con el objeto y un valor primitivo, en este caso sumarle 10, el resultado es que ambos elementos se convierten a cadena, siendo el resultado la concatenación del toString() de la clase (como no lo hemos sobrescrito, será <code>&quot;[object Object]&quot;</code>), y <code>&quot;10&quot;</code>.</p>
+<p>Hagamos una ligera modificación en la clase Time, añadiendo el método famoso:</p>
+<pre><code class="language-javascript">class Time {
+  ...
+
+  valueOf() {
+    return this.getSeconds();
+  }
+}
+
+const timeWithValueOf = new Time(1, 30, 45);
+
+// Muestra por consola: With valueOf(): 5455
+console.log(&quot;With valueOf(): &quot;, timeWithValueOf + 10);
+
+// Muestra por consola: With valueOf(): 5455
+console.og(&quot;getSeconds(): &quot;, timeWithValueOf.getSeconds() + 10);
+</code></pre>
+<p>Ahora se puede comprobar, como si se realiza la suma correctamente. Esto es porque el intérprete de JavaScript intenta buscar un método <code>valueOf()</code> en el objeto, de forma que al encontrarse en esta nueva versión, se termina llamando, y puesto que devolvemos un valor primitivo de tipo numérico, se realiza la suma correctamente. En resumen, la implementación del método <code>valueOf()</code>, permite que un objeto actúe como un valor primitivo.</p>
+<p><strong>Más artículos de esta serie</strong>:</p>
+<ul>
+<li><a href="/articles/posts/20211128.html">Parte 1. Clases</a></li>
+<li><a href="/articles/posts/20211203.html">Parte 2. Herencia</a></li>
+<li><a href="/articles/posts/20211205.html">Parte 3. Miembros estáticos</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

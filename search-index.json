@@ -454,5 +454,20 @@
     ],
     "content": "En muchas ocasiones nos interesa verificar que una variable contiene un valor numérico. Un atajo podría ser usar: El problema, es que con esa condición dejamos fuera al valor 0. Así que lo siguiente que se suele hacer, es tener fórmulas del estilo: Algo que como se puede apreciar es muy poco eficiente, y también bastante feote. Es por ello que vamos a ver como verificar que tenemos un valor real o uno entero de una forma mucho más sencilla. Para ello, nos valdremos de los funciones Number.isFinite() y Number.isInteger() . Como habéis podido comprobar, las dos funciones anteriores, nos ofrecen una forma muy sencilla de validar si un elemento es un número, y aparte verificar que es finito. Ya que por ejemplo, se podría hacer un typeof de la variable, pero los valores Infinity y -Infinity tienen como tipo number , y en caso de querer comprobar que es un entero, deberíamos verificar algunas cosillas extra. En mi opinión lo que hemos visto, queda más elegante, nos proporciona información extra de qué es lo que se desea comprobar y, lo mejor de todo, no requiere de librerías externas.",
     "imageMini": "/images/javascript-mini.webp"
+  },
+  {
+    "slug": "20211208.html",
+    "title": "Orientación a objetos con JavaScript (ES6). Parte 4. Método valueOf()",
+    "description": "En ocasiones puede que tengamos un objeto que represente un valor que podría ser de tipo primitivo, es decir, un boolean, string o number (principalmente). Para acceder a este valor podríamos tener un método que llamemos \"manualmente\" cuando queramos usar el objeto como valor primitivo, pero JavaScript nos proporciona un atajo, y es sobrescribir el método `valueOf()`. Si tenemos dicho método implementado, cuando sea necesario usar el objeto como si fuera un tipo primitivo, el intérprete pasará a llamarlo de forma transparente para nosotros.",
+    "url": "/articles/posts/20211208.html",
+    "date": "2021-12-08",
+    "categories": [
+      "Programación",
+      "JavaScript",
+      "POO",
+      "Programación Orientada a Objetos"
+    ],
+    "content": "En ocasiones puede que tengamos un objeto que represente un valor que podría ser de tipo primitivo, es decir, un boolean, string o number (principalmente). Para acceder a este valor podríamos tener un método que llamemos &quot;manualmente&quot; cuando queramos usar el objeto como valor primitivo, pero JavaScript nos proporciona un atajo, y es sobrescribir el método valueOf() . Si tenemos dicho método implementado, cuando sea necesario usar el objeto como si fuera un tipo primitivo, el intérprete pasará a llamarlo de forma transparente para nosotros. Veamos primero un ejemplo de una posible clase que representara un instante de tiempo con horas, minutos y segundos. Como podemos observar en el ejemplo anterior, si intentamos operar con el objeto y un valor primitivo, en este caso sumarle 10, el resultado es que ambos elementos se convierten a cadena, siendo el resultado la concatenación del toString() de la clase (como no lo hemos sobrescrito, será &quot;[object Object]&quot; ), y &quot;10&quot; . Hagamos una ligera modificación en la clase Time, añadiendo el método famoso: Ahora se puede comprobar, como si se realiza la suma correctamente. Esto es porque el intérprete de JavaScript intenta buscar un método valueOf() en el objeto, de forma que al encontrarse en esta nueva versión, se termina llamando, y puesto que devolvemos un valor primitivo de tipo numérico, se realiza la suma correctamente. En resumen, la implementación del método valueOf() , permite que un objeto actúe como un valor primitivo. Más artículos de esta serie : Parte 1. Clases Parte 2. Herencia Parte 3. Miembros estáticos",
+    "imageMini": "/images/javascript-mini.webp"
   }
 ]

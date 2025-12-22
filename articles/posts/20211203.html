@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Orientación a objetos con JavaScript (ES6). Parte 2. Herencia — JAFS</title>
+  <meta name="description" content="En el artículo anterior aprendimos los conceptos básicos sobre clases en JavaScript. En esta ocasión vamos a ver como aplicar la herencia sobre distintos obj..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, JavaScript, POO, Programación Orientada a Objetos" />
+  <meta name="article:published_time" content="2021-12-03T19:08:38.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20211203.html" />
+  <meta property="og:title" content="Orientación a objetos con JavaScript (ES6). Parte 2. Herencia" />
+  <meta property="og:description" content="En el artículo anterior aprendimos los conceptos básicos sobre clases en JavaScript. En esta ocasión vamos a ver como aplicar la herencia sobre distintos obj..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2021-12-03T19:08:38.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Orientación a objetos con JavaScript (ES6). Parte 2. Herencia" />
+  <meta name="twitter:description" content="En el artículo anterior aprendimos los conceptos básicos sobre clases en JavaScript. En esta ocasión vamos a ver como aplicar la herencia sobre distintos obj..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20211203.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Orientación a objetos con JavaScript (ES6). Parte 2. Herencia",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En el artículo anterior aprendimos los conceptos básicos sobre clases en JavaScript. En esta ocasión vamos a ver como aplicar la herencia sobre distintos obj...",
+  "url": "https://jafs.github.io/articles/posts/20211203.html",
+  "inLanguage": "es",
+  "datePublished": "2021-12-03T19:08:38.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Orientación a objetos con JavaScript (ES6). Parte 2. Herencia</h1><p class="text-gray-600 text-sm mb-6">2021-12-03</p><p>En el <a href="/articles/posts/20211128.html">artículo anterior</a> aprendimos los conceptos básicos sobre clases en JavaScript. En esta ocasión vamos a ver como aplicar la herencia sobre distintos objetos. Partiremos de un código que iremos desgranando poco a poco.</p>
+<pre><code class="language-javascript">class Animal {
+  #legs;
+
+  constructor(legs) {
+    console.log(&quot;Entering Animal constructor&quot;);
+    this.#legs = legs;
+    console.log(&quot;Exiting Animal constructor&quot;);
+  }
+
+  breathe() {
+    return &quot;I&#39;m breathing&quot;;
+  }
+}
+
+class Bird extends Animal {
+  #canFly;
+
+  constructor(legs, canFly) {
+    console.log(&quot;Entering Birdconstructor&quot;);
+    super(legs);
+    this.#canFly = canFly;
+    console.log(&quot;Exiting Bird constructor&quot;);
+  }
+
+  fly() {
+    if (this.#canFly) {
+      return &quot;Look at me, I&#39;m flying &amp;#x1f60a;&quot;;
+    }
+
+    return &quot;I can&#39;t fly &amp;#x1f612;&quot;;
+  }
+}
+
+class Stork extends Bird {
+  #species;
+
+  constructor(species) {
+    console.log(&quot;Entering Stork constructor&quot;);
+    super(2, true);
+    this.#species = species;
+    console.log(&quot;Exiting Stork constructor&quot;);
+  }
+
+  whatsMySpecies() {
+    return `I&#39;m a ${this.#species} stork`;
+  }
+
+  fly() {
+    console.log(&quot;I&#39;m extending my flags&quot;);
+    return super.fly();
+  }
+}
+
+const whiteStork = new Stork(&quot;white&quot;);
+
+// I&#39;m breathing
+console.log(whiteStork.breathe());
+
+
+// I&#39;m extending my flags
+// Look at me, I&#39;m flying &amp;#x1f60a;
+console.log(whiteStork.fly());
+
+// I&#39;m a white stork
+console.log(whiteStork.whatsMySpecies());
+</code></pre>
+<p>En esta jerarquía tenemos tres clases Animal, que tiene como hija Bird, que a su vez tiene como hija Stork. De la clase Animal no comentaremos mucho, pues ya vimos todo lo que contiene en el artículo anterior.</p>
+<p>En la clase Bird nos detendremos en su definición y en su constructor:</p>
+<pre><code class="language-javascript">class Bird extends Animal {
+  ...
+  constructor(legs, canFly) {
+    super(legs);
+    this.#canFly = canFly;
+  }
+}
+</code></pre>
+<p>En primer lugar vemos como poder establecer la relación de herencia con la clase padre con la palabra clave <code>extends</code>. Esto es similar a otros lenguajes como Java. Cabe destacar que de forma oficial sólo es posible heredar de esta forma de una clase. Se puede realizar herencia múltiple con otros métodos que veremos en otra ocasión...</p>
+<p>Si nos vamos al constructor, aparece la palabra reservada <code>super()</code>. Esto indica que vamos a llamar al constructor de la clase base, la cual recibía un parámetro el cual le indicamos. De forma, que cuando el código entre al constructor de Bird, primero llamará al constructor de la clase padre, para posteriormente seguir con el resto del código de la clase hija.</p>
+<p>Lo siguiente será ver otra cosilla relacionada con <code>super</code>, pero en la clase &quot;nieta&quot;:</p>
+<pre><code class="language-javascript">fly() {
+  console.log(&quot;I&#39;m extending my flags&quot;);
+  return super.fly();
+}
+</code></pre>
+<p>En esta ocasión podemos comprobar como si se indica un método de la clase base con <strong>super</strong>.<em>nombreMétodo</em>(), es posible llamar a éste.</p>
+<p>Finalmente, indicar como sería el flujo de llamadas a constructores con lo que hemos implementado en este ejemplo. Habéis visto que hay varios <code>console.log</code> al entrar y salir de los constructores. Pues bien, al crear la instancia de la clase Stork veríamos esto por consola:</p>
+<pre><code class="language-shell">// Entering Stork constructor
+// Entering Bird constructor
+// Entering Animal constructor
+// Exiting Animal constructor
+// Exiting Bird constructor
+// Exiting Stork constructor
+</code></pre>
+<p><strong>Enlaces</strong>:</p>
+<ul>
+<li><a href="https://262.ecma-international.org/16.0/#sec-class-definitions">Especificación en EcmaScript 2025</a></li>
+<li><a href="/articles/posts/20211128.html">Parte 1. Clases</a></li>
+<li><a href="/articles/posts/20211205.html">Parte 3. Miembros estáticos</a></li>
+<li><a href="/articles/posts/20211208.html">Parte 4. Método valueOf()</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

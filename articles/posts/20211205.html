@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Orientación a objetos con JavaScript (ES6). Parte 3. Miembros estáticos — JAFS</title>
+  <meta name="description" content="Ya hemos visto una pequeña introducción a las clases y la herencia en JavaScript. En esta tercera parte nos toca revisar los métodos y atributos estáticos. P..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, JavaScript, POO, Programación Orientada a Objetos" />
+  <meta name="article:published_time" content="2021-12-05T12:10:38.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20211205.html" />
+  <meta property="og:title" content="Orientación a objetos con JavaScript (ES6). Parte 3. Miembros estáticos" />
+  <meta property="og:description" content="Ya hemos visto una pequeña introducción a las clases y la herencia en JavaScript. En esta tercera parte nos toca revisar los métodos y atributos estáticos. P..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2021-12-05T12:10:38.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Orientación a objetos con JavaScript (ES6). Parte 3. Miembros estáticos" />
+  <meta name="twitter:description" content="Ya hemos visto una pequeña introducción a las clases y la herencia en JavaScript. En esta tercera parte nos toca revisar los métodos y atributos estáticos. P..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20211205.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Orientación a objetos con JavaScript (ES6). Parte 3. Miembros estáticos",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Ya hemos visto una pequeña introducción a las clases y la herencia en JavaScript. En esta tercera parte nos toca revisar los métodos y atributos estáticos. P...",
+  "url": "https://jafs.github.io/articles/posts/20211205.html",
+  "inLanguage": "es",
+  "datePublished": "2021-12-05T12:10:38.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Orientación a objetos con JavaScript (ES6). Parte 3. Miembros estáticos</h1><p class="text-gray-600 text-sm mb-6">2021-12-05</p><p>Ya hemos visto una pequeña introducción a las clases y la herencia en JavaScript. En esta tercera parte nos toca revisar los métodos y atributos estáticos. Primero pasemos a definir que es un miembro estático de manera más o menos oficial:</p>
+<blockquote>
+<p>Un miembro estático es aquel que reside en una clase sin requerir una instancia de esta para ser ejecutado. De forma que hay sólo una copia de éste, y se puede llamar sin tener objetos de la clase.</p>
+</blockquote>
+<p>Para declarar un miembro estático, no os podéis imaginar la palabra reservada que se va a usar... así es, se utiliza &quot;<code>static</code>&quot;.</p>
+<p>Bueno, pongámonos serios y pasemos a ver un ejemplo de código:</p>
+<pre><code class="language-javascript">class Operation {
+  static add(sum1, sum2) {
+    return sum1 + sum2;
+  }
+
+  addMultiple(sum1, sum2, sum3, sum4) {
+    return Operations.add(sum1, sum2) + Operations.add(sum3, sum4);
+  }
+}
+
+const operation = new Operation();
+operation.addMultiple(45, 4535, 785, 2934); // 8299
+Operations.add(1438, 2438);                 // 3876
+</code></pre>
+<p>Partiendo del código anterior, podemos ver como con <code>static</code>, hacemos que un método pase a ser estático, y que tanto para llamarlo desde dentro de la clase como desde fuera, se indicará el nombre de la clase y el nombre del atributo o método al que acceder.</p>
+<p>En este caso, sólo hay definido un método <code>add()</code>, es decir, al contrario que ocurre con un método normal (también lo podemos aplicar a los atributos), no habrá un objeto con su propia &quot;copia&quot; del método, sino que habrá uno global para todos los objetos.</p>
+<p>¿Esto cómo aplica a la herencia? Pues veamos otro ejemplo:</p>
+<pre><code class="language-javascript">class Article {
+  static taxPercent = 1.1;
+  #name;
+  #price;
+
+  constructor(name, price) {
+    this.#name = name;
+    this.#price = price;
+  }
+
+  get Name() {
+    return this.#name;
+  }
+
+  get Price() {
+    return this.#price;
+  }
+
+  calculatePrice() {
+    return this.#price * Article.taxPercent;
+  }
+}
+
+class DeluxeArticle extends Article {
+  static taxPercent = 1.21;
+}
+
+const article = new Article(&quot;Osito de peluche&quot;, 10);
+article.calculatePrice(); // 11
+
+deluxeArticle = new DeluxeArticle(&quot;Lijadora&quot;, 100);
+deluxeArticle.calculatePrice(); // 110
+</code></pre>
+<p>¡Hey espera! ¿Por qué el cálculo del precio de la lijadora devuelve 110, en lugar de 121?. Esto es porque en el método de la clase padre tenemos <code>Article.taxPercent</code>. En este caso al ser un elemento estático, no sobre-escribimos dicho valor, como si podría dar pie con miembros no estáticos. Es por ello que en el cálculo estamos llamando a <code>taxPercent</code> del padre. Si fuera necesario llamar al nuevo <code>taxPercent</code>, tendríamos que sobreescribir el método de <code>DeluxeArticle</code> de forma que quedara tal que así:</p>
+<pre><code class="language-javascript">class DeluxeArticle extends Article {
+  static taxPercent = 1.21;
+
+  calculatePrice() {
+    return this.Price * DeluxeArticle.taxPercent;
+  }
+}
+</code></pre>
+<p>Ahora si estamos llamando al atributo estático de nuestra clase. En resumen, en el código de ejemplo estamos teniendo dos atributos estáticos con el mismo nombre, uno accesible con <code>Article.taxPercent</code>, y el otro con <code>DeluxeArticle.taxPercent</code>. Es más podemos acceder a uno u otro indistintamente según nos haga falta, siempre anteponiendo el nombre de la clase que lo contiene.</p>
+<p>Con todo lo visto, es muy sencillo pasar a implementar el conocido patrón singleton en JavaScript:</p>
+<pre><code class="language-javascript">class MySingleton {
+  static #instance = null;
+
+  // Añadimos un atributo nombre para poder hacer pruebas más adelante &amp;#x1f609;
+  #name;
+
+  static getInstance() {
+    if (!MySingleton.#instance) {
+      MySingleton.#instance = new MySingleton();
+    }
+
+    return MySingleton.#instance;
+  }
+
+  set Name(name) {
+    this.#name = name;
+  }
+
+  get Name() {
+    return this.#name;
+  }
+
+
+}
+
+const instance1 = MySingleton.getInstance();
+const instance2 = MySingleton.getInstance();
+
+instance1.Name = &quot;Soy un singleton&quot;;
+instance1.Name; // Soy un singleton
+instance2.Name; // Soy un singleton
+</code></pre>
+<p>La pena es que no se puedan tener constructores privados en JavaScript para evitar instancias ajenas que no vayan por el método <code>getInstance()</code>.</p>
+<p><strong>Más artículos de esta serie</strong>:</p>
+<ul>
+<li><a href="/articles/posts/20211128.html">Parte 1. Clases</a></li>
+<li><a href="/articles/posts/20211203.html">Parte 2. Herencia</a></li>
+<li><a href="/articles/posts/20211208.html">Parte 4. Método valueOf()</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

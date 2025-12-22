@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Orientación a objetos con JavaScript (ES6). Parte 1. Clases — JAFS</title>
+  <meta name="description" content="La mayoría de lenguajes de programación orientados a objetos disponen de la posibilidad de definir la estructura de una clase, sin embargo, JavaScript hasta ..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, JavaScript, POO, Programación Orientada a Objetos" />
+  <meta name="article:published_time" content="2021-11-28T12:48:03.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20211128.html" />
+  <meta property="og:title" content="Orientación a objetos con JavaScript (ES6). Parte 1. Clases" />
+  <meta property="og:description" content="La mayoría de lenguajes de programación orientados a objetos disponen de la posibilidad de definir la estructura de una clase, sin embargo, JavaScript hasta ..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2021-11-28T12:48:03.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Orientación a objetos con JavaScript (ES6). Parte 1. Clases" />
+  <meta name="twitter:description" content="La mayoría de lenguajes de programación orientados a objetos disponen de la posibilidad de definir la estructura de una clase, sin embargo, JavaScript hasta ..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20211128.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Orientación a objetos con JavaScript (ES6). Parte 1. Clases",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "La mayoría de lenguajes de programación orientados a objetos disponen de la posibilidad de definir la estructura de una clase, sin embargo, JavaScript hasta ...",
+  "url": "https://jafs.github.io/articles/posts/20211128.html",
+  "inLanguage": "es",
+  "datePublished": "2021-11-28T12:48:03.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Orientación a objetos con JavaScript (ES6). Parte 1. Clases</h1><p class="text-gray-600 text-sm mb-6">2021-11-28</p><p>La mayoría de lenguajes de programación orientados a objetos disponen de la posibilidad de definir la estructura de una clase, sin embargo, JavaScript hasta ahora, permitía trabajar con objetos, pero no ofrecía una forma práctica de definir las clases, más allá de crearlas como una función.</p>
+<p>Veamos todo esto mejor con un ejemplo:</p>
+<pre><code class="language-javascript">function Customer(customerName, customerId) {
+  let name = customerName;
+  let id = customerId;
+  let invoices = [];
+  
+  this.addInvoice = function(newInvoice) {
+    invoices.push(newInvoice);
+  }
+
+  this.getName = function() {
+    return name;
+  }
+};
+
+const customer = new Customer(&quot;John Doe&quot;, 123);
+
+console.log(customer.getName()); // &#39;John Doe&#39;
+console.log(customer.name);      // undefined
+</code></pre>
+<p>Con el código anterior podemos usar una función como si fuera una clase. Uno de los trucos para tener los atributos como privados, es declararlos sin &quot;this&quot;. De esta forma, no se verán de forma externa. El problema viene cuando se quiere por ejemplo, utilizarlos en métodos añadidos a posteriori usando por ejemplo:</p>
+<pre><code class="language-javascript">Customer.prototype.printInvoice = function(index) {
+  // Esta línea provocará un error: &quot;Uncaught ReferenceError: invoices is not defined&quot;
+  console.log(invoices[index]);
+}
+</code></pre>
+<p>Lo que nos llevará a tener que crear getters y setters para que métodos que la propia clase puedan acceder a los atributos, algo que queda un poco confuso.</p>
+<p>Lo anterior unido a otros problemas, como un sistema raro de herencia, la propia nomenclatura de saber que se define una clase, pero se utiliza la palabra function, etc. Ha hecho que el lenguaje haya evolucionado hasta disponer en la versión 6 de EcmaScript (recordemos que es el nombre que se usa para el estándar definido de JavaScript), de una definición de clases más ajustada a otros lenguajes.</p>
+<p>Veamos la clase anterior definida con ES6:</p>
+<pre><code class="language-javascript">class Customer {
+  #name;
+  #id;
+  #invoices = [];
+
+  constructor(name, id) {
+    this.#name = name;
+    this.#id = id;
+  }
+  
+  addInvoice(newInvoice) {
+    this.#invoices.push(newInvoice);
+  }
+
+  get Name() {
+    return this.#name;
+  }
+};
+
+const customer = new Customer(&quot;John Doe&quot;, 123);
+
+// &#39;John Doe&#39;
+console.log(customer.Name);
+// Uncaught SyntaxError: Private field &#39;#name&#39; must be declared in an enclosing
+// class
+console.log(customer.#name);
+</code></pre>
+<p>Pasemos a desgranar un poco las líneas de código:</p>
+<pre><code class="language-javascript">class Customer
+</code></pre>
+<p>De esta forma se definen ahora las clases en ES6. Es una sintaxis mucho más próxima al resto de lenguajes como Java, C++, C#, Python, etc.</p>
+<pre><code class="language-javascript">#name;
+#id;
+#invoices = [];
+</code></pre>
+<p>Las tres líneas de arriba, definen los atributos de la clase. Podréis observar como tienen prefijado un símbolo &quot;<code>#</code>&quot;. Esto indica que el atributo (o también el método), es privado. Lo que permite que éste no sea visible de forma externa. Por desgracia aún no existe el concepto de &quot;protected&quot; en JavaScript, de forma que no podemos hacer que métodos o atributos no sean visibles al exterior pero sí a clases hijas. Por lo que a día de hoy, o un elemento es visible al exterior o no es visible para nadie.</p>
+<pre><code class="language-javascript">constructor(name, id) {
+  this.#name = name;
+  this.#id = id;
+}
+</code></pre>
+<p>Estas sentencias definen el constructor que tendrá la clase.</p>
+<blockquote>
+<p>Al contrario de lo que sucede con otros lenguajes, en JavaScript no podemos tener sobrecarga de constructores, por lo que sólo podemos definir uno. Si tuviéramos varios, se lanzará un error:</p>
+<pre><code class="language-javascript">class Test {
+  constructor(first) {
+    console.log(first);
+  }
+  constructor(first, second) {
+    console.log(first, second);
+  }
+}
+// El código anterior provocará este error:
+// Uncaught SyntaxError: A class may only have one constructor
+</code></pre>
+</blockquote>
+<pre><code class="language-javascript">addInvoice(newInvoice) {
+  this.#invoices.push(newInvoice);
+}
+</code></pre>
+<p>En el fragmento anterior se puede observar la definición de un método, en este caso público (no lleva el símbolo &quot;#&quot;), llamado <code>addInvoice</code>. Aquí podemos ver también que para acceder a atributos y métodos privados, tenemos que incluir el almohadilla en su nombre.</p>
+<pre><code class="language-javascript">get Name() {
+  return this.#name;
+}
+</code></pre>
+<p>Aquí tenemos también otra nomenclatura nueva. Ésta se utiliza para definir getters y setters con un estilo parecido a las <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties">propiedades en C#</a>. Es decir, podemos llamarlas desde el exterior como si fueran atributos y no métodos. Veremos su uso unas pocas líneas más adelante.</p>
+<pre><code class="language-javascript">const customer = new Customer(&quot;John Doe&quot;, 123);
+</code></pre>
+<p>A nivel de instanciación de la clase, podemos observar como no cambia nada respecto a cuando usamos una función para instanciarla.</p>
+<pre><code class="language-javascript">console.log(customer.Name);
+</code></pre>
+<p>Si recordáis antes teníamos definido un método getter, pues esta sentencia muestra su uso. Para ello se llama sin los paréntesis, como su fuera un atributo público.</p>
+<blockquote>
+<p>Si por ejemplo hubiésemos tenido un setter, este sería su uso:</p>
+<pre><code class="language-javascript">class Customer {
+  ...
+  set Name(newName) {
+    this.#name = newName;
+  }
+}
+
+customer.Name = &quot;Pepito Doe&quot;;
+</code></pre>
+</blockquote>
+<pre><code class="language-javascript">console.log(customer.#name);
+</code></pre>
+<p>Finalmente, para esta línea vemos que se produce un error. Este es lanzado, ya el intérprete de JavaScript detecta que #name es privado (por su prefijo), y nos advierte que no podemos usarlo de forma externa a la clase.</p>
+<hr>
+<p>Y hasta aquí esta introducción al nuevo sistema de definición de clases en JavaScript. Seguiremos poco a poco introduciendo los conceptos de herencia, algunos métodos útiles que podemos sobre-escribir de Object, etc.</p>
+<p><strong>Enlaces</strong>:</p>
+<ul>
+<li><a href="/articles/posts/20211203.html">Parte 2. Herencia</a></li>
+<li><a href="/articles/posts/20211205.html">Parte 3. Miembros estáticos</a></li>
+<li><a href="/articles/posts/20211208.html">Parte 4. Método valueOf()</a></li>
+<li><a href="https://www.instagram.com/p/CYPPMiJowt1/?utm_source=ig_web_button_share_sheet">Cheat sheet en Instragram</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

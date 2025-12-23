@@ -84,7 +84,7 @@
   </header>
   <main class="max-w-4xl mx-auto px-4 py-8">
     <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">Web Workers en JavaScript</h1><p class="text-gray-600 text-sm mb-6">2022-09-14</p><p>Estarás acostumbrado o acostumbrada a escuchar que JavaScript corre sobre un único hilo de ejecución. Esto puede en ocasiones acarrear problemas si una tarea es demasiada pesada, pues dejará bloqueado el hilo.</p>
+      <h1 class="text-4xl font-bold mb-2">Web Workers en JavaScript</h1><p class="text-gray-600 text-sm mb-6">14-09-2022</p><p>Estarás acostumbrado o acostumbrada a escuchar que JavaScript corre sobre un único hilo de ejecución. Esto puede en ocasiones acarrear problemas si una tarea es demasiada pesada, pues dejará bloqueado el hilo.</p>
 <p>Para solventar ese problema, se dispone de los <a href="https://developer.mozilla.org/es/docs/Web/API/Web_Workers_API/Using_web_workers">Web Workers</a>, que permiten ejecutar código JavaScript en hilos que se lanzan en segundo plano. Cabe destacar que estos workers utilizan un contexto global distinto al de la ventana (o worker) que lo lanza. Como consejo puedes usar <code>globalThis</code> para reducir dependencias de usar <code>window</code>, <code>self</code>, etc.</p>
 <p>El método de comunicación del worker con su creador es a través de mensajes gestionados como eventos. De forma muy parecida al sistema de comunicación entre iframes.</p>
 <p>Pero como siempre, será mejor que veamos el funcionamiento de los workers con varios ejemplos.</p>

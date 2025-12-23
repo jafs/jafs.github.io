@@ -87,7 +87,7 @@
   </header>
   <main class="max-w-4xl mx-auto px-4 py-8">
     <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">AbortController: cancela operaciones en JavaScript</h1><p class="text-gray-600 text-sm mb-6">2022-07-15</p><p>Hasta ahora, en JavaScript, cuando se lanzaba una llamada a una API con fetch, no resultaba sencillo detenerla. También se podía dar el caso de que quisiéramos detener varias operaciones que se ejecutaban de simultáneamente de forma centralizada, por lo que teníamos que implementar sistemas como el patrón observador.</p>
+      <h1 class="text-4xl font-bold mb-2">AbortController: cancela operaciones en JavaScript</h1><p class="text-gray-600 text-sm mb-6">15-07-2022</p><p>Hasta ahora, en JavaScript, cuando se lanzaba una llamada a una API con fetch, no resultaba sencillo detenerla. También se podía dar el caso de que quisiéramos detener varias operaciones que se ejecutaban de simultáneamente de forma centralizada, por lo que teníamos que implementar sistemas como el patrón observador.</p>
 <p>Pero en la actualidad, estos flujos ahora son más fáciles gracias a la clase <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController">AbortController</a> que viene a proporcionarnos una forma de enviar una señal de parada a todo elemento que lo utilice. Básicamente, tendremos una señal (<code>AbortSignal</code>) que se emitirá cuando queramos cancelar una operación.</p>
 <p>Veamos el uso más básico, y que está en miles de ejemplos:</p>
 <pre><code class="language-javascript">const abortController = new AbortController();

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Diferencias entre var y let en JavaScript — JAFS</title>
+  <meta name="description" content="Hasta hace unos años lo normal era usar `var` para declarar las variables en JavaScript. Sin embargo desde ES6, se introdujo la palabra clave `let`. Esto int..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, JavaScript" />
+  <meta name="article:published_time" content="2021-12-06T19:19:19.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20211206.html" />
+  <meta property="og:title" content="Diferencias entre var y let en JavaScript" />
+  <meta property="og:description" content="Hasta hace unos años lo normal era usar `var` para declarar las variables en JavaScript. Sin embargo desde ES6, se introdujo la palabra clave `let`. Esto int..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2021-12-06T19:19:19.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Diferencias entre var y let en JavaScript" />
+  <meta name="twitter:description" content="Hasta hace unos años lo normal era usar `var` para declarar las variables en JavaScript. Sin embargo desde ES6, se introdujo la palabra clave `let`. Esto int..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20211206.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Diferencias entre var y let en JavaScript",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Hasta hace unos años lo normal era usar `var` para declarar las variables en JavaScript. Sin embargo desde ES6, se introdujo la palabra clave `let`. Esto int...",
+  "url": "https://jafs.github.io/articles/posts/20211206.html",
+  "inLanguage": "es",
+  "datePublished": "2021-12-06T19:19:19.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Diferencias entre var y let en JavaScript</h1><p class="text-gray-600 text-sm mb-6">2021-12-06</p><p>Hasta hace unos años lo normal era usar <code>var</code> para declarar las variables en JavaScript. Sin embargo desde ES6, se introdujo la palabra clave <code>let</code>. Esto introduce tres cambios principales con respecto al uso de <code>var</code>.</p>
+<h2>let</h2>
+<p>Hay tres puntos principales a destacar en el uso de let. Así que pasaremos a verlos con ejemplos de código muy sencillitos.</p>
+<h3>No se puede llamar a una variable antes de declararse</h3>
+<pre><code class="language-javascript">// En esta función usamos &quot;hello&quot; antes de tener su declaración con var.
+function testVar() {
+  hello = 345;
+  var hello = 123;
+  console.log(hello);
+}
+
+// Si llamamos a la función, no se produce ningún error e imprime: 123
+testVar();
+
+// Si hacemos lo mismo con let, obtendremos un error.
+function testLet() {
+  hello = 345;
+  let hello = 123;
+  console.log(hello);
+}
+
+// Al llamar a la función tendremos el error:
+// Uncaught ReferenceError: Cannot access &#39;hello&#39; before initialization
+testLet();
+</code></pre>
+<h3>No se puede volver a declarar una variable con el mismo nombre que otra</h3>
+<pre><code class="language-javascript">// En esta función se define dos veces la variable &quot;hello&quot; mediante el uso de var.
+function testVar() {
+  var hello = 123;
+  var hello = 234;
+  console.log(hello);
+}
+
+// Esta llamada no provoca ningún error e imprime: 234
+testVar()
+
+// En esta ocasión no podremos ni llamar a la función, porque al crearla se nos
+// devolverá el error:
+// Uncaught SyntaxError: Identifier &#39;hello&#39; has already been declared.
+function testLet() {
+  let hello = 123;
+  let hello = 234;
+  console.log(hello);
+}
+</code></pre>
+<h3>La variable acota su ámbito al bloque en que se haya definido</h3>
+<pre><code class="language-javascript">function scope() {
+  var globalVar = &quot;Hola&quot;;
+  let globalLet = &quot;Mundo&quot;;
+
+  for (var indexVar = 0; indexVar &amp;lt; 1; ++indexVar) {
+    console.log(&quot;indexVar dentro del bucle: &quot; + indexVar);
+  }
+  console.log(&quot;indexVar fuera del bucle: &quot; + indexVar);
+
+  for (let indexLet = 0; indexLet &amp;lt; 1; ++indexLet) {
+    console.log(&quot;indexLet dentro del bucle: &quot; + indexLet);
+  }
+
+  // Esta llamada si estuviera descomentada nos daría el error:
+  // Uncaught ReferenceError: indexLet is not defined
+  // console.log(&quot;indexLet fuera del bucle: &quot; + indexLet);
+
+  if (true) {
+    var inIfVar = &quot;Magia global&quot;;
+    let inIfLet = &quot;Mejor sin magia&quot;;
+  }
+
+  console.log(&quot;inIfVar fuera del if&quot; + inIfVar);
+
+  // Esta llamada si estuviera descomentada nos daría el error:
+  // Uncaught ReferenceError: inIfLet is not defined
+  // console.log(&quot;inIfLet fuera del if&quot; + inIfLet);
+
+  console.log(&quot;globalVar: &quot; + globalVar);
+  console.log(&quot;globalLet: &quot; + globalLet);
+}
+</code></pre>
+<p>En este último ejemplo, como el código es más largo, pasemos a ver lo que ocurre con cada variable declarada:</p>
+<ul>
+<li><strong>globalVar</strong>: tiene de ámbito toda la función.</li>
+<li><strong>globalLet</strong>: tiene de ámbito toda la función.</li>
+<li><strong>indexVar</strong>: aunque se declara en el bucle. Ya sabemos se use donde se use, la declaración con <code>var</code>, es equivalente a poner una línea &quot;<code>var indexVar;</code>&quot; al principio de la función.</li>
+<li><strong>indexLet</strong>: se declara dentro del bucle, de forma que en cuanto éste termina, la variable deja de existir.</li>
+<li><strong>inIfVar</strong>: ocurre lo mismo que con <strong>indexVar</strong>. Aunque esté dentro del bloque condicional, es como si se hubiera declarado al principio de la función.</li>
+<li><strong>inIfLet</strong>: sólo vive dentro del bloque condicional en el que se encuentra. Desde fuera ya no existe.</li>
+</ul>
+<h2>Resumen</h2>
+<p>En este artículo hemos aprendido las diferencias entre <code>let</code> y <code>var</code>. Por lo que ya sabes, de ahora en adelante deberías usar <code>let</code>, ya que está ampliamente <a href="https://caniuse.com/let">soportado por los navegadores modernos</a>, y nos puede ayudar a evitar errores en el código, principalmente: evitando que tengamos una variable que se puede usar sin estar declarada, que una variable se pueda declarar dos veces (perdiendo un poco el contexto de su uso y los posibles problemas derivados), o que sea modificada en un ámbito que no toque. Junto con <code>const</code>, debería ser la forma principal de declarar variables y constantes en tu aplicación.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

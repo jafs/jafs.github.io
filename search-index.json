@@ -471,6 +471,19 @@
     "imageMini": "/images/javascript-mini.webp"
   },
   {
+    "slug": "20211206.html",
+    "title": "Diferencias entre var y let en JavaScript",
+    "description": "Hasta hace unos años lo normal era usar `var` para declarar las variables en JavaScript. Sin embargo desde ES6, se introdujo la palabra clave `let`. Esto introduce tres cambios principales con respecto al uso de `var`.",
+    "url": "/articles/posts/20211206.html",
+    "date": "2021-12-06",
+    "categories": [
+      "programación",
+      "JavaScript"
+    ],
+    "content": "Hasta hace unos años lo normal era usar var para declarar las variables en JavaScript. Sin embargo desde ES6, se introdujo la palabra clave let . Esto introduce tres cambios principales con respecto al uso de var . let Hay tres puntos principales a destacar en el uso de let. Así que pasaremos a verlos con ejemplos de código muy sencillitos. No se puede llamar a una variable antes de declararse No se puede volver a declarar una variable con el mismo nombre que otra La variable acota su ámbito al bloque en que se haya definido En este último ejemplo, como el código es más largo, pasemos a ver lo que ocurre con cada variable declarada: globalVar : tiene de ámbito toda la función. globalLet : tiene de ámbito toda la función. indexVar : aunque se declara en el bucle. Ya sabemos se use donde se use, la declaración con var , es equivalente a poner una línea &quot; var indexVar; &quot; al principio de la función. indexLet : se declara dentro del bucle, de forma que en cuanto éste termina, la variable deja de existir. inIfVar : ocurre lo mismo que con indexVar . Aunque esté dentro del bloque condicional, es como si se hubiera declarado al principio de la función. inIfLet : sólo vive dentro del bloque condicional en el que se encuentra. Desde fuera ya no existe. Resumen En este artículo hemos aprendido las diferencias entre let y var . Por lo que ya sabes, de ahora en adelante deberías usar let , ya que está ampliamente soportado por los navegadores modernos , y nos puede ayudar a evitar errores en el código, principalmente: evitando que tengamos una variable que se puede usar sin estar declarada, que una variable se pueda declarar dos veces (perdiendo un poco el contexto de su uso y los posibles problemas derivados), o que sea modificada en un ámbito que no toque. Junto con const , debería ser la forma principal de declarar variables y constantes en tu aplicación.",
+    "imageMini": "/images/javascript-mini.webp"
+  },
+  {
     "slug": "20211205.html",
     "title": "Orientación a objetos con JavaScript (ES6). Parte 3. Miembros estáticos",
     "description": "Ya hemos visto una pequeña introducción a las clases y la herencia en JavaScript. En esta tercera parte nos toca revisar los métodos y atributos estáticos. Primero pasemos a definir que es un miembro estático de manera más o menos oficial:",

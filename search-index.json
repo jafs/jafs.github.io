@@ -568,5 +568,20 @@
     ],
     "content": "Durante los próximos artículos iremos descubriendo que nos ofrecerá ES6 (EcmaScript 6, o JavaScript 6 para los amigos), analizando las novedades y cambios que la nueva versión del lenguaje nos ofrecerá, así como su estado actual de integración en los principales navegadores. En este primer artículo aprenderemos sobre el namespace global Intl y la clase Collator . El namespace Intl Cuando se desarrolla una web, hasta ahora si teníamos que internacionalizarla había diversos problemas que se debían resolver creando funciones específicas o mediante el uso de librerías destinadas a tal fin. Sin embargo, la próxima versión de ES, tiende una mano a los desarrolladores y desarrolladoras para hacernos la vida más fácil, todo mediante la inclusión de Intl . Este objeto se utiliza para lo que se conoce como ECMAScript Internationalization API , que proporciona comparación de cadenas dependiendo del idioma, formato para números, así como para fecha y hora, etc. Los constructores para los objetos Collator , NumberFormat , y DateTimeFormat son propiedades del namespace Intl . La clase Collator Hasta ahora al intentar ordenar cadenas, teníamos el problema de que para ese orden no se tenía en cuenta el idioma, por lo que por ejemplo, obteníamos resultados como el siguiente. Como podemos observar, aunque la ñ en nuestro alfabeto se encuentra tras la letra n , el orden por defecto de ES, la sitúa al final. La clase Collator viene a resolver dicho problema, ya que una vez que le indiquemos el idioma a utilizar, realizará el orden correcto, si la pasamos como argumento a la función sort() . Su sintaxis es la siguiente: El primer parámetro del constructor es el idioma a utilizar, el cual se especifica mediante una cadena con formato BCP 47 . El segundo son una serie de opciones a utilizar. Normalmente lo utilizaremos como método de ordenación en los arrays. A continuación podéis ver un ejemplo de uso. En MDN podrás consultar más información sobre ésta útil clase.",
     "imageMini": "/images/javascript-mini.webp"
+  },
+  {
+    "slug": "20130725.html",
+    "title": "Problemas de secuencias PostgreSQL con Hibernate",
+    "description": "Por desgracia, en versiones antiguas de Hibernate no suelen funcionar los valores secuenciales de forma correcta con PostgreSQL. Pero tenemos una solución, y es que podemos obtener el identificador de forma manual. Para ello se creará el método siguiente:",
+    "url": "/articles/posts/20130725.html",
+    "date": "2013-07-25",
+    "categories": [
+      "Programación",
+      "Java",
+      "PostgreSQL",
+      "JPA"
+    ],
+    "content": "Por desgracia, en versiones antiguas de Hibernate no suelen funcionar los valores secuenciales de forma correcta con PostgreSQL. Pero tenemos una solución, y es que podemos obtener el identificador de forma manual. Para ello se creará el método siguiente: El método anterior lo que hace es recibir el nombre de una secuencia, obtener el número siguiente e incrementarla. De esta forma el valor obtenido será el auto numérico que vamos a utilizar. Ahora que tenemos nuestro nuevo número de secuencia, lo podremos utilizar de la forma siguiente: Ya tenemos de una forma muy sencilla solucionado nuestro problema de secuencias.",
+    "imageMini": "/images/java-mini.png"
   }
 ]

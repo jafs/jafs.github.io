@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Internacionalización en ES6 2: La clase DateTimeFormat — JAFS</title>
+  <meta name="description" content="En nuestro artículo anterior, aprendimos en qué consiste el namespace **Intl** y las ventajas que ofrece el uso de las clases que contiene, centrándonos en l..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, JavaScript" />
+  <meta name="article:published_time" content="2016-07-07T19:52:53.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20160707.html" />
+  <meta property="og:title" content="Internacionalización en ES6 2: La clase DateTimeFormat" />
+  <meta property="og:description" content="En nuestro artículo anterior, aprendimos en qué consiste el namespace **Intl** y las ventajas que ofrece el uso de las clases que contiene, centrándonos en l..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2016-07-07T19:52:53.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Internacionalización en ES6 2: La clase DateTimeFormat" />
+  <meta name="twitter:description" content="En nuestro artículo anterior, aprendimos en qué consiste el namespace **Intl** y las ventajas que ofrece el uso de las clases que contiene, centrándonos en l..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20160707.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Internacionalización en ES6 2: La clase DateTimeFormat",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En nuestro artículo anterior, aprendimos en qué consiste el namespace **Intl** y las ventajas que ofrece el uso de las clases que contiene, centrándonos en l...",
+  "url": "https://jafs.github.io/articles/posts/20160707.html",
+  "inLanguage": "es",
+  "datePublished": "2016-07-07T19:52:53.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Internacionalización en ES6 2: La clase DateTimeFormat</h1><p class="text-gray-600 text-sm mb-6">07-07-2016</p><p>En nuestro <a href="/articles/posts/20160623.html">artículo anterior</a>, aprendimos en qué consiste el namespace <strong>Intl</strong> y las ventajas que ofrece el uso de las clases que contiene, centrándonos en la clase <code>Collator</code>. En este artículo, aprenderemos a trabajar con fechas internacionalizadas mediante el uso de la clase <code>DateTimeFormat</code>.</p>
+<h2>DateTimeFormat</h2>
+<p>Como indicamos anteriormente, gracias al objeto <code>Intl.DateTimeFormat</code> podremos construir objetos que nos permitirán trabajar con fechas internacionalizadas. Su sintaxis básica es la siguiente:</p>
+<pre><code class="language-javascript">const local = &#39;es-ES&#39;;
+const options = {};
+const dateTime = new Intl.DateTimeFormat(local, options);
+
+// Para el 29 de junio de 2016, la salida será: 29/6/2016
+console.log(dateTime.format(new Date());
+</code></pre>
+<ul>
+<li><code>local</code>: parámetro obligatorio que será una cadena o array de cadenas con el idioma en formato <a href="https://tools.ietf.org/html/bcp47">BCP 47</a>.</li>
+<li><code>options</code>: parámetro opcional en el que se especifica una serie de opciones para aplicar el formato de fecha que veremos en el apartado siguiente.</li>
+</ul>
+<p>Tras observar el ejemplo anterior, os preguntaréis, en qué se diferencia de los métodos <code>toLocaleDateString</code> y <code>toLocaleString</code> del objeto Date, pues prácticamente ninguna, lo único que con el uso de Intl, ahorraremos pasar idioma y opciones con cada llamada, ya que lo podemos inicializar durante el arranque de la aplicación o cuando sea necesario cambiar la configuración regional. Sin embargo, cada llamada a <code>toLocaleDateString</code> requiere el paso de los dos parámetros, además de relanzarse el parseo de la configuración indicada.</p>
+<p>Pensad por ejemplo, que tenéis en una aplicación 20 fechas en 20 sitios distintos y que además al formatear se le aplica alguna opción especial. Habría que repetir 20, la llamada exacta, por ejemplo:</p>
+<pre><code class="language-javascript">const dateOptions = {
+  weekday: &quot;long&quot;,
+  year: &quot;numeric&quot;,
+  month: &quot;long&quot;
+};
+const language = &#39;es-ES&#39;;
+
+// ...
+
+// Con cada instancia de una fecha, al querer &quot;imprimirla&quot; tendríamos:
+myDate.toLocaleDateString(language, dateOptions);
+</code></pre>
+<p>Con el ejemplo anterior, siempre tendríamos que tener presentes las opciones así como el idioma, en cuanto uno de los dos se perdieran o se obviaran, una de las fechas no tendría el formato adecuado. Sin embargo, con <code>DateTimeFormat</code>, tendríamos centralizada la conversión de fechas:</p>
+<pre><code class="language-javascript">const options = {
+  weekday: &quot;long&quot;,
+  year: &quot;numeric&quot;,
+  month: &quot;long&quot;
+};
+const language = &#39;es-ES&#39;,
+const dateConverter = new Intl.DateTimeFormat(language, options);
+
+...
+
+// Ahora con cada instancia, tan sólo llamaríamos a:
+dateConverter.format(myDate);
+</code></pre>
+<p>Ahora hemos pasado de requerir dos objetos, a sólo uno, quedando además mucho más legible el código. Y no sólo eso, sino que creando alguna función para centralizar la conversión, se podría cambiar la configurar de formato y todo seguiría funcionando correctamente con el nuevo formato.</p>
+<h2>El atributo options</h2>
+<p>El atributo options, es un objeto con el que indicamos a la case DateTimeFormat el formato de la cadena de salida. A continuación indicaremos algunas de las opciones más comunes, partiendo de la base siguiente:</p>
+<pre><code class="language-javascript">// Al instanciar la fecha tenemos que su valor es:
+// Thu Jul 07 2016 21:26:48 GMT+0200 (Hora de verano romance)
+const date = new Date();
+</code></pre>
+<h3>weekday</h3>
+<p>Indica la representación que se utilizará para mostrar el nombre del día de la semana. Sus valores son: &quot;narrow&quot;, &quot;short&quot; o &quot;long&quot;.</p>
+<pre><code class="language-javascript">dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {weekday: &#39;narrow&#39;});
+dateFormat.format(date); // Salida: J
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {weekday: &#39;short&#39;});
+dateFormat.format(date); // Salida: jue.
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {weekday: &#39;long&#39;});
+dateFormat.format(date); // Salida: jueves
+</code></pre>
+<h3>hour12</h3>
+<p>Indica si se utiliza el formato de 12 horas, en lugar del formato de 24 horas. Es un valor booleano, por lo que sus posibles valores son <code>true</code> y <code>false</code>.</p>
+<pre><code class="language-javascript">dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {hour12: true, hour: &#39;numeric&#39;});
+dateFormat.format(date); // Salida: 9 p. m.
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {hour12: false, hour: &#39;numeric&#39;});
+dateFormat.format(date); // Salida: 21
+</code></pre>
+<h3>year</h3>
+<p>Indica el tipo de representación utilizado para el año, siendo sus posibles valores: &quot;numeric&quot; y &quot;2-digit&quot;.</p>
+<pre><code class="language-javascript">dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {year: &#39;numeric&#39;});
+dateFormat.format(date); // Salida: 2016
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {year: &#39;2-digit&#39;});
+dateFormat.format(date); // Salida: 16
+</code></pre>
+<h3>month</h3>
+<p>Formato que se utilizará para representar el mes. Los valores a utilizar serían: &quot;numeric&quot;, &quot;2-digit&quot;, &quot;narrow&quot;, &quot;short&quot; y &quot;long&quot;.</p>
+<pre><code class="language-javascript">dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {month: &#39;numeric&#39;});
+dateFormat.format(date); // Salida: 7
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {month: &#39;2-digit&#39;});
+dateFormat.format(date); // Salida: 07
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {month: &#39;narrow&#39;});
+dateFormat.format(date); // Salida: J
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {month: &#39;short&#39;});
+dateFormat.format(date); // Salida: jul.
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {month: &#39;long&#39;});
+dateFormat.format(date); // Salida: julio
+</code></pre>
+<h3>day</h3>
+<p>Con este parámetro se indica como se mostrará el día del mes, siendo sus posibles valores: &quot;numeric&quot; y &quot;2-digit&quot;.</p>
+<pre><code class="language-javascript">dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {day: &#39;numeric&#39;});
+dateFormat.format(date); // Salida: 7
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {day: &#39;2-digit&#39;});
+dateFormat.format(date); // Salida: 07
+</code></pre>
+<h3>hour</h3>
+<p>Con este parámetro se especifica que formato tendrá la hora. Los valores que puede tomar son: &quot;numeric&quot; y &quot;2-digit&quot;.</p>
+<pre><code class="language-javascript">// En este caso suponemos que la hora tiene el valor 9.
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {hour: &#39;numeric&#39;});
+dateFormat.format(date); // Salida: 9
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {hour: &#39;2-digit&#39;});
+dateFormat.format(date); // Salida: 09
+</code></pre>
+<h3>minute</h3>
+<p>Representación que se utilizará para mostrar los minutos. Sus valores son: &quot;numeric&quot; y &quot;2-digit&quot;.</p>
+<pre><code class="language-javascript">// Suponemos que los minutos son 7.
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {minute: &#39;numeric&#39;});
+dateFormat.format(date); // Salida: 7
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {minute: &#39;2-digit&#39;});
+dateFormat.format(date); // Salida: 07
+</code></pre>
+<h3>second</h3>
+<p>Para terminar, este parámetro especifica el formato de los segundos. Sus valores son: &quot;numeric&quot; y &quot;2-digit&quot;.</p>
+<pre><code class="language-javascript">// Suponemos que los segundos son 4.
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {second: &#39;numeric&#39;});
+dateFormat.format(date); // Salida: 4
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, {second: &#39;2-digit&#39;});
+dateFormat.format(date); // Salida: 04
+</code></pre>
+<h2>Ejemplos</h2>
+<p>Como se ha observado en los ejemplos anteriores, si sólo se especifica un parámetros, será el único que devolverá format. Pero se puede realizar cualquier combinación, como se puede observar en los ejemplos siguientes:</p>
+<pre><code class="language-javascript">// Se parte de la fecha:
+// Thu Jul 07 2016 21:26:48 GMT+0200 (Hora de verano romance)
+const date = new Date();
+
+let options = {
+  weekday: &#39;long&#39;,
+  month: &#39;short&#39;,
+  day: &#39;2-digit&#39;,
+  year: &#39;2-digit&#39;
+};
+
+let dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, options);
+dateFormat.format(date); // Salida: jueves, 07 de jul. de 16
+
+options = {
+    weekday: &#39;short&#39;,
+    month: &#39;long&#39;,
+    day: &#39;2-digit&#39;,
+    year: &#39;numeric&#39;,
+    hour: &#39;2-digit&#39;,
+    minute: &#39;numeric&#39;
+};
+
+dateFormat = new Intl.DateTimeFormat(&#39;es-ES&#39;, options);
+dateFormat.format(date); // Salida: jue., 07 de julio de 2016 21:26
+</code></pre>
+<h2>Compatibilidad</h2>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Android</th>
+<th>Chrome</th>
+<th>Edge</th>
+<th>Firefox</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Escritorio</td>
+<td>N/A</td>
+<td>24</td>
+<td>Todas</td>
+<td>29</td>
+<td>11</td>
+<td>15</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Móvil</td>
+<td>No</td>
+<td>26</td>
+<td>N/A</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+<hr>
+<p>Enlaces de interés</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat">Descripción de la clase en MDN</a></li>
+<li><a href="http://jafs.es/2807/es6_collator/">Internacionalización en ES6 1: La clase Collator</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

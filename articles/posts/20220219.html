@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Repromise: Nueva librería para promesas JavaScript — JAFS</title>
+  <meta name="description" content="¿Echas de menos los Deferred de jQuery cuando trabajas con promesas en JavaScript? Pues bien, acabo de publicar una utilidad con un código muy pequeño (32 lí..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, JavaScript, promesas, asincronía" />
+  <meta name="article:published_time" content="2022-02-19T18:27:11.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220219.html" />
+  <meta property="og:title" content="Repromise: Nueva librería para promesas JavaScript" />
+  <meta property="og:description" content="¿Echas de menos los Deferred de jQuery cuando trabajas con promesas en JavaScript? Pues bien, acabo de publicar una utilidad con un código muy pequeño (32 lí..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2022-02-19T18:27:11.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Repromise: Nueva librería para promesas JavaScript" />
+  <meta name="twitter:description" content="¿Echas de menos los Deferred de jQuery cuando trabajas con promesas en JavaScript? Pues bien, acabo de publicar una utilidad con un código muy pequeño (32 lí..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220219.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Repromise: Nueva librería para promesas JavaScript",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "¿Echas de menos los Deferred de jQuery cuando trabajas con promesas en JavaScript? Pues bien, acabo de publicar una utilidad con un código muy pequeño (32 lí...",
+  "url": "https://jafs.github.io/articles/posts/20220219.html",
+  "inLanguage": "es",
+  "datePublished": "2022-02-19T18:27:11.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Repromise: Nueva librería para promesas JavaScript</h1><p class="text-gray-600 text-sm mb-6">19-02-2022</p><p>¿Echas de menos los Deferred de jQuery cuando trabajas con promesas en JavaScript? Pues bien, acabo de publicar una utilidad con un código muy pequeño (32 líneas), con la que puedes trabajar con las promesas de JavaScript, tal y como lo hacías con los Deferred. La mini-librería se llama <a href="https://github.com/jafs/repromise">Repromise</a>.</p>
+<p>Me explico. Su funcionamiento es muy básico. Si hasta ahora al construir las promesas de JavaScript, tenías que definir un callback, con el que recibir los métodos a los que llamar al resolver y rechazar la promesa. Pongamos un ejemplo de como sería un código más o menos realista con promesas:</p>
+<pre><code class="language-javascript">function findUserByName(userName) {
+  const promise = new Promise((resolve, reject) =&gt; {
+    userStore.findByName(userName).then((userResult) =&gt; {
+      const userParsed = parseUserResult(userResult);
+      resolve(userParsed);
+    }.catch(function(errorReason) {
+      reject(errorReason);
+    });
+  }
+
+  return promise;
+}
+</code></pre>
+<p>Como podéis ver, la indentación se va incrementando haciendo poco legible el código. Con Repromise, creas una instancia de la clase, y cuando quieras resolver la promesa o rechazarla llamas al método correspondiente. Basándonos en el ejemplo anterior:</p>
+<pre><code class="language-javascript">function findUserByName(userName) {
+  const repromise = new Repromise();
+
+  userStore.findByName(userName).then((userResult) =&gt; {
+    const userParsed = parseUserResult(userResult);
+    repromise.resolve(userParsed);
+  }.catch(function(errorReason) {
+    repromise.reject(errorReason);
+  });
+
+  return repromise.getPromise();
+}
+</code></pre>
+<p>Como podéis ver, simplifica un poco el código, evitando que tengamos un método en medio, y además, podemos pasar nuestro objeto Repromise a otros métodos para que sean éstos los que hagan las llamadas, así podemos simplificar aún más el método original:</p>
+<pre><code class="language-javascript">function findUserByName(userName) {
+  const repromise = new Repromise();
+
+  userStore.findByName(userName)
+    .then(onStoreFindByNameResolved.bind(this, repromise))
+    .catch(onStoreFindByNameRejected.bind(this, repromise));
+
+  return repromise.getPromise();
+}
+
+function onStoreFindByNameResolved(repromise, userResult) {
+  const userParsed = this.parseUserResult(userResult);
+  repromise.resolve(userParsed);
+}
+
+function onStoreFindByNameRejected(repromise, errorReason) {
+  repromise.reject(errorReason);
+}
+</code></pre>
+<p>Con el modo antiguo, no quedaba otra que pasar los dos parámetros, o crear un nuevo objeto uniendo ambos para pasarlos a otras funciones.</p>
+<p>Para utilizar la librería tan sólo hay que importarla en vuestro proyecto con <a href="https://www.npmjs.com/package/jrepromise">npm</a>:</p>
+<pre><code class="language-shell">npm i jrepromise
+</code></pre>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -279,6 +279,20 @@
     "imageMini": "/images/javascript-mini.webp"
   },
   {
+    "slug": "20220219.html",
+    "title": "Repromise: Nueva librería para promesas JavaScript",
+    "description": "¿Echas de menos los Deferred de jQuery cuando trabajas con promesas en JavaScript? Pues bien, acabo de publicar una utilidad con un código muy pequeño (32 líneas), con la que puedes trabajar con las promesas de JavaScript, tal y como lo hacías con los Deferred. La mini-librería se llama Repromise.",
+    "url": "/articles/posts/20220219.html",
+    "date": "2022-02-19",
+    "categories": [
+      "JavaScript",
+      "promesas",
+      "asincronía"
+    ],
+    "content": "¿Echas de menos los Deferred de jQuery cuando trabajas con promesas en JavaScript? Pues bien, acabo de publicar una utilidad con un código muy pequeño (32 líneas), con la que puedes trabajar con las promesas de JavaScript, tal y como lo hacías con los Deferred. La mini-librería se llama Repromise . Me explico. Su funcionamiento es muy básico. Si hasta ahora al construir las promesas de JavaScript, tenías que definir un callback, con el que recibir los métodos a los que llamar al resolver y rechazar la promesa. Pongamos un ejemplo de como sería un código más o menos realista con promesas: Como podéis ver, la indentación se va incrementando haciendo poco legible el código. Con Repromise, creas una instancia de la clase, y cuando quieras resolver la promesa o rechazarla llamas al método correspondiente. Basándonos en el ejemplo anterior: Como podéis ver, simplifica un poco el código, evitando que tengamos un método en medio, y además, podemos pasar nuestro objeto Repromise a otros métodos para que sean éstos los que hagan las llamadas, así podemos simplificar aún más el método original: Con el modo antiguo, no quedaba otra que pasar los dos parámetros, o crear un nuevo objeto uniendo ambos para pasarlos a otras funciones. Para utilizar la librería tan sólo hay que importarla en vuestro proyecto con npm :",
+    "imageMini": "/images/javascript-mini.webp"
+  },
+  {
     "slug": "20220209.html",
     "title": "Métodos del objeto Promise en JavaScript",
     "description": "Como hasta ahora no hemos hablado de promesas en este blog, vamos a comenzar haciendo una pequeña introducción a la breve pero apasionante historia de las promesas en JavaScript, para a continuación ver los distintos métodos para trabajar con promesas.",

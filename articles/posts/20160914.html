@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Internacionalización en ES6 (y 3): La clase NumberFormat — JAFS</title>
+  <meta name="description" content="Para terminar con esta mini-serie de artículos sobre internacionalización, a lo largo de los dos anterior artículos (parte 1 y parte 2), descubrimos el names..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, JavaScript" />
+  <meta name="article:published_time" content="2016-09-14T17:37:21.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20160914.html" />
+  <meta property="og:title" content="Internacionalización en ES6 (y 3): La clase NumberFormat" />
+  <meta property="og:description" content="Para terminar con esta mini-serie de artículos sobre internacionalización, a lo largo de los dos anterior artículos (parte 1 y parte 2), descubrimos el names..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2016-09-14T17:37:21.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Internacionalización en ES6 (y 3): La clase NumberFormat" />
+  <meta name="twitter:description" content="Para terminar con esta mini-serie de artículos sobre internacionalización, a lo largo de los dos anterior artículos (parte 1 y parte 2), descubrimos el names..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20160914.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Internacionalización en ES6 (y 3): La clase NumberFormat",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Para terminar con esta mini-serie de artículos sobre internacionalización, a lo largo de los dos anterior artículos (parte 1 y parte 2), descubrimos el names...",
+  "url": "https://jafs.github.io/articles/posts/20160914.html",
+  "inLanguage": "es",
+  "datePublished": "2016-09-14T17:37:21.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Internacionalización en ES6 (y 3): La clase NumberFormat</h1><p class="text-gray-600 text-sm mb-6">14-09-2016</p><p>Para terminar con esta mini-serie de artículos sobre internacionalización, a lo largo de los dos anterior artículos (<a href="/articles/posts/20160623.html">parte 1</a> y <a href="/articles/posts/20160707.html">parte 2</a>), descubrimos el namespace <strong>Intl</strong>, así como las ventajas que ofrece su uso. En este último artículo, descubriremos como mejorar el formateo de números gracias a la clase <code>NumberFormat</code>.</p>
+<p>NumberFormat</p>
+<p>El objeto <code>Intl.NumberFormat</code> nos permite construir objetos que nos ayudarán a convertir valores numéricos en cadenas con el formato de un país determinado. A continuación podéis ver un ejemplo básico:</p>
+<pre><code class="language-javascript">var local = &#39;es-ES&#39;;
+var options = {};
+var numberFormat = new Intl.NumberFormat(local, options);
+
+var myNumber = 1234567.89;
+console.log(numberFormat.format(myNumber));
+// La salida es: 1.234.567,89
+</code></pre>
+<ul>
+<li><code>local</code>: parámetro obligatorio que será una cadena o array de cadenas con el idioma en formato <a href="https://tools.ietf.org/html/bcp47">BCP 47</a>.</li>
+<li><code>options</code>: parámetro opcional en el que se especifica una serie de opciones para aplicar el formato de número que veremos en el apartado siguiente.</li>
+</ul>
+<h2>El atributo options</h2>
+<p>Al igual que con sus clases &quot;hermanas&quot;, <code>NumberFormat</code> tiene un atributo <code>options</code>, mediante el cuál se puede especificar el formato de la cadena de salida. Pasemos a ver las más comunes.</p>
+<h3>style</h3>
+<p>Indica la representación que se utilizará para mostrar el valor numérico. Sus valores son <code>decimal</code>, <code>currency</code> y <code>percente</code>. El primer caso es el valor por defecto; mientras que con el valor <code>currency</code> permite definir el formato moneda, el cuál requiere de otro parámetros llamado <code>currency</code> que indica el tipo de moneda a representar (los valores que puede tomar los encontrarás en <a href="http://www.currency-iso.org/dam/downloads/lists/list_one.xml">este XML</a>); finalmente, el valor <code>percent</code> muestra el símbolo de porcentaje al final del valor, además de multiplicar el valor indicado por 100, como se puede ver en el último ejemplo.</p>
+<pre><code class="language-javascript">var myNumber = 1234567.89;
+var options = { style: &#39;decimal&#39;};
+var numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,89
+
+options = { style: &#39;currency&#39;, currency: &#39;EUR&#39;};
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,89 €
+
+options = { style: &#39;percent&#39;};
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 123.456.789
+
+myNumber = 0.23;
+console.log(numberFormat.format(myNumber));
+// Salida: 23
+</code></pre>
+<h3>currencyDisplay</h3>
+<p>Gracias a esta opción, junto con el estilo <code>currency</code>, podremos personalizar el formato que se mostrará para la moneda. Puede tomar los valores <code>symbol</code> (valor por defecto, que muestra el símbolo de la moneda), <code>code</code> (la moneda se muestra con su código ISO) y <code>name</code> (que muestra el nombre completo de la moneda). Al final del ejemplo podéis comprobar que el formato <code>name</code> tiene la ventaja de distinguir entre singular y plural.</p>
+<pre><code class="language-javascript">var myNumber = 1234567.89;
+var options = { style: &#39;currency&#39;, currency: &#39;EUR&#39;, currencyDisplay: &#39;symbol&#39;};
+var numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,89 €
+
+options = { style: &#39;currency&#39;, currency: &#39;EUR&#39;, currencyDisplay: &#39;code&#39;};
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,89 EUR
+
+options = { style: &#39;currency&#39;, currency: &#39;EUR&#39;, currencyDisplay: &#39;name&#39;};
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,89 euros
+
+myNumber = 1;
+console.log(numberFormat.format(myNumber));
+// Salida: 1,00 euro
+</code></pre>
+<h3>useGrouping</h3>
+<p>Especifica si se usan los separadores en los grupos de número o no. Sus posibles valores son <code>true</code> (valor por defecto) y <code>false</code>.</p>
+<pre><code class="language-javascript">var myNumber = 1234567.89;
+var options = { useGrouping: true };
+var numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,89
+
+options = { useGrouping: false };
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1234567,89
+</code></pre>
+<h3>minimumIntegerDigits</h3>
+<p>Indica el número mínimo de valores enteros a mostrar al formatear el número. Si el valor a convertir tiene menos dígitos enteros se añadirán ceros al principio. Puede tomar valores entre <code>1</code> y <code>21</code>.</p>
+<pre><code class="language-javascript">var myNumber = 1234567.89;
+var options = { minimumIntegerDigits: 12 };
+var numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 000.001.234.567,89
+
+options = { minimumIntegerDigits: 1 };
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,89
+
+options = { minimumIntegerDigits: 21 };
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida 000.000.000.000.001.234.567,89
+</code></pre>
+<h3>minimumFractionDigits</h3>
+<p>De forma parecida al atributo anterior, <code>minimumFractionDigits</code> indica el número mínimo de valores decimales a mostrar al formatear el número. Si el valor a convertir tiene menos dígitos decimales se añadirán ceros al final. Puede tomar valores entre <code>0</code> y <code>20</code>. Si este parámetro no se especifica, se usa el valor por defecto para el idioma indicado.</p>
+<pre><code class="language-javascript">var myNumber = 1234567.89;
+var options = { minimumFractionDigits: 12 };
+var numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,890000000000
+
+options = { minimumFractionDigits: 1 };
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida 1.234.567,89
+
+options = { minimumFractionDigits: 20 };
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,89000000000000000000
+</code></pre>
+<h3>maximumFractionDigits</h3>
+<p>En esta ocasión, con este parámetro limitaremos el número de decimales a mostrar. En el caso de que el número de decimales sea mayor que el establecido con este parámetro, se realizará un rendondeo. Su valores están comprendidos entre <code>0</code> y <code>20</code>.</p>
+<pre><code class="language-javascript">var myNumber = 1234567.89;
+var options = { maximumFractionDigits: 0 };
+var numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.568
+
+options = { maximumFractionDigits: 10 };
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida 1.234.567,89
+
+options = { maximumFractionDigits: 1 };
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,9
+</code></pre>
+<h3>minimumSignificantDigits</h3>
+<p>Define el número mínimo de dígitos totales con que contará el valor formateado. Puede tomar valores del rango <code>1</code> a <code>21</code>. El incremento de cifras se realiza por la parte decimal como se puede ver en los ejemplos siguientes:</p>
+<pre><code class="language-javascript">var myNumber = 1234567.89;
+var options = { minimumSignificantDigits: 1 };
+var numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,89
+
+options = { minimumSignificantDigits: 10 };
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,890
+
+options = { minimumSignificantDigits: 21 };
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,89000000000000
+
+myNumber = 1234567;
+options = { minimumSignificantDigits: 10 };
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,000
+</code></pre>
+<h3>maximumSignificantDigits</h3>
+<p>Finalmente, este parámetro define el número máximo de cifras a mostrar para el número. Con números enteros realiza un redondeo a la unidad superior. Puede tomar valores del rango <code>1</code> a <code>21</code>.</p>
+<pre><code class="language-javascript">var myNumber = 1234567.89;
+var options = { maximumSignificantDigits: 1 };
+var numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.000.000
+
+options = { maximumSignificantDigits: 5 };
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.600
+
+options = { maximumSignificantDigits: 8 };
+numberFormat = new Intl.NumberFormat(local, options);
+console.log(numberFormat.format(myNumber));
+// Salida: 1.234.567,9
+</code></pre>
+<h3>Compatibilidad</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Android</th>
+<th>Chrome</th>
+<th>Edge</th>
+<th>Firefox</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Escritorio</td>
+<td>N/A</td>
+<td>24</td>
+<td>Todas</td>
+<td>29</td>
+<td>11</td>
+<td>15</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Móvil</td>
+<td>No</td>
+<td>26</td>
+<td>N/A</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+<h2>Enlaces</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat">Descripción de la clase en MDN</a></li>
+<li><a href="/articles/posts/20160623.html">Internacionalización en ES6 1: La clase Collator</a></li>
+<li><a href="/articles/posts/20160707.html">Internacionalización en ES6 2: La clase DateTimeFormat</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

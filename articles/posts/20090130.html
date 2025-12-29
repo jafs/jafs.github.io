@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>VB.NET: información de las unidades de disco — JAFS</title>
+  <meta name="description" content="En Visual Basic.NET se puede encontrar el array Drives dentro de My.Computer.FileSystem. Con él se obtiene bastante información sobre las unidades de disco c..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, Visual Basic.NET" />
+  <meta name="article:published_time" content="2009-01-30T11:38:53.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20090130.html" />
+  <meta property="og:title" content="VB.NET: información de las unidades de disco" />
+  <meta property="og:description" content="En Visual Basic.NET se puede encontrar el array Drives dentro de My.Computer.FileSystem. Con él se obtiene bastante información sobre las unidades de disco c..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/vbnet.webp" />
+  
+  <meta property="article:published_time" content="2009-01-30T11:38:53.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VB.NET: información de las unidades de disco" />
+  <meta name="twitter:description" content="En Visual Basic.NET se puede encontrar el array Drives dentro de My.Computer.FileSystem. Con él se obtiene bastante información sobre las unidades de disco c..." />
+  <meta name="twitter:image" content="/images/vbnet.webp" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20090130.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "VB.NET: información de las unidades de disco",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En Visual Basic.NET se puede encontrar el array Drives dentro de My.Computer.FileSystem. Con él se obtiene bastante información sobre las unidades de disco c...",
+  "url": "https://jafs.github.io/articles/posts/20090130.html",
+  "inLanguage": "es",
+  "datePublished": "2009-01-30T11:38:53.000Z",
+  "image": "/images/vbnet.webp"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">VB.NET: información de las unidades de disco</h1><p class="text-gray-600 text-sm mb-6">30-01-2009</p><p>En Visual Basic.NET se puede encontrar el array Drives dentro de My.Computer.FileSystem. Con él se obtiene bastante información sobre las unidades de disco conectadas en el ordenador. Pasemos a ver algunos de los atributos más interesantes:</p>
+<ul>
+<li><code>AvailabreFreeSpace</code>: entero largo que indica espacio disponible en la unidad en bytes. Para obtener los MB o GB deberemos realizar las operaciones oportunas con este dato.</li>
+<li><code>DriveFormat</code>: cadena que nos indica el sistema de archivos en el que está formateada la unidad.</li>
+<li><code>DriveType</code>: nos indica el tipo de unidad entre los que tenemos:<ul>
+<li><em>IO.DriveType.CDRom</em>: unidad de CD.</li>
+<li><em>IO.DriveType.Fixed</em>: disco fijo.</li>
+<li><em>IO.DriveType.Network</em>: unidad de red.</li>
+<li><em>IO.DriveType.NoRootDirectory</em>: unidad sin directorio raíz.</li>
+<li><em>IO.DriveType.Ram</em>: disco ram.</li>
+<li><em>IO.DriveType.Removable</em>: extraíble.</li>
+<li><em>IO.DriveType.Unknown</em>: unidad de tipo desconocido.</li>
+</ul>
+</li>
+<li><code>IsReady</code>: valor booleano que indica si la unidad está lista. Ten en cuenta que no podrá acceder a la mayoría de los datos, como el sistema de archivos o el espacio libre si la unidad no está montada.</li>
+<li><code>Name</code>: cadena con el nombre por el que conoce Windows a la unidad. El famoso A:, C:, etc.</li>
+<li><code>RootDirectory</code>: cadena que devuelve el directorio raíz de la unidad.</li>
+<li><code>TotalFreeSpace</code>: prácticamente lo mismo que AvailableFreeSpace.</li>
+<li><code>TotalSize</code>: entero largo que nos devuelve el tamaño total de la unidad en bytes.</li>
+<li><code>VolumeLabel</code>: nos devuelve una cadena con el nombre que le hemos asignado a la unidad, lo que se conoce como etiqueta del volumen.</li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

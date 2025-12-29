@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Java: toString() genérico para todas las clases — JAFS</title>
+  <meta name="description" content="Gracias a la reflexión en Java podemos acceder a los datos internos de nuestras clases. De esta forma podemos conocer los métodos y atributos declarados, ent..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, Java" />
+  <meta name="article:published_time" content="2013-04-04T14:55:49.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20130404.html" />
+  <meta property="og:title" content="Java: toString() genérico para todas las clases" />
+  <meta property="og:description" content="Gracias a la reflexión en Java podemos acceder a los datos internos de nuestras clases. De esta forma podemos conocer los métodos y atributos declarados, ent..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/java.png" />
+  
+  <meta property="article:published_time" content="2013-04-04T14:55:49.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Java: toString() genérico para todas las clases" />
+  <meta name="twitter:description" content="Gracias a la reflexión en Java podemos acceder a los datos internos de nuestras clases. De esta forma podemos conocer los métodos y atributos declarados, ent..." />
+  <meta name="twitter:image" content="/images/java.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20130404.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Java: toString() genérico para todas las clases",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Gracias a la reflexión en Java podemos acceder a los datos internos de nuestras clases. De esta forma podemos conocer los métodos y atributos declarados, ent...",
+  "url": "https://jafs.github.io/articles/posts/20130404.html",
+  "inLanguage": "es",
+  "datePublished": "2013-04-04T14:55:49.000Z",
+  "image": "/images/java.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Java: toString() genérico para todas las clases</h1><p class="text-gray-600 text-sm mb-6">04-04-2013</p><p>Gracias a la reflexión en Java podemos acceder a los datos internos de nuestras clases. De esta forma podemos conocer los métodos y atributos declarados, entre otras cosas. Pues bien, hoy vamos a tener un método toString() que nos servirá para cualquier clase y que nos mostrará una cadena del tipo:</p>
+<pre><code class="language-text">NombreClase {atributo1-&gt;valor1; atributo2-&gt;valor2; ... atributoN-&gt;valorN}
+</code></pre>
+<h2>El código</h2>
+<p>Para lo anterior, tan sólo tenemos que tener un método toString() con la forma siguiente en nuestras clases:</p>
+<pre><code class="language-java">import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
+// ...
+
+/**
+ * Obtiene una cadena con los valores del objeto.
+ * @return Cadena con los valores del objeto.
+ */
+@Override
+public String toString() {
+  final StringBuilder objBuilder = new StringBuilder();
+ 
+  // Inicio de cadena.
+  objBuilder.append(getClass().getSimpleName());
+  objBuilder.append(&quot; {&quot;);
+ 
+  try {
+    // Comienza el análisis por la clase actual y recorre los elementos hasta
+    // llegar a la clase base Object.
+    Class&lt;?&gt; objClase = getClass();
+    Field[] arCampos;
+    String sTipo;
+
+    while (null != objClase
+           &amp;&amp; !Object.class.getSimpleName().equals(objClase.getSimpleName())) {
+      arCampos = objClase.getDeclaredFields();
+      if (null != arCampos) {
+        // Recorre los campos del objeto. Si es una constante omite su lectura.
+        for (Field objCampo : arCampos) {
+          sTipo = objCampo.getType().toString();
+          if (!Modifier.isFinal(objCampo.getModifiers())
+              || (sTipo.startsWith(&quot;class&quot;)
+              &amp;&amp; !sTipo.endsWith(String.class.getCanonicalName()))) {
+            objCampo.setAccessible(true);
+            objBuilder.append(objCampo.getName());
+            objBuilder.append(&quot;-&gt;&quot;);
+            objBuilder.append(objCampo.get(this));
+            objBuilder.append(&quot;; &quot;);
+          }
+        }
+      }
+ 
+      // Pasa a la siguiente clase padre.
+      objClase = objClase.getSuperclass();
+    }
+  } catch (final IllegalArgumentException e) {
+  } catch (final IllegalAccessException e) {
+  }
+ 
+  // Fin de cadena. Si hay datos elimina el último &quot;; &quot;.
+  if (objBuilder.length() &gt; getClass().getSimpleName().length() + 2) {
+    objBuilder.setLength(objBuilder.length() - 2);
+  }
+  objBuilder.append(&#39;}&#39;);
+ 
+  return objBuilder.toString();
+}
+</code></pre>
+<h2>Explicación</h2>
+<p>Lo primero de todo es saber de forma muy breve que es la reflexión en Java. De forma totalmente ajena a nosotros, cuando creamos una clase en Java, se crea una instancia de Class para dicha clase. Dicho objeto contiene toda la información de nuestra clase, métodos, atributos, anotaciones, constructores, etc.</p>
+<p>En nuestro caso, lo que queremos saber es el contenido de las variables del objeto actual. Pues bien, veamos el código deteniéndonos en los pasos que más puedan interesar.</p>
+<pre><code class="language-java">  objBuilder.append(getClass().getSimpleName());
+</code></pre>
+<p>Es la parte más sencilla, con eso obtenemos el nombre que le hemos dado a la clase. Si usamos, getName() nos mostraría el paquete y el nombre de la clase, por ejemplo es.jafs.ejemplo.MiClase.</p>
+<pre><code class="language-java">while (null != objClase
+       &amp;&amp; !Object.class.getSimpleName().equals(objClase.getSimpleName())) {
+</code></pre>
+<p>Como sabemos, todas las clases, de forma transparente para nosotros heredan de la clase Object, por lo que es la clase padre de todas. Con este bucle, nos aseguramos de que salgamos al llegar a la clase Object.</p>
+<pre><code class="language-java">arCampos = objClase.getDeclaredFields();
+if (null != arCampos) {
+  // Recorre los campos del objeto. Si es una constante omite su lectura.
+  for (Field objCampo : arCampos) {
+    sTipo = objCampo.getType().toString();
+    if (!Modifier.isFinal(objCampo.getModifiers())
+        || (sTipo.startsWith(&quot;class&quot;)
+        &amp;&amp; !sTipo.endsWith(String.class.getCanonicalName()))) {
+      objCampo.setAccessible(true);
+      objBuilder.append(objCampo.getName());
+      objBuilder.append(&quot;-&gt;&quot;);
+      objBuilder.append(objCampo.get(this));
+      objBuilder.append(&quot;; &quot;);
+    }
+  }
+}
+</code></pre>
+<p>Aquí tenemos la parte principal del método. Lo primero que hacemos con <code>getDeclaredFields()</code> es obtener todos los atributos de la clase.
+Posteriormente recorremos los atributos recibidos hay primero verificamos que no sean una constante y para ello utilizamos <code>Modifier.isFinal()</code>, en el caso de que sean una constante, omitiremos tanto los valores primitivos, como las cadenas. Pero el resto serán mostrados ya que el contenido de dichos objetos constantes puede variar.
+Cuando el atributo pase nuestro filtro, lo que haremos es obtener su nombre y obtener su valor de toString() por defecto. Para obtener el valor de un campo lo que hacemos es llamar a los métodos <code>get()</code>, <code>getString()</code>, <code>getInt()</code>, etc, pasando la instancia del objeto actual.</p>
+<h2>Resultado</h2>
+<p>Tenemos dos clases, padre e hija cuyo código os mostramos a continuación. Ambas heredan de una clase ToString que contiene el método anterior.</p>
+<pre><code class="language-java">public class Padre extends ToString {
+  private int id;
+  private String nombre;
+  private final Hija objHija = new Hija(12.34);
+  ...
+}
+
+public class Hija extends ToString {
+  private double flotante;
+  ...
+}
+</code></pre>
+<p>Aquí podremos ver el resultado de ejecutar las dos sentencias inferiores:</p>
+<pre><code class="language-java">  Padre objRadio = new Padre(123, &quot;MiClase&quot;);
+  System.out.println(objRadio.toString());
+
+  // ...
+
+  Resultado:
+  Padre {id-&gt;123; nombre-&gt;MiClase; objHija-&gt;Hija {flotante-&gt;12.34}}
+</code></pre>
+<h2>Conclusión</h2>
+<p>Gracias a la reflexión hemos conseguido que cuando hagamos un toString() obtengamos cadenas con un formato parecido al que nos ofrece PHP. Si no queremos repetir código, lo cual no es deseable, lo mejor será crear una clase de la que hereden aquellas clases que queramos que implementen esta funcionalidad. El único problema es la herencia simple de Java, por lo que las clases que ya hereden de otra no podrán heredar de la que hayamos creado.</p>
+<p>Todas las posibles actualizaciones de código las podréis seguir en <a href="https://gist.github.com/jafs/5298970">GitHub</a>.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>C: función indexOf() para cadenas — JAFS</title>
+  <meta name="description" content="En Java, el método indexOf()) de los objetos String, nos permite conocer la posición de una cadena dentro de otra." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, C/C++" />
+  <meta name="article:published_time" content="2013-06-03T18:32:22.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20130603.html" />
+  <meta property="og:title" content="C: función indexOf() para cadenas" />
+  <meta property="og:description" content="En Java, el método indexOf()) de los objetos String, nos permite conocer la posición de una cadena dentro de otra." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/c.png" />
+  
+  <meta property="article:published_time" content="2013-06-03T18:32:22.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="C: función indexOf() para cadenas" />
+  <meta name="twitter:description" content="En Java, el método indexOf()) de los objetos String, nos permite conocer la posición de una cadena dentro de otra." />
+  <meta name="twitter:image" content="/images/c.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20130603.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "C: función indexOf() para cadenas",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En Java, el método indexOf()) de los objetos String, nos permite conocer la posición de una cadena dentro de otra.",
+  "url": "https://jafs.github.io/articles/posts/20130603.html",
+  "inLanguage": "es",
+  "datePublished": "2013-06-03T18:32:22.000Z",
+  "image": "/images/c.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">C: función indexOf() para cadenas</h1><p class="text-gray-600 text-sm mb-6">03-06-2013</p><p>En Java, el método <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#indexOf(java.lang.String)"><code>indexOf()</code></a> de los objetos String, nos permite conocer la posición de una cadena dentro de otra.</p>
+<p>En C no disponemos de una función parecida (a nivel de librerías estándar), por lo que para aquellas personas que la necesitéis, podréis ver a continuación el código de una función cuyo resultado es prácticamente igual que el método de Java.</p>
+<h2>El código</h2>
+<pre><code class="language-c">/**
+ * Obtiene la posición de la cadena recibida como segundo parámetro, dentro de
+ * la cadena indicada en el primer parámetro.
+ * @param  theString    Cadena sobre la que buscar la subcadena.
+ * @param  searched  Cadena a buscar.
+ * @return Índice base 0 de la subcadena si se encuentra o -1 en caso de no
+ *         encontrarse.
+ */
+int indexOf(char * theString, char * searched) {
+  int position = -1;
+  char * result = null;
+
+  if (theString &amp;&amp; searched) {
+    result = strstr(theString, searched);
+    if (result) {
+      position = result - theString;
+    }
+  }
+
+  return position;
+}
+</code></pre>
+<p>El funcionamiento del método es muy simple, se basa en la resta de punteros para obtener la posición de la subcadena.</p>
+<p>Lo primero que hacemos es obtener el puntero a la subcadena si se encuentra en la cadena principal mediante la llamada a <code>strstr</code>. Una vez obtenido el puntero, restamos éste a la cadena original dándonos la &quot;posición&quot; del puntero de la subcadena con respecto a la cadena original.</p>
+<p>A continuación, se muestra un ejemplo con sus respectivos resultados:</p>
+<pre><code class="language-c">int main(int argc, char * argv[]) {
+  printf(&quot;h   Posición: %i\n&quot;, indexOf(&quot;hola que tal&quot;, &quot;h&quot;));
+  printf(&quot;tal Posición: %i\n&quot;, indexOf(&quot;hola que tal&quot;, &quot;tal&quot;));
+  printf(&quot;que Posición: %i\n&quot;, indexOf(&quot;hola que tal&quot;, &quot;que&quot;));
+  printf(&quot;no  Posición: %i\n&quot;, indexOf(&quot;hola que tal&quot;, &quot;no&quot;));
+  printf(&quot;e1  Posición: %i\n&quot;, indexOf(&quot;&quot;, &quot;no&quot;));
+  printf(&quot;e2  Posición: %i\n&quot;, indexOf(&quot;hola que tal&quot;, &quot;&quot;));
+  printf(&quot;e12 Posición: %i\n&quot;, indexOf(&quot;&quot;, &quot;&quot;));
+  printf(&quot;n1  Posición: %i\n&quot;, indexOf(NULL, &quot;no&quot;));
+  printf(&quot;n2  Posición: %i\n&quot;, indexOf(&quot;hola que tal&quot;, NULL));
+  printf(&quot;n12 Posición: %i\n&quot;, indexOf(NULL, NULL));
+}
+
+// Resultado
+// h   Posición: 0
+// tal Posición: 9
+// que Posición: 5
+// no  Posición: -1
+// e1  Posición: -1
+// e2  Posición: 0
+// e12 Posición: 0
+// n1  Posición: -1
+// n2  Posición: -1
+// n12 Posición: -1
+</code></pre>
+<p>Como podéis observar se producen los mismos resultados que con el método de Java, excepto el trabajo con valores nulos (en Java como es obvio el objeto que llama no puede ser nulo, sólo el parámetro) por lo que se ha optado por devolver en este caso -1.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

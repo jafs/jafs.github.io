@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>VB.NET: crear un log sencillo — JAFS</title>
+  <meta name="description" content="La posibilidad de tener logs en las aplicaciones nos pueden ayudar bastante en el día a día, sobretodo cuando no podemos depurar nuestro código. Por ello, ho..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, Visual Basic.NET" />
+  <meta name="article:published_time" content="2012-07-24T13:41:54.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20120724.html" />
+  <meta property="og:title" content="VB.NET: crear un log sencillo" />
+  <meta property="og:description" content="La posibilidad de tener logs en las aplicaciones nos pueden ayudar bastante en el día a día, sobretodo cuando no podemos depurar nuestro código. Por ello, ho..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/vbnet.webp" />
+  
+  <meta property="article:published_time" content="2012-07-24T13:41:54.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VB.NET: crear un log sencillo" />
+  <meta name="twitter:description" content="La posibilidad de tener logs en las aplicaciones nos pueden ayudar bastante en el día a día, sobretodo cuando no podemos depurar nuestro código. Por ello, ho..." />
+  <meta name="twitter:image" content="/images/vbnet.webp" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20120724.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "VB.NET: crear un log sencillo",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "La posibilidad de tener logs en las aplicaciones nos pueden ayudar bastante en el día a día, sobretodo cuando no podemos depurar nuestro código. Por ello, ho...",
+  "url": "https://jafs.github.io/articles/posts/20120724.html",
+  "inLanguage": "es",
+  "datePublished": "2012-07-24T13:41:54.000Z",
+  "image": "/images/vbnet.webp"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">VB.NET: crear un log sencillo</h1><p class="text-gray-600 text-sm mb-6">24-07-2012</p><p>La posibilidad de tener logs en las aplicaciones nos pueden ayudar bastante en el día a día, sobretodo cuando no podemos depurar nuestro código. Por ello, hoy os propongo un código sencillo para llevar un registro de los eventos de nuestra aplicación en VB.NET.</p>
+<h2>El código</h2>
+<pre><code class="language-vb">Imports System.IO
+
+Public Class Logger
+  Public Enum TipoMensaje
+    DEBUG
+    INFO
+    WARNING
+    LERROR
+  End Enum
+
+  Private Const TAM_FICHERO As Integer = 52428800
+  Private Const EXTENSION As String = &quot;.log&quot;
+
+  Private Shared eNivel As TipoMensaje = TipoMensaje.DEBUG
+
+  Public Shared Property Nivel As TipoMensaje
+    Get
+      Return eNivel
+    End Get
+    Set(eActual As TipoMensaje)
+      eNivel = eActual
+    End Set
+  End Property
+
+  Private Shared Sub add(ByVal eTipo As TipoMensaje, _
+                         ByVal sMensaje As String, _
+                         Optional ByVal objTraza As StackFrame = Nothing)
+    If eTipo &gt;= eNivel Then
+      Dim sDestino As String = getFileFecha()
+
+      verificar(sDestino)
+
+      Dim objFichero As New FileStream(sDestino, FileMode.Append, _
+                                       FileAccess.Write)
+
+      If Not objFichero Is Nothing And objFichero.CanWrite Then
+        Dim sDeb As String = String.Empty
+        Dim objFecha As Date = Date.Now
+
+        sDeb = objFecha.ToString() + &quot; [&quot; + eTipo.ToString + &quot;] &quot;
+        sDeb &amp;= getTraza(objTraza) &amp; sMensaje
+
+        Dim objStream As New StreamWriter(objFichero)
+        objStream.WriteLine(sDeb)
+        objStream.Close()
+        objFichero.Close()
+      End If
+    End If
+  End Sub
+
+  Private Shared Function getFileFecha() As String
+    Dim objFecha As Date = Date.Now
+    Dim sCadena As String = String.Empty
+
+    sCadena &amp;= objFecha.Year
+    If objFecha.Month &lt; 10 Then
+      sCadena &amp;= &quot;0&quot;
+    End If
+    sCadena &amp;= objFecha.Month
+    If objFecha.Day &lt; 10 Then
+      sCadena &amp;= &quot;0&quot;
+    End If
+    sCadena &amp;= objFecha.Day
+    sCadena &amp;= EXTENSION
+
+    Return sCadena
+  End Function
+
+  Private Shared Sub verificar(sFichero As String)
+    Try
+      If My.Computer.FileSystem.GetFileInfo(sFichero).Length &gt;= _
+         TAM_FICHERO Then
+        My.Computer.FileSystem.MoveFile(sFichero, sFichero &amp; &quot;.old&quot;)
+      End If
+    Catch ex As IOException
+    End Try
+  End Sub
+
+  Public Shared Sub e(sMensaje As String, objExcepcion As Exception, _
+                      Optional ByVal objTraza As StackFrame = Nothing)
+    add(TipoMensaje.LERROR, sMensaje &amp; vbNewLine &amp; _
+        vbTab &amp; objExcepcion.Message &amp; vbNewLine &amp; _
+        vbTab &amp; objExcepcion.ToString, objTraza)
+  End Sub
+
+  Public Shared Sub e(sMensaje As String, _
+                      Optional ByVal objTraza As StackFrame = Nothing)
+    add(TipoMensaje.LERROR, sMensaje, objTraza)
+  End Sub
+
+  Public Shared Sub w(sMensaje As String, _
+                      Optional ByVal objTraza As StackFrame = Nothing)
+    add(TipoMensaje.WARNING, sMensaje, objTraza)
+  End Sub
+
+  Public Shared Sub i(sMensaje As String, _
+                      Optional ByVal objTraza As StackFrame = Nothing)
+    add(TipoMensaje.INFO, sMensaje, objTraza)
+  End Sub
+
+  Public Shared Sub d(sMensaje As String, _
+                      Optional ByVal objTraza As StackFrame = Nothing)
+    add(TipoMensaje.DEBUG, sMensaje, objTraza)
+  End Sub
+
+  Public Shared Function getTraza(objTraza As StackFrame) As String
+    Dim sTraza As String = String.Empty
+
+    If Not objTraza Is Nothing Then
+      Dim iPosicion As Integer = objTraza.GetFileName.LastIndexOf(&quot;\&quot;)
+
+      If iPosicion &lt; 0 Then
+        sTraza = objTraza.GetFileName()
+      Else
+        sTraza = objTraza.GetFileName().Substring(iPosicion + 1)
+      End If
+
+      sTraza &amp;= &quot;::&quot; &amp; objTraza.GetFileLineNumber &amp; &quot; - &quot;
+    End If
+
+    Return sTraza
+  End Function
+End Class
+</code></pre>
+<h2>Explicación</h2>
+<p>Lo primero que vemos es el enumerado <strong>TipoMensaje</strong> que contiene los posibles tipos de registro que tendremos. A la hora de guardar nuestro registro se mostrará el nivel de cada evento.</p>
+<p>La función <code>getFileFecha()</code> obtiene el nombre del fichero que vamos a utilizar. Por ejemplo, en el día de escritura de este artículo el nombre obtenido sería: <strong>20120724.log</strong>.</p>
+<p>El método <code>verificar()</code> lo que hace es analizar el tamaño del fichero de registro. Si este excede el límite que viene dado por la constante <strong>TAM_FICHERO</strong> se realiza una copia de seguridad y se comienza un nuevo fichero. Esta parte la podéis obviar si no os importa el tamaño de los archivos.</p>
+<p>El método <code>add()</code> es el que contiene la parte principal del código. Recibe el tipo de registro, así como el mensaje a almacenar y de forma opcional la traza y se encarga de almacenarlos en el fichero de registro con la fecha y hora actuales.</p>
+<p>Los métodos <code>d()</code>, <code>i()</code>, <code>w()</code> y <code>e()</code> hacen de interfaz para simplificar la escritura en el registro y son los métodos que utilizará el usuario o usuaria. El método <code>e()</code> puede recibir un parámetro extra que será un objeto de tipo <strong>Exception</strong>, de esta forma podremos añadir a nuestro log el contenido de la excepción.</p>
+<h2>Resultado</h2>
+<p>El resultado de utilizar nuestra clase Logger sería parecido al siguiente:</p>
+<pre><code class="language-text">24/07/2012 16:37:34 [LERROR] - Este no tiene traza
+24/07/2012 16:37:35 [DEBUG] FrmPrueba.vb::7 - Este si tiene traza
+24/07/2012 16:37:36 [INFO] FrmPrueba.vb::9 - Mensaje de información.
+24/07/2012 16:38:02 [LERROR] FrmPrueba.vb::19 - Ocurrió un error
+  Valor demasiado grande o demasiado pequeÃ±o para un decimal.
+  System.OverflowException: Valor demasiado grande o demasiado pequeño para un decimal.
+    en System.Decimal..ctor(Double value)
+    en Logger.Form1.btnEnviar_Click(Object sender, EventArgs e) en FrmPrueba.vb:lÃ­nea 19
+</code></pre>
+<p>Finalmente, veamos como utilizar nuestro sistema de log. Lo primero es indicar el nivel de registro. Por defecto, es DEBUG, pero podemos ponerle un nivel, por ejemplo, de WARNING, esto se haría de la forma siguiente:</p>
+<pre><code class="language-vb">Logger.Nivel = Logger.TipoMensaje.WARNING
+</code></pre>
+<p>En este caso sólo se mostrarán los mensajes de WARNING y de ERROR, siendo omitidos los demás.</p>
+<h2>Ejemplos de uso</h2>
+<pre><code class="language-vb">Logger.e(&quot;Error con excepción&quot;, ex)
+Logger.d(&quot;Debug con traza&quot;, New StackFrame(True))
+Logger.i(&quot;Info sin traza&quot;, New StackFrame(True))
+Logger.e(&quot;Error con excepción y traza&quot;, ex, New StackFrame(True))
+</code></pre>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

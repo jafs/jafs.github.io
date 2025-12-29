@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>C/C++: Texto de consola con formato — JAFS</title>
+  <meta name="description" content="La consola (o terminal) de Linux/Unix admite diferentes formatos de carácter como negrita, subrayado, colores, etc. Para aplicar los formatos hemos desarroll..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, C/C++" />
+  <meta name="article:published_time" content="2013-06-07T18:20:57.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20130607.html" />
+  <meta property="og:title" content="C/C++: Texto de consola con formato" />
+  <meta property="og:description" content="La consola (o terminal) de Linux/Unix admite diferentes formatos de carácter como negrita, subrayado, colores, etc. Para aplicar los formatos hemos desarroll..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/c.png" />
+  
+  <meta property="article:published_time" content="2013-06-07T18:20:57.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="C/C++: Texto de consola con formato" />
+  <meta name="twitter:description" content="La consola (o terminal) de Linux/Unix admite diferentes formatos de carácter como negrita, subrayado, colores, etc. Para aplicar los formatos hemos desarroll..." />
+  <meta name="twitter:image" content="/images/c.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20130607.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "C/C++: Texto de consola con formato",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "La consola (o terminal) de Linux/Unix admite diferentes formatos de carácter como negrita, subrayado, colores, etc. Para aplicar los formatos hemos desarroll...",
+  "url": "https://jafs.github.io/articles/posts/20130607.html",
+  "inLanguage": "es",
+  "datePublished": "2013-06-07T18:20:57.000Z",
+  "image": "/images/c.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">C/C++: Texto de consola con formato</h1><p class="text-gray-600 text-sm mb-6">07-06-2013</p><p>La consola (o terminal) de Linux/Unix admite diferentes formatos de carácter como negrita, subrayado, colores, etc. Para aplicar los formatos hemos desarrollado una función que junto con una enumeración nos permitirá de forma sencilla aplicar formato a nuestros textos por consola. A continuación podéis ver el código común a las dos funciones:</p>
+<pre><code class="language-cpp">// Carácter de escape para aplicar los estilos.
+#define CHAR_ESC    (char) 27
+// Tamaño mínimo de la cadena de formato.
+#define FORMAT_SIZE 10
+
+// Enumeración con los formato de texto a aplicar.
+typedef enum {
+  FRM_NORMAL = 0,     // Texto con formato normal.
+  FRM_BOLD,           // Texto en negrita.
+  FRM_DARK,           // Texto oscurecido.
+  FRM_UNDERLINE = 4,  // Texto subyarado.
+  FRM_REVERSE = 7,    // Texto seleccionado.
+  FRM_STRIKED = 9,    // Texto tachado.
+  FRM_BLACK = 30,     // Texto de color negro.
+  FRM_RED,            // Texto de color rojo.
+  FRM_GREEN,          // Texto de color verde.
+  FRM_YELLOW,         // Texto de color amarillo.
+  FRM_BLUE,           // Texto de color azul.
+  FRM_MAGENTA,        // Texto de color magenta.
+  FRM_CYAN,           // Texto de color ciano.
+  FRM_WHITE,          // Texto de color blanco.
+  FRM_BACK_RED = 41,  // Color de fondo rojo.
+  FRM_BACK_GREEN,     // Color de fondo verde.
+  FRM_BACK_YELLOW,    // Color de fondo amarillo.
+  FRM_BACK_BLUE,      // Color de fondo azul.
+  FRM_BACK_MAGENTA,   // Color de fondo magenta.
+  FRM_BACK_CYAN,      // Color de fondo ciano.
+  FRM_BACK_GREY       // Color de fondo gris.
+} strformat;
+</code></pre>
+<p>En el código superior se definen las constantes a utilizar en las funciones. La enumeración strformat contiene los valores de formato que se pueden aplicar. Esta parte no tiene más misterios, pasemos ahora a ver la función de formato para C estándar:</p>
+<pre><code class="language-cpp">/**
+ * Establece el formato de texto a partir del valor recibido.
+ * @param  formato  Formato de texto a aplicar.
+ * @param  cadena   Cadena en la que escribir el formato.
+ * @param  tam      Tamaño de la cadena de formato.
+ * @return Cadena con el formato aplicado.
+ */
+char * strFormat(const strformat formato, char * cadena, size_t tam) {
+  if (cadena &amp;&amp; tam &gt;= FORMAT_SIZE) {
+    snprintf(cadena, tam, &quot;%c[%im&quot;, CHAR_ESC, formato);
+  }
+
+  return cadena;
+}
+</code></pre>
+<p>La función de C, devuelve el mismo array que recibe de esta forma podemos utilizarla dentro de funciones como <code>printf()</code> sin problemas de estar llenando la memoria de elementos duplicados. Como podéis observar, el código de la función es muy sencillo, tan sólo se limita a imprimir el carácter de escape y a continuación el código de formato. Tan sólo nos queda ver un ejemplo de su uso:</p>
+<pre><code class="language-cpp">  ...
+  char arcFormato[FORMAT_SIZE];
+
+  printf(&quot;Este es un %s&quot;, strFormat2(FRM_BLUE, arcFormato, sizeof(arcFormato)));
+  printf(&quot;text%sto &quot;, strFormat2(FRM_UNDERLINE, arcFormato, sizeof(arcFormato)));
+  printf(&quot;%scon &quot;, strFormat2(FRM_BOLD, arcFormato, sizeof(arcFormato)));
+  printf(&quot;%sformato&quot;, strFormat2(FRM_BACK_CYAN, arcFormato, sizeof(arcFormato)));
+  printf(&quot;%s\n&quot;, strFormat2(FRM_NORMAL, arcFormato, sizeof(arcFormato)));
+  ...
+</code></pre>
+<p>No obstante hay algunos inconvenientes. Por ejemplo, como se usa el mismo array debe hacerse una llamada por printf, ya que si no, no se actualizará el formato. Para solventar este y otros problemas, tenemos una versión para C++:</p>
+<pre><code class="language-cpp">/**
+ * Establece el formato de texto a partir del valor recibido.
+ * @param  formato  Formato de texto a aplicar.
+ * @return Cadena con el formato aplicado.
+ */
+string strFormat(const strformat formato) {
+  char arcFormato[10];
+  snprintf(arcFormato, sizeof(arcFormato), &quot;%c[%im&quot;, CHAR_ESC, formato);
+  return arcFormato;
+}
+</code></pre>
+<p>En este caso, el array se crea y destruye con la función, y lo que obtenemos es una cadena copiada. Podéis observar que prácticamente hacemos lo mismo que en el método C. Ahora veamos el mismo ejemplo con esta función:</p>
+<pre><code class="language-cpp">  ...
+  printf(&quot;Este es un %tyext%sto%s sin %sformato%s\n&quot;,
+         strFormat(FRM_BLUE).c_str(), strFormat(FRM_UNDERLINE).c_str(),
+         strFormat(FRM_BOLD).c_str(), strFormat(FRM_BACK_CYAN).c_str(),
+         strFormat(FRM_NORMAL).c_str());
+  ...
+</code></pre>
+<p>Tanto la primera como la segunda función, producirán la siguiente salida por consola:</p>
+<blockquote>
+<p>Este es un <span style="color:#66F">tex<u>to con <span style="background:#99F">formato</span></u></span></p>
+</blockquote>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

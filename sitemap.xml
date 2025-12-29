@@ -304,6 +304,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://jafs.github.io/articles/posts/20130607.html</loc>
+    <lastmod>2013-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://jafs.github.io/articles/posts/20130603.html</loc>
     <lastmod>2013-06-03</lastmod>
     <changefreq>monthly</changefreq>

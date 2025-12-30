@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Benckmark: redondear un número a decenas en JavaScript — JAFS</title>
+  <meta name="description" content="En ocasiones puede que necesitemos redondear un número entero a su valor en decenas (también se podría aplicar a centenas, miles, etc). Por ejemplo, en mi ca..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, JavaScript" />
+  <meta name="article:published_time" content="2016-07-02T10:49:05.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20160702.html" />
+  <meta property="og:title" content="Benckmark: redondear un número a decenas en JavaScript" />
+  <meta property="og:description" content="En ocasiones puede que necesitemos redondear un número entero a su valor en decenas (también se podría aplicar a centenas, miles, etc). Por ejemplo, en mi ca..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2016-07-02T10:49:05.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Benckmark: redondear un número a decenas en JavaScript" />
+  <meta name="twitter:description" content="En ocasiones puede que necesitemos redondear un número entero a su valor en decenas (también se podría aplicar a centenas, miles, etc). Por ejemplo, en mi ca..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20160702.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Benckmark: redondear un número a decenas en JavaScript",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En ocasiones puede que necesitemos redondear un número entero a su valor en decenas (también se podría aplicar a centenas, miles, etc). Por ejemplo, en mi ca...",
+  "url": "https://jafs.github.io/articles/posts/20160702.html",
+  "inLanguage": "es",
+  "datePublished": "2016-07-02T10:49:05.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Benckmark: redondear un número a decenas en JavaScript</h1><p class="text-gray-600 text-sm mb-6">02-07-2016</p><p>En ocasiones puede que necesitemos redondear un número entero a su valor en decenas (también se podría aplicar a centenas, miles, etc). Por ejemplo, en mi caso, fue necesario para generar un calendario y pasar del año actual a su década correspondiente.</p>
+<p>En este artículo veremos cuatro funciones JavaScript para realizar dicha operación y cuál nos ofrece mejores resultados.</p>
+<h2>Función 1. Multiplicación y división</h2>
+<p>Esta primera función se <strong>divide</strong> el número entre 10, posteriormente se <strong>convierte a entero</strong> (por lo que se pierde la unidad que habría quedado en la parte decimal) y finalmente se <strong>multiplica</strong> por 10 para obtener el valor redondeado.</p>
+<pre><code class="language-javascript">function round(value) {
+    return parseInt(value / 10) * 10;
+}
+</code></pre>
+<h2>Función 2. Resto</h2>
+<p>En este caso, se calculará el <strong>resto</strong> sobre 10 del valor indicado <strong>restándose</strong> al valor original. De esta forma, puesto que obtenemos el valor de unidad lo podremos restar al número original.</p>
+<pre><code class="language-javascript">function round(value) {
+    return value - (value % 10);
+}
+</code></pre>
+<h2>Función 3. Redondeo con Math</h2>
+<p>La última función es parecida a la primera, pero en lugar de pasar a entero el valor, realiza un <strong>redondeo</strong> usando la librería <strong>Math</strong> para posteriormente <strong>multiplicar</strong> por 10. Curiosamente, pese a utilizar la librería Math y tener una condición en su interior, pudiera parecer que es más lenta que la primera opción, pero os sorprenderá el resultado.</p>
+<pre><code class="language-javascript">function round(value) {
+    if (0 &gt; value) {
+        return Math.ceil(value / 10) * 10;
+    }
+    return Math.floor(value / 10) * 10;
+}
+</code></pre>
+<h2>Función 4. Uso de cadenas</h2>
+<p>Algunas personas están cómodas con el uso de cadenas, pero supone una gran penalización de rendimiento. En esta función, se <strong>convierte</strong> a cadena el valor, se <strong>suprime</strong> el último carácter y finalmente se <strong>concatena el 0</strong>, realizando un parseo a entero. El resultado es nefasto como podréis observar en la tabla de tiempos.</p>
+<pre><code class="language-javascript">function round(value) {
+    return parseInt((&#39;&#39; + value).slice(0, -1) + &#39;0&#39;);
+}
+</code></pre>
+<h2>La batería de pruebas</h2>
+<p>El código para todas las pruebas será el mismo, por un lado tendremos un HTML muy básico que mostrará una tabla de resultados:</p>
+<pre><code class="language-html">&lt;table&gt;
+    &lt;tr id=&quot;data&quot;&gt;
+        &lt;th&gt;Results&lt;/th&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+<p>Por otro lado, el código de pruebas también es muy sencillo. Consiste en una función que realiza un bucle de 10 pasos, en el que en cada paso se llama un millón de veces a la función encargada de redondear con valores comprendidos entre -500.000 y 500.000. Por otro lado, se dispone de una función con la que se añade cada resultado a la tabla HTML (Se podría haber mostrado por consola simplemente, pero así queda más visual).</p>
+<pre><code class="language-javascript">function addResult(value, row, last) {
+    var node = document.createElement(last ? &#39;th&#39; : &#39;td&#39;),
+        textnode = document.createTextNode(value);
+
+    node.appendChild(textnode);
+    row.appendChild(node);
+}
+
+function test() {
+    var roundTime = 0,
+        row = document.getElementById(&#39;data&#39;),
+        lap, startTime, i, endTime, currentResult;
+
+    for (lap = 0; lap &lt; 10; ++lap) {
+        startTime = new Date();
+        for (i = 0; i &lt; 10000000; ++i) {
+            round(-5000000 + i);
+        }
+        endTime = new Date();
+
+        currentResult = endTime.getTime() - startTime.getTime()
+        roundTime += currentResult;
+        addResult(currentResult, row, false);
+    }
+
+    addResult((roundTime / 10) + &#39;ms&#39;, row, true);
+}
+
+test();
+</code></pre>
+<h2>Resultados</h2>
+<p>Tras ejecutar el código anterior con cada función de redondeo, los resultados han sido los siguientes (los valores son en milisegundos):</p>
+<table>
+<thead>
+<tr>
+<th>Función</th>
+<th>Paso 1</th>
+<th>Paso 2</th>
+<th>Paso 3</th>
+<th>Paso 4</th>
+<th>Paso 5</th>
+<th>Paso 6</th>
+<th>Paso 7</th>
+<th>Paso 8</th>
+<th>Paso 9</th>
+<th>Paso 10</th>
+<th>Media</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>184</td>
+<td>183</td>
+<td>175</td>
+<td>172</td>
+<td>171</td>
+<td>175</td>
+<td>174</td>
+<td>180</td>
+<td>171</td>
+<td>178</td>
+<td>176.3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>10</td>
+<td>10</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>6</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7.5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>102</td>
+<td>99</td>
+<td>94</td>
+<td>92</td>
+<td>94</td>
+<td>94</td>
+<td>95</td>
+<td>93</td>
+<td>95</td>
+<td>93</td>
+<td>95.1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3284</td>
+<td>3584</td>
+<td>4267</td>
+<td>3562</td>
+<td>3790</td>
+<td>4114</td>
+<td>3947</td>
+<td>3558</td>
+<td>3461</td>
+<td>3765</td>
+<td>3733.2</td>
+</tr>
+</tbody></table>
+<p>En conclusión, como se puede observar, a la hora de redondear tenemos una clara vencedora. El uso de la función 2, con cálculo de resto, es más de 20 veces más rápida que la función 1 y 10 veces más rápida que la función 3. No hace falta decir, que el uso de cadenas para realizar esta operación no es nada aconsejable, teniendo una media de 3.7 segundos por paso.</p>
+<p>Seguro que conocéis algún otro método para realizar esta operación, así que no dudéis en compartirla en los comentarios.</p>
+<hr>
+<p><strong>Enlaces</strong></p>
+<ul>
+<li><a href="https://jsfiddle.net/juglan/zw2t938c/">Método 1 en JSFiddle</a></li>
+<li><a href="https://jsfiddle.net/juglan/h7qyfbtg/">Método 2 en JSFiddle</a></li>
+<li><a href="https://jsfiddle.net/juglan/u8ss5n16/">Método 3 en JSFiddle</a></li>
+<li><a href="https://jsfiddle.net/juglan/xqo5hqq9/">Método 4 en JSFiddle</a></li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Opinión: modas en programación. El caso Hooks de React — JAFS</title>
+  <meta name="description" content="En el artículo de hoy me salgo un poco de la costumbre, para reflejar una reflexión sobre un tema que he visto a lo largo de los años y que en mi modesta opi..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Opinión" />
+  <meta name="article:published_time" content="2022-05-07T13:57:23.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20220507.html" />
+  <meta property="og:title" content="Opinión: modas en programación. El caso Hooks de React" />
+  <meta property="og:description" content="En el artículo de hoy me salgo un poco de la costumbre, para reflejar una reflexión sobre un tema que he visto a lo largo de los años y que en mi modesta opi..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/react-hook.png" />
+  
+  <meta property="article:published_time" content="2022-05-07T13:57:23.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Opinión: modas en programación. El caso Hooks de React" />
+  <meta name="twitter:description" content="En el artículo de hoy me salgo un poco de la costumbre, para reflejar una reflexión sobre un tema que he visto a lo largo de los años y que en mi modesta opi..." />
+  <meta name="twitter:image" content="/images/react-hook.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20220507.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Opinión: modas en programación. El caso Hooks de React",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En el artículo de hoy me salgo un poco de la costumbre, para reflejar una reflexión sobre un tema que he visto a lo largo de los años y que en mi modesta opi...",
+  "url": "https://jafs.github.io/articles/posts/20220507.html",
+  "inLanguage": "es",
+  "datePublished": "2022-05-07T13:57:23.000Z",
+  "image": "/images/react-hook.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Opinión: modas en programación. El caso Hooks de React</h1><p class="text-gray-600 text-sm mb-6">07-05-2022</p><p>En el artículo de hoy me salgo un poco de la costumbre, para reflejar una reflexión sobre un tema que he visto a lo largo de los años y que en mi modesta opinión no siempre mejora nuestro trabajo. Y son las &quot;malditas&quot; modas en el mundo de la programación. Cuántos proyectos han apostado por una moda temporal, y posteriormente han quedado varados en el olvido, intentando mantener la tecnología que describía esa moda como la panacea con esfuerzo, sudor y lágrimas.</p>
+<p>Si atendemos a la evolución del desarrollo de software en estos últimos 40 años podemos comprobar como en un inicio se tenían programas que tras pasar de saltos incondicinales, comenzaron a definir funciones y procedimientos. Pasados los años se comprobó como los desarrollos al crecer en complejidad era difíciles de mantener y de mejorar. Es por ello que surgió la programación orientada a objetos. Esto trajo algo de estabilidad, pero mucha gente en lugar de formarse y ver como utilizar esta nueva herramienta, prefirió seguir programando &quot;a lo loco&quot;, llegando a los mismos problemas que se habían observado en la generación anterior.</p>
+<p>Recientemente, con la moda de los hooks en React, he visto que todo el mundo prácticamente te llamaban loco por usar los componentes de clase. Así que raudo y veloz, me he puesto a buscar información de por qué no se deben usar los componentes de clase. Ya que quería comprender qué estaba haciendo mal para poder mejorarlo. Y tras mucho navegar, (ahora es el momento de poner voz de Dross) estas son las siete razones por las que no hay que usar componentes de clase:</p>
+<ul>
+<li>La programación con clases es confusa para los humanos.</li>
+<li>La lógica de los métodos del ciclo de vida es difícil de entender.</li>
+<li>Complejidad con los tests.</li>
+<li>No hay que preocuparse con el bindeo de métodos y el uso de this.</li>
+<li>Es fácil compartir la lógica entre componentes.</li>
+<li>Una muy graciosa: no hay que perder el tiempo pasando de componentes funcionales a componentes de clase.</li>
+<li>El uso de super en el constructor es confuso.</li>
+</ul>
+<p>Vamos a ver pasito a pasito, cada punto.</p>
+<h2>POO es confusa para los humanos</h2>
+<p>Seamos sinceros, quien dice eso, es porque no se ha tomado la molestia de querer estudiar un mínimo como funciona la programación orientada a objetos. Es más compleja de interpretar para las máquinas, eso no lo niego, pero acerca mucho más el lenguaje de programación al lenguaje humano. Al final como todo en esta vida, no es que la POO sea la panacea, tiene sus inconvenientes. Pero veo muy vaga la escusa de que resulta confusa para los humanos.</p>
+<p>Es más, muchos de los ejemplos encontrados eran las famosas listas de tareas y que terminaban añadiendo complejidad innecesaria a los componentes de clase, sólo para terminar indicando que las clases quedan muy feas. Realmente, todos los hooks de proyectos reales ¿van a tener 1 o 2 líneas siempre?</p>
+<h2>La lógica de los métodos del ciclo de vida es difícil de entender</h2>
+<p>Pues mas o menos tenemos el mismo caso que el anterior. Es más, estos métodos de ciclo de vida ya tienen un nombre muy descriptivo que te indican en qué momento del ciclo de vida se van a ejecutar: <code>componentDidMount</code>, <code>componentWillUnmount</code>, etc. Es decir, sólo hay que usar el o los métodos que necesitamos e introducir el código dentro:</p>
+<pre><code class="language-typescript">public class MiComponenteClase extends React.PureComponent {
+  public componentDidMount(): void {
+    // El componente se ha montado
+  }
+ 
+  public componentWillUnmount(): void {
+    // El componente va a desmontarse
+  }
+}
+
+function MiComponenteFuncional() {
+  useEffect(() =&gt; {
+    console.log(&quot;El componente se ha montado&quot;);
+
+    return () =&gt; {
+      console.log(&quot;El componente va a desmontarse&quot;);
+    };
+  });
+}
+</code></pre>
+<p>En el ejemplo anterior, el método te dice en qué momento se va a ejecutar, y ni siquiera hay que aprendérselos de memoria, que para eso estamos en 2022 y tenemos IDEs modernos. En el segundo caso, debes recordar que el código antes del <code>return</code> actúa al montarse y repintarse el componente, y que luego debes devolver otra función que se ejecutará al desmontarse. Que sí, que es obvio que cuando lo hagas dos veces te acordarás, pero sinceramente ¿qué resulta más legible para un humano?</p>
+<p>Otros ejemplos que he visto ponían código duplicado en varios métodos del ciclo de vida, y luego ponían la versión comparada con el hook, y claro, me hacían pensar ¿por qué quien ha hecho el ejemplo no ha sacado ese código repetido a una función? El que usemos componentes de clase, no implica que todo lo que usemos sean métodos. Hay que utilizar todas las herramientas que nos proporcione el lenguaje, y el usar clases, no implica que las funciones estén prohibidas.</p>
+<h2>Complejidad con los tests</h2>
+<p>Entiendo que con esto se refieren a que un test de una función es más sencillo porque debería siempre devolver el mismo resultado. Pero si hacemos test de una clase (excepto en caso especiales), para un mismo orden de llamadas y unos mismos parámetros también terminará teniendo siempre un mismo resultado. Veamos el ejemplo más tonto del mundo:</p>
+<pre><code class="language-typescript">class Sumador {
+  private acumulado: number = 0;
+
+  public sumar(numero: number): number {
+    this.acumulado += number;
+    return this.acumulado;
+  }
+}
+
+const sumadorc: Sumador = new Sumador();
+sumadorc.sumar(12);
+console.log(sumadorc.sumar(45)); // 57
+
+
+function sumadorf(numero1: number, numero2: number): number {
+  return numero1 + numero2;
+}
+
+let acumulado: number = 0;
+acumulado = sumadorf(acumulado, 12);
+console.log(sumadorf(acumulado, 45)); // 57
+</code></pre>
+<p>En el caso anterior, para los mismos paso, la clase también nos va a devolver los mismo resultados. Y sí, es obvio que en una clase muy grande, con muchos estados, se nos pueden ir de madre los tests. Pero en esos casos seguramente, hemos hecho mal y entre otras cosas nos hemos saltado los <code>principios SOLID</code> permitiendo que la clase crezca y tenga demasiado acoplamiento con otros componentes.</p>
+<h2>No hay que preocuparse con el bindeo de métodos y el uso de this</h2>
+<p>La &quot;problemática&quot; con el uso de <code>this</code> en JavaScript es algo que tiene el lenguaje desde sus inicios. Es más, todo desarrollador que se considere senior en JavaScript debería saber como funciona su ámbito de forma obligatoria.</p>
+<p>Pues bien, hace unos años no quedaba otra que hacer <code>bind</code> de métodos en JavaScript para no perder el contexto del <code>this</code>, de forma que teníamos código del estilo:</p>
+<pre><code class="language-typescript">class Componente extends React.PureComponent&lt;IComponenteProps&gt; {
+  private onClickMethodBind: () =&gt; void;
+
+  public constructor(props: IComponenteProps) {
+    super(props);
+
+    // Lanzábamos un bind del método, para que el contexto de this se siguiera manteniendo.
+    this.onClickMethodBind = this.onClickMethod.bind(this);
+  }
+
+  public render(): JSX.Element {
+    return &lt;button onClick={this.onClickMethodBind}&gt;Haz clic&lt;/button&gt;
+  }
+
+  private onClickMethod(): void {
+    alert(&quot;Holi&quot;);
+  }
+}
+</code></pre>
+<p>Pero... ¿quién programa así en la actualidad? Ya que ahora tenemos las arrow functions, por lo que ya no es necesario tener atributos con el método &quot;bindeado&quot;:</p>
+<pre><code class="language-typescript">class Componente extends React.PureComponent&lt;IComponenteProps&gt; {
+  // Podríamos quitar el constructor si sólo vamos a hacer un super(props). Pero
+  // lo dejo por mantener la estructura.
+  public constructor(props: IComponenteProps) {
+    super(props);
+  }
+
+  public render(): JSX.Element {
+    return &lt;button onClick={this.onClickMethod}&gt;Haz clic&lt;/button&gt;
+  }
+
+  private onClickMethod = (): void =&gt; {
+    alert(&quot;Holi&quot;);
+  }
+}
+</code></pre>
+<p>Hala, ya no tenemos problema con el bind.</p>
+<h2>Es más fácil compartir la lógica entre componentes</h2>
+<p>Bueno, si seguimos la guía de React, dice que no se use herencia entre componentes. Pero, ya os confirmo que he usado durante años la herencia entre componentes React y funciona perfectamente. Por lo que, cuando hay componentes que requieren usar lógica en común, en mi caso he optado por hacer que hereden de uno base con toda esa lógica común. Con este caso se solventaría el tener una lógica que sepamos que no se comparte entre componentes que no tienen nada que ver.</p>
+<p>En el caso de tener operaciones comunes más globales, podemos usar funciones que serán llamadas en nuestros componentes. Como podéis ver en este artículo no demonizo el uso de funciones, sino el que casi nos &quot;fuercen&quot; a usar hooks. Ya que en muchas ocasiones las funciones son más prácticas que las clases. Pero lo dicho, podemos tener funciones en un componente de clase, nadie nos lo impide, y es más, quizás esa función la estemos usando tanto en código React como en código no React. Con JavaScript la mezcla de paradigmas no debería ser un problema.</p>
+<h2>No hay que perder el tiempo pasando de componentes funcionales a componentes de clase</h2>
+<p>Aunque sean unas líneas más, todos los componentes que desarrollo siempre son clases. Por ende, si necesito métodos de ciclo de vida no tengo que cambiar el componente. Que sí, que el código es más grande, pero no estamos usando módems de los 90 y no vamos a programar un Horizon Zero Dawn con React. El que ocupe 10KB más un minificado, no va a ser el fin del mundo con las tecnologías actuales, y para eso en todo caso nos deberíamos centrar en las imágenes no escaladas aunque sean miniaturas, vídeos que no permiten cambiar el bitrate, etc.</p>
+<h2>El uso de super en el constructor es confuso</h2>
+<p>Llamar a la clase padre desde la hija es de primero de POO. Es decir, es algo lógico para quien programa con POO, y que se aprende enseguida. No entiendo por qué se define que usar algo estándar de POO es un problema, es como decir que declarar las funciones usando la palabra <code>function</code>, es confuso.</p>
+<h2>Conclusión</h2>
+<p>Tras mucho leer, no he visto razones de peso reales para tener que dejar atrás el uso de componentes de clase en React. Y es que ahora está de moda hacer todo de forma funcional, demonizando la programación orientada a objetos. Pero claro, lo primero es que la programación funcional que se suele indicar, no es funcional pura (no debería haber bucles, variables, etc). Pero por otro lado, la llamémosla programación funcional &quot;híbrida&quot;, y la programación orientada a objetos, pueden convivir y usarse según la situación. Ya que el verdadero potencial de un programador o una programadora es saber cuándo usar todas las herramientas de que dispone. Es por ello que cuando alguien indica que hay que utilizar una tecnología por encima de otra, nos debe dar razones de peso, y no escusas vagas.</p>
+<p>En este trabajo, no se aprende de la mañana a la noche, hay que explorar muchas vías, y estudiar mucho durante toda la vida. Es más, el objetivo de este trabajo es tener un código breve, pero que a su vez entendible por tus compañeros y compañeras, y que además sea fácil de mejorar y corregir si es así, escojas el camino que escojas, vas en el buen camino. Pero por otro lado tengo la sensación de que hay modas que se nos imponen, y con el paso de los años no dejarán de ser más que eso, modas.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

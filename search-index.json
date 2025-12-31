@@ -557,6 +557,19 @@
     "imageMini": "/images/javascript-mini.webp"
   },
   {
+    "slug": "20181023.html",
+    "title": "Benckmark: switch con caracteres",
+    "description": "En esta ocasión traemos una prueba sencilla para comprobar si es más rápido tener un switch en el que se comprueben cadenas de un carácter, o por el contrario es más veloz convertir antes dichos caracteres a su valor ASCII. En el segundo caso nos valdremos del uso de `charCodeAt()`.",
+    "url": "/articles/posts/20181023.html",
+    "date": "2018-10-23",
+    "categories": [
+      "Programación",
+      "JavaScript"
+    ],
+    "content": "En esta ocasión traemos una prueba sencilla para comprobar si es más rápido tener un switch en el que se comprueben cadenas de un carácter, o por el contrario es más veloz convertir antes dichos caracteres a su valor ASCII. En el segundo caso nos valdremos del uso de charCodeAt() . Función 1. Switch con cadenas Para la primera función, tan sólo tendremos un switch que compruebe las cadenas que queramos &quot;controlar&quot;. Tanto, en esta función, como en la siguiente, se ha dejado el código del case vacío, de forma que se evite obtener datos falseados por operaciones que se realicen en dicho case. Función 2. Switch con ASCII Con la segunda función se convierte el &quot;caracter&quot; recibido en su correspondiente valor ASCII. De forma que, el switch se llevará a cabo sobre dicho valor. Como podréis comprobar el código no contiene comprobaciones extra para evitar que se alteren los resultados. La batería de pruebas El código encargado de medir los tiempos para las dos pruebas será el mismo en ambos casos. Llamando a una u otra función dependiendo de la prueba. Resultados Para mí ha sido una sorpresa ver lo lento que ha funcionado convertir a ASCII, siendo el ganador con diferencia el switch de caracteres: Función Paso 1 Paso 2 Paso 3 Paso 4 Paso 5 Paso 6 Paso 7 Paso 8 Paso 9 Paso 10 Media String 18 8 7 7 8 7 6 6 7 7 8.1 Ascii 245 232 232 232 231 235 239 231 237 239 235.3 Como resultado de las pruebas, se observa una clara vencedora, la función con el switch de cadenas. Esta función es casi 30 veces más rápida que la encargada de convertir el carácter a ASCII.",
+    "imageMini": "/images/javascript-mini.webp"
+  },
+  {
     "slug": "20160914.html",
     "title": "Internacionalización en ES6 (y 3): La clase NumberFormat",
     "description": "Para terminar con esta mini-serie de artículos sobre internacionalización, a lo largo de los dos anterior artículos (parte 1 y parte 2), descubrimos el namespace **Intl**, así como las ventajas que ofrece su uso. En este último artículo, descubriremos como mejorar el formateo de números gracias a la clase `NumberFormat`.",

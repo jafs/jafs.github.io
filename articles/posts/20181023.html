@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Benckmark: switch con caracteres — JAFS</title>
+  <meta name="description" content="En esta ocasión traemos una prueba sencilla para comprobar si es más rápido tener un switch en el que se comprueben cadenas de un carácter, o por el contrari..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, JavaScript" />
+  <meta name="article:published_time" content="2018-10-23T18:00:02.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20181023.html" />
+  <meta property="og:title" content="Benckmark: switch con caracteres" />
+  <meta property="og:description" content="En esta ocasión traemos una prueba sencilla para comprobar si es más rápido tener un switch en el que se comprueben cadenas de un carácter, o por el contrari..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/javascript.png" />
+  
+  <meta property="article:published_time" content="2018-10-23T18:00:02.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Benckmark: switch con caracteres" />
+  <meta name="twitter:description" content="En esta ocasión traemos una prueba sencilla para comprobar si es más rápido tener un switch en el que se comprueben cadenas de un carácter, o por el contrari..." />
+  <meta name="twitter:image" content="/images/javascript.png" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20181023.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Benckmark: switch con caracteres",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En esta ocasión traemos una prueba sencilla para comprobar si es más rápido tener un switch en el que se comprueben cadenas de un carácter, o por el contrari...",
+  "url": "https://jafs.github.io/articles/posts/20181023.html",
+  "inLanguage": "es",
+  "datePublished": "2018-10-23T18:00:02.000Z",
+  "image": "/images/javascript.png"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Benckmark: switch con caracteres</h1><p class="text-gray-600 text-sm mb-6">23-10-2018</p><p>En esta ocasión traemos una prueba sencilla para comprobar si es más rápido tener un switch en el que se comprueben cadenas de un carácter, o por el contrario es más veloz convertir antes dichos caracteres a su valor ASCII. En el segundo caso nos valdremos del uso de <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/String/charCodeAt"><code>charCodeAt()</code></a>.</p>
+<h2>Función 1. Switch con cadenas</h2>
+<p>Para la primera función, tan sólo tendremos un switch que compruebe las cadenas que queramos &quot;controlar&quot;. Tanto, en esta función, como en la siguiente, se ha dejado el código del case vacío, de forma que se evite obtener datos falseados por operaciones que se realicen en dicho case.</p>
+<pre><code class="language-javascript">function switchString(value) {
+  switch (value) {
+      case &#39;z&#39;: break;
+      case &#39;y&#39;: break;
+      case &#39;x&#39;: break;
+      case &#39;w&#39;: break;
+      case &#39;v&#39;: break;
+      case &#39;a&#39;: break;
+  }
+}
+</code></pre>
+<h2>Función 2. Switch con ASCII</h2>
+<p>Con la segunda función se convierte el &quot;caracter&quot; recibido en su correspondiente valor ASCII. De forma que, el switch se llevará a cabo sobre dicho valor. Como podréis comprobar el código no contiene comprobaciones extra para evitar que se alteren los resultados.</p>
+<pre><code class="language-javascript">function switchAscii(value) {
+  let code = value.charCodeAt(0);
+  switch (code) {
+      case 122: break;
+      case 121: break;
+      case 120: break;
+      case 119: break;
+      case 118: break;
+      case 97: break;
+  }
+}
+</code></pre>
+<h2>La batería de pruebas</h2>
+<p>El código encargado de medir los tiempos para las dos pruebas será el mismo en ambos casos. Llamando a una u otra función dependiendo de la prueba.</p>
+<pre><code class="language-javascript">function test() {
+    var roundTime = 0,
+        lap, startTime, i, endTime, currentResult;
+
+    for (lap = 0; lap &amp;amp;lt; 10; ++lap) {
+        startTime = new Date();
+        for (i = 0; i &amp;amp;lt; 10000000; ++i) {
+            switchString(&#39;a&#39;);
+            // switchAscii(&#39;a&#39;);
+        }
+        endTime = new Date();
+
+        currentResult = endTime.getTime() - startTime.getTime()
+        roundTime += currentResult;
+
+        console.log(&#39;Resultado: &#39;  + currentResult);
+    }
+
+    console.log(&#39;Media: &#39; + (roundTime / 10) + &#39;ms&#39;);
+}
+</code></pre>
+<h2>Resultados</h2>
+<p>Para mí ha sido una sorpresa ver lo lento que ha funcionado convertir a ASCII, siendo el ganador con diferencia el switch de caracteres:</p>
+<table>
+<thead>
+<tr>
+<th>Función</th>
+<th>Paso 1</th>
+<th>Paso 2</th>
+<th>Paso 3</th>
+<th>Paso 4</th>
+<th>Paso 5</th>
+<th>Paso 6</th>
+<th>Paso 7</th>
+<th>Paso 8</th>
+<th>Paso 9</th>
+<th>Paso 10</th>
+<th>Media</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String</td>
+<td>18</td>
+<td>8</td>
+<td>7</td>
+<td>7</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>6</td>
+<td>7</td>
+<td>7</td>
+<td>8.1</td>
+</tr>
+<tr>
+<td>Ascii</td>
+<td>245</td>
+<td>232</td>
+<td>232</td>
+<td>232</td>
+<td>231</td>
+<td>235</td>
+<td>239</td>
+<td>231</td>
+<td>237</td>
+<td>239</td>
+<td>235.3</td>
+</tr>
+</tbody></table>
+<p>Como resultado de las pruebas, se observa una clara vencedora, la función con el switch de cadenas. Esta función es casi 30 veces más rápida que la encargada de convertir el carácter a ASCII.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

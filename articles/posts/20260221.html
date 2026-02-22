@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DDD en un apocalipsis zombi. Parte 1 — JAFS</title>
+  <meta name="description" content="Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situac..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, DDD" />
+  <meta name="article:published_time" content="2026-02-22T12:30:00.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20260221.html" />
+  <meta property="og:title" content="DDD en un apocalipsis zombi. Parte 1" />
+  <meta property="og:description" content="Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situac..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/ddd.webp" />
+  
+  <meta property="article:published_time" content="2026-02-22T12:30:00.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DDD en un apocalipsis zombi. Parte 1" />
+  <meta name="twitter:description" content="Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situac..." />
+  <meta name="twitter:image" content="/images/ddd.webp" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20260221.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DDD en un apocalipsis zombi. Parte 1",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situac...",
+  "url": "https://jafs.github.io/articles/posts/20260221.html",
+  "inLanguage": "es",
+  "datePublished": "2026-02-22T12:30:00.000Z",
+  "image": "/images/ddd.webp"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 1</h1><p class="text-gray-600 text-sm mb-6">22-02-2026</p><p>Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situación es crítica: hay que gestionar refugios, coordinar reabastecimientos, controlar infecciones y tomar decisiones que pueden significar vida o muerte. Decides crear un sistema para ayudar a gestionar todo esto.</p>
+<p>Meses después, el sistema funciona, pero hay un problema: cada vez que el líder del grupo (nuestro &quot;experto de negocio&quot;) pide un cambio, tú y tu equipo os perdéis en traducciones. Él habla de &quot;supervivientes en cuarentena&quot;, tú piensas en <code>user.status = 3</code>. Él menciona &quot;refugio en capacidad crítica&quot;, tú ves <code>shelter.count &gt;= shelter.max</code>. El código funciona, pero nadie entiende realmente qué hace sin abrir cada archivo y desentrañar la lógica. Y en un apocalipsis zombi, perder tiempo tratando de entender el código puede costarte la vida.</p>
+<p>Este es exactamente el tipo de problema que <strong>Domain-Driven Design</strong> vino a resolver. Y no, <strong>DDD no es una arquitectura</strong> ni un framework mágico que instalas con npm. Es una filosofía de desarrollo que propone algo radical y a la vez obvio: el código debe ser un espejo fiel de cómo funcionan las cosas en el mundo real del negocio (o en nuestro caso, del apocalipsis).</p>
+<p>La idea la plasmó <strong>Eric Evans</strong> en 2003 en su libro <a href="https://amzn.to/4kT4iaG">Domain-Driven Design: Tackling Complexity in the Heart of Software</a>, y aunque ya han pasado más de dos décadas, la premisa sigue siendo igual de potente: si el líder de supervivientes y el desarrollador miran el modelo del sistema, ambos deberían ver lo mismo. Mismos conceptos, mismas palabras, mismas reglas.</p>
+<p>¿Suena simple? Lo es. ¿Es fácil de implementar? Para nada. Pero cuando funciona, la diferencia es brutal: el código deja de ser una caja negra incomprensible y se convierte en una representación viva del dominio.</p>
+<h2>¿Por qué DDD en un apocalipsis zombi?</h2>
+<p>Nuestro dominio de supervivencia tiene todo lo que necesita un buen modelo de DDD:</p>
+<ul>
+<li><strong>Actores claros</strong>: Supervivientes, Refugios, Suministros, Infectados</li>
+<li><strong>Reglas firmes</strong>: capacidad máxima de refugio, riesgo de contagio por proximidad, prioridad de evacuación</li>
+<li><strong>Eventos que importan</strong>: <code>SupervivienteInfectado</code>, <code>RefugioReabastecido</code>, <code>CuarentenaActivada</code></li>
+<li><strong>Consecuencias inmediatas</strong>: un error en la lógica de cuarentena puede significar un brote masivo</li>
+</ul>
+<p>Si el código habla ese mismo idioma del apocalipsis, las decisiones serán más rápidas y menos peligrosas. Si en cambio tenemos un <code>User.status = 2</code> en lugar de un <code>Superviviente.infectar()</code>, alguien va a acabar mordido porque no entendió qué hacía ese &quot;2&quot;.</p>
+<p>Ahora que entendemos el problema, veamos cómo DDD nos da las herramientas para solucionarlo.</p>
+<p><img src="/images/ddd-ciudad.webp" alt="Ciudad post-apocalíptica"></p>
+<h2>1. Lenguaje ubicuo (Ubiquitous Language)</h2>
+<p>El primer pilar de DDD es establecer un <strong>lenguaje común</strong> entre todos los que participan en el proyecto. Y cuando digo común, me refiero a que las mismas palabras que usa el líder de supervivientes cuando describe cómo funciona la gestión del refugio, deben ser exactamente las mismas que aparecen en el código, en los tests, en la documentación y en las reuniones de equipo.</p>
+<p>¿Por qué es esto tan importante? Pensemos en un ejemplo concreto del apocalipsis:</p>
+<p>Imagina que el líder del grupo dice: &quot;Cuando un superviviente muestra síntomas de infección, debe entrar inmediatamente en cuarentena hasta que un médico lo evalúe&quot;. Si tú como desarrollador traduces esto internamente a <code>user.status = 2</code> y <code>user.quarantine = true</code>, ¿qué pasa cuando dentro de tres meses otro desarrollador tenga que modificar esa lógica? Va a tener que hacer arqueología de código para descifrar qué significa <code>status = 2</code>.</p>
+<p>El lenguaje ubicuo elimina esa traducción mental. En nuestro refugio:</p>
+<ul>
+<li>No decimos <code>Usuario</code>, decimos <code>Superviviente</code>. Porque en un apocalipsis zombi no hay &quot;usuarios&quot;, hay personas luchando por sobrevivir.</li>
+<li>No tenemos un método <code>setSalud(valor)</code>, tenemos <code>sufrirHerida()</code>, <code>curar()</code> o <code>aplicarVendaje()</code>. Son acciones que cualquiera entiende sin necesidad de abrir la documentación.</li>
+<li>No hay un <code>status = 5</code>, hay un método <code>ponerEnCuarentena()</code> que hace exactamente lo que dice.</li>
+</ul>
+<h3>¿Qué pasa si no usamos lenguaje ubicuo?</h3>
+<p>La consecuencia directa es la <strong>pérdida de conocimiento del dominio</strong>. El código se vuelve críptico, lleno de abreviaciones y abstracciones que solo el desarrollador original entiende. Cuando esa persona se va (o peor, se convierta en zombi), su conocimiento desaparecerá con ella.</p>
+<p>Además, cada conversación con el equipo de negocio se convierte en un ejercicio de traducción simultánea: ellos hablan de &quot;reabastecimiento de urgencia&quot;, tú piensas en <code>supply.priority = 1</code>. Ellos dicen &quot;ruta segura&quot;, tú ves <code>route.safe = true</code>. Es agotador y, lo peor de todo, propenso a errores de comunicación.</p>
+<h3>En la práctica</h3>
+<p>Si en una especificación la líder del grupo menciona &quot;cuarentena&quot;, en el código tendremos una clase o concepto llamado <code>Cuarentena</code>, no <code>IsolationZone</code> ni <code>StatusType2</code>. Si hablan de &quot;suministros críticos&quot;, el código tendrá <code>SuministrosCriticos</code>, no <code>ImportantSupplies</code>.</p>
+<p>Este lenguaje compartido se convierte en el diccionario viviente del proyecto. Y debe estar documentado: un simple glosario donde se definan los términos clave del dominio puede salvar a tu equipo de horas de confusión.</p>
+<p><img src="/images/ddd-lenguaje-ubicuo.webp" alt="La líder y el desarrollador hablan el mismo idioma"></p>
+<p><em>En la imagen superior podemos ver cómo el desarrollador tiene que dejar de pensar en tecnicismos para comenzar a hablar con la líder el mismo idioma.</em></p>
+<p>La diferencia entre el código de la izquierda y el de la derecha parece cosmética, pero en la práctica es enorme:</p>
+<pre><code class="language-typescript">// ❌ Sin lenguaje ubicuo
+user.status = 2;
+user.quarantine = true;
+
+// ✅ Con lenguaje ubicuo
+superviviente.ponerEnCuarentena();
+</code></pre>
+<p>En el primer caso, ¿qué significa <code>status = 2</code>? ¿Hay un <code>status = 1</code>? ¿Y un <code>status = 3</code>? ¿Quién sabe qué implica cada número? En el segundo caso, la intención es cristalina. Y si en el futuro la cuarentena implica también bloquear el acceso al comedor o notificar al médico, ¿dónde pones esa lógica? En el método <code>ponerEnCuarentena()</code>, claro. El código se organiza solo cuando el lenguaje es el correcto.</p>
+<h2>2. Bounded Contexts (Contextos delimitados)</h2>
+<p>Aquí viene uno de los conceptos más potentes de DDD y, a la vez, uno de los más malinterpretados. Un <strong>Bounded Context</strong> (Contexto Delimitado) es básicamente una frontera donde un modelo específico tiene sentido y es coherente.</p>
+<p>¿Por qué necesitamos esto? Porque en sistemas grandes, la misma palabra puede significar cosas completamente diferentes dependiendo de quién la use. Y esto no es un error, es natural.</p>
+<p>Pongamos un ejemplo del apocalipsis: la palabra <strong>&quot;Superviviente&quot;</strong>.</p>
+<ul>
+<li>Para el equipo de <strong>Logística</strong>, es alguien que consume recursos, tiene una ubicación y puede transportar suministros. Les interesa su capacidad de carga y su ruta.</li>
+<li>Para el equipo de <strong>Sanidad</strong>, es un o una paciente potencial con un historial médico, un nivel de salud y un riesgo de infección. Les importa su temperatura corporal y si se ha expuesto a mordeduras.</li>
+<li>Para el equipo de <strong>Comando</strong>, es una unidad con habilidades específicas que puede asignarse a refugios o misiones. Les interesa su experiencia en combate o sus conocimientos técnicos.</li>
+</ul>
+<p>¿Ves el problema? Si intentamos meter todo esto en una única clase <code>Superviviente</code>, acabaremos con un monstruo de 50 propiedades donde la mitad no tienen sentido en cada contexto. Y peor aún, cuando Logística quiera cambiar cómo se calcula la capacidad de carga, podría romper accidentalmente algo en Sanidad.</p>
+<h3>Dividir para reinar</h3>
+<p>La solución es dividir nuestro sistema en <strong>contextos delimitados</strong>, cada uno con su propio modelo:</p>
+<h4>Contexto de Logística</h4>
+<ul>
+<li>Gestiona rutas de reabastecimiento entre refugios</li>
+<li>Controla niveles de stock y consumo estimado</li>
+<li>Calcula costes de transporte y riesgos de las rutas</li>
+<li>Su <code>Superviviente</code> tiene: ubicación, capacidad de carga, estado de movilidad</li>
+</ul>
+<h4>Contexto de Sanidad</h4>
+<ul>
+<li>Rastrea infecciones y posibles brotes</li>
+<li>Gestiona vacunas y tratamientos médicos</li>
+<li>Monitoriza el estado de salud general</li>
+<li>Su <code>Superviviente</code> tiene: historial médico, síntomas, nivel de inmunidad</li>
+</ul>
+<h4>Contexto de Comando</h4>
+<ul>
+<li>Asigna supervivientes a refugios</li>
+<li>Decide evacuaciones y redistribuciones</li>
+<li>Planifica misiones y estrategias</li>
+<li>Su <code>Superviviente</code> tiene: habilidades, experiencia, refugio asignado</li>
+</ul>
+<p>Dentro de cada contexto, el modelo y el lenguaje son coherentes y enfocados. No hay propiedades &quot;de más&quot; ni responsabilidades que no correspondan.</p>
+<p><img src="/images/ddd-bounded-contexts.webp" alt="Los tres contextos delimitados de nuestro apocalipsis"></p>
+<p><em>En la imagen superior podemos ver los tres contextos delimitados de nuestro apocalipsis: logística, sanidad y comando.</em></p>
+<h3>Comunicación entre contextos</h3>
+<p>Pero claro, estos contextos no viven aislados. Cuando Sanidad detecta un brote de infección, Comando necesita saberlo para activar una evacuación. Cuando Logística actualiza el stock de un refugio, Comando debe conocer si hay escasez crítica.</p>
+<p>La comunicación entre contextos se hace mediante <strong>contratos bien definidos</strong>:</p>
+<ul>
+<li><strong>APIs</strong>: interfaces claras que exponen solo lo necesario</li>
+<li><strong>Eventos de dominio</strong>: &quot;Ha ocurrido X&quot; (por ejemplo, <code>SupervivienteInfectado</code>, <code>RefugioReabastecido</code>)</li>
+<li><strong>Anti-corruption layers</strong>: capas que traducen entre los modelos de diferentes contextos, protegiendo a cada uno de los cambios del otro</li>
+</ul>
+<p>Por ejemplo, cuando Sanidad emite el evento <code>BroteDetectado</code>, Comando no necesita conocer los detalles médicos internos. Solo recibe la información que le importa: qué refugio está afectado y cuántas personas están en riesgo.</p>
+<p><img src="/images/ddd-context-communications.webp" alt="Diagrama de comunicación entre Sanidad, Logística y Comando"></p>
+<p><em>Diagrama de comunicación entre Sanidad, Logística y Comando</em></p>
+<h2>3. Entidades y Objetos de Valor</h2>
+<p>Una de las distinciones más importantes en DDD es entender la diferencia entre algo que &quot;es&quot; y algo que &quot;tiene&quot;. Suena filosófico, pero tiene implicaciones muy prácticas en cómo diseñamos nuestro código.</p>
+<h3>Entidad (Entity): lo que importa es quién ES</h3>
+<p>Una <strong>Entidad</strong> es algo que tiene una <strong>identidad única y continuada en el tiempo</strong>, independientemente de cómo cambien sus atributos.</p>
+<p>Pensemos en una superviviente llamada Gema. Cuando Gema entra al refugio, tiene 100 puntos de salud y no está infectada. A lo largo de los días, Gema sufre una herida (ahora tiene 80 de salud), luego le curan (recupera a 95), después contrae una leve infección... su estado cambia constantemente. Pero en todo momento seguimos hablando de <strong>Gema</strong>, la misma superviviente. Su identidad no cambia aunque sus atributos sí lo hagan.</p>
+<p>Eso es una Entidad. Lo que importa es <strong>quién es</strong>, no <strong>cómo está</strong>.</p>
+<p>Características de las Entidades:</p>
+<ul>
+<li>Tienen un identificador único (ID) que las distingue</li>
+<li>Su identidad persiste a lo largo del tiempo</li>
+<li>Pueden cambiar de estado sin dejar de ser ellas mismas</li>
+<li>Dos entidades con los mismos atributos pero diferente ID son diferentes<ul>
+<li>Gema con 100 de salud ≠ Pedro con 100 de salud (son personas distintas)</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-typescript">// Entidad - Tiene identidad propia a través del ID
+class Survivor {
+  constructor(
+    public readonly id: string, // El ID nunca cambia
+    public name: string,
+    public health: number
+  ) {}
+
+  sufrirHerida(puntos: number): void {
+    this.health = Math.max(0, this.health - puntos);
+  }
+
+  curar(puntos: number): void {
+    this.health = Math.min(100, this.health + puntos);
+  }
+
+  // La igualdad se determina por ID, no por atributos
+  equals(other: Survivor): boolean {
+    return this.id === other.id;
+  }
+}
+
+const gema = new Survivor(&quot;survivor-1&quot;, &quot;Gema&quot;, 100);
+gema.sufrirHerida(20); // salud: 80 → sigue siendo Gema
+gema.curar(15);        // salud: 95 → sigue siendo Gema
+
+const otraPersona = new Survivor(&quot;survivor-2&quot;, &quot;Gema&quot;, 95);
+
+// Aunque tengan el mismo nombre y la misma salud, NO son la misma persona
+console.log(gema.equals(otraPersona)); // false → diferente ID
+</code></pre>
+<h3>Objeto de Valor (Value Object): lo que importa es QUÉ es</h3>
+<p>Un <strong>Objeto de Valor</strong> es algo que se define completamente por sus atributos. No tiene identidad propia, simplemente <strong>representa un valor</strong>.</p>
+<p>Pensemos en las coordenadas de un punto de suministro: <code>{ lat: 40.4168, lon: -3.7038 }</code>. Estas coordenadas no &quot;son&quot; nadie ni nada. Son simplemente un valor que describe una ubicación. Si mañana tienes otra posición con exactamente la misma latitud y longitud, es <strong>la misma coordenada</strong>, no importa quién la use o cuándo se creó.</p>
+<p>Características de los Objetos de Valor:</p>
+<ul>
+<li>No tienen identidad propia</li>
+<li>Se definen completamente por sus atributos</li>
+<li>Son <strong>inmutables</strong>: si necesitas cambiarlos, creas uno nuevo</li>
+<li>Dos objetos de valor con los mismos atributos son idénticos<ul>
+<li>Coordenadas(40.4168, -3.7038) === Coordenadas(40.4168, -3.7038)</li>
+</ul>
+</li>
+</ul>
+<p>Otros ejemplos en nuestro apocalipsis:</p>
+<ul>
+<li><strong><code>Suministro</code></strong>: un pack de vendas es idéntico a otro pack de vendas del mismo tipo</li>
+<li><strong><code>FechaEvacuacion</code></strong>: el 25 de diciembre de 2026 es el mismo día para todo el mundo</li>
+<li><strong><code>CantidadMunicion</code></strong>: 50 balas son 50 balas, no importa quién las cuente</li>
+</ul>
+<pre><code class="language-typescript">// Value Object - Inmutable
+class Coordinates {
+  constructor(
+    public readonly lat: number,
+    public readonly lon: number
+  ) {}
+
+  // Comparación por valor, no por referencia
+  equals(other: Coordinates): boolean {
+    return this.lat === other.lat &amp;&amp; this.lon === other.lon;
+  }
+}
+
+// Si necesitas cambiar las coordenadas, creas unas nuevas
+const punto1 = new Coordinates(40.4168, -3.7038);
+const punto2 = new Coordinates(41.3851, 2.1734); // Nuevo objeto
+
+// Comparación
+console.log(punto1.equals(punto2)); // false
+console.log(punto1.equals(new Coordinates(40.4168, -3.7038))); // true
+</code></pre>
+<h3>¿Por qué importa esta distinción?</h3>
+<p>Si confundes Entidades con Objetos de Valor, puedes cometer errores críticos:</p>
+<ul>
+<li><strong>Tratar una Entidad como Value Object</strong>: Si comparas dos supervivientes solo por su salud actual, podrías pensar que son la misma persona. Catastrófico.</li>
+<li><strong>Tratar un Value Object como Entidad</strong>: Si das un ID único a cada conjunto de coordenadas, acabarás con miles de objetos &quot;diferentes&quot; que en realidad representan la misma posición. Desperdicio de memoria y lógica innecesariamente compleja.</li>
+</ul>
+<p>La regla simple: si la pregunta &quot;¿es el mismo?&quot; se responde con un ID, es una Entidad. Si se responde comparando valores, es un Value Object.</p>
+<p><img src="/images/ddd-entidades.webp" alt="Entidad vs Value Object"></p>
+<h2>4. Agregados: el guardián de las reglas</h2>
+<p>Ahora entramos en uno de los conceptos más poderosos de DDD: los <strong>Agregados</strong>. Si has llegado hasta aquí pensando &quot;vale, ya tengo Entidades y Value Objects, ¿qué más necesito?&quot;, prepárate porque los Agregados son lo que realmente mantiene la integridad de tu dominio.</p>
+<h3>¿Qué es un Agregado?</h3>
+<p>Un <strong>Agregado</strong> es un grupo de Entidades y Objetos de Valor que se tratan como una unidad a la hora de aplicar cambios. Dentro de este grupo hay una <strong>raíz del agregado</strong> (Aggregate Root), que es la única puerta de entrada permitida para modificar cualquier cosa dentro del agregado.</p>
+<p>Piénsalo como un refugio con una sola puerta de acceso vigilada. Nadie puede entrar ni salir sin pasar por esa puerta. Nadie puede modificar nada dentro sin que el guardián lo autorice. Ese guardián es la raíz del agregado.</p>
+<h3>¿Por qué necesitamos esto?</h3>
+<p>En nuestro apocalipsis zombi, imagina que tenemos un refugio con estas reglas críticas:</p>
+<ol>
+<li><strong>Capacidad máxima</strong>: Un refugio solo puede albergar un número limitado de supervivientes (si no, se agota el oxígeno, la comida, o simplemente no caben).</li>
+<li><strong>Cuarentena obligatoria</strong>: Si hay infectados sin cuarentena, no se puede admitir más gente (riesgo de contagio masivo).</li>
+<li><strong>Gestión de suministros</strong>: Los suministros del refugio deben ser controlados y contabilizados.</li>
+</ol>
+<p>Si permitimos que cualquier parte del código pueda modificar directamente la lista de supervivientes o los suministros, ¿quién garantiza que se cumplan estas reglas? La respuesta: nadie. Y en cuanto alguien añade un superviviente sin verificar la capacidad, o asigna suministros sin control, el caos es inevitable.</p>
+<h3>El Refugio como Agregado</h3>
+<p>Vamos a modelar <code>Shelter</code> (Refugio) como la <strong>raíz del agregado</strong>. Todo lo que ocurre con los supervivientes y suministros de ese refugio debe pasar por él:</p>
+<ul>
+<li>✅ La raíz (<code>Shelter</code>) expone métodos que verifican las invariantes antes de realizar cambios</li>
+<li>✅ Los supervivientes y suministros son <strong>privados</strong>, nadie puede tocarlos directamente desde fuera</li>
+<li>✅ Cada operación (<code>admit()</code>, <code>addSupply()</code>) protege las reglas del negocio</li>
+<li>❌ No hay setters públicos ni acceso directo al estado interno</li>
+</ul>
+<pre><code class="language-typescript">// Value Object - Representa un suministro genérico
+// Como es un Value Object, es inmutable (readonly)
+class Supply {
+  constructor(
+    public readonly name: string,
+    public readonly amount: number
+  ) {}
+}
+
+// Entity - Representa un superviviente individual
+// Tiene identidad única (id) y puede cambiar de estado
+class Survivor {
+  constructor(
+    public readonly id: string,
+    public name: string,
+    public health: number
+  ) {}
+}
+
+// Aggregate Root - La &quot;puerta de entrada&quot; a nuestro agregado
+// Es la ÚNICA forma de modificar supervivientes y suministros
+export class Shelter {
+  // CRÍTICO: Estos arrays son PRIVADOS
+  // Nadie fuera de esta clase puede modificarlos directamente
+  private survivors: Survivor[] = [];
+  private supplies: Supply[] = [];
+  private currentCount = 0;
+
+  constructor(
+    public readonly id: string,
+    public readonly capacity: number  // Invariante: no podemos superarla
+  ) {}
+
+  // Método público para admitir supervivientes
+  // Aquí es donde protegemos nuestras reglas de negocio
+  public admit(s: Survivor): void {
+    // INVARIANTE 1: Verificar capacidad ANTES de admitir
+    // Esta es la regla que no puede romperse NUNCA
+    if (this.currentCount + 1 &gt; this.capacity) {
+      throw new Error(&quot;Refugio lleno: no podemos admitir más supervivientes&quot;);
+    }
+
+    // Solo si pasa la verificación, modificamos el estado
+    this.survivors.push(s);
+    this.currentCount++;
+
+    // Aquí podríamos emitir un evento: SupervivienteAdmitido
+  }
+
+  // Método para añadir suministros
+  // La lógica de negocio: si ya existe el suministro, sumamos cantidades
+  public addSupply(supply: Supply): void {
+    const existing = this.supplies.find(x =&gt; x.name === supply.name);
+
+    if (existing) {
+      // Los Value Objects son inmutables, así que creamos uno nuevo
+      const merged = new Supply(existing.name, existing.amount + supply.amount);
+      // Reemplazamos el antiguo por el nuevo
+      this.supplies = this.supplies.map(x =&gt; x === existing ? merged : x);
+    } else {
+      // Si no existe, lo añadimos directamente
+      this.supplies.push(supply);
+    }
+  }
+
+  // Métodos de consulta: devolvemos COPIAS, no las referencias originales
+  // Esto evita que alguien pueda modificar el estado desde fuera
+  public getSurvivors(): Survivor[] {
+    return [...this.survivors];
+  }
+
+  public getSupplies(): Supply[] {
+    return [...this.supplies];
+  }
+}
+</code></pre>
+<p>Veamos cómo funciona esto en la práctica:</p>
+<pre><code class="language-typescript">// Creamos un refugio con capacidad para 3 supervivientes
+const electricShelter = new Shelter(&quot;Central Eléctrica Abandonada&quot;, 3);
+
+// Admitimos a tres supervivientes sin problema
+electricShelter.admit(new Survivor(&quot;1&quot;, &quot;Pepe&quot;, 10));
+electricShelter.admit(new Survivor(&quot;2&quot;, &quot;Juana&quot;, 8));
+electricShelter.admit(new Survivor(&quot;3&quot;, &quot;Atolón&quot;, 9));
+
+console.log(electricShelter.getSurvivors());
+// [
+//   Survivor: { &quot;id&quot;: &quot;1&quot;, &quot;name&quot;: &quot;Pepe&quot;, &quot;health&quot;: 10 },
+//   Survivor: { &quot;id&quot;: &quot;2&quot;, &quot;name&quot;: &quot;Juana&quot;, &quot;health&quot;: 8},
+//   Survivor: { &quot;id&quot;: &quot;3&quot;, &quot;name&quot;: &quot;Atolón&quot;, &quot;health&quot;: 9 }
+// ]
+
+// Si intentamos admitir un cuarto superviviente...
+// electricShelter.admit(new Survivor(&quot;4&quot;, &quot;Ariel&quot;, 7));
+// ❌ Error: &quot;Refugio lleno: no podemos admitir más supervivientes&quot;
+// La invariante nos protege de romper la regla
+
+// Añadimos suministros
+electricShelter.addSupply(new Supply(&quot;vendas&quot;, 10));
+console.log(electricShelter.getSupplies());
+// [Supply: { &quot;name&quot;: &quot;vendas&quot;, &quot;amount&quot;: 10 }]
+
+// Si añadimos más vendas, se suman automáticamente
+electricShelter.addSupply(new Supply(&quot;vendas&quot;, 7));
+console.log(electricShelter.getSupplies());
+// [Supply: { &quot;name&quot;: &quot;vendas&quot;, &quot;amount&quot;: 17 }]
+// Observa que no hay dos entradas de &quot;vendas&quot;, se han consolidado
+</code></pre>
+<h3>Puntos clave del agregado</h3>
+<p>Fijémonos en lo que hace que este código sea un buen agregado:</p>
+<ol>
+<li><p><strong>Estado privado</strong>: Los arrays <code>survivors</code> y <code>supplies</code> son privados. Imposible modificarlos desde fuera sin pasar por los métodos de la raíz.</p>
+</li>
+<li><p><strong>Invariantes protegidas</strong>: Antes de modificar cualquier estado, verificamos que no rompemos las reglas (<code>capacity</code>). Si la regla se viola, lanzamos un error y el estado permanece intacto.</p>
+</li>
+<li><p><strong>Métodos con sentido de negocio</strong>: No tenemos <code>setSurvivors()</code> ni <code>addSurvivorToArray()</code>. Tenemos <code>admit()</code>, que tiene significado en el lenguaje del dominio.</p>
+</li>
+<li><p><strong>Copias defensivas</strong>: Los getters devuelven copias (<code>[...this.survivors]</code>), no las referencias originales. Esto evita que alguien haga <code>shelter.getSurvivors().push(...)</code> y modifique el estado sin pasar por las validaciones.</p>
+</li>
+<li><p><strong>Consistencia transaccional</strong>: Cuando modificas un agregado, todos los cambios se hacen juntos. O se admite completamente al superviviente (con todas las verificaciones), o no se admite. No hay estados intermedios inválidos.</p>
+</li>
+</ol>
+<p>La siguiente imagen resume la estructura del agregado: <code>Shelter</code> es la raíz, los supervivientes y suministros son internos, y el acceso siempre pasa por los métodos públicos de la raíz:</p>
+<p><img src="/images/ddd-aggregate-root.webp" alt="Diagrama de clases del agregado"></p>
+<p><em>Diagrama de clases del agregado: <code>Shelter</code> como raíz, <code>Survivor</code> como Entidad y <code>Supply</code> como Value Object.</em></p>
+<p>Y si lo llevamos al mundo físico del apocalipsis, la analogía es perfecta:</p>
+<p><img src="/images/ddd-agregado.webp" alt="El Refugio como Agregado: el guardián controla quién entra"></p>
+<p>El combatiente en la puerta es la raíz del agregado. No importa quién intente entrar ni cómo de urgente sea la situación, si el refugio está lleno, nadie entra. Las invariantes se respetan siempre. Y si el camión llega con suministros, también pasa por él antes de que las cajas entren al refugio.</p>
+<h2>Continuará</h2>
+<p>En esta primera parte hemos sentado las bases de DDD: el <strong>lenguaje ubicuo</strong> que elimina traducciones mentales, los <strong>Bounded Contexts</strong> que dividen el sistema de forma coherente, las <strong>Entidades y Value Objects</strong> que modelan la identidad y el valor, y los <strong>Agregados</strong> que protegen las invariantes del dominio.</p>
+<p>En la segunda parte veremos cómo conectar todo esto con el exterior: <strong>Servicios de Dominio</strong>, <strong>Eventos</strong>, <strong>Repositorios</strong> y la <strong>capa de Aplicación</strong>. Además, veremos los antipatterns más comunes y cuándo tiene sentido (y cuándo no) aplicar DDD.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

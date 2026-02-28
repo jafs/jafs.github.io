@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DDD en un apocalipsis zombi. Parte 2 — JAFS</title>
+  <meta name="description" content="En la primera entrega de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un lenguaje ubicuo para acabar con la brecha en..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, DDD" />
+  <meta name="article:published_time" content="2026-02-22T12:30:00.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20260228.html" />
+  <meta property="og:title" content="DDD en un apocalipsis zombi. Parte 2" />
+  <meta property="og:description" content="En la primera entrega de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un lenguaje ubicuo para acabar con la brecha en..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/ddd.webp" />
+  
+  <meta property="article:published_time" content="2026-02-22T12:30:00.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DDD en un apocalipsis zombi. Parte 2" />
+  <meta name="twitter:description" content="En la primera entrega de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un lenguaje ubicuo para acabar con la brecha en..." />
+  <meta name="twitter:image" content="/images/ddd.webp" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20260228.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DDD en un apocalipsis zombi. Parte 2",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En la primera entrega de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un lenguaje ubicuo para acabar con la brecha en...",
+  "url": "https://jafs.github.io/articles/posts/20260228.html",
+  "inLanguage": "es",
+  "datePublished": "2026-02-22T12:30:00.000Z",
+  "image": "/images/ddd.webp"
+}
+  </script>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 2</h1><p class="text-gray-600 text-sm mb-6">22-02-2026</p><p>En la <a href="/articles/posts/20260221.html">primera entrega</a> de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un <strong>lenguaje ubicuo</strong> para acabar con la brecha entre lo que dice la líder del grupo y lo que escribe el desarrollador. Dividimos el sistema en <strong>Bounded Contexts</strong> para que Sanidad, Logística y Comando no se pisoteen entre sí. Aprendimos a distinguir <strong>entidades</strong> de <strong>objetos de valor</strong> y, por último, vimos cómo los <strong>agregados</strong> actúan como el guardián en la puerta del refugio: nadie modifica nada sin pasar por él. Te recomiendo leerlo antes, ya que reutilizaremos varias de las clases que definimos en él.</p>
+<p>Todo eso era el interior. El núcleo. La lógica que mantiene el orden dentro de las paredes.</p>
+<p>Pero un refugio necesita algo más para sobrevivir: operaciones que involucran a varios actores a la vez, mecanismos para comunicarse sin crear dependencias directas entre contextos, y una forma de persistir el estado sin que el dominio sepa si estás usando PostgreSQL o cuadernos viejunos. Alguien tiene que coordinar todo eso sin convertirse en la única persona que lo sabe todo y lo controla todo. Ya sabes cómo va esto de los apocalipsis zombi: quien sabe dónde están las llaves del generador, tiene acceso a los suministros críticos y entiende cómo funciona el sistema de ventilación es, invariablemente, la primera persona en convertirse en zombi en el peor momento posible. Y cuando eso pasa, el sistema entero se va a pique porque nadie más sabe cómo funciona.</p>
+<p>En esta segunda parte vamos a ver exactamente eso: <strong>Servicios de Dominio</strong>, <strong>Repositories</strong>, la <strong>capa de Aplicación</strong> y <strong>Eventos de Dominio</strong>.</p>
+<p><img src="/images/20260228/ddd-parte2-refugio.webp" alt="Exterior del refugio: capacidad al límite y zombis merodeando fuera"></p>
+<h2>1. Servicios de Dominio (Domain Services)</h2>
+<p>A veces te encuentras con lógica de negocio que no encaja naturalmente en ninguna entidad ni objeto de valor. No es responsabilidad de un único agregado, sino que involucra conceptos de varios o simplemente representa una operación del dominio que no &quot;pertenece&quot; a nadie en particular.</p>
+<h3>¿Cuándo necesitas un Servicio de Dominio?</h3>
+<p>Pregúntate: ¿esta lógica es responsabilidad de un Superviviente? ¿De un Refugio? Si la respuesta es &quot;no realmente, sino que es algo que pasa entre ellos&quot; o &quot;es un cálculo que usa información de varios sitios&quot;, entonces probablemente necesitas un <strong>Servicio de Dominio</strong>.</p>
+<p>Un Servicio de Dominio contiene lógica de negocio pura: no realiza I/O (no accede a bases de datos ni a servicios externos), no mantiene estado interno y actúa sobre los parámetros que recibe para devolver resultados. No debe convertirse en un cajón de sastre con utilidades varias: su propósito es expresar reglas del dominio con nombre claro.</p>
+<h3>Ejemplo real: Cálculo de riesgo de contagio</h3>
+<p>Imagina que Luis, uno de nuestros exploradores, acaba de volver con el traje rasgado y cara de susto. Estuvo rodeado de infectados pero dice que mantuvo distancia... más o menos. El médico del refugio necesita calcular la probabilidad real de contagio según su proximidad a los zombis y el tiempo de exposición. Esta lógica:</p>
+<ul>
+<li>No es responsabilidad de Luis (el <code>Superviviente</code>) (él no decide si se infecta o no, solo sufre las consecuencias).</li>
+<li>No es responsabilidad del <code>Refugio</code> (es un cálculo que puede ocurrir fuera también).</li>
+<li>Es una <strong>regla del dominio</strong> que depende de factores físicos del apocalipsis zombi.</li>
+</ul>
+<p>Con las condiciones anteriores, es cuando entraría en juego un Servicio de Dominio:</p>
+<pre><code class="language-typescript">export class InfectionSpreadService {
+  /**
+   * Calcula la probabilidad de contagio según distancia y tiempo de exposición
+   *
+   * @param distanceMeters - Distancia al infectado en metros
+   * @param exposureMinutes - Minutos de exposición
+   * @returns Probabilidad entre 0 (sin riesgo) y 1 (contagio seguro)
+   */
+  public chanceOfInfection(
+    distanceMeters: number,
+    exposureMinutes: number
+  ): number {
+    // Regla del dominio: a menor distancia, mayor riesgo
+    // A 0 metros = riesgo máximo (1.0)
+    // A 20+ metros = sin riesgo (0.0)
+    const base = Math.max(0, 1 - distanceMeters / 20);
+
+    // Regla del dominio: el tiempo de exposición aumenta el riesgo
+    // Menos de 60 minutos = riesgo proporcional al tiempo
+    // 60+ minutos = factor máximo (1.0)
+    const timeFactor = Math.min(1, exposureMinutes / 60);
+
+    // Fórmula de contagio: combinamos distancia y tiempo
+    // Base mínima del 50%, incrementa hasta 100% con el tiempo
+    return Math.min(1, base * (0.5 + 0.5 * timeFactor));
+  }
+}
+
+const infectionSpreadService = new InfectionSpreadService();
+
+// Uso del servicio
+const riesgo1 = infectionSpreadService.chanceOfInfection(5, 30);
+console.log(riesgo1);
+// ~0.59 (59% de probabilidad — hay que aislar a Luis)
+
+const riesgo2 = infectionSpreadService.chanceOfInfection(15, 90);
+console.log(riesgo2);
+// ~0.25 (25% de probabilidad — más lejos, pero estuvo mucho tiempo)
+
+const riesgo3 = infectionSpreadService.chanceOfInfection(1, 120);
+console.log(riesgo3);
+// ~0.95 (95% de probabilidad — Luis ya está prácticamente perdido)
+</code></pre>
+<h3>¿Quién usa este servicio?</h3>
+<p>Este servicio es <strong>pura lógica de dominio</strong>, por lo que puede ser utilizado por:</p>
+<ul>
+<li>El agregado <code>Refugio</code> cuando evalúa si activar una cuarentena automática.</li>
+<li>Un proceso que simula interacciones entre supervivientes.</li>
+<li>La capa de aplicación cuando necesita decidir si un <code>SupervivienteExpuesto</code> debe marcarse como <code>Infectado</code> (hablaremos de esa capa en la sección 3).</li>
+</ul>
+<p>Lo importante es que la lógica de negocio (cómo se calcula el contagio) está centralizada en un solo lugar con un nombre claro que refleja lo que hace. Si mañana los expertos en zombis dicen &quot;en realidad, el contagio es más rápido a través del aire&quot;, solo modificas este servicio.</p>
+<h3>Cuando el servicio coordina múltiples agregados</h3>
+<p>El ejemplo anterior es un servicio &quot;puro&quot;: solo hace cálculos con valores primitivos. Pero hay otra situación igualmente válida: lógica de negocio que <strong>involucra a varios agregados a la vez</strong>.</p>
+<p>Imagina que necesitamos transferir un superviviente de un refugio a otro. La operación tiene reglas de negocio concretas:</p>
+<ul>
+<li>No se puede transferir a un superviviente infectado.</li>
+<li>El refugio de destino debe tener capacidad libre.</li>
+<li>Si el superviviente es un especialista (médico, ingeniero), el refugio de origen no puede quedar por debajo del mínimo de especialistas requerido.</li>
+</ul>
+<p>¿Dónde vive esta lógica? No en el refugio (<code>Shelter</code>) (no sabe nada del otro refugio) ni en los supervivientes (<code>Survivor</code>) (no decide a dónde va). Es una regla que cruza dos agregados: aquí entra el Servicio de Dominio.</p>
+<pre><code class="language-typescript">export class SurvivorTransferService {
+  /**
+   * Valida y ejecuta la transferencia de un superviviente entre dos refugios,
+   * aplicando todas las reglas de negocio del dominio.
+   *
+   * ⚠️ Los agregados deben llegar ya cargados: este servicio
+   * no accede a repositorios ni a la base de datos.
+   */
+  public transfer(
+    survivor: Survivor,
+    fromShelter: Shelter,
+    toShelter: Shelter
+  ): void {
+    // Regla de dominio: los infectados no se trasladan
+    if (survivor.isInfected()) {
+      throw new DomainError(&quot;No se puede transferir a un superviviente infectado&quot;);
+    }
+
+    // Regla de dominio: el destino debe tener hueco
+    if (!toShelter.hasCapacity()) {
+      throw new DomainError(`El refugio ${toShelter.id} no tiene capacidad`);
+    }
+
+    // Regla de dominio: un especialista no puede marcharse si deja al refugio
+    // origen por debajo del mínimo de seguridad
+    if (survivor.isSpecialist() &amp;&amp; fromShelter.wouldBeUnsafeWithout(survivor)) {
+      throw new DomainError(
+        `${survivor.name} es especialista y su marcha dejaría el refugio en situación crítica`
+      );
+    }
+
+    // Aplicar el traslado en los dos agregados
+    fromShelter.removeSurvivor(survivor.id);
+    toShelter.admit(survivor);
+  }
+}
+</code></pre>
+<p>La clave está en el comentario: <strong>los agregados llegan ya cargados</strong>. Este servicio no sabe ni le importa si los datos vienen de PostgreSQL, de una caché o de un archivador mugroso. Solo aplica las reglas del dominio sobre objetos del dominio.</p>
+<p>Aunque SurvivorTransferService coordine el movimiento entre dos refugios, la última palabra la tienen los agregados. El servicio no hace <code>shelter.count++</code> manualmente (lo cual rompería la encapsulación), sino que llama a <code>toShelter.admit()</code>. Es el agregado quien se asegura de que su invariante (por ejemplo: &quot;nunca superar la capacidad máxima&quot;) se cumpla. Si el servicio intentara forzar algo ilegal, el agregado lanzaría un error y protegería la integridad del refugio.</p>
+<p><img src="/images/20260228/ddd-parte2-diagrama-servicio.png" alt="Diagrama de clases"></p>
+<h2>2. Repositorios (Repositories)</h2>
+<p>Tenemos agregados con reglas de negocio bien protegidas y Servicios de Dominio que calculan cosas importantes. Pero falta una pieza crucial: ¿cómo guardamos y recuperamos estos agregados de la base de datos?</p>
+<h3>El problema de la persistencia</h3>
+<p>Piénsalo así: el médico del refugio sabe curar heridas, suturar mordeduras y detectar los primeros síntomas de infección zombi. Pero no tiene por qué saber dónde está el archivero con los historiales médicos ni cómo está organizado el almacén de material sanitario. Son dos responsabilidades completamente distintas. El día que cambiemos de sistema de archivo, el médico no tiene que aprender nada nuevo: sigue haciendo su trabajo.</p>
+<p>Lo mismo ocurre con el dominio y la persistencia.</p>
+<p>Si dejamos que nuestros agregados sepan cómo se guardan en base de datos, estaríamos mezclando dos responsabilidades completamente diferentes:</p>
+<pre><code class="language-typescript">// ❌ HORRIBLE: El agregado sabe de SQL
+class Shelter {
+  public async save(): Promise&lt;void&gt; {
+    await db.query(
+      &quot;UPDATE shelters SET capacity = ?, current_count = ? WHERE id = ?&quot;,
+      [this.capacity, this.currentCount, this.id]
+    );
+    // Y ahora qué hacemos con los supervivientes, ¿otra tabla? ¿JSON?
+  }
+}
+</code></pre>
+<p>Esto rompe completamente la separación de responsabilidades. El dominio no debería saber si estás usando PostgreSQL, MongoDB, archivos JSON o palomas mensajeras para persistir datos.</p>
+<h3>La solución: Repositorios como abstracciones</h3>
+<p>Un <strong>Repositorio</strong> es una abstracción que se comporta como una colección en memoria, pero por debajo puede persistir los datos donde sea necesario. Es el intermediario perfecto entre el dominio puro y la infraestructura sucia. En DDD es siempre una <strong>interfaz</strong> (o clase abstracta). El dominio usa esta interfaz sin saber cómo está implementada:</p>
+<pre><code class="language-typescript">// Esto va en la capa de DOMINIO
+// Define QUÉ operaciones necesitamos, no CÓMO se hacen
+export interface ShelterRepository {
+  // Buscar un refugio por su ID
+  findById(id: string): Promise&lt;Shelter | null&gt;;
+
+  // Guardar un refugio (crear o actualizar)
+  save(shelter: Shelter): Promise&lt;void&gt;;
+
+  // Buscar refugios cercanos a unas coordenadas
+  findAllNear(coords: Coordinates, radiusKm: number): Promise&lt;Shelter[]&gt;;
+
+  // Buscar todos los refugios con capacidad disponible
+  findWithCapacity(): Promise&lt;Shelter[]&gt;;
+}
+</code></pre>
+<p>Fíjate en lo que <strong>NO</strong> está en esta interfaz:</p>
+<ul>
+<li>❌ Nada de SQL, MongoDB, o cualquier tecnología específica</li>
+<li>❌ Nada sobre tablas, colecciones, o estructura de datos</li>
+<li>❌ Nada sobre conexiones, transacciones, o pooling</li>
+</ul>
+<p>Solo operaciones del dominio expresadas en el lenguaje del negocio: &quot;buscar refugio&quot;, &quot;guardar refugio&quot;, &quot;encontrar cercanos&quot;.</p>
+<h3>Las implementaciones van en Infraestructura</h3>
+<p>La implementación concreta (SQL, Mongo, memoria) se coloca en la <strong>capa de infraestructura</strong>, completamente separada del dominio:</p>
+<pre><code class="language-typescript">// Esto va en la capa de INFRAESTRUCTURA
+export class PostgreSQLShelterRepository implements ShelterRepository {
+  async findById(id: string): Promise&lt;Shelter | null&gt; {
+    const row = await db.query(&quot;SELECT * FROM shelters WHERE id = ?&quot;, [id]);
+    if (!row) return null;
+
+    // Aquí hacemos el mapeo de base de datos a agregado
+    return this.mapToAggregate(row);
+  }
+
+  async save(shelter: Shelter): Promise&lt;void&gt; {
+    // Aquí decidimos cómo persistir el agregado
+    await db.query(
+      &quot;INSERT INTO shelters ... ON CONFLICT UPDATE ...&quot;,
+      [shelter.id, shelter.capacity, /* etc */]
+    );
+  }
+
+  // ... resto de métodos
+}
+
+// También podríamos tener una implementación en memoria para tests
+export class InMemoryShelterRepository implements ShelterRepository {
+  private shelters: Map&lt;string, Shelter&gt; = new Map();
+
+  async findById(id: string): Promise&lt;Shelter | null&gt; {
+    return this.shelters.get(id) || null;
+  }
+
+  async save(shelter: Shelter): Promise&lt;void&gt; {
+    this.shelters.set(shelter.id, shelter);
+  }
+
+  // ... resto de métodos
+}
+</code></pre>
+<h3>Ventajas de este enfoque</h3>
+<ol>
+<li><strong>Dominio puro</strong>: Los agregados no saben nada de persistencia. Solo contienen lógica de negocio.</li>
+<li><strong>Testeable</strong>: Puedes testear tu dominio usando un <code>InMemoryRepository</code> sin necesidad de levantar una base de datos real.</li>
+<li><strong>Flexible</strong>: Puedes cambiar de PostgreSQL a MongoDB sin tocar una sola línea del dominio. Solo cambias la implementación del Repositorio.</li>
+<li><strong>Inversión de dependencias</strong>: El dominio define la interfaz que necesita. La infraestructura implementa esa interfaz. El dominio no depende de la infraestructura, es al revés (esto es la <a href="/articles/posts/20220131.html">D de SOLID</a>).</li>
+</ol>
+<p>En resumen: los Repositorios son la frontera entre el mundo puro de las reglas de negocio y el mundo sucio de bases de datos, APIs y archivos. Y esa frontera está muy bien definida por una interfaz.</p>
+<h2>3. Aplicación: el director de orquesta</h2>
+<p>Ya tenemos agregados con reglas de negocio y repositorios que persisten datos. Pero falta algo: ¿quién coordina todo esto? ¿Quién recibe las peticiones del exterior y las traduce en operaciones del dominio?</p>
+<p>Aquí entra la <strong>capa de aplicación</strong>. Su trabajo es <strong>orquestar</strong>, no contener lógica de negocio. Es el director de orquesta que dice &quot;tú haz esto, luego tú aquello, y finalmente tú lo otro&quot;.</p>
+<h3>¿Qué hace la capa de aplicación?</h3>
+<p>La capa de aplicación es responsable de:</p>
+<ol>
+<li><strong>Recibir comandos o peticiones</strong> del exterior (API REST, GraphQL, CLI, etc.)</li>
+<li><strong>Validar permisos y autorización</strong> (¿puede este usuario hacer esto?)</li>
+<li><strong>Cargar agregados</strong> desde los repositorios</li>
+<li><strong>Invocar métodos del dominio</strong> (donde vive la lógica de negocio real)</li>
+<li><strong>Guardar los cambios</strong> a través de los repositorios</li>
+<li><strong>Publicar eventos</strong> de dominio para que otros se enteren (los veremos en la sección siguiente)</li>
+</ol>
+<p>Pero lo más importante es también saber lo que <strong>NO</strong> hace la capa de aplicación:</p>
+<ul>
+<li>❌ Contener reglas de negocio (eso es el dominio)</li>
+<li>❌ Saber de detalles de persistencia (eso es infraestructura)</li>
+<li>❌ Formatear respuestas para HTTP, GraphQL, etc. (eso es la capa de presentación)</li>
+</ul>
+<h3>Casos de uso y el patrón Command + Handler</h3>
+<p>Cada operación del sistema accesible desde el exterior es un <strong>caso de uso</strong>. Por ejemplo:</p>
+<ul>
+<li>Admitir un superviviente</li>
+<li>Transferir suministros</li>
+<li>Activar una cuarentena</li>
+</ul>
+<p>La capa de aplicación se organiza en torno a ellos: un caso de uso por operación, con toda la orquestación necesaria y nada más.</p>
+<p>Un patrón muy común en DDD para implementar esos casos de uso es usar <strong>Commands</strong> (comandos) y <strong>Handlers</strong> (manejadores). El Command describe la intención; el Handler es el caso de uso implementado:</p>
+<pre><code class="language-typescript">// Un Command representa una INTENCIÓN
+// &quot;Quiero admitir a este superviviente en este refugio&quot;
+export class AdmitSurvivorCommand {
+  constructor(
+    public readonly shelterId: string,
+    public readonly survivor: Survivor
+  ) {}
+}
+
+// El Handler es quien EJECUTA la intención
+export class AdmitSurvivorHandler {
+  constructor(
+    private shelterRepo: ShelterRepository,
+    private eventBus: EventBus
+  ) {}
+
+  async handle(cmd: AdmitSurvivorCommand): Promise&lt;void&gt; {
+    // 1. Cargar el agregado desde el repositorio
+    const shelter = await this.shelterRepo.findById(cmd.shelterId);
+    if (!shelter) {
+      throw new Error(&quot;Refugio no encontrado&quot;);
+    }
+
+    // 2. Invocar método del dominio
+    // AQUÍ es donde se validan las reglas de negocio (capacidad, etc.)
+    shelter.admit(cmd.survivor);
+
+    // 3. Persistir los cambios
+    await this.shelterRepo.save(shelter);
+
+    // 4. Publicar evento de dominio (lo explicaremos en la sección siguiente)
+    // ...
+  }
+}
+</code></pre>
+<h3>El flujo completo</h3>
+<p>Una de las grandes ventajas de organizar la capa de aplicación en casos de uso es que el mismo caso de uso puede ser invocado desde cualquier punto de entrada del sistema: una API REST, una interfaz de línea de comandos, un evento que llega de otro servicio o un proceso batch automático. La lógica de negocio y la orquestación no cambian en ningún caso; lo único que cambia es quién construye el <code>Command</code> y se lo pasa al <code>Handler</code>.</p>
+<p>Veámoslo con un ejemplo. Aquí una API REST invoca el caso de uso que acabamos de definir:</p>
+<pre><code class="language-typescript">// La API recibe una petición HTTP (capa de presentación)
+app.post(&quot;/shelters/:id/admit&quot;, async (req, res) =&gt; {
+  const command = new AdmitSurvivorCommand(
+    req.params.id,
+    new Survivor(req.body.survivorId, req.body.name, req.body.health)
+  );
+
+  // Construye el Command y delega en el caso de uso
+  await admitSurvivorHandler.handle(command);
+
+  res.status(200).json({ message: &quot;Superviviente admitido&quot; });
+});
+</code></pre>
+<p>Fíjate en la separación de responsabilidades:</p>
+<ul>
+<li><strong>API (Presentación)</strong>: Recibe HTTP, construye el comando, devuelve HTTP</li>
+<li><strong>Handler (Aplicación)</strong>: Orquesta el caso de uso, sin lógica de negocio</li>
+<li><strong>Shelter (Dominio)</strong>: Valida la capacidad, aplica las reglas, protege invariantes</li>
+<li><strong>Repository (Infraestructura)</strong>: Persiste en la base de datos</li>
+</ul>
+<p>Si mañana quisieras admitir supervivientes desde una CLI, desde un mensaje de otro sistema o desde un proceso nocturno automático, solo cambiaría cómo se construye el <code>AdmitSurvivorCommand</code>. El caso de uso —el <code>AdmitSurvivorHandler</code>— permanece intacto. Y el dominio ni se entera.</p>
+<h3>Servicio de Dominio vs. Capa de Aplicación</h3>
+<p>Aquí es donde mucha gente se confunde, porque un caso de uso de la capa de aplicación también &quot;coordina&quot; cosas. La diferencia es fundamental:</p>
+<pre><code class="language-typescript">// SERVICIO DE DOMINIO
+// Recibe objetos ya cargados, aplica reglas de negocio, sin I/O
+transferService.transfer(survivor, shelterA, shelterB);
+
+// HANDLER DE APLICACIÓN
+// Carga objetos, llama al dominio, guarda cambios, despacha eventos
+class TransferSurvivorHandler {
+  public constructor(
+    private survivorRepo: SurvivorRepository,
+    private shelterRepo: ShelterRepository,
+    private transferService: SurvivorTransferService
+  ) { }
+
+  async handle(cmd: TransferSurvivorCommand): Promise&lt;void&gt; {
+    // 1. CARGAR (I/O: acceso a repositorios)
+    const survivor = await this.survivorRepo.findById(cmd.survivorId);
+    const fromShelter = await this.shelterRepo.findById(cmd.fromShelterId);
+    const toShelter = await this.shelterRepo.findById(cmd.toShelterId);
+
+    // 2. DOMINIO (sin I/O: solo lógica de negocio)
+    this.transferService.transfer(survivor, fromShelter, toShelter);
+
+    // 3. GUARDAR (I/O: acceso a repositorios)
+    await this.shelterRepo.save(fromShelter);
+    await this.shelterRepo.save(toShelter);
+    await this.survivorRepo.save(survivor);
+  }
+}
+</code></pre>
+<p>Con la siguiente tabla puedes hacerte una idea de las diferencias entre ambos servicios para evitar confusiones:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Servicio de Dominio</th>
+<th>Servicio de Aplicación</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>¿Qué hace?</td>
+<td>Aplica reglas de negocio</td>
+<td>Orquesta un caso de uso completo</td>
+</tr>
+<tr>
+<td>¿Con qué trabaja?</td>
+<td>Objetos del dominio ya cargados</td>
+<td>Repositorios, eventos, servicios externos</td>
+</tr>
+<tr>
+<td>¿Tiene I/O?</td>
+<td>❌ Nunca</td>
+<td>✅ Siempre</td>
+</tr>
+<tr>
+<td>¿Contiene lógica de negocio?</td>
+<td>✅ Sí</td>
+<td>❌ No (delega en el dominio)</td>
+</tr>
+<tr>
+<td>¿Sabe de conexiones externas?</td>
+<td>❌ Nunca</td>
+<td>Indirectamente, a través de repositorios</td>
+</tr>
+</tbody></table>
+<p>Dicho de otra manera: el Servicio de Dominio sabe <strong>qué reglas</strong> gobiernan una operación del negocio. El Servicio de Aplicación sabe <strong>cómo ejecutar</strong> ese caso de uso de principio a fin. El primero es lógica; el segundo, coordinación u orquestación.</p>
+<p>Si en algún momento te preguntas &quot;¿esto debería ser un Servicio de Dominio o un caso de uso?&quot;, busca la respuesta en el I/O: si el código necesita acceder a repositorios o a cualquier infraestructura externa, es Aplicación. Si solo opera sobre objetos del dominio que ya tienes en memoria, es Dominio.</p>
+<h2>4. Eventos de Dominio (Domain Events)</h2>
+<p>Los <strong>Eventos de Dominio</strong> representan hechos que ya han ocurrido en el pasado y que son importantes para el negocio. No son órdenes ni peticiones, son <strong>notificaciones</strong> de algo que pasó y que otras partes del sistema podrían querer saber.</p>
+<h3>¿Por qué son importantes?</h3>
+<p>Los eventos son la clave para <strong>desacoplar</strong> partes del sistema que no deberían conocerse directamente. Pensemos en nuestro apocalipsis:</p>
+<p>Imagina que un zombi consigue colarse por una brecha en el perímetro. El centinela que lo detecta no puede salir corriendo a avisar al médico, luego al encargado de Logística y luego al mando, uno por uno. Para cuando terminase el recorrido, ya habría medio refugio infectado. En su lugar, toca la alarma. Con esa acción, reaccionará toda la gente que necesite hacerlo. El centinela no sabe ni le importa quién escucha la alarma: su trabajo es detectar y avisar, no coordinar. Eso son exactamente los Eventos de Dominio.</p>
+<p>Como siempre, para hacer un poco más sencilla la explicación lo veremos con un ejemplo en código: piensa al admitir a alguien en el grupo de supervivientes del refugio, ¿qué debe pasar?</p>
+<ul>
+<li>El equipo de <strong>Logística</strong> necesita saber que hay una boca más que alimentar</li>
+<li>El equipo de <strong>Sanidad</strong> debe registrar al superviviente para hacer un chequeo médico</li>
+<li>El equipo de <strong>Comando</strong> actualiza el mapa de distribución de personal</li>
+</ul>
+<p>Si hicieras esto directamente en el método <code>admit()</code> del refugio, tendrías algo así:</p>
+<pre><code class="language-typescript">// ❌ MAL: El refugio conoce demasiados detalles
+public admit(survivor: Survivor): void {
+  this.survivors.push(survivor);
+  this.logisticService.updateFoodConsumption(this.id);
+  this.medicalService.scheduleCheckup(survivor.id);
+  this.commandService.updateMap(this.id, this.currentCount);
+}
+</code></pre>
+<p>Esto es terrible porque:</p>
+<ul>
+<li>El <code>Refugio</code> ahora depende de 3 servicios que no son su responsabilidad</li>
+<li>Si mañana quieres que algo más reaccione a la admisión, tienes que modificar el <code>Refugio</code></li>
+<li>Estás acoplando contextos que deberían estar separados</li>
+</ul>
+<h3>La solución: Eventos de Dominio</h3>
+<p>En lugar de llamar directamente a todos esos servicios, el Handler —que ya conocemos de la sección anterior— publica un <strong>evento</strong> después de guardar el agregado. Quien esté interesado en ese evento, que reaccione.</p>
+<p>Primero definimos los eventos como tipos con nombres en pasado (ya ocurrieron, son hechos consumados):</p>
+<pre><code class="language-typescript">type DomainEvent =
+  | {
+      type: &quot;SurvivorAdmitted&quot;;
+      shelterId: string;
+      survivorId: string;
+      timestamp: string;
+    }
+  | {
+      type: &quot;SurvivorInfected&quot;;
+      survivorId: string;
+      infectedBy?: string; // Opcional: quién lo infectó
+      timestamp: string;
+    }
+  | {
+      type: &quot;ShelterRestocked&quot;;
+      shelterId: string;
+      supplies: Array&lt;{ name: string; amount: number }&gt;;
+      timestamp: string;
+    }
+  | {
+      type: &quot;QuarantineActivated&quot;;
+      shelterId: string;
+      reason: string;
+      affectedCount: number;
+      timestamp: string;
+    };
+</code></pre>
+<p>El método <code>admit()</code> del refugio permanece limpio: solo aplica reglas y cambia estado, sin saber nada de lo que ocurre después:</p>
+<pre><code class="language-typescript">public admit(s: Survivor): void {
+  if (this.currentCount + 1 &gt; this.capacity) {
+    throw new Error(&quot;Refugio lleno&quot;);
+  }
+  this.survivors.push(s);
+  this.currentCount++;
+  // Nada más: el dominio aplica reglas y cambia estado
+}
+</code></pre>
+<p>Y el Handler es quien publica el evento, siempre después de guardar. El Handler sabe qué operación acaba de ejecutar, por eso puede publicar el evento correcto:</p>
+<pre><code class="language-typescript">class AdmitSurvivorHandler {
+  async handle(cmd: AdmitSurvivorCommand): Promise&lt;void&gt; {
+    const shelter = await this.shelterRepo.findById(cmd.shelterId);
+    shelter.admit(cmd.survivor);
+    await this.shelterRepo.save(shelter);
+
+    // Si todo fue bien, notifica el evento.
+    await this.eventBus.publish({
+      type: &quot;SurvivorAdmitted&quot;,
+      shelterId: shelter.id,
+      survivorId: cmd.survivor.id,
+      timestamp: new Date().toISOString()
+    });
+  }
+}
+</code></pre>
+<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">🗒️ <strong>NOTA</strong><br />En sistemas robustos, se suele utilizar el patrón Outbox para garantizar la consistencia de que tras realizar todas las transacciones se publique correctamente el evento. Lo dejaremos fuera del alcance de este artículo. Pero si os interesa siempre podéis dejar algún comentario en LinkedIn para profundizar en él.</div></p>
+<h3>¿Quién escucha los eventos?</h3>
+<p>Diferentes partes del sistema pueden suscribirse a los eventos que les interesan:</p>
+<pre><code class="language-typescript">// El servicio de Logística escucha admisiones
+eventBus.on(&quot;SurvivorAdmitted&quot;, (event) =&gt; {
+  logisticService.updateFoodConsumption(event.shelterId);
+});
+
+// El servicio de Sanidad también
+eventBus.on(&quot;SurvivorAdmitted&quot;, (event) =&gt; {
+  medicalService.scheduleCheckup(event.survivorId);
+});
+
+// Comando reacciona a infecciones para evaluar evacuaciones
+eventBus.on(&quot;SurvivorInfected&quot;, (event) =&gt; {
+  commandService.evaluateEvacuation(event.shelterId);
+});
+
+// Sanidad emite alertas ante brotes
+eventBus.on(&quot;QuarantineActivated&quot;, (event) =&gt; {
+  alertService.sendUrgentNotification(
+    `¡Cuarentena activada en ${event.shelterId}! Motivo: ${event.reason}`
+  );
+});
+</code></pre>
+<h3>Ventajas de usar eventos</h3>
+<ol>
+<li><strong>Desacoplamiento</strong>: El <code>Refugio</code> no sabe quién reacciona a sus eventos, ni le importa. Solo publica lo que pasó.</li>
+<li><strong>Extensibilidad</strong>: Si mañana necesitas que otro servicio reaccione a <code>SurvivorAdmitted</code>, solo añades un listener. No tocas el código del <code>Refugio</code>.</li>
+<li><strong>Auditoría</strong>: Los eventos son un registro de todo lo que ha pasado. Como cualquiera puede recibirlos, puedes guardarlos y tener un historial completo de eventos del apocalipsis.</li>
+<li><strong>Procesos asíncronos</strong>: Los eventos permiten desencadenar procesos que no necesitan completarse inmediatamente (enviar alertas, actualizar dashboards, generar informes, etc.).</li>
+<li><strong>Event Sourcing</strong>: Si además guardas todos los eventos de forma cronológica, estarías a un paso del Event Sourcing, que como diría Doc Brown, es la verdadera máquina del tiempo del dominio: te permite reconstruir todo lo que pasó, paso a paso, desde el día 0 del apocalipsis.</li>
+</ol>
+<p>Los eventos son la columna vertebral de sistemas complejos bien diseñados. En DDD, son el pegamento que mantiene unidos los Bounded Contexts sin crear dependencias directas entre ellos.</p>
+<p><img src="/images/20260228/ddd-parte2-eventos.webp" alt="Reacción en cadena al detectar una brecha zombi: cada equipo reacciona al mismo evento sin que nadie los coordine directamente"></p>
+<h2>Para terminar</h2>
+<p>Implementar estas capas puede parecer mucho trabajo extra cuando hay zombis golpeando la puerta, pero es lo que diferencia a un grupo de supervivientes organizado de una cena buffet para no-muertos. Gracias a que el equipo médico (Dominio) y la gente encargada de suministros (Infraestructura) hablan el mismo idioma y respetan sus fronteras, Luis está ahora en una zona de aislamiento segura en lugar de estar deambulando por el comedor buscando cerebros.</p>
+<p>Hemos pasado de tener &quot;código que funciona&quot; a tener un sistema que refleja la realidad de nuestra supervivencia.</p>
+<p>En el siguiente artículo, daremos el paso final: cómo evitar que todo vuele por los aires cuando varias cosas pasan a la vez (transacciones), qué errores no debes cometer nunca (antipatrones) y cómo probar que nuestro refugio es realmente impenetrable (testing). ¡Mantened las puertas cerradas y el código limpio!</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

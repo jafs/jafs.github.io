@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DDD en un apocalipsis zombi. Parte 3 — JAFS</title>
+  <meta name="description" content="En la primera parte establecimos los cimientos: el lenguaje ubicuo que hace que la líder del grupo y el desarrollador hablen el mismo idioma, los Bounded Con..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, DDD" />
+  <meta name="article:published_time" content="2026-03-06T18:30:00.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20260306.html" />
+  <meta property="og:title" content="DDD en un apocalipsis zombi. Parte 3" />
+  <meta property="og:description" content="En la primera parte establecimos los cimientos: el lenguaje ubicuo que hace que la líder del grupo y el desarrollador hablen el mismo idioma, los Bounded Con..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/ddd-3.webp" />
+  
+  <meta property="article:published_time" content="2026-03-06T18:30:00.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DDD en un apocalipsis zombi. Parte 3" />
+  <meta name="twitter:description" content="En la primera parte establecimos los cimientos: el lenguaje ubicuo que hace que la líder del grupo y el desarrollador hablen el mismo idioma, los Bounded Con..." />
+  <meta name="twitter:image" content="/images/ddd-3.webp" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20260306.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DDD en un apocalipsis zombi. Parte 3",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En la primera parte establecimos los cimientos: el lenguaje ubicuo que hace que la líder del grupo y el desarrollador hablen el mismo idioma, los Bounded Con...",
+  "url": "https://jafs.github.io/articles/posts/20260306.html",
+  "inLanguage": "es",
+  "datePublished": "2026-03-06T18:30:00.000Z",
+  "image": "/images/ddd-3.webp"
+}
+  </script>
+
+
+  <!-- Mermaid.js para renderizar diagramas -->
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark'
+    });
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 3</h1><p class="text-gray-600 text-sm mb-6">06-03-2026</p><p>En la <a href="/articles/posts/20260221.html">primera parte</a> establecimos los cimientos: el <strong>lenguaje ubicuo</strong> que hace que la líder del grupo y el desarrollador hablen el mismo idioma, los <strong>Bounded Contexts</strong> para que Sanidad, Logística y Comando no se pisen entre sí, y los <strong>Agregados</strong> que actúan como guardián en la puerta del refugio. En la <a href="/articles/posts/20260228.html">segunda parte</a> conectamos ese núcleo con el exterior: <strong>Servicios de Dominio</strong> para lógica que involucra a varios actores, <strong>Repositorios</strong> que mantienen el dominio ajeno a la base de datos, la <strong>capa de Aplicación</strong> como directora de orquesta y los <strong>Eventos de Dominio</strong> que permiten que todo el sistema reaccione sin dependencias directas.</p>
+<p>Pero hay tres preguntas que todavía están en el aire: ¿qué pasa cuando una sola transacción no basta para coordinar una evacuación completa? ¿Cuáles son los errores más graves que puedes cometer implementando DDD, y cómo los evitas? ¿Y cómo pruebas que todas esas piezas funcionan de verdad antes de que llegue la horda?</p>
+<p>En esta tercera entrega veremos: <strong>consistencia y Sagas</strong>, los <strong>antipatrones</strong> que más daño hacen en producción, y <strong>testing</strong> del dominio.</p>
+<p><img src="/images/20260306/ddd-parte3-portada.webp" alt="Centro de mando coordinando la evacuación"></p>
+<h2>1. Consistencia, transacciones y Sagas</h2>
+<p>Hasta ahora hemos conocido operaciones que afectan a un solo agregado: <em>admitir un superviviente</em>, <em>añadir suministros</em>, <em>calcular riesgos de contagio</em>. Operaciones limpias y acotadas. Pero en medio del apocalipsis zombi rara vez tenemos el lujo de mantener las cosas simples. ¿Qué pasa cuando una horda rodea el Refugio A y hay que mover a todos sus supervivientes al Refugio B mientras los suministros se redistribuyen entre varios puntos? ¿Qué pasa cuando una sola transacción no basta para coordinar todo eso?</p>
+<h3>La regla de oro: un agregado = una transacción</h3>
+<p>Los agregados definen <strong>límites transaccionales</strong>. Cuando modificas un agregado, todos los cambios dentro de él se hacen de forma atómica (todo o nada). Pero esta garantía <strong>solo aplica dentro de un agregado</strong>.</p>
+<p>Pensemos en el caso más sencillo: mover un superviviente del Refugio A al Refugio B. La operación involucra dos agregados:</p>
+<ol>
+<li>Refugio A debe &quot;hacer salir&quot; al superviviente</li>
+<li>Refugio B debe &quot;admitirlo&quot;</li>
+</ol>
+<p>Aunque técnicamente podrías envolver ambos en una misma transacción de base de datos si comparten infraestructura (y de hecho veremos cuándo puede tener sentido hacerlo), llevarlo a cabo introduce un acoplamiento entre agregados que DDD recomienda evitar. Y si los refugios están en servicios distribuidos distintos, directamente no hay transacción que los cubra a los dos. De todas formas, recordad que hay veces que nos podemos saltar las normas siempre con cuidado, si no, provocaremos una serie de catastróficas desdichas que nos llevarán a ser rodeados por una horda.</p>
+<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">🗒️ <strong>NOTA</strong><br /><a href="/articles/posts/20260221.html">Recordemos</a> que cada agregado es dueño de su propio estado y no debería necesitar al otro para confirmar sus cambios. Si los metes en la misma transacción, los estás atando: si uno falla, arrastra al otro. Y eso es exactamente lo que queríamos evitar cuando les pusimos una frontera.</div></p>
+<h3>Solución 1: Transacciones locales simples</h3>
+<p>Cuando la operación es simple y los agregados comparten base de datos, puedes usar una transacción local con cuidado:</p>
+<pre><code class="language-typescript">async transferSurvivor(
+  fromShelterId: string,
+  toShelterId: string,
+  survivorId: string
+): Promise&lt;void&gt; {
+  await db.transaction(async (trx) =&gt; {
+    // Cargar ambos agregados dentro de la misma transacción
+    const fromShelter = await repo.findById(fromShelterId, trx);
+    const toShelter = await repo.findById(toShelterId, trx);
+
+    // Operaciones del dominio: las reglas se siguen aplicando
+    const survivor = fromShelter.removeSurvivor(survivorId);
+    toShelter.admit(survivor);
+
+    // Si algo falla, la transacción revierte ambos cambios
+    await repo.save(fromShelter, trx);
+    await repo.save(toShelter, trx);
+  });
+}
+</code></pre>
+<p>Esto introduce un acoplamiento que quizás no deseamos. Pero, funciona bien cuando la operación es rápida y los dos refugios están en la misma base de datos. Si no, necesitas algo más robusto.</p>
+<h3>Solución 2: Sagas / Process Managers</h3>
+<p>Las <strong>Sagas</strong> son el mecanismo para operaciones largas o distribuidas. La idea es sencilla: en lugar de una gran transacción que lo envuelva todo, usamos una <strong>secuencia de transacciones pequeñas coordinadas mediante eventos</strong>. Y si algo falla en el camino, las compensaciones intentan corregir el estado para que el sistema siga siendo coherente.</p>
+<p>En cuanto a dónde vive en el código: la Saga es una clase de la <strong>capa de aplicación</strong>, igual que los handlers de comandos que vimos en la <a href="/articles/posts/20260228.html">segunda parte</a>. La diferencia es que un handler gestiona una operación puntual, mientras que la Saga orquesta un proceso que puede durar minutos u horas y atravesar varios agregados. No contiene reglas de negocio —eso sigue siendo responsabilidad del dominio— sino que decide qué comando enviar a continuación en función de los eventos que recibe.</p>
+<p>Imagina la evacuación del Refugio A: los zombis han superado el perímetro exterior y hay que mover a todo el mundo al Refugio B antes de que sea demasiado tarde. El proceso tiene varios pasos:</p>
+<ol>
+<li>Verificar capacidad en Refugio B (consulta, no modifica nada)</li>
+<li>Marcar Refugio A como &quot;en evacuación&quot; → emite <code>EvacuacionIniciada</code></li>
+<li>Por cada superviviente:<ul>
+<li>Reservar plaza en Refugio B → emite <code>PlazaReservada</code></li>
+<li>Retirar al superviviente de A → emite <code>SupervivienteRetirado</code></li>
+<li>Admitir en B → emite <code>SupervivienteAdmitido</code></li>
+<li>Si B no tiene plaza → compensación: cancelar la evacuación (<code>PlazaNoDisponible</code>)</li>
+</ul>
+</li>
+<li>Transferir suministros críticos</li>
+<li>Marcar Refugio A como &quot;evacuado&quot; → emite <code>RefugioEvacuado</code></li>
+</ol>
+<pre class="mermaid">
+sequenceDiagram
+    participant A as Refugio A
+    participant Saga as Saga / Process Manager
+    participant B as Refugio B
+
+    A-&gt;&gt;Saga: EvacuacionIniciada
+
+    Note over A,B: Superviviente 1 — transferencia exitosa
+    Saga-&gt;&gt;B: ReservarPlaza
+    B-&gt;&gt;Saga: PlazaReservada ✅
+    Saga-&gt;&gt;A: RetirarSuperviviente
+    A-&gt;&gt;Saga: SupervivienteRetirado
+    Saga-&gt;&gt;B: AdmitirSuperviviente
+    B-&gt;&gt;Saga: SupervivienteAdmitido ✅
+
+    Note over A,B: Superviviente 2 — transferencia exitosa
+    Saga-&gt;&gt;B: ReservarPlaza
+    B-&gt;&gt;Saga: PlazaReservada ✅
+    Saga-&gt;&gt;A: RetirarSuperviviente
+    A-&gt;&gt;Saga: SupervivienteRetirado
+    Saga-&gt;&gt;B: AdmitirSuperviviente
+    B-&gt;&gt;Saga: SupervivienteAdmitido ✅
+
+    Note over A,B: Superviviente 3 — Refugio B lleno
+    Saga-&gt;&gt;B: ReservarPlaza
+    B-&gt;&gt;Saga: PlazaNoDisponible ❌
+    Saga-&gt;&gt;A: Compensación: CancelarEvacuacion
+    Note over A,B: Evacuación cancelada. Supervivientes 1 y 2 ya están en B.
+</pre>
+<p>Cada paso es una transacción local en un único agregado. La Saga suele mantener su propio estado —qué supervivientes se han transferido, en qué fase está la evacuación— para poder decidir el siguiente paso del proceso. Escucha los eventos y reacciona con el comando correspondiente. Cuando el Refugio B no puede reservar más plaza, la evacuación se cancela: los supervivientes ya transferidos se quedan en B y el resto permanece en A. No hay vuelta atrás para los que ya cruzaron el páramo, pero el sistema queda en un estado coherente y conocido.</p>
+<p><img src="/images/20260306/ddd-parte3-saga.webp" alt="Mapa táctico mostrando dos refugios conectados por una ruta de evacuación"></p>
+<h3>¿Cuándo usar cada opción?</h3>
+<ul>
+<li><strong>Transacción local simple</strong>: dos agregados en la misma base de datos, operación rápida.</li>
+<li><strong>Sagas</strong>: operación larga, múltiples agregados, sistemas distribuidos o necesidad de compensaciones ante fallos parciales.</li>
+</ul>
+<p>Y una cosa importante: DDD no siempre garantiza consistencia inmediata global. A veces el sistema tarda un momento en llegar a un estado consistente, y eso está bien. Se llama <strong>consistencia eventual</strong>. Imagina que el sistema esperase confirmación de todos los refugios antes de iniciar la evacuación. Mientras tanto, los zombis están cruzando el perímetro. En sistemas reales —y en apocalipsis reales— la consistencia eventual es un precio razonable por mantener el sistema operativo.</p>
+<h2>2. Antipatrones y errores comunes</h2>
+<p>Como todo en ingeniería de software, DDD se puede hacer mal. Muy mal. Y lo peor es que estos errores no explotan de forma inmediata: se van acumulando hasta que el sistema es tan difícil de cambiar que cualquier pequeña modificación provoca efectos inesperados en cadena. Exactamente lo que menos quieres cuando tienes una horda a las puertas.</p>
+<p><img src="/images/20260306/ddd-parte3-antipatterns.webp" alt="Refugio caótico"></p>
+<p><em>Los antipatrones serían el símil a que haya supervivientes accediendo directamente al almacén sin pasar por el guardia, con la puerta de acceso completamente ignorada y suministros esparcidos por el suelo.</em></p>
+<h3>A. Modelo anémico: el zombi del código</h3>
+<p>El nombre lo dice todo. Un modelo anémico tiene aspecto de clase con lógica de negocio, pero por dentro está vacío: solo getters, setters y ninguna regla que proteger.</p>
+<pre><code class="language-typescript">// ❌ MAL: Modelo anémico
+class Shelter {
+  public id: string;
+  public capacity: number;
+  public currentCount: number;
+  public survivors: Survivor[] = [];
+
+  public getSurvivors() { return this.survivors; }
+  public setSurvivors(s: Survivor[]) { this.survivors = s; }
+  public getCurrentCount() { return this.currentCount; }
+  public setCurrentCount(n: number) { this.currentCount = n; }
+}
+
+// Toda la lógica vive en un servicio aparte
+class ShelterService {
+  admitSurvivor(shelter: Shelter, survivor: Survivor) {
+    // ¿Y si alguien llama a setSurvivors() directamente sin pasar por aquí?
+    if (shelter.getCurrentCount() + 1 &gt; shelter.capacity) {
+      throw new Error(&quot;Refugio lleno&quot;);
+    }
+    shelter.getSurvivors().push(survivor);
+    shelter.setCurrentCount(shelter.getCurrentCount() + 1);
+  }
+}
+</code></pre>
+<p>El problema no es solo estético. Con <code>setSurvivors()</code> público, cualquier parte del código puede saltarse la validación de capacidad. Alguien añade supervivientes directamente al array, el refugio queda sobresaturado y en el apocalipsis eso puede significar un brote de infección.</p>
+<p>La confusión habitual es: &quot;si para transferir suministros entre dos refugios necesito un Servicio de Dominio, ¿no acabo igual de anémico?&quot;. No, porque la diferencia está en <em>qué</em> hace el servicio. Si llama a métodos con lógica de negocio, el dominio está sano. Si modifica el estado directamente saltándose esas reglas, el dominio es anémico aunque los métodos tengan nombres bonitos.</p>
+<pre><code class="language-typescript">// ✅ BIEN: El agregado protege sus invariantes
+class Shelter {
+  // No existe setSurvivors(). En su lugar:
+  public admit(survivor: Survivor): void {
+    if (this.currentCount + 1 &gt; this.capacity) {
+      throw new DomainError(&quot;Refugio lleno: no podemos admitir más supervivientes&quot;);
+    }
+    this.survivors.push(survivor);
+    this.currentCount++;
+  }
+
+  // No existe setSupplies(). En su lugar:
+  public receiveSupplies(supply: Supply): void {
+    if (this.isStorageFull()) {
+      throw new DomainError(&quot;Almacén lleno&quot;);
+    }
+    // Los Value Objects son inmutables: si existe el suministro, creamos uno nuevo con la suma
+    const idx = this.supplies.findIndex(s =&gt; s.name === supply.name);
+    if (idx &gt;= 0) {
+      this.supplies[idx] = new Supply(supply.name, this.supplies[idx].amount + supply.amount);
+    } else {
+      this.supplies.push(supply);
+    }
+  }
+
+  public sendSupplies(supply: Supply): void {
+    const idx = this.supplies.findIndex(s =&gt; s.name === supply.name);
+    if (idx &lt; 0 || this.supplies[idx].amount &lt; supply.amount) {
+      throw new DomainError(`Suministros insuficientes: ${supply.name}`);
+    }
+    // Value Object inmutable: reemplazamos con la cantidad reducida
+    this.supplies[idx] = new Supply(supply.name, this.supplies[idx].amount - supply.amount);
+  }
+}
+
+// El Servicio de Dominio coordina agregados LLAMANDO a sus métodos, nunca con setters:
+class SupplyTransferService {
+  public static transfer(supply: Supply, from: Shelter, to: Shelter): void {
+    from.sendSupplies(supply);   // ← El origen aplica sus reglas
+    to.receiveSupplies(supply);  // ← El destino aplica las suyas
+  }
+}
+</code></pre>
+<p>El test rápido para saber si tienes dominio anémico: ¿podrías reemplazar <code>receiveSupplies()</code> por <code>setSupplies(newList)</code> sin perder ninguna regla de negocio? Si la respuesta es sí, el agregado está vacío por dentro.</p>
+<h3>B. Agregados gigantes: el refugio que contiene el mundo entero</h3>
+<p>El exceso contrario: un único agregado que acumula todo el dominio. Cuanto más crece, más lento se vuelve cargarlo y más probable es que un cambio en un área rompa algo en otra completamente distinta.</p>
+<pre><code class="language-typescript">// ❌ MAL: Un solo agregado para gobernarlos a todos
+class Shelter {
+  private survivors: Survivor[];
+  private supplies: Supply[];
+  private medicalRecords: MedicalRecord[];
+  private securityLogs: SecurityLog[];
+  private weatherConditions: WeatherData[];
+  private nearbyThreats: Zombie[];
+  private alliances: Alliance[];
+  private historicalEvents: Event[];
+  // ... y 20 colecciones más
+}
+</code></pre>
+<p>Cada vez que alguien modifica el <code>Shelter</code>, carga toda esa información de base de datos, aunque solo necesite cambiar el nivel de suministros. Los conflictos de concurrencia se multiplican porque cada operación bloquea más datos de los necesarios. Y cuando el médico quiere añadir un campo al historial médico, rompe los tests del módulo de logística porque comparten la misma clase.</p>
+<p><strong>Solución</strong>: divide en agregados con responsabilidades claras: <code>Refugio</code> (capacidad, ocupación), <code>HistorialMedico</code> (pacientes, tratamientos), <code>SistemaSeguridad</code> (alertas, logs). Cada uno con sus propias invariantes.</p>
+<h3>C. Bounded Contexts como estructura de carpetas</h3>
+<p>Un error sutil y muy común: crear carpetas con nombres de contexto pero compartir el mismo modelo de datos entre todas ellas.</p>
+<pre><code class="language-text">/contexts
+  /logistics
+    LogisticsService.ts  // Usa la clase Survivor global
+  /medical
+    MedicalService.ts    // Usa la MISMA clase Survivor global
+  /command
+    CommandService.ts    // Usa la MISMA clase Survivor global
+</code></pre>
+<p>Si Logística, Sanidad y Comando comparten la clase <code>Survivor</code> con 50 propiedades, cualquier cambio que necesite uno afecta a los otros dos. No hay aislamiento real: es acoplamiento disfrazado de organización.</p>
+<p><strong>Solución</strong>: cada contexto tiene su propio modelo de <code>Survivor</code> con solo las propiedades que le interesan, y se comunican mediante contratos bien definidos (eventos, DTOs, APIs).</p>
+<h3>D. Persistir el agregado tal cual</h3>
+<p>Mezclar decoradores de ORM directamente en las clases de dominio es la forma más rápida de que el dominio acabe dependiendo de la infraestructura, justo lo contrario de lo que queremos.</p>
+<pre><code class="language-typescript">// ❌ MAL: El dominio huele a base de datos
+class Shelter {
+  @Column()
+  public id: string;
+
+  @OneToMany(() =&gt; Survivor)
+  public survivors: Survivor[];
+}
+</code></pre>
+<p>Si mañana cambias de ORM, o decides guardar los supervivientes en una colección de MongoDB en lugar de una tabla SQL, tienes que tocar el dominio. Y testear el dominio requiere levantar la base de datos.</p>
+<p><strong>Solución</strong>: el agregado es puro. El repositorio (en infraestructura) sabe cómo mapear entre el estado del agregado y lo que necesita la base de datos. En la siguiente entrega veremos exactamente cómo hacer ese mapeo sin comprometer esa pureza, con el patrón Snapshot.</p>
+<h3>E. DDD en aplicaciones CRUD simples</h3>
+<p>Aplicar todo el arsenal (agregados, bounded contexts, eventos, sagas) a una aplicación que básicamente crea, lee, actualiza y borra registros es un error que tiene consecuencias inmediatas y duraderas: el equipo tarda el doble en entregar cualquier cosa, el código es diez veces más complejo de lo necesario y la gente aprende a odiar DDD para siempre.</p>
+<p>Si tu sistema es un formulario conectado a una base de datos sin reglas de negocio complejas, un CRUD bien hecho es la solución correcta. DDD brilla cuando hay <strong>complejidad de dominio</strong>, no complejidad técnica.</p>
+<h2>3. Pruebas: testear comportamiento, no implementación</h2>
+<p>Aquí está una de las recompensas silenciosas de haber hecho bien todo lo anterior: el dominio puro es <strong>extraordinariamente fácil de testear</strong>.</p>
+<p>Piénsalo como el ejercicio de revisión que hace el médico del refugio antes de que llegue la siguiente horda. No espera a que los zombis entren para comprobar si el sistema de cuarentena funciona. Lo prueba en condiciones controladas, sin presión, y si algo falla lo arregla antes de que sea demasiado tarde. Eso son los tests unitarios del dominio: condiciones controladas, sin base de datos, sin servicios externos, sin excusas.</p>
+<p><img src="/images/20260306/ddd-parte3-tests.webp" alt="Superviviente verificando metódicamente las cerraduras, alarmas y capacidad del refugio"></p>
+<h3>Testea invariantes, no detalles de persistencia</h3>
+<p>Las <strong>invariantes</strong> (las reglas que nunca pueden romperse) son el corazón de tus tests. No importa si usas SQL o un cuaderno lleno de barro, eso es responsabilidad de los tests de integración. En el dominio, testea que las reglas de negocio se cumplan.</p>
+<pre><code class="language-typescript">import { describe, test, expect } from &quot;vitest&quot;; // o jest, o lo que uses
+
+describe(&quot;Refugio - Gestión de capacidad&quot;, () =&gt; {
+  test(&quot;debería admitir supervivientes si hay capacidad&quot;, () =&gt; {
+    // Arrange (preparar)
+    const shelter = new Shelter(&quot;refugio-1&quot;, 3);
+    const survivor = new Survivor(&quot;1&quot;, &quot;Ana&quot;, 100);
+
+    // Act (actuar)
+    shelter.admit(survivor);
+
+    // Assert (verificar)
+    expect(shelter.getSurvivors()).toHaveLength(1);
+    expect(shelter.getSurvivors()[0].name).toBe(&quot;Ana&quot;);
+  });
+
+  test(&quot;debería rechazar admisión si el refugio está lleno&quot;, () =&gt; {
+    // Arrange
+    const shelter = new Shelter(&quot;refugio-1&quot;, 2);
+    shelter.admit(new Survivor(&quot;1&quot;, &quot;Ana&quot;, 100));
+    shelter.admit(new Survivor(&quot;2&quot;, &quot;Borja&quot;, 100));
+
+    // Act &amp; Assert: la invariante debe protegernos
+    expect(() =&gt; {
+      shelter.admit(new Survivor(&quot;3&quot;, &quot;Carmen&quot;, 100));
+    }).toThrow(&quot;Refugio lleno: no podemos admitir más supervivientes&quot;);
+  });
+
+  test(&quot;debería consolidar suministros del mismo tipo&quot;, () =&gt; {
+    // Arrange
+    const shelter = new Shelter(&quot;refugio-1&quot;, 5);
+
+    // Act
+    shelter.receiveSupplies(new Supply(&quot;vendas&quot;, 10));
+    shelter.receiveSupplies(new Supply(&quot;antibióticos&quot;, 5));
+    shelter.receiveSupplies(new Supply(&quot;vendas&quot;, 7)); // Mismo tipo que el primero
+
+    // Assert
+    const supplies = shelter.getSupplies();
+    expect(supplies).toHaveLength(2); // No 3: las vendas se consolidaron
+    const vendas = supplies.find(s =&gt; s.name === &quot;vendas&quot;);
+    expect(vendas?.amount).toBe(17); // 10 + 7
+  });
+});
+
+describe(&quot;InfectionSpreadService - Cálculo de riesgo&quot;, () =&gt; {
+  const service = new InfectionSpreadService();
+
+  test(&quot;debería calcular alto riesgo con poca distancia y mucho tiempo&quot;, () =&gt; {
+    const risk = service.chanceOfInfection(2, 120);
+    expect(risk).toBeGreaterThan(0.8); // Más del 80% de riesgo: Luis está perdido
+  });
+
+  test(&quot;debería calcular riesgo cero fuera del rango de contagio&quot;, () =&gt; {
+    const risk = service.chanceOfInfection(25, 30);
+    expect(risk).toBe(0); // A 25 metros no hay peligro
+  });
+});
+</code></pre>
+<h3>Ventajas de testear el dominio puro</h3>
+<ol>
+<li><strong>Tests rápidos</strong>: sin base de datos, sin APIs externas. Tests unitarios puros que corren en milisegundos.</li>
+<li><strong>Tests claros</strong>: cada test verifica una regla de negocio concreta. Si falla, sabes exactamente qué invariante se rompió.</li>
+<li><strong>Refactoring seguro</strong>: puedes cambiar la implementación interna del agregado sin tocar los tests, mientras las invariantes se mantengan.</li>
+<li><strong>Documentación viva</strong>: leyendo los tests, cualquiera entiende qué se puede y qué no se puede hacer en el dominio.</li>
+</ol>
+<h3>Tests de repositorios (integración)</h3>
+<p>Para los repositorios sí necesitas tests de integración, porque interactúan con infraestructura real:</p>
+<pre><code class="language-typescript">describe(&quot;PostgreSQLShelterRepository - Integración&quot;, () =&gt; {
+  test(&quot;debería persistir y recuperar un refugio con sus supervivientes&quot;, async () =&gt; {
+    const repo = new PostgreSQLShelterRepository(db);
+    const shelter = new Shelter(&quot;refugio-test&quot;, 10);
+    shelter.admit(new Survivor(&quot;1&quot;, &quot;Ana&quot;, 100));
+
+    await repo.save(shelter);
+    const retrieved = await repo.findById(&quot;refugio-test&quot;);
+
+    expect(retrieved).not.toBeNull();
+    expect(retrieved?.getSurvivors()).toHaveLength(1);
+  });
+});
+</code></pre>
+<p>Estos tests son más lentos y requieren setup/teardown de base de datos, así que son menos frecuentes. La estrategia habitual es muchos tests de dominio puro (rápidos, sin dependencias) y pocos tests de integración (lentos, con infraestructura real).</p>
+<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">🗒️ <strong>NOTA</strong><br />No siempre hace falta levantar la base de datos de producción para estos tests. Puedes usar una versión en memoria (SQLite in-memory, bases de datos embebidas como H2 en Java) o un repositorio stub que guarde los agregados en un simple <code>Map</code>. Sería como repasar el protocolo de evacuación en una maqueta del refugio, en lugar de hacerlo en el refugio real: más rápido, más seguro, y si hay errores no pierdes a nadie.</div></p>
+<h3>Qué más tiene sentido testear</h3>
+<p>El dominio puro y los repositorios no son lo único que merece atención:</p>
+<p><strong>Handlers de la capa de aplicación</strong>: no verifican reglas de negocio (eso ya lo hacen los tests del dominio), sino que la orquestación es correcta: que el handler carga el agregado, llama al método adecuado y persiste el resultado. El repositorio se sustituye por un mock.</p>
+<p><strong>Servicios de Dominio</strong>: se testean igual que los agregados, sin dependencias externas. El <code>InfectionSpreadService</code> del ejemplo anterior es un caso típico: entradas conocidas, salida esperada, sin base de datos ni red de por medio.</p>
+<p><strong>Sagas</strong>: son las más difíciles de testear porque implican secuencias de eventos y compensaciones. Lo que interesa verificar es que ante cada evento la Saga reacciona con el comando correcto, y que ante un fallo emite la compensación adecuada. Se prueban enviando eventos directamente a la Saga y comprobando qué comandos produce.</p>
+<p><strong>Tests end-to-end</strong>: el flujo completo, por ejemplo en aplicaciones web, esto nos llevaría desde la petición HTTP hasta la base de datos. Son los más lentos y los menos numerosos, pero dan la confianza final de que todo el sistema encaja. El equivalente a un simulacro general con todos los refugios y todas las rutas activas.</p>
+<p>Podríamos poner ejemplos y extendernos en esta parte, pero daría prácticamente para otro artículo completo. Aún así, si os interesa comentad en LinkedIn y lo vemos.</p>
+<h2>Continuará</h2>
+<p>En esta tercera parte hemos visto cómo mantener la coherencia cuando una sola transacción no basta, con las <strong>Sagas</strong> coordinando operaciones distribuidas mediante eventos y compensaciones. Hemos repasado los <strong>antipatrones</strong> más peligrosos: el modelo anémico que vacía el dominio de lógica, los agregados gigantes que lo concentran todo, los bounded contexts que son solo carpetas con nombre bonito. Y vimos cómo <strong>testear el dominio puro</strong> sin levantar ninguna base de datos.</p>
+<p>En la siguiente entrega aterrizaremos los tres problemas que aparecen cuando intentas llevar este diseño a producción: cómo garantizar que los eventos de dominio llegan aunque el sistema falle a mitad de camino, por qué modificar dos agregados en la misma transacción te va a dar problemas a escala y qué pasa cuando los datos del dominio son privados de verdad y el repositorio necesita guardarlos sin saltarse esa privacidad. Y después de eso, veremos todo el sistema funcionando de principio a fin con un checklist para saber si realmente estás haciendo DDD o solo organizando carpetas.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

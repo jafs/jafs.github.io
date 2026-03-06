@@ -60,7 +60,7 @@
   "description": "En la primera entrega de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un lenguaje ubicuo para acabar con la brecha en...",
   "url": "https://jafs.github.io/articles/posts/20260228.html",
   "inLanguage": "es",
-  "datePublished": "2026-02-22T12:30:00.000Z",
+  "datePublished": "2026-02-28T12:30:00.000Z",
   "image": "/images/ddd.webp"
 }
   </script>
@@ -87,7 +87,7 @@
   </header>
   <main class="max-w-4xl mx-auto px-4 py-8">
     <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 2</h1><p class="text-gray-600 text-sm mb-6">22-02-2026</p><p>En la <a href="/articles/posts/20260221.html">primera entrega</a> de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un <strong>lenguaje ubicuo</strong> para acabar con la brecha entre lo que dice la líder del grupo y lo que escribe el desarrollador. Dividimos el sistema en <strong>Bounded Contexts</strong> para que Sanidad, Logística y Comando no se pisoteen entre sí. Aprendimos a distinguir <strong>entidades</strong> de <strong>objetos de valor</strong> y, por último, vimos cómo los <strong>agregados</strong> actúan como el guardián en la puerta del refugio: nadie modifica nada sin pasar por él. Te recomiendo leerlo antes, ya que reutilizaremos varias de las clases que definimos en él.</p>
+      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 2</h1><p class="text-gray-600 text-sm mb-6">28-02-2026</p><p>En la <a href="/articles/posts/20260221.html">primera entrega</a> de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un <strong>lenguaje ubicuo</strong> para acabar con la brecha entre lo que dice la líder del grupo y lo que escribe el desarrollador. Dividimos el sistema en <strong>Bounded Contexts</strong> para que Sanidad, Logística y Comando no se pisoteen entre sí. Aprendimos a distinguir <strong>entidades</strong> de <strong>objetos de valor</strong> y, por último, vimos cómo los <strong>agregados</strong> actúan como el guardián en la puerta del refugio: nadie modifica nada sin pasar por él. Te recomiendo leerlo antes, ya que reutilizaremos varias de las clases que definimos en él.</p>
 <p>Todo eso era el interior. El núcleo. La lógica que mantiene el orden dentro de las paredes.</p>
 <p>Pero un refugio necesita algo más para sobrevivir: operaciones que involucran a varios actores a la vez, mecanismos para comunicarse sin crear dependencias directas entre contextos, y una forma de persistir el estado sin que el dominio sepa si estás usando PostgreSQL o cuadernos viejunos. Alguien tiene que coordinar todo eso sin convertirse en la única persona que lo sabe todo y lo controla todo. Ya sabes cómo va esto de los apocalipsis zombi: quien sabe dónde están las llaves del generador, tiene acceso a los suministros críticos y entiende cómo funciona el sistema de ventilación es, invariablemente, la primera persona en convertirse en zombi en el peor momento posible. Y cuando eso pasa, el sistema entero se va a pique porque nadie más sabe cómo funciona.</p>
 <p>En esta segunda parte vamos a ver exactamente eso: <strong>Servicios de Dominio</strong>, <strong>Repositories</strong>, la <strong>capa de Aplicación</strong> y <strong>Eventos de Dominio</strong>.</p>

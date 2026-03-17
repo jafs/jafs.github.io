@@ -101,6 +101,12 @@
               </p>
 
               <p>
+                <h4>Audio relato</h4>
+                <div class="flex items-center gap-4">
+                  <audio id="audio-tokens" controls src="/resources/tokens.mp3"></audio>
+                  <a href="/resources/tokens.mp3" data-umami-event="download" data-umami-event-file="tokens.mp3" class="p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block">Descargar audio gratis</a>
+                </div>
+
                 <a href="/resources/tokens.epub" data-umami-event="download" data-umami-event-file="tokens.epub" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block">Descargar EPUB gratis</a>
                 <a href="/resources/tokens.pdf" data-umami-event="download" data-umami-event-file="tokens.pdf" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block">Descargar PDF gratis</a>
               </p>
@@ -166,5 +172,15 @@
   </footer>
 
   <script src="/js/main.js"></script>
+  <script>
+    const audio = document.getElementById('audio-tokens');
+    audio.addEventListener('play', () => {
+      if (window.umami) {
+        umami.track('audio-play', {
+          file: 'tokens.mp3'
+        });
+      }
+    });
+  </script>
 </body>
 </html>

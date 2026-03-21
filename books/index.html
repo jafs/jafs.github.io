@@ -101,14 +101,28 @@
               </p>
 
               <p>
-                <h4>Audio relato</h4>
-                <div class="flex items-center gap-4">
-                  <audio id="audio-tokens" controls src="/resources/tokens.mp3"></audio>
-                  <a href="/resources/tokens.mp3" data-umami-event="download" data-umami-event-file="tokens.mp3" class="p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block">Descargar audio gratis</a>
-                </div>
+                <h4 class="font-bold">Audio relato</h4>
+                <audio id="audio-tokens" class="w-full" controls src="/resources/tokens.mp3"></audio>
 
-                <a href="/resources/tokens.epub" data-umami-event="download" data-umami-event-file="tokens.epub" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block">Descargar EPUB gratis</a>
-                <a href="/resources/tokens.pdf" data-umami-event="download" data-umami-event-file="tokens.pdf" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block">Descargar PDF gratis</a>
+                <h4 class="font-bold">Descargas gratuitas</h4>
+                <div class="flex flex-wrap gap-2">
+                <a href="/resources/tokens.mp3" data-umami-event="download" data-umami-event-file="tokens.mp3" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block flex items-center gap-2">
+                  <img src="/images/icons/mp3.svg" alt="Audio" class="inline-block w-6 h-6 mr-1 align-middle" />
+                  <span>Audio relato</span>
+                </a>
+                <a href="/resources/tokens.epub" data-umami-event="download" data-umami-event-file="tokens.epub" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block flex items-center gap-2">
+                  <img src="/images/icons/epub.svg" alt="EPUB" class="inline-block w-6 h-6 mr-1 align-middle" />
+                  <span>EPUB</span>
+                </a>
+                <a href="/resources/tokens.pdf" data-umami-event="download" data-umami-event-file="tokens.pdf" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block flex items-center gap-2">
+                  <img src="/images/icons/pdf.svg" alt="PDF" class="inline-block w-6 h-6 mr-1 align-middle" />
+                  <span>PDF</span>
+                </a>
+                <a href="https://www.wattpad.com/story/409098881-tokens" data-umami-event="download" data-umami-event-file="tokens-wattpad" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block flex items-center gap-2">
+                  <img src="/images/icons/wattpad.svg" alt="Wattpad" class="inline-block w-6 h-6 mr-1 align-middle" />
+                  <span>Leer en Wattpad</span>
+                </a>
+                </div>
               </p>
             </div>
           </div>
@@ -138,14 +152,47 @@
                 desafíos que pondrán a prueba tu ingenio.
               </p>
 
-              <p>
-                <a href="/resources/guia_programacion_apocalipsis_zombi_demo.pdf" data-umami-event="download" data-umami-event-file="guia_programacion_apocalipsis_zombi_demo.pdf" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block">Leer un fragmento</a>
+              <p class="flex flex-col gap-2">
+                <a href="/resources/guia_programacion_apocalipsis_zombi_demo.pdf" data-umami-event="download" data-umami-event-file="guia_programacion_apocalipsis_zombi_demo.pdf" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block flex items-center gap-2" style="width:fit-content">
+                  <img src="/images/icons/pdf.svg" alt="PDF" class="inline-block w-6 h-6 mr-1 align-middle" />
+                  <span>Leer un fragmento</span>
+                </a>
               </p>
 
               <ul class="mt-4">
-                <li><a href="https://amzn.eu/d/fddQ4Fe" title="Compra la edición en tapa dura en Amazon" data-umami-event="purchase" data-umami-event-product="Guía de Programación en un Apocalipsis Zombi - Tapa Dura">🛒 Comprar edición en tapa dura</a></li>
-                <li><a href="https://amzn.eu/d/9vzHsil" title="Compra la edición en tapa blanda en Amazon" data-umami-event="purchase" data-umami-event-product="Guía de Programación en un Apocalipsis Zombi - Tapa Blanda">🛒 Comprar edición en tapa blanda</a></li>
-                <li><a href="https://amzn.eu/d/fGrG7FV" title="Compra el eBook en Amazon" data-umami-event="purchase" data-umami-event-product="Guía de Programación en un Apocalipsis Zombi - eBook">🛒 Comprar edición eBook</a></li>
+                <li>
+                  <a
+                    href="https://amzn.eu/d/fddQ4Fe"
+                    title="Compra la edición en tapa dura en Amazon"
+                    data-umami-event="purchase"
+                    data-umami-event-product="Guía de Programación en un Apocalipsis Zombi - Tapa Dura"
+                    class="font-bold text-cyan-800 hover:text-cyan-500 transition-colors"
+                  >
+                    🛒 Comprar edición en tapa dura
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://amzn.eu/d/9vzHsil"
+                    title="Compra la edición en tapa blanda en Amazon"
+                    data-umami-event="purchase"
+                    data-umami-event-product="Guía de Programación en un Apocalipsis Zombi - Tapa Blanda"
+                    class="font-bold text-cyan-800 hover:text-cyan-500 transition-colors"
+                  >
+                    🛒 Comprar edición en tapa blanda
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://amzn.eu/d/fGrG7FV"
+                    title="Compra el eBook en Amazon"
+                    data-umami-event="purchase"
+                    data-umami-event-product="Guía de Programación en un Apocalipsis Zombi - eBook"
+                    class="font-bold text-cyan-800 hover:text-cyan-500 transition-colors"
+                  >
+                    🛒 Comprar edición eBook
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

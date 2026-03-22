@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DDD en un apocalipsis zombi. Parte 4 — JAFS</title>
+  <meta name="description" content="En las tres entregas anteriores construimos los cimientos del refugio: el lenguaje ubicuo y los Bounded Contexts que hacen que todos hablen el mismo idioma, ..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, DDD" />
+  <meta name="article:published_time" content="2026-03-22T00:00:00.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20260322.html" />
+  <meta property="og:title" content="DDD en un apocalipsis zombi. Parte 4" />
+  <meta property="og:description" content="En las tres entregas anteriores construimos los cimientos del refugio: el lenguaje ubicuo y los Bounded Contexts que hacen que todos hablen el mismo idioma, ..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/ddd-4.webp" />
+  
+  <meta property="article:published_time" content="2026-03-22T00:00:00.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DDD en un apocalipsis zombi. Parte 4" />
+  <meta name="twitter:description" content="En las tres entregas anteriores construimos los cimientos del refugio: el lenguaje ubicuo y los Bounded Contexts que hacen que todos hablen el mismo idioma, ..." />
+  <meta name="twitter:image" content="/images/ddd-4.webp" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20260322.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DDD en un apocalipsis zombi. Parte 4",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En las tres entregas anteriores construimos los cimientos del refugio: el lenguaje ubicuo y los Bounded Contexts que hacen que todos hablen el mismo idioma, ...",
+  "url": "https://jafs.github.io/articles/posts/20260322.html",
+  "inLanguage": "es",
+  "datePublished": "2026-03-22T00:00:00.000Z",
+  "image": "/images/ddd-4.webp"
+}
+  </script>
+
+
+  <!-- Mermaid.js para renderizar diagramas -->
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark'
+    });
+  </script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 4</h1><p class="text-gray-600 text-sm mb-6">22-03-2026</p><p>En las tres entregas anteriores construimos los cimientos del refugio: el <a href="/articles/posts/20260221.html">lenguaje ubicuo y los Bounded Contexts</a> que hacen que todos hablen el mismo idioma, los <a href="/articles/posts/20260228.html">Servicios de Dominio, Repositorios, capa de Aplicación y Eventos de Dominio</a> que conectan el núcleo con el exterior, y las <a href="/articles/posts/20260306.html">Sagas, antipatrones y tests</a> que mantienen la integridad cuando las cosas se complican.</p>
+<p>La noche del día 94 descubrimos a las malas, si todo lo aprendido nos había servido. Una horda más grande de lo habitual obligó a una evacuación urgente del Refugio 3 hacia el Refugio 7. El sistema procesó las órdenes, los registros parecían correctos, pero el contexto de Sanidad nunca recibió los avisos: tres supervivientes con heridas abiertas pasaron la noche sin revisión médica. Por la mañana, uno de ellos había infectado a su compañero de litera y hubo que cerrar toda la sala para contener el brote. El código era correcto. La infraestructura, no.</p>
+<p>Hay tres puntos donde casi todos los equipos se estrellan cuando llevan DDD a producción. Este artículo va de esos tres puntos, de cómo construir las defensas que un simulacro no exige pero el ataque de una horda sí, y de ver todo el sistema funcionando de principio a fin.</p>
+<p><img src="/images/20260321/ddd-parte4-portada.webp" alt="Centro de operaciones con múltiples mostrando el estado de los refugios"></p>
+<h2>1. El dilema de la doble escritura y el patrón Outbox</h2>
+<p>En la <a href="/articles/posts/20260228.html">segunda parte</a> publicamos eventos así, justo después de guardar el agregado:</p>
+<pre><code class="language-typescript">async handle(cmd: AdmitSurvivorCommand): Promise&lt;void&gt; {
+  const shelter = await this.shelterRepo.findById(cmd.shelterId);
+  shelter.admit(cmd.survivor);
+  await this.shelterRepo.save(shelter);      // ← transacción en BD confirmada
+
+  await this.eventBus.publish({              // ← si el sistema falla aquí...
+    type: &quot;SurvivorAdmitted&quot;,
+    shelterId: shelter.id,
+    survivorId: cmd.survivor.id,
+    timestamp: new Date().toISOString()
+  });
+}
+</code></pre>
+<p>Y dejamos una nota al pie hablando de forma muy resumida del patrón Outbox. Lo que ocurrió la noche del día 94 es exactamente esa nota al pie hecha realidad.</p>
+<h3>El problema: dos infraestructuras, cero atomicidad</h3>
+<p>El código anterior intenta hacer dos cosas en dos infraestructuras distintas. La base de datos relacional y el bus de mensajes (Kafka, RabbitMQ o mensajes por Walkie Talkie) son dos sistemas independientes. No existe ningún mecanismo que garantice que ambas operaciones se completen o fallen juntas.</p>
+<p>Si la red sufre un pico de latencia de un milisegundo entre el <code>save</code> y el <code>publish</code>, o si el proceso cae justo en ese instante, el refugio tiene al superviviente dentro pero el equipo de sanidad jamás recibe la notificación. El herido está en el recinto, sangrando en su litera, y nadie va a atenderle porque el sistema global está desincronizado. Eso fue exactamente lo que pasó la noche del día 94, multiplicado por tres.</p>
+<p>Esto es el <strong>dilema de la doble escritura</strong>: cualquier intento de coordinar dos escrituras en sistemas distintos sin un mecanismo explícito de garantía está expuesto a este tipo de fallo silencioso.</p>
+<h3>La solución: el patrón Outbox</h3>
+<p>La idea es sencilla: en lugar de publicar el evento directamente al bus, lo guardamos en una tabla de la propia base de datos junto con el estado del agregado, dentro de <strong>la misma transacción SQL</strong>. O se guardan los dos o no se guarda ninguno.</p>
+<pre><code class="language-typescript">// Tabla outbox_events en la base de datos
+// id | event_type | payload (JSON) | created_at | processed_at (null = pendiente)
+
+async handle(cmd: AdmitSurvivorCommand): Promise&lt;void&gt; {
+  await this.uow.run(async () =&gt; {
+    // Cargamos dentro de la unidad de trabajo para evitar lecturas sucias
+    const shelter = await this.uow.shelters.findById(cmd.shelterId);
+    shelter.admit(cmd.survivor);
+
+    // 1. Guardamos el estado del agregado
+    await this.uow.shelters.save(shelter);
+
+    // 2. Guardamos el evento pendiente en la misma unidad de trabajo
+    await this.uow.outbox.save({
+      event_type: &quot;SurvivorAdmitted&quot;,
+      payload: JSON.stringify({
+        shelterId: shelter.id,
+        survivorId: cmd.survivor.id,
+        timestamp: new Date().toISOString()
+      })
+    });
+    // Si algo falla aquí, el Unit of Work revierte ambas escrituras
+  });
+}
+</code></pre>
+<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">🗒️ <strong>NOTA</strong><p>Lo que aparece como <code>this.uow</code> representa el <a href="https://martinfowler.com/eaaCatalog/unitOfWork.html"><strong>patrón Unit of Work</strong></a> que es una abstracción de la capa de aplicación que agrupa varias operaciones en una unidad atómica. El handler lo recibe por inyección de dependencias y solo sabe que <code>uow.run()</code> garantiza que o todo se persiste o nada se persiste. La implementación concreta —la que abre la transacción SQL, conoce Knex o Postgres y pasa el contexto a cada repositorio— vive en infraestructura. Así el caso de uso cumple la regla de dependencia: depende de abstracciones, no de detalles de la base de datos.</p><p>Podéis leer más acerca de él, en el fantástico libro <a href="https://amzn.to/4lMkNFJ">Patterns of Enterprise Application Architecture</a> de Martin Fowler</div></p>
+<p>El estado del agregado y el evento quedan atómicamente vinculados. Ahora necesitamos algo que publique esos eventos pendientes.</p>
+<h3>El worker: de la tabla al bus</h3>
+<p>Un proceso en segundo plano lee periódicamente la tabla <code>outbox_events</code> y publica los eventos pendientes al bus:</p>
+<pre><code class="language-typescript">export class OutboxWorker {
+  constructor(
+    private readonly eventBus: EventBus
+  ) {}
+
+  async processPendingEvents(): Promise&lt;void&gt; {
+    const pending = await db(&quot;outbox_events&quot;)
+      .whereNull(&quot;processed_at&quot;)
+      .orderBy(&quot;created_at&quot;, &quot;asc&quot;)
+      .limit(10);
+
+    for (const record of pending) {
+      // Publicamos al bus de mensajes
+      await this.eventBus.publish(JSON.parse(record.payload));
+
+      // Solo cuando el bus confirma la recepción, marcamos como procesado
+      await db(&quot;outbox_events&quot;)
+        .where(&quot;id&quot;, record.id)
+        .update({ processed_at: new Date() });
+    }
+  }
+}
+</code></pre>
+<p>Este método se ejecuta cada pocos segundos vía cron, un <code>setInterval</code> o cualquier mecanismo de tareas periódicas que uses en tu stack.</p>
+<p>Piénsalo así: la tabla <code>outbox_events</code> es la libreta de papel que hay en la sala de radio del refugio. Cuando el guardia admite a un superviviente, anota la entrada en el registro principal y, en el mismo acto, escribe el mensaje pendiente en esa libreta. Las dos cosas ocurren juntas o no ocurre ninguna. El worker es la operadora de radio que revisa la libreta cada pocos minutos, transmite los mensajes pendientes por radio (el bus de mensajes) y, solo cuando recibe confirmación de que el destinatario los recibió, los tacha. Si se va la luz mientras transmite, la libreta sigue intacta: el siguiente turno del operador encontrará el mensaje sin tachar y lo retransmitirá. El corte de energía no se lleva el aviso.</p>
+<p><img src="/images/20260321/ddd-parte4-outbox.webp" alt="Diagrama del patrón Outbox"></p>
+<h3>Entrega de al menos una vez e idempotencia</h3>
+<p>La operadora de radio transmite el mensaje, la guardia del refugio de destino confirma que lo recibió, pero el operador pierde el conocimiento antes de tacharlo de la libreta. Al llegar el turno siguiente, el mensaje sigue sin tachar y se retransmite.</p>
+<p>En términos de código: el worker publica el evento, el bus lo recibe y confirma, pero el worker cae justo antes de ejecutar el <code>UPDATE processed_at</code>. Al reiniciarse, verá ese evento todavía pendiente y lo enviará de nuevo.</p>
+<p>Esto se llama <strong>entrega de al menos una vez</strong> (<em>at-least-once delivery</em>): el sistema garantiza que el evento llega, pero no que llega exactamente una sola vez. La consecuencia directa es que <strong>los consumidores deben ser idempotentes</strong>: capaces de recibir el mismo evento más de una vez sin efectos secundarios duplicados.</p>
+<pre><code class="language-typescript">// El servicio de sanidad escucha admisiones
+eventBus.on(&quot;SurvivorAdmitted&quot;, async (event) =&gt; {
+  // Verificamos si ya programamos el chequeo para este superviviente
+  const alreadyScheduled = await medicalRepo.hasCheckupFor(event.survivorId);
+  if (alreadyScheduled) return; // Ignoramos el duplicado sin error ni efecto
+
+  await medicalService.scheduleCheckup(event.survivorId);
+});
+</code></pre>
+<p>Si el médico ya tiene programado el chequeo del superviviente 42 y recibe el aviso por segunda vez, simplemente lo ignora. No se asignan dos camas al mismo paciente. Esta propiedad no es opcional en un sistema que usa el patrón Outbox: es un requisito de diseño que todo consumidor de eventos debe cumplir.</p>
+<h3>Idempotencia en los handlers de comandos</h3>
+<p>La idempotencia no es solo responsabilidad de quien recibe los avisos de radio. El guardia en la puerta también puede recibir la misma orden dos veces: la señal del cuartel general se cortó y el operador la reenvió por si acaso. Sin protección, admitiría al mismo superviviente dos veces.</p>
+<p>Los propios handlers deberían poder recibir el mismo comando dos veces sin efectos duplicados, algo habitual cuando hay reintentos de red o clientes que reenvían peticiones. La solución es incluir un <code>commandId</code> único en cada comando y registrar los ya procesados dentro de la misma transacción:</p>
+<pre><code class="language-typescript">async handle(cmd: AdmitSurvivorCommand): Promise&lt;void&gt; {
+  await this.uow.run(async () =&gt; {
+    // Verificamos si este comando ya se procesó antes
+    const alreadyProcessed = await this.uow.processedCommands.findById(cmd.commandId);
+    if (alreadyProcessed) return;
+
+    const shelter = await this.uow.shelters.findById(cmd.shelterId);
+    if (!shelter) throw new Error(&quot;Refugio no encontrado&quot;);
+
+    shelter.admit(cmd.survivor);
+    await this.uow.shelters.save(shelter);
+
+    await this.uow.outbox.save({ /* ... */ });
+
+    // Registramos el commandId para detectar duplicados futuros
+    await this.uow.processedCommands.save({
+      command_id: cmd.commandId,
+      processed_at: new Date()
+    });
+  });
+}
+</code></pre>
+<p>Llevado al terreno del refugio, este identificador único es exactamente la hoja de control del guardia: anota el número de orden del cuartel general cuando procesa la señal. Si ese número ya está anotado, ignora el mensaje y no abre la puerta. La señal puede llegar dos veces; la puerta solo se abre una.</p>
+<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">📚 <strong>PARA SABER MÁS</strong><p>Los conceptos de doble escritura, idempotencia y entrega de al menos una vez están tratados en profundidad en <a href="https://amzn.to/4uIPnnF"><strong>Designing Data-Intensive Applications</strong></a> de Martin Kleppmann, probablemente el mejor libro sobre sistemas distribuidos modernos que existe.</p></div></p>
+<h3>Una nota sobre 2PC</h3>
+<p>Después de la noche del día 94, alguien en el comité de crisis propuso una solución distinta: que el cuartel general actuara como coordinador central y exigiera confirmación de <em>todos</em> los refugios antes de dar cualquier operación por válida. Primero preguntaría a cada refugio &quot;¿estás listo para comprometerte?&quot; —fase 1— y solo cuando todos respondieran afirmativamente enviaría la orden definitiva de confirmar —fase 2—. Garantía total, en teoría.</p>
+<p>El problema es que mientras cada refugio espera la confirmación final, sus recursos quedan bloqueados: nadie puede entrar ni salir hasta que el coordinador cierre el ciclo. Y si el cuartel general cae entre las dos fases —un corte de luz, un francotirador, un zombis en la salda del generador— todos los refugios se quedan congelados indefinidamente esperando una orden que nunca llega. Lo que era un punto de coordinación se convierte en un punto único de fallo. Además, no todos los refugios hablan el mismo protocolo de radio: exigir que todos lo soporten es una restricción operativa que en pleno apocalipsis nadie puede garantizar.</p>
+<p>Esto de lo que hemos hablado es el protocolo de confirmación en dos fases (<em>Two-Phase Commit</em>, 2PC). En teoría resuelve el dilema de la doble escritura; en la práctica has convertido un punto de coordinación en un punto único de fallo, incrementas la latencia de cada operación y exiges que todos los sistemas soporten el protocolo. En sistemas con alta disponibilidad, el coste supera casi siempre al beneficio. El patrón Outbox con idempotencia en los consumidores cubre la gran mayoría de los casos con mucho menos complejidad operativa. Reserva 2PC para escenarios muy excepcionales donde el coste operativo sea asumible y la atomicidad sea estrictamente imprescindible.</p>
+<h3>Orden y concurrencia</h3>
+<p>Cuando docenas de grupos transmiten avisos de radio al mismo tiempo, los mensajes pueden llegar en orden distinto al que fueron enviados. Un aviso de salida que llega después del aviso de llegada puede hacer creer al sistema que el superviviente entró antes de salir.</p>
+<p>En sistemas con alta concurrencia, es posible que un evento anterior llegue después de uno posterior. Incluir un <strong>número de versión o secuencia</strong> en los eventos del agregado permite a la Saga detectar y rechazar (o encolar) eventos desordenados. Para evitar que dos instancias paralelas de la misma Saga avancen el mismo estado simultáneamente, el registro de la Saga debe estar protegido con bloqueo pesimista o una restricción de unicidad en base de datos que impida que dos procesos modifiquen el mismo estado a la vez.</p>
+<h2>2. Un superviviente en el páramo: consistencia eventual entre agregados</h2>
+<p>En la segunda parte presentamos el <code>SurvivorTransferService</code> como solución para transferir un superviviente entre dos refugios. Volvamos a mirarlo con ojo crítico. De hecho, fue exactamente este servicio el que nos dio problemas la noche del día 94: con cuatro supervivientes moviéndose en paralelo hacia el Refugio 7, las escrituras se pisaron y dos transferencias quedaron en un estado inconsistente. El sistema creía que esos supervivientes seguían en el Refugio 3, que ya estaba sellado. Nadie supo dónde estaban durante horas.</p>
+<pre><code class="language-typescript">// De la parte 2: modifica DOS agregados en el mismo flujo
+export class SurvivorTransferService {
+  public transfer(
+    survivor: Survivor,
+    fromShelter: Shelter,
+    toShelter: Shelter
+  ): void {
+    if (survivor.isInfected()) throw new DomainError(&quot;...&quot;);
+    if (!toShelter.hasCapacity()) throw new DomainError(&quot;...&quot;);
+    if (survivor.isSpecialist() &amp;&amp; fromShelter.wouldBeUnsafeWithout(survivor)) {
+      throw new DomainError(&quot;...&quot;);
+    }
+
+    fromShelter.removeSurvivor(survivor.id);
+    toShelter.admit(survivor);
+    // Quien llama a esto guarda los dos refugios. Son dos agregados. Una transacción.
+  }
+}
+</code></pre>
+<p>El problema no es la lógica de negocio, que es correcta. El problema es el escenario a escala: imagina docenas de refugios enviando supervivientes al mismo refugio central bien abastecido. Cada transferencia bloquea simultáneamente dos filas en la base de datos: la del refugio de origen y la del refugio de destino. Con suficiente concurrencia, esto genera una avalancha de bloqueos en cascada que puede paralizar el sistema en el peor momento posible.</p>
+<p>Además, viola la regla de oro de DDD: <strong>un agregado, una transacción</strong>. Los agregados definen fronteras de consistencia que, por diseño, deberían ser independientes entre sí.</p>
+<h3>La solución: dejar al superviviente caminar</h3>
+<p>El equivalente físico de lo que queremos hacer es este: el refugio de origen abre sus puertas, el superviviente sale al páramo, las puertas se cierran y el guardia anota su salida. El refugio de destino no sabe nada todavía. Horas después, el superviviente llega y golpea la puerta. El refugio de destino decide entonces, con sus propias reglas actuales, si hay sitio.</p>
+<p>Cada refugio solo bloquea su propia fila. Nunca los dos a la vez.</p>
+<p><strong>Paso 1</strong>: el comando inicial solo toca el refugio de origen.</p>
+<pre><code class="language-typescript">// Nuevo método en Shelter: gestiona la salida, devuelve al superviviente
+public transferOut(survivorId: string): Survivor {
+  const survivor = this.survivors.find(s =&gt; s.id === survivorId);
+  if (!survivor) {
+    throw new DomainError(`Superviviente ${survivorId} no encontrado`);
+  }
+  if (survivor.isInfected()) {
+    throw new DomainError(&quot;No se puede transferir a un superviviente infectado&quot;);
+  }
+  this.survivors = this.survivors.filter(s =&gt; s.id !== survivorId);
+  this.currentCount--;
+  return survivor;
+}
+
+// Handler: una sola transacción, un solo agregado
+export class InitiateTransferHandler {
+  async handle(cmd: InitiateTransferCommand): Promise&lt;void&gt; {
+    await db.transaction(async (trx) =&gt; {
+      const fromShelter = await this.shelterRepo.findById(cmd.fromShelterId, trx);
+
+      // El refugio de origen aplica sus reglas y devuelve al superviviente
+      const survivor = fromShelter.transferOut(cmd.survivorId);
+      await this.shelterRepo.save(fromShelter, trx);
+
+      // El superviviente está &quot;en tránsito&quot;: lo serializamos en el evento
+      await trx(&quot;outbox_events&quot;).insert({
+        id: crypto.randomUUID(),
+        event_type: &quot;SurvivorTransferInitiated&quot;,
+        payload: JSON.stringify({
+          survivorId: cmd.survivorId,
+          fromShelterId: cmd.fromShelterId,
+          toShelterId: cmd.toShelterId,
+          survivorSnapshot: survivor.toSnapshot()  // Más sobre esto en la sección 3
+        }),
+        created_at: new Date(),
+        processed_at: null
+      });
+    });
+    // La transacción termina aquí. El refugio de destino no sabe nada todavía.
+  }
+}
+</code></pre>
+<p><strong>Paso 2</strong>: el refugio de destino reacciona de forma independiente cuando recibe el evento.</p>
+<pre><code class="language-typescript">eventBus.on(&quot;SurvivorTransferInitiated&quot;, async (event) =&gt; {
+  await db.transaction(async (trx) =&gt; {
+    const toShelter = await shelterRepo.findById(event.toShelterId, trx);
+    const survivor = Survivor.reconstitute(event.survivorSnapshot);
+
+    try {
+      // El destino aplica sus propias reglas en este instante
+      toShelter.admit(survivor);
+      await shelterRepo.save(toShelter, trx);
+
+      await trx(&quot;outbox_events&quot;).insert({
+        id: crypto.randomUUID(),
+        event_type: &quot;SurvivorTransferCompleted&quot;,
+        payload: JSON.stringify({
+          survivorId: event.survivorId,
+          shelterId: event.toShelterId
+        }),
+        created_at: new Date(),
+        processed_at: null
+      });
+    } catch (error) {
+      // El destino no puede admitirlo: emitimos el rechazo
+      await trx(&quot;outbox_events&quot;).insert({
+        id: crypto.randomUUID(),
+        event_type: &quot;SurvivorAdmissionRejected&quot;,
+        payload: JSON.stringify({
+          survivorId: event.survivorId,
+          fromShelterId: event.fromShelterId,
+          toShelterId: event.toShelterId,
+          survivorSnapshot: event.survivorSnapshot,
+          reason: error.message
+        }),
+        created_at: new Date(),
+        processed_at: null
+      });
+    }
+  });
+});
+</code></pre>
+<pre class="mermaid">
+sequenceDiagram
+    actor G as Guardia
+    participant O as Refugio origen
+    participant DB as Base de datos
+    participant W as OutboxWorker
+    participant D as Refugio destino
+
+    G-&gt;&gt;O: InitiateTransferCommand
+    rect rgb(20, 40, 20)
+        note over O,DB: Transacción 1 — solo el origen
+        O-&gt;&gt;O: transferOut(survivorId)
+        O-&gt;&gt;DB: save(refugioOrigen)
+        O-&gt;&gt;DB: outbox ← SurvivorTransferInitiated
+    end
+
+    W-&gt;&gt;DB: lee eventos pendientes
+    W-&gt;&gt;D: publica SurvivorTransferInitiated
+
+    alt El destino tiene capacidad
+        rect rgb(20, 20, 40)
+            note over D,DB: Transacción 2 — solo el destino
+            D-&gt;&gt;D: admit(survivor)
+            D-&gt;&gt;DB: save(refugioDestino)
+            D-&gt;&gt;DB: outbox ← SurvivorTransferCompleted
+        end
+    else El destino está lleno
+        rect rgb(40, 20, 20)
+            note over D,DB: Transacción 2 — compensación
+            D-&gt;&gt;DB: outbox ← SurvivorAdmissionRejected
+        end
+    end
+</pre>
+<h3>El caso que no podemos ignorar: el nómada</h3>
+<p>La consistencia eventual abre una caja de Pandora que el diseño debe afrontar: ¿qué pasa si el superviviente camina hasta el refugio de destino y le dicen que no hay sitio? No es una pregunta teórica. Ocurre cuando una evacuación simultánea de otro refugio llenó el destino mientras el superviviente estaba en camino. El superviviente lleva horas caminando y la puerta no se abre.</p>
+<p>El refugio de origen ya lo sacó de su inventario. Si intentamos simplemente devolverlo, se pondrá en peligro ya que hay zombis en el camino de vuelta. La compensación no siempre es posible, y el sistema tiene que modelar este estado de forma explícita.</p>
+<pre><code class="language-typescript">eventBus.on(&quot;SurvivorAdmissionRejected&quot;, async (event) =&gt; {
+  // Opción 1: redirigir a otro refugio con capacidad
+  const alternative = await shelterRepo.findWithCapacity();
+  if (alternative) {
+    await outboxRepo.insert({
+      event_type: &quot;SurvivorTransferInitiated&quot;,
+      payload: JSON.stringify({
+        ...event,
+        toShelterId: alternative.id
+      })
+    });
+    return;
+  }
+
+  // Opción 2: no hay alternativa. El superviviente es un Nómada.
+  // Este no es un estado de error: es un concepto de dominio legítimo.
+  await nomadRegistry.register({
+    survivorId: event.survivorId,
+    survivorSnapshot: event.survivorSnapshot,
+    lastKnownShelterId: event.fromShelterId,
+    reason: event.reason,
+    registeredAt: new Date()
+  });
+
+  await alertService.sendUrgentNotification(
+    `Superviviente ${event.survivorId} sin destino: activar protocolo de rescate`
+  );
+});
+</code></pre>
+<p>El concepto de <strong>Nómada</strong> no es un error del sistema ni un estado de excepción: es una realidad del dominio que la consistencia eventual nos obliga a modelar. En un apocalipsis zombi, hay gente que se queda sin refugio. Ignorar ese estado en el código no hace que deje de ocurrir: solo hace que ocurra sin que nadie lo sepa.</p>
+<h3>Persistir el estado de la Saga</h3>
+<p>La Saga que coordina la evacuación sabe en todo momento qué supervivientes se han transferido y en qué fase está el proceso. Pero ¿qué pasa si el servidor cae a mitad de la evacuación? Sin persistencia, la Saga pierde ese contexto al reiniciarse y el sistema queda en un estado desconocido: algunos supervivientes ya están en el refugio B, otros siguen en A, y nadie sabe exactamente cuántos ni cuáles.</p>
+<p>La solución es persistir el estado de la Saga en su propia tabla, dentro de la misma transacción que los cambios del agregado:</p>
+<pre><code class="language-typescript">// Una fila por instancia de Saga en curso
+// saga_id | saga_type | state (JSON) | current_step | started_at | updated_at
+
+export class EvacuationSaga {
+  private survivorsTransferred: string[] = [];
+  private currentStep: &quot;initiating&quot; | &quot;transferring&quot; | &quot;completing&quot; | &quot;compensating&quot; = &quot;initiating&quot;;
+
+  public toState(): object {
+    return {
+      survivorsTransferred: this.survivorsTransferred,
+      currentStep: this.currentStep
+    };
+  }
+
+  public static reconstitute(savedState: Record&lt;string, unknown&gt;): EvacuationSaga {
+    const saga = new EvacuationSaga();
+    saga.survivorsTransferred = savedState[&quot;survivorsTransferred&quot;] as string[];
+    saga.currentStep = savedState[&quot;currentStep&quot;] as typeof saga.currentStep;
+    return saga;
+  }
+}
+</code></pre>
+<p>Si el servidor cae mientras los supervivientes están en camino, la Saga sabe exactamente por dónde se quedó al reiniciarse: quiénes ya cruzaron, quiénes no, y cuál es el siguiente paso (o la compensación a ejecutar). Esto es lo que convierte a las Sagas en el mecanismo resiliente para operaciones largas: no la lógica en sí, sino el hecho de que esa lógica sobrevive a los reinicios.</p>
+<p><img src="/images/20260321/ddd-parte4-consistencia.webp" alt="Mapa táctico mostrando un superviviente en tránsito entre dos refugios, y la figura de un nómada en el páramo cuando ningún refugio tiene capacidad"></p>
+<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">📚 <strong>PARA SABER MÁS</strong><p>El patrón Saga y la gestión de la consistencia eventual en microservicios están tratados en detalle en <a href="https://amzn.to/3NP7YxX"><strong>Microservices Patterns</strong></a> de Chris Richardson.</p></div></p>
+<h2>3. El patrón Snapshot: persistir sin comprometer la pureza</h2>
+<p>Hay un tercer problema que la noche del día 94 no provocó, pero que habría aparecido tarde o temprano: ¿cómo guarda y recupera el repositorio el estado interno de un agregado sin romper su encapsulación?</p>
+<p>En la segunda parte mostramos el repositorio de PostgreSQL así:</p>
+<pre><code class="language-typescript">export class PostgreSQLShelterRepository implements ShelterRepository {
+  async findById(id: string): Promise&lt;Shelter | null&gt; {
+    const row = await db.query(&quot;SELECT * FROM shelters WHERE id = ?&quot;, [id]);
+    if (!row) return null;
+    return this.mapToAggregate(row); // ← ¿Cómo funciona este método?
+  }
+}
+</code></pre>
+<p>Y lo dejamos ahí. Ese <code>mapToAggregate</code> esconde exactamente el problema del que ahora hay que hablar.</p>
+<h3>El muro: ¿cómo accede el repositorio al estado privado?</h3>
+<p>Los arrays <code>survivors</code> y <code>supplies</code> del refugio son privados. No tienen setters. El diseño es correcto: nadie debería poder modificarlos desde fuera sin pasar por los métodos de negocio.</p>
+<p>Pero el repositorio necesita leer ese estado para guardarlo, y reconstituirlo para cargarlo. Sin una solución explícita, los equipos acaban haciendo una de estas dos cosas:</p>
+<pre><code class="language-typescript">// ❌ MAL: Decoradores del ORM directamente en el dominio
+class Shelter {
+  @Column()
+  public id: string;
+
+  @OneToMany(() =&gt; Survivor)
+  public survivors: Survivor[];  // ← privado... pero ahora con decorador de TypeORM
+}
+
+// ❌ MAL: Reflexión para saltarse la privacidad
+const shelter = new Shelter(row.id, row.capacity);
+(shelter as any)[&quot;survivors&quot;] = survivors.map(mapRow);
+</code></pre>
+<p>Ambas opciones destruyen lo que estábamos protegiendo. La primera acopla el dominio al ORM: si cambias de TypeORM a Prisma, o a PostgreSQL, o a un cuaderno, tienes que tocar tus clases de negocio más críticas. La segunda usa <code>(shelter as any)</code> para saltarse TypeScript a la fuerza, que es exactamente lo mismo pero más honesto sobre lo que está haciendo.</p>
+<h3>La solución: el patrón Snapshot</h3>
+<p>La idea es que el propio agregado expone una representación plana de su estado, exclusivamente para que la infraestructura pueda trabajar con él. Un objeto sin comportamiento, sin reglas de negocio, solo datos:</p>
+<pre><code class="language-typescript">// Interfaz del snapshot: solo datos, sin comportamiento
+export interface ShelterSnapshot {
+  id: string;
+  capacity: number;
+  currentCount: number;
+  survivors: Array&lt;{ id: string; name: string; health: number }&gt;;
+  supplies: Array&lt;{ name: string; amount: number }&gt;;
+}
+
+export interface SurvivorSnapshot {
+  id: string;
+  name: string;
+  health: number;
+}
+</code></pre>
+<p>El agregado añade dos métodos: uno para extraer su estado y otro para reconstituirse a partir de un snapshot.</p>
+<pre><code class="language-typescript">export class Shelter {
+  private survivors: Survivor[] = [];
+  private supplies: Supply[] = [];
+  private currentCount = 0;
+
+  constructor(
+    public readonly id: string,
+    public readonly capacity: number
+  ) {}
+
+  // ── Métodos de negocio existentes ───────────────────────────────────────────
+
+  public admit(s: Survivor): void {
+    if (this.currentCount + 1 &gt; this.capacity) {
+      throw new DomainError(&quot;Refugio lleno: no podemos admitir más supervivientes&quot;);
+    }
+    this.survivors.push(s);
+    this.currentCount++;
+  }
+
+  // ... resto de métodos de negocio
+
+  // ── Persistencia ────────────────────────────────────────────────────────────
+
+  /**
+   * Devuelve el estado actual como un objeto plano.
+   * Solo debe usarlo el repositorio para persistir.
+   */
+  public toSnapshot(): ShelterSnapshot {
+    return {
+      id: this.id,
+      capacity: this.capacity,
+      currentCount: this.currentCount,
+      survivors: this.survivors.map(s =&gt; s.toSnapshot()),
+      supplies: this.supplies.map(s =&gt; ({ name: s.name, amount: s.amount }))
+    };
+  }
+
+  /**
+   * Reconstituye un Shelter a partir de un snapshot guardado en base de datos.
+   * NO aplica las invariantes de negocio: está cargando un hecho histórico, no procesando un nuevo comando.
+   */
+  public static reconstitute(snapshot: ShelterSnapshot): Shelter {
+    const shelter = new Shelter(snapshot.id, snapshot.capacity);
+    shelter.currentCount = snapshot.currentCount;
+    shelter.survivors = snapshot.survivors.map(s =&gt; Survivor.reconstitute(s));
+    shelter.supplies = snapshot.supplies.map(s =&gt; new Supply(s.name, s.amount));
+    return shelter;
+  }
+}
+
+export class Survivor {
+  constructor(
+    public readonly id: string,
+    public name: string,
+    public health: number
+  ) {}
+
+  public toSnapshot(): SurvivorSnapshot {
+    return { id: this.id, name: this.name, health: this.health };
+  }
+
+  public static reconstitute(snapshot: SurvivorSnapshot): Survivor {
+    return new Survivor(snapshot.id, snapshot.name, snapshot.health);
+  }
+}
+</code></pre>
+<h3>Por qué <code>reconstitute</code> se salta las invariantes: la trampa del tiempo</h3>
+<p>Esta es la lección más profunda de esta sección, y conviene dejarla clara antes de seguir: hay una diferencia fundamental entre <strong>actuar en el presente</strong> y <strong>leer el pasado</strong>.</p>
+<p>Imagina los expedientes sellados en el archivo histórico del búnker. En la entrada del 15 de septiembre pone: &quot;admitidos 100 supervivientes, refugio al límite&quot;. Cuando el guardia abre esa carpeta hoy, no comprueba si el refugio tiene oxígeno suficiente para 100 personas. ¿Por qué lo haría? Ese hecho ya ocurrió, ya fue válido en su momento. Consultar ese expediente no activa ninguna regla del presente; solo devuelve la memoria de lo que fue.</p>
+<p><code>reconstitute</code> funciona exactamente así. No procesa un nuevo comando: reconstruye un estado que ya existió y que fue correcto cuando se guardó. Las invariantes de negocio se aplican a los comandos nuevos, no a la historia.</p>
+<p>Imagina que en el día 40, con la información que había disponible, la regla de negocio decía que la capacidad máxima de un refugio era de 100 personas. El refugio se llenó con 100 supervivientes y ese estado se guardó en base de datos.</p>
+<p>En el día 80, el colapso del sistema de ventilación del sector norte obligó a reducir la capacidad máxima a 50 personas y a actualizar el código en consecuencia.</p>
+<p>Si el repositorio intentara reconstruir el refugio pasando los 100 supervivientes uno a uno por el método <code>admit()</code>, el sistema lanzaría una excepción en el superviviente número 51 y colapsaría. No podrías ni cargar el sistema para ver quién está dentro.</p>
+<pre><code class="language-typescript">// ❌ Lo que NO debe hacer el repositorio:
+const shelter = new Shelter(row.id, row.capacity); // capacity = 50 en el código actual
+for (const survivorRow of survivorRows) {
+  shelter.admit(new Survivor(survivorRow.id, ...)); // ← lanza error en el superviviente 51
+}
+
+// ✅ Lo que debe hacer:
+const shelter = Shelter.reconstitute(snapshot); // carga directamente, sin validar
+</code></pre>
+<p><code>reconstitute</code> no valida porque los datos vienen de tu propia base de datos: son <strong>hechos que ya ocurrieron</strong> y que fueron válidos en el momento en que se guardaron. No estás intentando meter 50 personas más hoy. Solo estás despertando el objeto para que recuerde cuánta gente tiene dentro.</p>
+<p>Las invariantes aplican a los <strong>comandos nuevos</strong>, no a la historia. Si alguien intenta admitir un superviviente nuevo con la nueva regla de 50, <code>admit()</code> lo rechazará correctamente.</p>
+<h3>El repositorio actualizado</h3>
+<p>Con <code>toSnapshot()</code> y <code>reconstitute()</code> disponibles, el repositorio queda limpio y sin tocar el dominio:</p>
+<pre><code class="language-typescript">export class PostgreSQLShelterRepository implements ShelterRepository {
+  async findById(id: string): Promise&lt;Shelter | null&gt; {
+    const row = await db(&quot;shelters&quot;).where({ id }).first();
+    if (!row) return null;
+
+    const survivors = await db(&quot;survivors&quot;).where({ shelter_id: id });
+    const supplies = await db(&quot;supplies&quot;).where({ shelter_id: id });
+
+    // Reconstituimos desde el snapshot: ni un ORM decorator, ni reflexión
+    return Shelter.reconstitute({
+      id: row.id,
+      capacity: row.capacity,
+      currentCount: row.current_count,
+      survivors: survivors.map(s =&gt; ({ id: s.id, name: s.name, health: s.health })),
+      supplies: supplies.map(s =&gt; ({ name: s.name, amount: s.amount }))
+    });
+  }
+
+  async save(shelter: Shelter, trx?: Knex.Transaction): Promise&lt;void&gt; {
+    const conn = trx ?? db;
+    const snap = shelter.toSnapshot(); // Pedimos la foto al agregado
+
+    await conn(&quot;shelters&quot;)
+      .insert({ id: snap.id, capacity: snap.capacity, current_count: snap.currentCount })
+      .onConflict(&quot;id&quot;).merge();
+
+    // Sustituimos supervivientes: sencillo para este modelo
+    await conn(&quot;survivors&quot;).where({ shelter_id: snap.id }).delete();
+    if (snap.survivors.length &gt; 0) {
+      await conn(&quot;survivors&quot;).insert(
+        snap.survivors.map(s =&gt; ({ ...s, shelter_id: snap.id }))
+      );
+    }
+
+    await conn(&quot;supplies&quot;).where({ shelter_id: snap.id }).delete();
+    if (snap.supplies.length &gt; 0) {
+      await conn(&quot;supplies&quot;).insert(
+        snap.supplies.map(s =&gt; ({ ...s, shelter_id: snap.id }))
+      );
+    }
+  }
+}
+</code></pre>
+<p>El dominio no sabe nada de SQL. La infraestructura no sabe nada de reglas de negocio. La frontera está exactamente donde tiene que estar.</p>
+<p>Este enfoque es una variante del patrón <strong>Data Mapper</strong>: en lugar de que un mapper externo deba conocer la estructura interna del agregado (violando la encapsulación), el propio agregado expone y consume su representación serializable mediante <code>toSnapshot()</code> y <code>reconstitute()</code>. El efecto es el mismo que si usaras DTOs explícitos de mapeo, pero sin acoplar la infraestructura al dominio. El dominio no sabe que existe una tabla SQL; la infraestructura no sabe qué reglas de negocio aplica el dominio.</p>
+<p><img src="/images/20260321/ddd-parte4-snapshot.webp" alt="Diagrama del patrón Snapshot"></p>
+<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">📚 <strong>PARA SABER MÁS</strong><p>El patrón Data Mapper, del que el Snapshot es una variante, está documentado en <a href="https://amzn.to/4lMkNFJ"><strong>Patterns of Enterprise Application Architecture</strong></a> de Martin Fowler (el mismo libro que cubre el patrón Unit of Work mencionado antes).</p></div></p>
+<h2>4. Juntándolo todo: tres días en el refugio</h2>
+<p>Ha llegado el momento del simulacro completo. El código está disponible en <a href="https://github.com/jafs/ddd-zombie-patterns">GitHub</a> con tres escenarios encadenados que cubren todo lo que hemos visto: admisión, transferencia y el caso del Nómada con concurrencia real.</p>
+<p><strong>Día 95 — María y Carlos llegan al Refugio 7</strong></p>
+<p>El Refugio 7 tiene capacidad para dos personas. El <code>AdmitSurvivorHandler</code> gestiona cada llegada por separado: carga el refugio desde el repositorio (usando <code>reconstitute</code> internamente), llama a <code>shelter.admit()</code> para que el dominio aplique sus reglas, persiste el nuevo estado (usando <code>toSnapshot</code>) y deja el evento <code>SurvivorAdmitted</code> en el outbox. El worker lo publica, Sanidad programa los chequeos y Logística actualiza las raciones. El refugio queda lleno.</p>
+<pre><code class="language-text">AdmitSurvivorHandler → [Dominio] admit() → [Repo] toSnapshot → [Outbox] SurvivorAdmitted
+OutboxWorker → Sanidad programa chequeo · Logística actualiza raciones
+</code></pre>
+<p><strong>Día 96 — Carlos se traslada al Refugio 8</strong></p>
+<p>El Refugio 7 está lleno y Carlos necesita moverse. El <code>InitiateTransferHandler</code> solo toca el refugio de origen: saca a Carlos con <code>transferOut()</code>, guarda el estado actualizado y emite <code>SurvivorTransferInitiated</code> con el snapshot de Carlos serializado dentro. Una sola transacción, un solo agregado. El worker procesa el evento: el <code>TransferEventHandlers</code> carga el Refugio 8, aplica sus propias reglas y admite a Carlos. Refugio 8: lleno.</p>
+<pre><code class="language-text">InitiateTransferHandler → [Dominio] transferOut() → [Outbox] SurvivorTransferInitiated
+OutboxWorker → TransferEventHandlers → [Dominio] admit() en destino → SurvivorTransferCompleted
+</code></pre>
+<p><strong>Día 97 — Pedro queda como Nómada</strong></p>
+<p>Pedro ocupa la plaza que dejó Carlos en el Refugio 7 —el refugio vuelve a estar lleno— y a continuación se inicia su traslado al Refugio 8. En ese momento el evento de Pedro está en el outbox, pendiente de procesar. Antes de que el worker lo gestione, Ana llega y ocupa la plaza que Pedro acaba de dejar libre en el Refugio 7. Cuando el worker finalmente procesa el traslado: el Refugio 8 está lleno, el Refugio 7 también. No hay alternativa. Pedro es un Nómada y su registro aparece en <code>data/nomads/</code>.</p>
+<p>Este tercer escenario no es un caso inventado. Es exactamente lo que ocurre cuando la consistencia eventual y la concurrencia se cruzan: el sistema no puede garantizar que el destino siga disponible entre el momento en que se emite la orden de traslado y el momento en que se ejecuta. La solución no es añadir más bloqueos —eso nos devuelve al problema de la sección 2— sino modelar el Nómada como lo que es: una realidad del dominio con su propio estado, su propia alerta y su propio protocolo de rescate.</p>
+<pre><code class="language-text">InitiateTransferHandler → [Outbox] SurvivorTransferInitiated (Pedro en tránsito)
+[Concurrencia] Ana admitida → Refugio 7 lleno
+OutboxWorker → Refugio 8 lleno → SurvivorAdmissionRejected
+             → sin alternativa → Pedro registrado en data/nomads/
+</code></pre>
+<h2>El refugio aguanta</h2>
+<p>Cuatro artículos después, el sistema ha evolucionado desde un <code>user.status = 2</code> hasta un dominio que habla el idioma del apocalipsis, protege sus invariantes, coordina múltiples contextos sin acoplarse entre sí y persiste su estado sin comprometer su pureza.</p>
+<p>Pero la lección más importante no es técnica. Es que DDD es, ante todo, una conversación continua con el dominio. Las herramientas —Bounded Contexts, Agregados, Repositorios, Outbox, Snapshots— son consecuencia de escuchar bien ese dominio y modelar lo que encuentras, incluyendo los estados incómodos como el superviviente nómada que el sistema cómodo preferiría ignorar.</p>
+<p>Un dominio bien modelado no es el que no tiene casos límite. Es el que los nombra, los gestiona y los convierte en código que cualquiera del equipo puede leer sin abrir la documentación.</p>
+<p>Mantened las puertas cerradas y el código limpio.</p>
+<p>En la próxima y última entrega cerraremos la serie con un artículo de preguntas frecuentes, un checklist rápido de DDD para tener a mano y, quizás lo más importante, una guía honesta sobre cuándo usar DDD y cuándo no merece la pena. Porque no todo apocalipsis necesita un dominio rico.</p>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

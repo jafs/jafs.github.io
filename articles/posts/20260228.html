@@ -533,7 +533,7 @@ public admit(survivor: Survivor): void {
   }
 }
 </code></pre>
-<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">🗒️ <strong>NOTA</strong><br />En sistemas robustos, se suele utilizar el patrón Outbox para garantizar la consistencia de que tras realizar todas las transacciones se publique correctamente el evento. Lo dejaremos fuera del alcance de este artículo. Pero si os interesa siempre podéis dejar algún comentario en LinkedIn para profundizar en él.</div></p>
+<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">🗒️ <strong>NOTA</strong><br />En sistemas robustos, se suele utilizar el patrón Outbox para garantizar la consistencia de que tras realizar todas las transacciones se publique correctamente el evento. Lo dejaremos fuera del alcance de este artículo. Podéis leer más sobre él en la <a href="/articles/posts/20260322.html">cuarta parte</a> de esta serie de artículos.</div></p>
 <h3>¿Quién escucha los eventos?</h3>
 <p>Diferentes partes del sistema pueden suscribirse a los eventos que les interesan:</p>
 <pre><code class="language-typescript">// El servicio de Logística escucha admisiones

@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DDD en un apocalipsis zombi. Preguntas frecuentes — JAFS</title>
+  <meta name="description" content="En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el lenguaje ubicuo y terminamos con patrones más avanzados como patrón O..." />
+  <meta name="author" content="José Antonio Fuentes Santiago" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, DDD" />
+  <meta name="article:published_time" content="2026-04-02T00:00:00.000Z" />
+  
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jafs.github.io/articles/posts/20260402.html" />
+  <meta property="og:title" content="DDD en un apocalipsis zombi. Preguntas frecuentes" />
+  <meta property="og:description" content="En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el lenguaje ubicuo y terminamos con patrones más avanzados como patrón O..." />
+  <meta property="og:site_name" content="JAFS" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/ddd-faq.webp" />
+  
+  <meta property="article:published_time" content="2026-04-02T00:00:00.000Z" />
+  
+  <meta property="article:author" content="José Antonio Fuentes Santiago" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DDD en un apocalipsis zombi. Preguntas frecuentes" />
+  <meta name="twitter:description" content="En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el lenguaje ubicuo y terminamos con patrones más avanzados como patrón O..." />
+  <meta name="twitter:image" content="/images/ddd-faq.webp" />
+  
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jafs.github.io/articles/posts/20260402.html" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/github-dark.min.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DDD en un apocalipsis zombi. Preguntas frecuentes",
+  "author": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "José Antonio Fuentes Santiago"
+  },
+  "description": "En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el lenguaje ubicuo y terminamos con patrones más avanzados como patrón O...",
+  "url": "https://jafs.github.io/articles/posts/20260402.html",
+  "inLanguage": "es",
+  "datePublished": "2026-04-02T00:00:00.000Z",
+  "image": "/images/ddd-faq.webp"
+}
+  </script>
+
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-black text-white py-4 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold">
+        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+      </a>
+      <div class="flex items-center gap-4">
+        <nav class="flex gap-4">
+          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+        </nav>
+        <form action="/search.html" method="get">
+          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Preguntas frecuentes</h1><p class="text-gray-600 text-sm mb-6">02-04-2026</p><p>En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el <a href="/articles/posts/20260221.html">lenguaje ubicuo</a> y terminamos con patrones más avanzados como <a href="/articles/posts/20260322.html">patrón Outbox</a>. Ha sido un viaje intenso, pero antes de cerrar la puerta del refugio, toca responder a esas dudas que siempre surgen cuando intentas aplicar esto en un proyecto real. Además, veremos una checklist y una pequeña guía que os ayudará a decidir cuándo tiene sentido aplicar DDD y cuándo no.</p>
+<h2>¿Cómo sé si algo es un Value Object o una Entidad?</h2>
+<p>Si tienes dudas, usaremos el <strong>test de intercambio</strong>. Hazte esta pregunta: ¿Puedo cambiar este objeto por otro igual sin que pase nada?</p>
+<ul>
+<li><strong>Value Object</strong>: Solo importan sus atributos. Si tienes una lata de atún, te da igual qué lata sea mientras sea de atún y pese 100g. Si la cambias por otra idéntica, el sistema no nota la diferencia. Importa <strong>qué es</strong>.</li>
+<li><strong>Entidad</strong>: Tiene un historial y una identidad. No puedes cambiar a Ana por Borja aunque tengan la misma edad. Ana tiene su pasado, sus relaciones y su puesto en la guardia. Importa <strong>cuál es</strong>.</li>
+</ul>
+<p>Es decir, si el objeto tiene un ID que lo identifica a lo largo del tiempo, es una Entidad. Si solo es un puñado de datos, es un Value Object.</p>
+<p>Algunos ejemplos:</p>
+<ul>
+<li>Un <strong>walkie-talkie</strong>: depende. Si solo necesitas saber &quot;tenemos 3 walkies operativos&quot;, es un VO. Si asignas cada walkie a una persona con número de serie y historial de averías, es una Entidad.</li>
+<li>Una <strong>ración de comida</strong>: será un value object casi siempre. A nadie le importa qué te comas una lata de atún de 100g u otra igual, solo <em>cuántas</em> hay.</li>
+<li>Una <strong>misión de exploración</strong>: será una entidad. Tiene estado que evoluciona, responsables asignados, cosas que le ocurren a <em>esa misión</em> en particular.</li>
+</ul>
+<h2>¿Cuándo pongo lógica en el agregado y cuándo en un Servicio de Dominio?</h2>
+<p>Para salir de dudas puedes mirar la tablilla siguiente:</p>
+<table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>Dónde va</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Lógica que cambia el estado de <strong>un</strong> agregado</td>
+<td>Método en ese agregado</td>
+</tr>
+<tr>
+<td>Lógica que involucra <strong>varios</strong> agregados</td>
+<td>Servicio de Dominio</td>
+</tr>
+<tr>
+<td>Cálculo o regla sin estado que no pertenece a nadie</td>
+<td>Servicio de Dominio</td>
+</tr>
+</tbody></table>
+<p>No uses los servicios para &quot;vaciar&quot; tus agregados (mal símil 😛). Si el servicio hace todo el trabajo y el agregado solo tiene getters y setters, tienes un modelo anémico. El servicio debe orquestar, pero la lógica de verdad (las reglas de negocio) debe estar protegida dentro de tus clases de dominio.</p>
+<h2>¿Necesito implementar siempre todos los conceptos de DDD?</h2>
+<p>No. DDD es una caja de herramientas de la que puedes extraer sólo lo que necesites. Puedes tener Entidades y Value Objects sin necesitar Sagas. Puedes aplicar el lenguaje ubicuo sin implementar Eventos de Dominio. Puedes tener Repositorios sin dividir en Bounded Contexts.</p>
+<p>Empieza por el lenguaje ubicuo y los agregados con invariantes. Añade el resto cuando el problema lo requiera. La complejidad extra solo vale la pena cuando resuelve un problema real que ya tienes, no uno que podrías tener algún día.</p>
+<h2>¿Cómo sé si mi agregado es demasiado grande?</h2>
+<p>Un error típico es querer meter todo en el mismo sitio. Para saber si debes dividir un agregado, fíjate en las invariantes (recuerda, las reglas que no se pueden romper).</p>
+<p>Si para que una regla de negocio se cumpla necesitas que el dato A y el dato B se guarden sí o sí en la misma transacción, van en el mismo agregado.</p>
+<ul>
+<li>Ejemplo: No puedes añadir un superviviente si el refugio está lleno. Como el &quot;contador&quot; y el &quot;listado&quot; deben ir de la mano, van juntos.</li>
+<li>Contrajemplo: El historial médico de un superviviente y los suministros de comida. Si uno cambia, al otro le da igual. Sepáralos.</li>
+</ul>
+<p>Si tu agregado tiene colecciones que raramente se modifican juntas, o donde un cambio en una parte nunca afecta a las reglas de otra, es una señal de que puede dividirse.</p>
+<h2>¿Cómo integro modelos de diferentes contextos sin acoplarlos?</h2>
+<p>Cuando Logística necesita saber algo que solo conoce Sanidad, la tentación es compartir la clase. No lo hagas, ya que eso destruirá el aislamiento que tanto te costó construir.</p>
+<p>Es por ello que debes utilizar las herramientas adecuadas para comunicarse sin acoplarse:</p>
+<ul>
+<li><strong>Eventos de dominio</strong>: Sanidad emite <code>BroteDetectado</code> con solo la información que otros contextos necesitan (refugio afectado, personas en riesgo). Sin objetos médicos internos.</li>
+<li><strong>DTOs</strong>: objetos simples sin comportamiento que representan exactamente lo que el contexto productor quiere exponer.</li>
+<li><strong>Anti-corruption layer (ACL)</strong>: un adaptador en el contexto <em>consumidor</em> que traduce lo que recibe al modelo local. Si Logística recibe eventos de Sanidad, el ACL los convierte a conceptos logísticos sin que el modelo logístico sepa nada de historiales médicos.</li>
+</ul>
+<p>Cuando el contexto consumidor tiene que entender la estructura interna del contexto productor es una clara señal para que pases a usar un ACL.</p>
+<h2>¿Cómo sé que el diseño de mi dominio es correcto?</h2>
+<p>En este caso puedes plantearte lo siguiente: <strong>si para verificar una regla de negocio del dominio necesitas levantar una base de datos o configurar mocks de infraestructura, algo va mal</strong>. El dominio puro no debe necesitar nada externo para que sus reglas sean verificables.</p>
+<p>Si por ejemplo, el test de &quot;el refugio lleno rechaza nuevos supervivientes&quot; requiere un repositorio real eso es porque la lógica de negocio la has llevado fuera del dominio.</p>
+<h2>¿Puedo usar diferentes bases de datos en un mismo contexto?</h2>
+<p>¡Claro!. El criterio para delimitar un Bounded Context es el <strong>dominio</strong>, no la tecnología de persistencia.</p>
+<p>El contexto (Bounded Context) se define por el lenguaje y el negocio, no por la tecnología. Si para gestionar supervivientes usas PostgreSQL para los datos y Elasticsearch para las búsquedas, ambos repositorios viven en el mismo contexto porque hablan de lo mismo.</p>
+<p>Es por ello que las interfaces de los repositorios se ubican en el dominio:</p>
+<pre><code class="language-typescript">// Dominio - define QUÉ necesita, sin saber CÓMO
+interface SurvivorRepository {
+  save(survivor: Survivor): Promise&lt;void&gt;;
+}
+
+interface SurvivorSearchRepository {
+  searchBySymptoms(symptoms: string[]): Promise&lt;Survivor[]&gt;;
+}
+</code></pre>
+<p>Y en infraestructura tienes dos implementaciones distintas, cada una con su tecnología:</p>
+<pre><code class="language-typescript">// Implementa el guardado
+class PostgresSurvivorRepository implements SurvivorRepository { ... }
+
+// Implementa la búsqueda por síntomas
+class ElasticSurvivorSearchRepository implements SurvivorSearchRepository { ... }
+</code></pre>
+<p>Ambas interfaces viven en el mismo contexto porque sirven al mismo modelo de dominio. La capa de aplicación las usa de forma independiente según qué necesite cada caso de uso.</p>
+<p>La señal de que algo debe ir a otro contexto no es que use &quot;una tecnología diferente&quot;, sino el que &quot;hable de conceptos distintos o tenga un modelo que diverge del resto&quot;.</p>
+<h2>¿Cómo sé que el sistema está funcionando antes de que llegue la horda?</h2>
+<p>Un sistema con Sagas y procesos largos puede fallar de formas muy poco visibles: una transferencia que nunca termina, una compensación que no se ejecuta o un evento que se publica pero nadie procesa. Si no tenemos todo bajo control, estos fallos aparecen demasiado tarde, y normalmente cuando hay zombis atravesando el perímetro.</p>
+<p>La observabilidad es justo eso: saber qué está pasando dentro del sistema antes de que todo se descontrole.</p>
+<p>Por un lado tenemos las trazas distribuidas: para poder seguir todo el flujo en caso de error, utiliza lo que se llama <strong>correlationId</strong>, que es como el número de expediente de cada proceso. Si lo vas propagando por todos los comandos y eventos, luego puedes reconstruir el recorrido completo y ver dónde se paró.</p>
+<p>En tu panel de control del refugio deberías vigilar estas métricas:</p>
+<ul>
+<li>Cuánto tarda cada Saga en completarse.</li>
+<li>Cuántas acaban en compensación.</li>
+<li>Cuántos eventos siguen esperando en el outbox.</li>
+<li>Qué tipos de error se repiten más.</li>
+</ul>
+<p>Además, puedes establecer alarmas en los casos de que una Saga se queda atascada, si la tasa de compensación sube o si la cola de outbox no deja de crecer. Esos casos indican que algo va mal y conviene mirarlo cuanto antes.</p>
+<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">📚 <strong>PARA SABER MÁS</strong><p>El tema de la observabilidad da para mucho. Si quieres profundizar en él, <a href="https://amzn.to/4brsIF9"><strong>Observability Engineering</strong></a> de Charity Majors, Liz Fong-Jones y George Miranda es la referencia más completa sobre el tema.</p></div></p>
+<h2>Checklist rápido de DDD</h2>
+<p>Antes de dar por buena tu implementación, deberías revisar estos puntos:</p>
+<h3>Lenguaje y comunicación</h3>
+<ul>
+<li><input disabled="" type="checkbox"> ¿Hay un glosario de términos del dominio compartido por todo el equipo?</li>
+<li><input disabled="" type="checkbox"> ¿Los nombres en el código coinciden exactamente con los que usan los expertos del negocio?</li>
+<li><input disabled="" type="checkbox"> ¿Puedes explicar el código a alguien del negocio sin traducir mentalmente?</li>
+</ul>
+<h3>Agregados y reglas de negocio</h3>
+<ul>
+<li><input disabled="" type="checkbox"> ¿Los agregados tienen métodos con lógica de negocio, no solo getters/setters?</li>
+<li><input disabled="" type="checkbox"> ¿Las invariantes están protegidas en la raíz del agregado?</li>
+<li><input disabled="" type="checkbox"> ¿Es imposible romper las reglas del negocio desde fuera del agregado?</li>
+</ul>
+<h3>Persistencia y separación de capas</h3>
+<ul>
+<li><input disabled="" type="checkbox"> ¿Los repositorios son interfaces en el dominio, implementadas en infraestructura?</li>
+<li><input disabled="" type="checkbox"> ¿El dominio no sabe nada de SQL, MongoDB o cualquier tecnología de persistencia?</li>
+<li><input disabled="" type="checkbox"> ¿Los agregados exponen <code>toSnapshot()</code> y <code>reconstitute()</code> en lugar de getters individuales?</li>
+<li><input disabled="" type="checkbox"> ¿Puedes cambiar de base de datos sin tocar el dominio?</li>
+</ul>
+<h3>Eventos y consistencia</h3>
+<ul>
+<li><input disabled="" type="checkbox"> ¿Los eventos se guardan en el outbox dentro de la misma transacción que el estado del agregado?</li>
+<li><input disabled="" type="checkbox"> ¿Los consumidores de eventos son idempotentes?</li>
+<li><input disabled="" type="checkbox"> ¿Los handlers de comandos son idempotentes (usan <code>commandId</code> para detectar duplicados)?</li>
+<li><input disabled="" type="checkbox"> ¿Las transferencias entre agregados usan consistencia eventual en lugar de transacciones que cruzan fronteras?</li>
+<li><input disabled="" type="checkbox"> ¿Los estados intermedios inválidos (como el superviviente nómada) están modelados como conceptos de dominio explícitos?</li>
+<li><input disabled="" type="checkbox"> ¿Las Sagas en curso tienen su estado persistido para sobrevivir a reinicios del servidor?</li>
+<li><input disabled="" type="checkbox"> ¿Tienes trazas y métricas para detectar Sagas atascadas o con tasa de compensación anómala?</li>
+</ul>
+<h3>Bounded Contexts</h3>
+<ul>
+<li><input disabled="" type="checkbox"> ¿Cada contexto tiene su propio modelo y lenguaje?</li>
+<li><input disabled="" type="checkbox"> ¿Hay contratos claros entre contextos (eventos, DTOs, APIs)?</li>
+<li><input disabled="" type="checkbox"> ¿Un cambio en un contexto no rompe automáticamente otros contextos?</li>
+<li><input disabled="" type="checkbox"> ¿Tienes tests de contrato para asegurar que los eventos y DTOs no rompen a los consumidores?</li>
+</ul>
+<h3>Tests</h3>
+<ul>
+<li><input disabled="" type="checkbox"> ¿Los tests verifican invariantes del dominio, no detalles de implementación?</li>
+<li><input disabled="" type="checkbox"> ¿Puedes testear el dominio sin levantar una base de datos?</li>
+<li><input disabled="" type="checkbox"> ¿Cada regla de negocio importante tiene al menos un test?</li>
+<li><input disabled="" type="checkbox"> ¿Los tests de Sagas verifican que cada evento produce el comando correcto?</li>
+<li><input disabled="" type="checkbox"> ¿Los tests de Sagas verifican que ante un fallo se emite la compensación adecuada?</li>
+</ul>
+<p>Si respondiste &quot;no&quot; a varios de estos puntos, puede ser porque no necesites todas las herramientas de DDD. Pero cuidado si has respondido <code>no</code> a prácticamente todos, porque seguro que ya habrá un zombi a tu espalda mientras piensas que estás haciendo DDD.</p>
+<h2>¿Cuándo usar DDD? (y cuándo NO)</h2>
+<p>No todo sistema necesita el nivel de ingeniería de un refugio de alta seguridad. Un puesto de observación temporal, un almacén de paso, una guarida de una sola noche: cada escenario tiene sus propias necesidades y sus propios costes. Aplicar la misma arquitectura a un CRUD sencillo que a un sistema de evacuaciones coordinadas es tan contraproducente como instalar un sistema de exclusas de descontaminación en una cabaña en un árbol: te costará, perderás el tiempo y encima quizás se caiga en cuanto sople viento.</p>
+<p>DDD no es la panacea para todos los problemas. Es una herramienta poderosa, pero recuerda: &quot;todo gran poder conlleva una gran responsabilidad&quot;.</p>
+<p>De todas formas, no hace falta aplicar DDD al 100% desde el primer día. Puedes identificar las partes más complejas del dominio y aplicarlo ahí, dejando el resto. Con el paso del tiempo, podrás evolucionar gradualmente el sistema a medida que éste crece y los problemas aparecen.</p>
+<p>Recuerda que DDD es una filosofía, no una religión. Así que toma lo que te sirva y aplícalo donde tenga sentido.</p>
+<h3>Usa DDD cuando...</h3>
+<ul>
+<li><strong>El dominio es complejo y cambiante</strong>: reglas de negocio interdependientes que evolucionan con frecuencia. Un sistema de gestión de seguros con cientos de casos especiales, una plataforma de trading financiero con reglas de riesgo complejas, o nuestro apocalipsis zombi con refugios, infecciones y evacuaciones coordinadas.</li>
+<li><strong>Hay reglas de negocio valiosas que proteger</strong>: si tu aplicación tiene lógica que no puede romperse bajo ninguna circunstancia, DDD te da los mecanismos para garantizarlo.</li>
+<li><strong>Trabajas cerca de gente experta del dominio</strong>: DDD funciona mejor cuando puedes tener conversaciones directas con quienes entienden el negocio y esas conversaciones alimentan directamente el código. Si no puedes hablar con las personas expertas, desarrollar un lenguaje ubicuo es prácticamente imposible.</li>
+<li><strong>El proyecto es a largo plazo</strong>: DDD tiene una curva de aprendizaje que hará que al principio vayas más despacio. Pero si el proyecto va a vivir muchos meses, o incluso años, la inversión vale la pena: el código es más mantenible, las nuevas funcionalidades encajan con más naturalidad y el conocimiento del dominio no desaparece cuando alguien se va del equipo.</li>
+</ul>
+<h3>NO uses DDD cuando...</h3>
+<ul>
+<li><strong>El dominio es trivial</strong>: si tu aplicación es un formulario conectado a una base de datos sin reglas complejas, DDD es overkill. Quizás un CRUD bien hecho con Active Record (aunque se considere un anti-patrón) sea la solución correcta, y no hay nada de malo en eso.</li>
+<li><strong>No tienes acceso a expertos del dominio</strong>: sin colaboración con quienes entienden el negocio, no puedes modelar correctamente ni desarrollar un lenguaje común. DDD sin esa colaboración puedes comenzar a añadir suposiciones al lenguage ubicuo e introducir reglas de negocio erróneas.</li>
+<li><strong>Desarrolles un prototipo o un MVP de vida corta</strong>: si necesitas validar una idea rápido y no sabes si el proyecto sobrevivirá, no inviertas en DDD. Haz el CRUD rápido, valida la hipótesis, y si el proyecto crece ya habrá tiempo de refactorizar hacia un modelo más rico. Más ahora con la ayuda de la IA, que podrás refactorizar en poco tiempo.</li>
+<li><strong>El equipo no está listo</strong>: DDD requiere entender bien OOP, encapsulación e inversión de dependencias. Intentar aplicarlo con un equipo que aún está aprendiendo esos fundamentos es una receta para el caos.</li>
+</ul>
+<h2>El refugio cierra sus puertas (por ahora)</h2>
+<p>Con esta entrega cerramos la serie de DDD en un apocalipsis zombi. Cinco artículos después, hemos recorrido un largo camino. Si has llegado hasta aquí, lo primero de todo, muchas gracias. Ya tienes las herramientas para que tu código hable el idioma del dominio y sobreviva a la producción sin propagar el virus Z.</p>
+<p>Eso sí, hay temas que no he podido añadir a los artículos, ya sea por extensión o por complejidad. Esos temas que quedaron fuera merecen también su espacio propio.</p>
+<p>Por eso estoy escribiendo <strong>Guía de Domain-Driven Design en un Apocalipsis Zombi</strong>, un libro que surge como una historia alternativa a <a href="/books/"><strong>Guía de programación en un Apocalipsis Zombi</strong></a> y que ampliará todo lo que hemos visto aquí. Técnicamente cubrirá los temas vistos y todo lo que quedó fuera.</p>
+<p>Si la serie te ha resultado útil, el libro va a llevarlo bastante más lejos.</p>
+<p>Recordad, ¡mantened las puertas cerradas y el código limpio!</p>
+<p><strong>Otros artículos de la serie</strong></p>
+<ul>
+<li><a href="/articles/posts/20260221.html">Parte 1</a>: Lenguaje ubicuo, bounded contexts, entidades, objetos de valor y agregados.</li>
+<li><a href="/articles/posts/20260228.html">Parte 2</a>: Servicios de dominio, repositorios, capa de aplicación y eventos de dominio.</li>
+<li><a href="/articles/posts/20260306.html">Parte 3</a>: Sagas, antipatrones y pruebas.</li>
+<li><a href="/articles/posts/20260322.html">Parte 4</a>: Patrón Outbox, consistencia eventual entre agregados, el patrón Snapshot.</li>
+</ul>
+
+    </article>
+  </main>
+  <footer class="bg-black text-white py-4 mt-12">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+      </div>
+      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+    </div>
+  </footer>
+  <script src="/js/highlight.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

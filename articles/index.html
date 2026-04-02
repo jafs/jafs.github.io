@@ -58,7 +58,7 @@
       <div class="flex items-center gap-4">
         <nav class="flex gap-4">
           <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-          <a class="text-white font-semibold">Artículos</a>
+          <span class="text-white font-semibold">Artículos</span>
           <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
           <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
         </nav>
@@ -72,6 +72,21 @@
     <section class="py-8">
       <h1 class="text-3xl font-bold mb-6">Lista de artículos</h1>
       <ul class="list-none space-y-2 bg-white rounded-lg shadow-sm p-6">
+        <li class="py-2 border-b border-gray-200">
+          <article class="flex gap-4">
+            <figure class="w-24 h-24">
+              <img src="/images/ddd-mini-faq.webp" alt="DDD en un apocalipsis zombi. Preguntas frecuentes" class="object-cover rounded w-full h-full" />
+            </figure>
+            <div class="flex-1">
+              <header>
+                <a href="/articles/posts/20260402.html" class="font-semibold text-lg">DDD en un apocalipsis zombi. Preguntas frecuentes</a>
+                <span class="text-gray-400">—</span>
+                <time datetime="2026-04-02" class="text-gray-600 text-sm">02-04-2026</time>
+              </header>
+              <p class="text-gray-700 leading-relaxed mt-1">En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el lenguaje ubicuo y terminamos con patrones más avanzados como patrón Outbox. Ha sido un viaje intenso, pero antes de cerrar la puerta del refugio, toca responder a esas dudas que siempre surgen cuando intentas aplicar esto en un proyecto real. Además, veremos una checklist y una pequeña guía que os ayudará a decidir cuándo tiene sentido aplicar DDD y cuándo no.</p>
+            </div>
+          </article>
+        </li>
         <li class="py-2 border-b border-gray-200">
           <article class="flex gap-4">
             <figure class="w-24 h-24">

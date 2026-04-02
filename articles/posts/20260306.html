@@ -413,6 +413,14 @@ describe(&quot;InfectionSpreadService - Cálculo de riesgo&quot;, () =&gt; {
 <p>En esta tercera parte hemos visto cómo mantener la coherencia cuando una sola transacción no basta, con las <strong>Sagas</strong> coordinando operaciones distribuidas mediante eventos y compensaciones. Hemos repasado los <strong>antipatrones</strong> más peligrosos: el modelo anémico que vacía el dominio de lógica, los agregados gigantes que lo concentran todo, los bounded contexts que son solo carpetas con nombre bonito. Y vimos cómo <strong>testear el dominio puro</strong> sin levantar ninguna base de datos.</p>
 <p>En la <a href="/articles/posts/20260322.html">siguiente entrega</a> aterrizaremos los tres problemas que aparecen cuando intentas llevar este diseño a producción: cómo garantizar que los eventos de dominio llegan aunque el sistema falle a mitad de camino, por qué modificar dos agregados en la misma transacción te va a dar problemas a escala y qué pasa cuando los datos del dominio son privados de verdad y el repositorio necesita guardarlos sin saltarse esa privacidad. Y después de eso, veremos todo el sistema funcionando de principio a fin con un checklist para saber si realmente estás haciendo DDD o solo organizando carpetas.</p>
 
+<p><strong>Otros artículos de la serie</strong></p>
+<ul>
+<li><a href="/articles/posts/20260221.html">Parte 1</a>: Lenguaje ubicuo, bounded contexts, entidades, objetos de valor y agregados.</li>
+<li><a href="/articles/posts/20260228.html">Parte 2</a>: Servicios de dominio, repositorios, capa de aplicación y eventos de dominio.</li>
+<li><a href="/articles/posts/20260322.html">Parte 4</a>: Patrón Outbox, consistencia eventual entre agregados, el patrón Snapshot.</li>
+<li><a href="/articles/posts/20260402.html">F.A.Q.</a>: Preguntas frecuentes.</li>
+</ul>
+
     </article>
   </main>
   <footer class="bg-black text-white py-4 mt-12">

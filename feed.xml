@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>JAFS — José Antonio Fuentes Santiago</title>
     <link>https://jafs.github.io</link>
     <description>Artículos sobre programación, TypeScript, arquitectura de software y desarrollo web.</description>
     <language>es</language>
     <managingEditor>contacto@jafs.github.io (José Antonio Fuentes Santiago)</managingEditor>
-    <lastBuildDate>Thu, 02 Apr 2026 06:58:05 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 02 Apr 2026 07:13:00 GMT</lastBuildDate>
     <atom:link href="https://jafs.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <image>
+      <url>https://jafs.github.io/favicon-96x96.png</url>
+      <title>JAFS — José Antonio Fuentes Santiago</title>
+      <link>https://jafs.github.io</link>
+      <width>96</width>
+      <height>96</height>
+    </image>
     <item>
       <title>DDD en un apocalipsis zombi. Preguntas frecuentes</title>
       <link>https://jafs.github.io/articles/posts/20260402.html</link>
@@ -16,6 +23,7 @@
       <pubDate>Thu, 02 Apr 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>DDD</category>
+      <media:content url="https://jafs.github.io/images/ddd-faq.webp" medium="image" />
     </item>
     <item>
       <title>DDD en un apocalipsis zombi. Parte 4</title>
@@ -25,6 +33,7 @@
       <pubDate>Sun, 22 Mar 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>DDD</category>
+      <media:content url="https://jafs.github.io/images/ddd-4.webp" medium="image" />
     </item>
     <item>
       <title>DDD en un apocalipsis zombi. Parte 3</title>
@@ -34,6 +43,7 @@
       <pubDate>Fri, 06 Mar 2026 18:30:00 GMT</pubDate>
       <category>Programación</category>
       <category>DDD</category>
+      <media:content url="https://jafs.github.io/images/ddd-3.webp" medium="image" />
     </item>
     <item>
       <title>DDD en un apocalipsis zombi. Parte 2</title>
@@ -43,6 +53,7 @@
       <pubDate>Sat, 28 Feb 2026 12:30:00 GMT</pubDate>
       <category>Programación</category>
       <category>DDD</category>
+      <media:content url="https://jafs.github.io/images/ddd-2.webp" medium="image" />
     </item>
     <item>
       <title>DDD en un apocalipsis zombi. Parte 1</title>
@@ -52,6 +63,7 @@
       <pubDate>Sun, 22 Feb 2026 12:30:00 GMT</pubDate>
       <category>Programación</category>
       <category>DDD</category>
+      <media:content url="https://jafs.github.io/images/ddd.webp" medium="image" />
     </item>
     <item>
       <title>Introducción a las redes neuronales</title>
@@ -60,6 +72,7 @@
       <description>En el artículo anterior pudimos revisar en qué consisten las neuronas artificiales, y además vimos cómo poder implementar una neurona en JavaScript. Si aún no lo has leído, te recomiendo que empieces por ahí para entender la base de lo que vamos a ver ahora.</description>
       <pubDate>Sun, 20 Jul 2025 18:12:04 GMT</pubDate>
       <category>Programación</category>
+      <media:content url="https://jafs.github.io/images/redes-neuronales.webp" medium="image" />
     </item>
     <item>
       <title>Introducción a las neuronas artificiales</title>
@@ -70,6 +83,7 @@
       <category>Programación</category>
       <category>IA</category>
       <category>neurona artificial</category>
+      <media:content url="https://jafs.github.io/images/neuronas-artificiales-mini.webp" medium="image" />
     </item>
     <item>
       <title>Aritmética binaria</title>
@@ -80,6 +94,7 @@
       <category>programación</category>
       <category>binario</category>
       <category>aritmética</category>
+      <media:content url="https://jafs.github.io/images/aritmetica-binaria-mini.webp" medium="image" />
     </item>
     <item>
       <title>Hablemos de acoplamiento y cohesión. Parte 2. Cohesión</title>
@@ -88,6 +103,7 @@
       <description>En el artículo anterior estuvimos viendo un poco por encima en qué consisten los conceptos de acoplamiento y cohesión. En esta segunda parte nos centraremos es ver los distintos tipos de cohesión que hay. Eso sí, dependiendo del autor o autora, puede variar la lista, así que he intentado unificar lo máximo posible para poner los tipos que hay en común.</description>
       <pubDate>Sun, 25 Jun 2023 08:50:00 GMT</pubDate>
       <category>Diseño y arquitectura</category>
+      <media:content url="https://jafs.github.io/images/acoplamiento-cohesion-mini.webp" medium="image" />
     </item>
     <item>
       <title>Hablemos de acoplamiento y cohesión. Parte 1</title>
@@ -96,6 +112,7 @@
       <description>Ya hemos hablado del Principio de Responsabilidad Única, y no, no es una idea original de Robert C. Martin, sino que este principio parte del concepto de &quot;cohesión&quot;. Es más, el Principio de Inversión de Dependencias, tampoco es algo original y lo que nos habla es de &quot;acoplamiento&quot;.</description>
       <pubDate>Fri, 24 Mar 2023 17:36:47 GMT</pubDate>
       <category>Diseño y arquitectura</category>
+      <media:content url="https://jafs.github.io/images/acoplamiento-cohesion-mini.webp" medium="image" />
     </item>
     <item>
       <title>Caso práctico TDD</title>
@@ -104,6 +121,7 @@
       <description>Por poner el broche de oro a esta mini-serie de artículos sobre TDD, vamos a ver un caso práctico con algo muy sencillo que todos conocéis: una pila. Por si queda algún despistado o despistada, una pila es una lista ordenada que permite almacenar y recuperar valores. El acceso a estos datos sigue el patrón LIFO (del inglés Last In, First Out, &quot;el último en entrar es el primero en salir&quot;). Básicamente, podéis pensar en la típica pila de platos, en la que el último plato que se pone encima, será el primero que quitemos.</description>
       <pubDate>Fri, 10 Mar 2023 20:24:00 GMT</pubDate>
       <category>Testing</category>
+      <media:content url="https://jafs.github.io/images/caso-practico-tdd-mini.webp" medium="image" />
     </item>
     <item>
       <title>Testing y TDD. Algunos consejos</title>
@@ -113,6 +131,7 @@
       <pubDate>Sat, 25 Feb 2023 10:50:26 GMT</pubDate>
       <category>testing</category>
       <category>TDD</category>
+      <media:content url="https://jafs.github.io/images/tdd-consejos-mini.webp" medium="image" />
     </item>
     <item>
       <title>BDD y Gherkin. Una pequeña introducción</title>
@@ -121,6 +140,7 @@
       <description>BDD (Behavior Driven Development) o Desarrollo Dirigido por Comportamiento es una metodología que lleva varios años en el tintero, pero día a día va cobrando más fuerza. En este artículo aprenderemos más sobre ella.</description>
       <pubDate>Tue, 20 Dec 2022 17:18:46 GMT</pubDate>
       <category>Testing</category>
+      <media:content url="https://jafs.github.io/images/bdd-mini.webp" medium="image" />
     </item>
     <item>
       <title>Plantilla de proyecto TypeScript</title>
@@ -130,6 +150,7 @@
       <pubDate>Sun, 18 Dec 2022 18:10:29 GMT</pubDate>
       <category>TypeScript</category>
       <category>plantilla</category>
+      <media:content url="https://jafs.github.io/images/tsvitejest-mini.webp" medium="image" />
     </item>
     <item>
       <title>Testing y TDD</title>
@@ -139,6 +160,7 @@
       <pubDate>Sun, 11 Dec 2022 17:59:11 GMT</pubDate>
       <category>testing</category>
       <category>TDD</category>
+      <media:content url="https://jafs.github.io/images/tdd-mini.webp" medium="image" />
     </item>
     <item>
       <title>Cosas que quizás no sabías de CSS</title>
@@ -148,6 +170,7 @@
       <pubDate>Sat, 29 Oct 2022 17:15:30 GMT</pubDate>
       <category>Programación</category>
       <category>CSS</category>
+      <media:content url="https://jafs.github.io/images/css-mini.webp" medium="image" />
     </item>
     <item>
       <title>Web Workers en JavaScript</title>
@@ -156,6 +179,7 @@
       <description>Estarás acostumbrado o acostumbrada a escuchar que JavaScript corre sobre un único hilo de ejecución. Esto puede en ocasiones acarrear problemas si una tarea es demasiada pesada, pues dejará bloqueado el hilo.</description>
       <pubDate>Wed, 14 Sep 2022 13:55:26 GMT</pubDate>
       <category>JavaScript</category>
+      <media:content url="https://jafs.github.io/images/web-worker-mini.webp" medium="image" />
     </item>
     <item>
       <title>Faker: usa datos realistas en tus pruebas y demos</title>
@@ -168,6 +192,7 @@
       <category>TypeScript</category>
       <category>programación</category>
       <category>testing</category>
+      <media:content url="https://jafs.github.io/images/faker-mini.webp" medium="image" />
     </item>
     <item>
       <title>Decorator para gente novata</title>
@@ -177,6 +202,7 @@
       <pubDate>Sun, 07 Aug 2022 15:07:19 GMT</pubDate>
       <category>programación</category>
       <category>diseño y arquitectura</category>
+      <media:content url="https://jafs.github.io/images/decorator-mini.webp" medium="image" />
     </item>
     <item>
       <title>AbortController: cancela operaciones en JavaScript</title>
@@ -186,6 +212,7 @@
       <pubDate>Fri, 15 Jul 2022 18:00:00 GMT</pubDate>
       <category>programación</category>
       <category>JavaScript</category>
+      <media:content url="https://jafs.github.io/images/abort-controller-mini.webp" medium="image" />
     </item>
   </channel>
 </rss>

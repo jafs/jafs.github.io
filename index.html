@@ -8,23 +8,24 @@
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, TypeScript, desarrollo software, arquitectura software, libros programación" />
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://jafs.github.io/" />
-  <meta property="og:title" content="José Antonio Fuentes Santiago - Desarrollador y Escritor" />
+  <meta property="og:title" content="José Antonio Fuentes Santiago" />
   <meta property="og:description" content="José Antonio Fuentes Santiago es desarrollador de software y escritor. Artículos sobre programación, TypeScript, arquitectura de software y libros técnicos." />
   <meta property="og:site_name" content="JAFS" />
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/web-app-manifest-512x512.png" />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="José Antonio Fuentes Santiago - Desarrollador y Escritor" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="José Antonio Fuentes Santiago" />
   <meta name="twitter:description" content="José Antonio Fuentes Santiago es desarrollador de software y escritor. Artículos sobre programación, TypeScript, arquitectura de software y libros técnicos." />
   <meta name="twitter:image" content="/web-app-manifest-512x512.png" />
 
-  <!-- Canonical URL -->
+  <!-- Canonical & RSS -->
   <link rel="canonical" href="https://jafs.github.io/" />
+  <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -35,33 +36,31 @@
 
   <link rel="stylesheet" href="/css/dist.css">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "José Antonio Fuentes Santiago",
-    "alternateName": "JAFS",
-    "url": "https://jafs.github.io/",
-    "jobTitle": "Desarrollador de Software",
-    "description": "Desarrollador de software y escritor especializado en TypeScript y arquitectura de software",
-    "sameAs": [
-      "https://github.com/jafs"
-    ]
-  }
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "José Antonio Fuentes Santiago",
+  "alternateName": "JAFS",
+  "url": "https://jafs.github.io/",
+  "jobTitle": "Desarrollador de Software",
+  "description": "Desarrollador de software y escritor especializado en TypeScript y arquitectura de software",
+  "sameAs": [
+    "https://github.com/jafs"
+  ]
+}
   </script>
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
 <body class="bg-gray-50 text-gray-900">
   <header class="bg-black text-white py-4 shadow-md">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between gap-4 flex-wrap">
-      <h1 class="text-2xl font-bold">
-        <a href="/">
-          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
-        </a>
-      </h1>
-      <nav class="flex gap-4 justify-end flex-1">
-        <a class="text-white font-semibold">Inicio</a>
+  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    </a>
+    <div class="flex items-center gap-4">
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-white font-semibold">Inicio</a>
         <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
         <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
         <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
@@ -70,52 +69,38 @@
         <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
       </form>
     </div>
-  </header>
+  </div>
+</header>
 
   <main class="max-w-4xl mx-auto px-4 py-8">
-    <!-- Anuncio del libro -->
-    <section class="mb-8 bg-gradient-to-r from-gray-50 to-gray-100 border-l-4 border-cyan-500 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+
+    <section class="mb-4">
+      <h3 class="text-2xl font-bold mb-6">Últimos libros y relatos</h3>
+      <div class="bg-gradient-to-r from-gray-50 to-gray-100 border-l-4 border-cyan-500 rounded-lg shadow-md hover:shadow-lg transition-shadow">
       <div class="flex flex-col md:flex-row gap-6 p-6">
-        <a href="/books/" class="flex-shrink-0 mx-auto md:mx-0">
-          <img src="/images/books/tokens.webp" alt="Portada: Tokens" class="shadow-lg rounded hover:scale-110 transition-transform" style="width: 146px; height: 200px" />
+        <a href="/books/tokens.html" class="flex-shrink-0 mx-auto md:mx-0">
+          <img src="/images/books/tokens.webp" alt="Tokens" class="shadow-lg rounded hover:scale-110 transition-transform" style="width:146px;height:200px" />
         </a>
         <div class="flex-1">
-          <div class="flex items-center gap-2 mb-2">
-            <h2 class="text-2xl font-bold text-gray-900">¡Nuevo relato gratis disponible!</h2>
-          </div>
-          <p class="text-gray-700 mb-3">
-            <a href="/books/" class="hover:underline"><strong>Tokens</strong></a>
-          </p>
-          <p class="text-gray-600 mb-4">
-            ¿Y si el mundo hubiera perdido su humanidad y sus pensamientos para delegarlos a la Inteligencia Artificial? En este relato de ciencia ficción, exploramos un futuro distópico donde las personas han entregado su autonomía a una IA que gestiona sus vidas a través de tokens digitales.
-          </p>
-          <p>
-            <a href="/books/" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block">Más información y descargas</a>
-          </p>
+          <h2 class="text-2xl font-bold text-gray-900"><a href="/books/tokens.html" class="hover:text-cyan-700">Tokens</a></h2>
+          <p class="text-gray-600 italic mb-2">Una historia de ciencia ficción sobre la dependencia de la Inteligencia Artificial.</p>
+          <p class="text-gray-600 mb-4">¿Y si el mundo hubiera perdido su humanidad y sus pensamientos para delegarlos a la Inteligencia Artificial? En un futuro no tan lejano, la sociedad se ha vuelto completamente dependiente de los sistemas inteligentes, entregando su autonomía a cambio de comodidad.</p>
+          <a href="/books/tokens.html" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white rounded inline-block">Más información</a>
         </div>
       </div>
       <div class="flex flex-col md:flex-row gap-6 p-6">
-        <a href="/books/" class="flex-shrink-0 mx-auto md:mx-0">
-          <img src="/images/survive-zombi-mini.webp" alt="Portada: Guía de Programación en un Apocalipsis Zombie" class="shadow-lg rounded hover:scale-110 transition-transform" style="width: 146px; height: 200px" />
+        <a href="/books/programacion-zombi.html" class="flex-shrink-0 mx-auto md:mx-0">
+          <img src="/images/survive-zombi.webp" alt="Guía de Programación en un Apocalipsis Zombi" class="shadow-lg rounded hover:scale-110 transition-transform" style="width:146px;height:200px" />
         </a>
         <div class="flex-1">
-          <div class="flex items-center gap-2 mb-2">
-            <h2 class="text-2xl font-bold text-gray-900">¡Nuevo libro disponible!</h2>
-          </div>
-          <p class="text-gray-700 mb-3">
-            <a href="/books/" class="hover:underline"><strong>Guía de Programación en un Apocalipsis Zombi</strong></a> — Aprende TypeScript mientras sobrevives al fin del mundo.
-          </p>
-          <p class="text-gray-600 mb-4">
-            Una experiencia inmersiva que combina narrativa, práctica y metáforas visuales para aprender programación moderna.
-          </p>
-          <p>
-            <a href="/resources/guia_programacion_apocalipsis_zombi_demo.pdf" data-umami-event="download" data-umami-event-file="guia_programacion_apocalipsis_zombi_demo.pdf" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block">Leer un fragmento</a>
-            <a href="/books/" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-block">Más información...</a>
-          </p>
+          <h2 class="text-2xl font-bold text-gray-900"><a href="/books/programacion-zombi.html" class="hover:text-cyan-700">Guía de Programación en un Apocalipsis Zombi</a></h2>
+          <p class="text-gray-600 italic mb-2">Aprende TypeScript mientras sobrevives al fin del mundo.</p>
+          <p class="text-gray-600 mb-4">Cuando el mundo colapsa y los sistemas dejan de funcionar, solo una cosa puede salvarte: el conocimiento. Esta guía transforma el aprendizaje de TypeScript en una experiencia inmersiva de supervivencia en un apocalipsis zombi. Cada capítulo combina narrativa, práctica y metáforas visuales para que aprendas a programar como quien prepara su mochila antes de huir de la ciudad.</p>
+          <a href="/books/programacion-zombi.html" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white rounded inline-block">Más información</a>
         </div>
+      </div>
       </div>
     </section>
-
     <section class="py-8">
       <h3 class="text-2xl font-bold mb-6">Últimos artículos</h3>
       <div class="flex gap-2 flex-col">
@@ -127,7 +112,7 @@
             <header>
               <a href="/articles/posts/20260402.html" class="font-semibold text-lg">DDD en un apocalipsis zombi. Preguntas frecuentes</a>
               <span class="text-gray-400">—</span>
-              <time datetime="2026-04-02" class="text-gray-600 text-sm font-normal">02-04-2026</time>
+              <time datetime="2026-04-02" class="text-gray-600 text-sm">02-04-2026</time>
             </header>
             <p class="text-gray-700 leading-relaxed mt-1">En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el lenguaje ubicuo y terminamos con patrones más avanzados como patrón Outbox. Ha sido un viaje intenso, pero antes de cerrar la puerta del refugio, toca responder a esas dudas que siempre surgen cuando intentas aplicar esto en un proyecto real. Además, veremos una checklist y una pequeña guía que os ayudará a decidir cuándo tiene sentido aplicar DDD y cuándo no.</p>
           </div>
@@ -140,7 +125,7 @@
             <header>
               <a href="/articles/posts/20260322.html" class="font-semibold text-lg">DDD en un apocalipsis zombi. Parte 4</a>
               <span class="text-gray-400">—</span>
-              <time class="text-gray-600 text-sm font-normal">22-03-2026</time>
+              <time datetime="2026-03-22" class="text-gray-600 text-sm">22-03-2026</time>
             </header>
             <p class="text-gray-700 leading-relaxed mt-1">En las tres entregas anteriores construimos los cimientos del refugio: el lenguaje ubicuo y los Bounded Contexts que hacen que todos hablen el mismo idioma, los Servicios de Dominio, Repositorios, capa de Aplicación y Eventos de Dominio que conectan el núcleo con el exterior, y las Sagas, antipatrones y tests que mantienen la integridad cuando las cosas se complican.</p>
           </div>
@@ -150,62 +135,60 @@
             <img src="/images/ddd-mini-3.webp" alt="DDD en un apocalipsis zombi. Parte 3" class="object-cover rounded w-full h-full" />
           </figure>
           <div class="flex-1">
-            <h4 class="text-xl font-bold mb-2">
-              <a href="/articles/posts/20260306.html">DDD en un apocalipsis zombi. Parte 3</a>
-              <span class="text-gray-400 font-normal">—</span>
-              <time class="text-gray-600 text-sm font-normal">06-03-2026</time>
-            </h4>
+            <header>
+              <a href="/articles/posts/20260306.html" class="font-semibold text-lg">DDD en un apocalipsis zombi. Parte 3</a>
+              <span class="text-gray-400">—</span>
+              <time datetime="2026-03-06" class="text-gray-600 text-sm">06-03-2026</time>
+            </header>
             <p class="text-gray-700 leading-relaxed mt-1">En la primera parte establecimos los cimientos: el lenguaje ubicuo que hace que la líder del grupo y el desarrollador hablen el mismo idioma, los Bounded Contexts para que Sanidad, Logística y Comando no se pisen entre sí, y los Agregados que actúan como guardián en la puerta del refugio. En la segunda parte conectamos ese núcleo con el exterior: Servicios de Dominio para lógica que involucra a varios actores, Repositorios que mantienen el dominio ajeno a la base de datos, la capa de Aplicación como directora de orquesta y los Eventos de Dominio que permiten que todo el sistema reaccione sin dependencias directas.</p>
           </div>
         </article>
         <article class="border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow bg-white flex gap-4">
-            <figure class="w-24 h-24">
-              <img src="/images/ddd-mini-2.webp" alt="DDD en un apocalipsis zombi. Parte 2" class="object-cover rounded w-full h-full" />
-            </figure>
-            <div class="flex-1">
-              <h4 class="text-xl font-bold mb-2">
-                <a href="/articles/posts/20260228.html">DDD en un apocalipsis zombi. Parte 2</a>
-                <span class="text-gray-400 font-normal">—</span>
-                <time class="text-gray-600 text-sm font-normal">28-02-2026</time>
-              </h4>
-              <p class="text-gray-700 leading-relaxed">En la primera entrega de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un lenguaje ubicuo para acabar con la brecha entre lo que dice la líder del grupo y lo que escribe el desarrollador. Dividimos el sistema en Bounded Contexts para que Sanidad, Logística y Comando no se pisoteen entre sí. Aprendimos a distinguir entidades de objetos de valor y, por último, vimos cómo los agregados actúan como el guardián en la puerta del refugio: nadie modifica nada sin pasar por él. Te recomiendo leerlo antes, ya que reutilizaremos varias de las clases que definimos en él.</p>
-            </div>
+          <figure class="w-24 h-24">
+            <img src="/images/ddd-mini-2.webp" alt="DDD en un apocalipsis zombi. Parte 2" class="object-cover rounded w-full h-full" />
+          </figure>
+          <div class="flex-1">
+            <header>
+              <a href="/articles/posts/20260228.html" class="font-semibold text-lg">DDD en un apocalipsis zombi. Parte 2</a>
+              <span class="text-gray-400">—</span>
+              <time datetime="2026-02-28" class="text-gray-600 text-sm">28-02-2026</time>
+            </header>
+            <p class="text-gray-700 leading-relaxed mt-1">En la primera entrega de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un lenguaje ubicuo para acabar con la brecha entre lo que dice la líder del grupo y lo que escribe el desarrollador. Dividimos el sistema en Bounded Contexts para que Sanidad, Logística y Comando no se pisoteen entre sí. Aprendimos a distinguir entidades de objetos de valor y, por último, vimos cómo los agregados actúan como el guardián en la puerta del refugio: nadie modifica nada sin pasar por él. Te recomiendo leerlo antes, ya que reutilizaremos varias de las clases que definimos en él.</p>
+          </div>
         </article>
         <article class="border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow bg-white flex gap-4">
-            <figure class="w-24 h-24">
-              <img src="/images/ddd-mini.webp" alt="DDD en un apocalipsis zombi. Parte 1" class="object-cover rounded w-full h-full" />
-            </figure>
-            <div class="flex-1">
-              <h4 class="text-xl font-bold mb-2">
-                <a href="/articles/posts/20260221.html">DDD en un apocalipsis zombi. Parte 1</a>
-                <span class="text-gray-400 font-normal">—</span>
-                <time class="text-gray-600 text-sm font-normal">22-02-2026</time>
-              </h4>
-              <p class="text-gray-700 leading-relaxed">Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situación es crítica: hay que gestionar refugios, coordinar reabastecimientos, controlar infecciones y tomar decisiones que pueden significar vida o muerte. Decides crear un sistema para ayudar a gestionar todo esto.</p>
-            </div>
+          <figure class="w-24 h-24">
+            <img src="/images/ddd-mini.webp" alt="DDD en un apocalipsis zombi. Parte 1" class="object-cover rounded w-full h-full" />
+          </figure>
+          <div class="flex-1">
+            <header>
+              <a href="/articles/posts/20260221.html" class="font-semibold text-lg">DDD en un apocalipsis zombi. Parte 1</a>
+              <span class="text-gray-400">—</span>
+              <time datetime="2026-02-22" class="text-gray-600 text-sm">22-02-2026</time>
+            </header>
+            <p class="text-gray-700 leading-relaxed mt-1">Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situación es crítica: hay que gestionar refugios, coordinar reabastecimientos, controlar infecciones y tomar decisiones que pueden significar vida o muerte. Decides crear un sistema para ayudar a gestionar todo esto.</p>
+          </div>
         </article>
-
-        <a href="articles/index.html" class="mt-2">Ver mas...</a>
+        <a href="/articles/" class="mt-2">Ver más...</a>
       </div>
     </section>
   </main>
-
   <footer class="bg-black text-white py-4 mt-12">
-    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-      <div class="flex gap-4">
-        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-        </a>
-        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-        </a>
-        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-        </a>
-      </div>
-      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+    <div class="flex gap-4">
+      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+      </a>
+      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+      </a>
     </div>
-  </footer>
+    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  </div>
+</footer>
 
   <script src="/js/main.js"></script>
 </body>

@@ -34,6 +34,18 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://jafs.github.io/books/tokens.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jafs.github.io/books/programacion-zombi.html</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://jafs.github.io/articles/posts/20260402.html</loc>
     <lastmod>2026-04-02</lastmod>
     <changefreq>monthly</changefreq>

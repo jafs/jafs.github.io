@@ -98,13 +98,57 @@
 <li><strong><a href="/articles/posts/20221211.html">TDD</a> (Test-Driven Development):</strong> Popularizado por Kent Beck a principios de los 2000, nos enseñó la sagrada trinidad del <em>Rojo, Verde, Refactor</em>: escribir el test unitario antes que el código. Fue una revolución para garantizar la calidad técnica a bajo nivel, aunque a veces pecaba de hacernos perder la perspectiva global del producto por centrarnos al milímetro dentro de la función.</li>
 <li><strong><a href="/articles/posts/20221220.html">BDD</a> (Behavior-Driven Development):</strong> Unos años más tarde, Dan North pensó que debíamos hablar un lenguaje que los humanos de negocio entendieran. Trajo consigo los escenarios <em>Given-When-Then</em> (Dado-Cuando-Entonces). Ya no testeábamos funciones aisladas, sino el comportamiento del sistema.</li>
 </ul>
-<p>¿Qué pasa ahora? En esta era en la que delegamos la escritura mecánica del código a agentes autónomos, testear o describir comportamientos de forma aislada se queda corto. Un simple &quot;haz que un usuario se pueda registrar&quot; generará, seguramente, un código muy difícil de mantener. Antes de tocar un solo archivo, los agentes necesitan contexto, restricciones inmutables y reglas de juego claras.</p>
-<p>Ahí es donde <strong>SDD (Spec-Driven Development)</strong> llama a la puerta (como Avón). En esta metodología, el artefacto principal y la &quot;fuente única de verdad&quot; es una <strong>especificación ejecutable y versionada</strong> en tu repositorio (normalmente en Markdown estructurado, usando patrones como EARS). Tú diseñas la arquitectura, los casos de uso, los límites del sistema y los criterios de aceptación. Y a partir de esa documentación, el agente ya puede trazar un plan y generar el código respetando esas reglas.</p>
+<p>¿Qué pasa ahora? En esta era en la que delegamos la escritura mecánica del código a agentes autónomos, testear o describir comportamientos de forma aislada se queda corto. Antes de tocar un solo archivo es importante definir las restricciones y el contexto que utilizarán los agentes. Así evitaremos errores como los de la sección siguiente.</p>
+<h2>Los problemas del vibe coding: cuando la IA es la que te guía</h2>
+<p>No me malinterpretes, el <em>vibe coding</em> nos ahorra mucho tiempo y nos permite centrarnos en lo importante. Pocas cosas dan más satisfacción que lanzarle un prompt a un agente y ver cómo te escupe en segundos lo que antes te llevaba una tarde entera. El problema aparece cuando dejamos que sea la IA la que siempre tome las decisiones:</p>
+<h3>Deriva arquitectónica silenciosa</h3>
+<p>Le pides al agente que implemente la feature A, y funciona. Luego la B, y también. Pero cuando llega la C, resulta que la A y la B han dejado el código en un estado donde te toca reescribir medio proyecto para añadir la nueva implementación. El agente no tiene visión global, ya que resuelve lo que le pides aquí y ahora, y el diseño general comienza a degradarse.</p>
+<h3>El síndrome de monstruo de Frankenstein</h3>
+<p>Cada prompt genera código con su propio estilo, sus propias abstracciones y su propia idea de cómo debería estructurarse el proyecto. Al cabo de unas semanas tienes un monstruo hecho de retales donde conviven tres formas distintas de manejar errores, dos patrones de acceso a datos y un servicio que la IA te propuso pero que ahora no sabes si es un repositorio, un caso de uso o vete tú a saber.</p>
+<h3>Acoplamiento invisible</h3>
+<p>Cuando no dejas una serie de límites claros, el agente comienza a tomar atajos. ¿Necesita un dato de otro módulo? Lo importa directamente. ¿Una función de utilidad? La mete donde le pilla más cerca. Cuando quieres darte cuenta, tienes dependencias cruzadas por todas partes y un refactor te deja sin tokens en un ratico.</p>
+<h3>Falsa sensación de velocidad</h3>
+<p>Este es el más traicionero. Durante las primeras semanas todo va como un tiro: características que salen a velocidad de vértigo, demos que impresionan, métricas de productividad por las nubes. Pero la deuda técnica se acumula en silencio, y cuando explota (además, siempre en el momento  menos oportuno), el tiempo que &quot;ahorraste&quot; lo devuelves con intereses.</p>
+<p>Un simple &quot;haz que un usuario se pueda registrar&quot; generará, seguramente, un código que funcione... pero que sea muy difícil de mantener.</p>
+<h2>SDD de lo que usted me habla</h2>
+<p>Para evitar los problemillas antes mencionados, <strong>SDD (Spec-Driven Development)</strong> llama a la puerta (como Avón). En esta metodología, el artefacto principal y la &quot;fuente única de verdad&quot; es una <strong>especificación ejecutable y versionada</strong> en tu repositorio (normalmente en Markdown estructurado, usando patrones como EARS). Tú diseñas la arquitectura, los casos de uso, los límites del sistema y los criterios de aceptación. Y a partir de esa documentación, el agente ya puede trazar un plan y generar el código respetando esas reglas.</p>
 <blockquote>
 <p>Para escribir el Markdown se pueden seguir patrones como EARS. Eso daría prácticamente para otro artículo. Sin embargo, Oguz Senna ya nos deleita con <a href="https://medium.com/paramtech/ears-the-easy-approach-to-requirements-syntax-b09597aae31d">éste</a> donde desglosa los puntos principales.</p>
 </blockquote>
+<h2>Cómo aplicar SDD paso a paso</h2>
+<p>Seguro que con un párrafo te has quedado igual. Vale, la teoría suena bien. Pero si te quedas solo con el concepto abstracto y no sabes por dónde empezar, SDD se queda en otra sigla bonita para la colección. Así que vamos al grano: ¿cómo se aplica esto en el día a día de un proyecto real?</p>
+<h3>1. Crea el directorio de especificaciones</h3>
+<p>Lo primero es tener un sitio donde vivan tus especificaciones. Tan sencillo como crear una carpeta <code>specs/</code> (o <code>docs/specs/</code>, como prefieras, el nombre es lo de menos). La clave es que las especificaciones vivan <strong>junto al código</strong> y se versionen con él. Evita tener documentos dispersos por Confluence, One Drive, Google Drive y compañía.</p>
+<h3>2. Define la arquitectura antes de escribir código</h3>
+<p>Antes de lanzar el primer prompt al agente, siéntate y diseña. Esto no significa escribir un documento de cien páginas y volver al viejo modelo en cascada (uff, que escalofríos). Se trata de dejar claro:</p>
+<ul>
+<li><strong>Los módulos o componentes principales</strong> y sus responsabilidades.</li>
+<li><strong>Las interfaces públicas</strong> entre ellos: qué datos entran, qué datos salen y qué contratos se respetan.</li>
+<li><strong>Las restricciones técnicas</strong>: qué base de datos usas, qué framework, qué patrones arquitectónicos sigues (hexagonal, capas, microservicios...).</li>
+<li><strong>Las invariantes del sistema</strong>: las reglas que jamás se pueden romper, pase lo que pase.</li>
+</ul>
+<p>Este paso es el que da más pereza, pero te aseguro que es el que más penurias te ahorará.</p>
+<h3>3. Escribe las especificaciones por caso de uso</h3>
+<p>Aquí es donde SDD se pone interesante. Para cada funcionalidad o caso de uso, crea un archivo Markdown estructurado que incluya:</p>
+<ul>
+<li><strong>Contexto</strong>: qué problema resuelve y por qué existe esta funcionalidad.</li>
+<li><strong>Requisitos funcionales</strong>: qué debe hacer, paso a paso.</li>
+<li><strong>Criterios de aceptación</strong>: cómo saber que está bien hecho (vamos, los <em>Given-When-Then</em> de BDD de toda la vida).</li>
+<li><strong>Restricciones</strong>: qué no debe hacer, qué límites tiene, qué módulos no puede tocar.</li>
+<li><strong>Dependencias</strong>: qué otros componentes o servicios necesita.</li>
+</ul>
+<p>La especificación es el contrato entre tú y el agente. Cuanto más clara sea, menos margen tendrá la IA para improvisar y más predecible será el resultado.</p>
+<h3>4. Alimenta al agente con la especificación</h3>
+<p>Cuando le pidas al agente que implemente algo, no le sueltes un prompt al aire. Apunta directamente a la especificación: <em>&quot;Implementa el caso de uso descrito en <code>specs/registro-usuario.md</code> respetando la arquitectura definida en <code>specs/arquitectura.md</code>&quot;</em>. De esta forma, el agente tiene un marco claro y no necesita inventarse nada.</p>
+<blockquote>
+<p>Muchas veces ya tendrás algún fichero definiendo parte de la arquitectura y los más importante. Por ejemplo, <code>CLAUDE.md</code> en Claude Code. Eso sí, recuerda que dicho fichero no debe ser el Quijote, ya que se cargará en contexto con cada petición.</p>
+</blockquote>
+<h3>5. Valida contra la especificación</h3>
+<p>Una vez el agente genera el código, no hagas la revisión con &quot;a ver qué tal pinta&quot; en mente. Compara lo generado con aquello que especificaste punto por punto: ¿respeta las interfaces? ¿Cumple los criterios de aceptación? ¿Se ha saltado alguna restricción? Si algo no cuadra, te tocará o corregir la implementación o, si descubres que la especificación estaba incompleta, actualizarla y pedir al agente que revise los cambios que apliquen.</p>
+<h3>6. Itera y mantén las especificaciones vivas</h3>
+<p>Las especificaciones no son documentos estáticos que escribes una vez y olvidas. En un proyecto vivo, puede que el dominio cambie, aparezcan nuevos requisitos o descubras un caso extremo que no habías contemplado. En esos casos la especificación debe actualizarse. Si el código evoluciona pero tu especificación sigue siendo Pikachu, acabará en el mismo sitio que con la documentación tradicional: ficheros obsoletos que si los consultas te generan más dudas que soluciones.</p>
 <h2>El peligro del plano flotante: Por qué fusionar SDD con DDD</h2>
-<p>Delegar la generación de código en una especificación SDD suena idílico, pero tiene un punto débil peligrosillo si se aplica en el vacío conceptual. Un agente de IA puede leer tu especificación puramente técnica, asumir que la ha cumplido a la perfección y entregarte un ecosistema de archivos impecables... pero a la hora de la verdad, puede que no funcionen juntos o que fallen en los casos extremos.</p>
+<p>Delegar la generación de código en una especificación SDD suena idílico, pero tiene un punto débil si se aplica en el vacío conceptual. Un agente de IA puede leer tu especificación puramente técnica, asumir que la ha cumplido a la perfección y entregarte un ecosistema de archivos impecables... pero a la hora de la verdad, puede que no funcionen juntos o que fallen en los casos extremos.</p>
 <p>Por eso, la fusión de SDD con DDD (<a href="/articles/posts/20260221.html">Domain-Driven Design</a> para los amigos y amigas) es lo que evita que acabes con un software que puede ser técnicamente impoluto, pero muy frágil a nivel conceptual. Podríamos resumirlo de la siguiente manera:</p>
 <blockquote>
 <p><strong>Escribir SDD sin DDD es como dibujar un plano a mano alzada. A primera vista, se entenderá qué es lo que se quiere hacer, pero a la hora de la verdad, cuando comience la construcción, habrá imprecisiones estructurales que provocarán que tarde o temprano el edificio se venga abajo.</strong></p>
@@ -138,7 +182,7 @@
 <p>Este flujo es elegante porque convierte al propio test en la especificación del bug: qué se esperaba sucediera, qué ocurría y en qué momento se ha solucionado.</p>
 <h3>Prototipos y experimentos</h3>
 <p>Si estás montando un PoC (<em>Proof of Concept</em>) o explorando si algo es técnicamente viable, la especificación puede esperar. En ese contexto, el <em>vibe coding</em> es perfectamente legítimo. El problema viene cuando el prototipo, en lugar de tirarse a la basura tras la validación, acaba convirtiéndose en un producto.</p>
-<div class="flex justify-center"><img src="/images/20260517/poc-meme.webp" alt="Meme POC" style="p-0 m-0" /></div>
+<div class="flex justify-center"><img src="/images/20260517/poc-meme.webp" alt="Meme POC" /></div>
 <h2>Conclusión</h2>
 <p>Al igual que siempre repito hasta la sociedad respecto a los principios SOLID, DDD y otros patrones: &quot;no son religiones ni verdades absolutas&quot;. Siempre hay que equilibrar su aplicación y uso dependiendo del caso.</p>
 <p>Y es que si tenemos una definición excesiva, puedes caer en la trampa de intentar documentar hasta el más mínimo detalle de toda la aplicación antes de programar nada, lo que resucitará al fantasma de las Navidades pasadas, más conocido como <strong>viejo modelo en cascada</strong> (aún siento escalofríos al pensar en él).</p>

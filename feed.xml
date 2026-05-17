@@ -6,7 +6,7 @@
     <description>Artículos sobre programación, TypeScript, arquitectura de software y desarrollo web.</description>
     <language>es</language>
     <managingEditor>contacto@jafs.github.io (José Antonio Fuentes Santiago)</managingEditor>
-    <lastBuildDate>Thu, 02 Apr 2026 16:16:49 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 17 May 2026 16:22:43 GMT</lastBuildDate>
     <atom:link href="https://jafs.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://jafs.github.io/favicon-96x96.png</url>
@@ -15,6 +15,16 @@
       <width>96</width>
       <height>96</height>
     </image>
+    <item>
+      <title>SDD: Del caos del vibe coding al rigor de la arquitectura</title>
+      <link>https://jafs.github.io/articles/posts/20260517.html</link>
+      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260517.html</guid>
+      <description>En el principio, el programador picaba código línea a línea. Y el software estaba desordenado y lleno de bugs. Las tinieblas del código legacy acechaban los despliegues de los viernes. Pero entonces llegaron los modelos de lenguaje y los agentes de IA, y la comunidad exclamó: &quot;¡Hágase el prompt!&quot;. De repente, pasamos al fascinante mundo del vibe coding: tirarle tres frases informales a Cursor o a Claude, mirar cómo se autocompletan quinientas líneas de código por arte de magia y rezar para que compile a la primera.</description>
+      <pubDate>Sun, 17 May 2026 00:00:00 GMT</pubDate>
+      <category>Programación</category>
+      <category>SDD</category>
+      <media:content url="https://jafs.github.io/images/20260517/SDD-original.webp" medium="image" />
+    </item>
     <item>
       <title>DDD en un apocalipsis zombi. Preguntas frecuentes</title>
       <link>https://jafs.github.io/articles/posts/20260402.html</link>
@@ -203,16 +213,6 @@
       <category>programación</category>
       <category>diseño y arquitectura</category>
       <media:content url="https://jafs.github.io/images/decorator-mini.webp" medium="image" />
-    </item>
-    <item>
-      <title>AbortController: cancela operaciones en JavaScript</title>
-      <link>https://jafs.github.io/articles/posts/20220715.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20220715.html</guid>
-      <description>Hasta ahora, en JavaScript, cuando se lanzaba una llamada a una API con fetch, no resultaba sencillo detenerla. También se podía dar el caso de que quisiéramos detener varias operaciones que se ejecutaban de simultáneamente de forma centralizada, por lo que teníamos que implementar sistemas como el patrón observador.</description>
-      <pubDate>Fri, 15 Jul 2022 18:00:00 GMT</pubDate>
-      <category>programación</category>
-      <category>JavaScript</category>
-      <media:content url="https://jafs.github.io/images/abort-controller-mini.webp" medium="image" />
     </item>
   </channel>
 </rss>

@@ -10,26 +10,29 @@
   <meta name="article:published_time" content="2023-06-25T08:50:00.000Z" />
   
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jafs.github.io/articles/posts/20230625.html" />
   <meta property="og:title" content="Hablemos de acoplamiento y cohesión. Parte 2. Cohesión" />
   <meta property="og:description" content="En el artículo anterior estuvimos viendo un poco por encima en qué consisten los conceptos de acoplamiento y cohesión. En esta segunda parte nos centraremos ..." />
   <meta property="og:site_name" content="JAFS" />
   <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/acoplamiento-cohesion-mini.webp" />
   
   <meta property="article:published_time" content="2023-06-25T08:50:00.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Hablemos de acoplamiento y cohesión. Parte 2. Cohesión" />
   <meta name="twitter:description" content="En el artículo anterior estuvimos viendo un poco por encima en qué consisten los conceptos de acoplamiento y cohesión. En esta segunda parte nos centraremos ..." />
+  <meta name="twitter:image" content="/images/acoplamiento-cohesion-mini.webp" />
   
 
-  <!-- Canonical URL -->
+  <!-- Canonical & RSS -->
   <link rel="canonical" href="https://jafs.github.io/articles/posts/20230625.html" />
+  <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -41,7 +44,6 @@
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
@@ -58,22 +60,23 @@
   "description": "En el artículo anterior estuvimos viendo un poco por encima en qué consisten los conceptos de acoplamiento y cohesión. En esta segunda parte nos centraremos ...",
   "url": "https://jafs.github.io/articles/posts/20230625.html",
   "inLanguage": "es",
-  "datePublished": "2023-06-25T08:50:00.000Z"
+  "datePublished": "2023-06-25T08:50:00.000Z",
+  "image": "/images/acoplamiento-cohesion-mini.webp"
 }
   </script>
+
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-900 text-gray-100">
   <header class="bg-black text-white py-4 shadow-md">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between gap-4 flex-wrap">
-      <h1 class="text-2xl font-bold">
-        <a href="/">
-          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
-        </a>
-      </h1>
-      <nav class="flex gap-4 justify-end flex-1">
+  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    </a>
+    <div class="flex items-center gap-4">
+      <nav class="flex gap-4">
         <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/articles/" class="text-white font-semibold">Artículos</a>
         <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
         <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
       </nav>
@@ -81,13 +84,13 @@
         <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
       </form>
     </div>
-  </header>
+  </div>
+</header>
+
   <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">Hablemos de acoplamiento y cohesión. Parte 2. Cohesión</h1>
-      <p class="text-gray-600 text-sm mb-6">2023-06-25 08:50:00.000Z</p>
-      <p>En el <a href="/articles/posts/20230324.html">artículo anterior</a> estuvimos viendo un poco por encima en qué consisten los conceptos de acoplamiento y cohesión. En esta segunda parte nos centraremos es ver los distintos tipos de cohesión que hay. Eso sí, dependiendo del autor o autora, puede variar la lista, así que he intentado unificar lo máximo posible para poner los tipos que hay en común.</p>
-<h2 id="tipos-de-cohesión">Tipos de cohesión</h2>
+    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Hablemos de acoplamiento y cohesión. Parte 2. Cohesión</h1><p class="text-gray-400 text-sm mb-6">25-06-2023</p><p>En el <a href="/articles/posts/20230324.html">artículo anterior</a> estuvimos viendo un poco por encima en qué consisten los conceptos de acoplamiento y cohesión. En esta segunda parte nos centraremos es ver los distintos tipos de cohesión que hay. Eso sí, dependiendo del autor o autora, puede variar la lista, así que he intentado unificar lo máximo posible para poner los tipos que hay en común.</p>
+<h2>Tipos de cohesión</h2>
 <table>
 <thead>
 <tr>
@@ -127,44 +130,44 @@
 <td>Los elementos de un módulo están relacionados porque todos están asociados con un evento o entidad común.</td>
 </tr>
 </tbody></table>
-<h3 id="cohesión-de-coincidencia">Cohesión de coincidencia</h3>
+<h3>Cohesión de coincidencia</h3>
 <blockquote>
 <p>Los elementos de un módulo están relacionados porque todos están asociados con un evento o elemento común.</p>
 </blockquote>
 <p>Para explicar esto de una manera más práctica, consideremos un ejemplo. Imagina que tienes un módulo que se encarga de la validación de formularios. Este módulo contiene varias funciones, como <code>validateEmail()</code>, <code>validatePassword()</code>, <code>validateName()</code>, etc. Estas funciones comparten algunas constantes o variables globales, como las expresiones regulares para verificar el formato de entrada.</p>
 <p>En este caso, podríamos decir que el módulo tiene una cohesión de coincidencia, ya que las funciones no están conectadas entre sí, pero comparten algunos recursos. En lugar de esto, podríamos dividir el módulo en submódulos más pequeños y específicos, como uno para validar correos electrónicos, otro para contraseñas, etc. De esta manera, cada módulo tendría una mayor cohesión, lo que facilitaría su mantenimiento y escalabilidad.</p>
 <p>Es importante tener en cuenta que la cohesión de coincidencia no siempre es mala. De hecho, en algunos casos, puede ser difícil evitarla por completo. Sin embargo, es importante asegurarse de que la cohesión de coincidencia no se convierta en un problema en el futuro.</p>
-<h3 id="cohesión-lógica">Cohesión lógica</h3>
+<h3>Cohesión lógica</h3>
 <blockquote>
 <p>La cohesión lógica implica que un conjunto de componentes que pueden trabajar para conseguir un fin deberían estar juntos, mientras que los que no tienen ninguna relación directa con ese fin deberían estar separados.</p>
 </blockquote>
 <p>Este tipo de cohesión, generalmente, resulta en un código compartido, que es difícil de modificar y que implica estar pasando parámetros entre módulos que en ocasiones pueden ser innecesarios.</p>
 <p>Si pensamos en el típico y tópico caso de una tienda online. Podríamos tener varios módulos que se relacionan entre sí, como el módulo de autenticación, el módulo de gestión de productos, y el módulo de gestión de pedidos. Cada uno de estos módulos tendría su propia funcionalidad, pero estarían lógicamente conectados entre sí. Cuando un usuario inicia sesión, el módulo de autenticación se encargaría de autenticar al usuario y el módulo de gestión de productos mostraría los productos disponibles en la tienda. El problema aparecerá si los módulos están muy entrelazados y se cambia el funcionamiento o el comportamiento, mejor dicho de alguno de ellos, ya que implicará que se adapte el resto de módulos.</p>
 <p>Si cada módulo es verdaderamente independiente, entonces podemos hacer cambios en uno, y no debería implicar la modificación del resto.</p>
-<h3 id="cohesión-temporal">Cohesión temporal</h3>
+<h3>Cohesión temporal</h3>
 <blockquote>
 <p>La cohesión temporal es parecida a la lógica pero, como su nombre indica, en este caso los distintos módulos tienen relación en el tiempo.</p>
 </blockquote>
 <p>Un ejemplo muy claro se da cuando tenemos una parte en nuestro código que se encarga de inicializar la aplicación. En ese momento estaremos uniendo distintos módulos que sólo tienen tienen en común el actuar dentro de esa funcionalidad.</p>
 <p>Este tipo de cohesión tiende a presentar las desventajas de los módulos con cohesión lógica. Sin embargo, se considera una cohesión más fuerte, ya que los módulos tienden a ser más simples puesto que todos los elementos se ejecutan en un solo momento (es decir, normalmente no hay parámetros y lógica para determinar qué elemento ejecutar).</p>
-<h3 id="cohesión-comunicativa">Cohesión comunicativa</h3>
+<h3>Cohesión comunicativa</h3>
 <blockquote>
 <p>En este tipo de cohesión, los elementos operan sobre los mismos datos o sobre un subconjunto de ellos.</p>
 </blockquote>
 <p>Por ejemplo, el elemento que gestiona el estado de conexión de un usuario o usuaria en un sistema de mensajería, y el que muestra el estado de los contactos. Operan sobre el mismo dato (estado de conexión), pero son elementos distintos.</p>
-<h3 id="cohesión-secuencial">Cohesión secuencial</h3>
+<h3>Cohesión secuencial</h3>
 <blockquote>
 <p>Se da cuando la salida de un elemento es la entrada del siguiente.</p>
 </blockquote>
 <p>Un ejemplo de cohesión secuencial se puede dar cuando llega una llamada a una API para almacenar un dato. Se van pasando por distintas capas que convierten por ejemplo un JSON a un objeto, para terminar llegando a la persistencia. En este ejemplo, cuando termina un elemento de hacer su trabajo, el resultado es enviado al elemento siguiente en la cadena.</p>
-<h3 id="cohesión-funcional">Cohesión funcional</h3>
+<h3>Cohesión funcional</h3>
 <blockquote>
 <p>En un módulo cohesionado funcionalmente, todos los elementos están relacionados para llevar a cabo una sola función, siendo lo suficientemente pequeños.</p>
 </blockquote>
 <p>Pensemos en una aplicación de procesamiento de imágenes. En este caso, podríamos tener diferentes módulos para la captura de imágenes, la edición de imágenes y la exportación de imágenes. Cada uno de estos módulos tiene una función específica, pero están conectados para permitir una edición y exportación efectiva de las imágenes.</p>
 <p>Si estos módulos no estuvieran funcionalmente conectados, podría ser difícil mantener y escalar el código. Por ejemplo, si el módulo de edición de imágenes no estuviera diseñado para trabajar de manera efectiva con el módulo de exportación de imágenes, las imágenes podrían no exportarse correctamente.</p>
 <p>En este tipo de cohesión cada módulo es lo suficientemente pequeño como para que se pueda comprender toda su implementación de una sola vez. En el momento en que empezamos a añadir distintos caminos y flujos, el módulo seguramente se pueda hacer aún más pequeño.</p>
-<h2 id="¿cómo-detectar-el-tipo-de-cohesión">¿Cómo detectar el tipo de cohesión?</h2>
+<h2>¿Cómo detectar el tipo de cohesión?</h2>
 <p>Una técnica útil para determinar el tipo de cohesión de un módulo consiste en escribir una oración que describa el propósito del módulo y luego examinar la oración. Se pueden realizar las siguientes pruebas:</p>
 <ul>
 <li>Si la oración es compuesta, contiene una coma o más de un verbo, el módulo probablemente está realizando más de una función; de modo que, probablemente, tiene cohesión <strong>secuencial</strong> o <strong>comunicativa</strong>.</li>
@@ -172,24 +175,26 @@
 <li>Si el predicado de la oración no contiene un objeto específico que siga al verbo, es probable que el módulo tenga cohesión <strong>lógica</strong>. Por ejemplo, &quot;Editar Todos los Datos&quot; tiene un cohesión lógica; sin embargo, &quot;Editar la Declaración de Origen&quot; puede tener cohesión <strong>funcional</strong>.</li>
 <li>Palabras como &quot;inicializar&quot;, &quot;limpiar&quot;, etc. implican cohesión <strong>temporal</strong>.</li>
 </ul>
+
     </article>
   </main>
   <footer class="bg-black text-white py-4 mt-12">
-    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-      <div class="flex gap-4">
-        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-        </a>
-        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-        </a>
-        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-        </a>
-      </div>
-      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+    <div class="flex gap-4">
+      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+      </a>
+      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+      </a>
     </div>
-  </footer>
+    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  </div>
+</footer>
+
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

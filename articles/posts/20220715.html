@@ -10,15 +10,15 @@
   <meta name="article:published_time" content="2022-07-15T18:00:00.000Z" />
   
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jafs.github.io/articles/posts/20220715.html" />
   <meta property="og:title" content="AbortController: cancela operaciones en JavaScript" />
   <meta property="og:description" content="Hasta ahora, en JavaScript, cuando se lanzaba una llamada a una API con fetch, no resultaba sencillo detenerla. También se podía dar el caso de que quisiéram..." />
   <meta property="og:site_name" content="JAFS" />
   <meta property="og:locale" content="es_ES" />
-  <meta property="og:image" content="/images/abort-controller-mini.webp" />
   
+  <meta property="og:image" content="/images/abort-controller-mini.webp" />
   <meta property="article:published_time" content="2022-07-15T18:00:00.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
@@ -27,11 +27,12 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AbortController: cancela operaciones en JavaScript" />
   <meta name="twitter:description" content="Hasta ahora, en JavaScript, cuando se lanzaba una llamada a una API con fetch, no resultaba sencillo detenerla. También se podía dar el caso de que quisiéram..." />
-  <meta name="twitter:image" content="/images/abort-controller-mini.webp" />
   
+  <meta name="twitter:image" content="/images/abort-controller-mini.webp" />
 
-  <!-- Canonical URL -->
+  <!-- Canonical & RSS -->
   <link rel="canonical" href="https://jafs.github.io/articles/posts/20220715.html" />
+  <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -43,7 +44,6 @@
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
@@ -67,17 +67,16 @@
 
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-900 text-gray-100">
   <header class="bg-black text-white py-4 shadow-md">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between gap-4 flex-wrap">
-      <h1 class="text-2xl font-bold">
-        <a href="/">
-          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
-        </a>
-      </h1>
-      <nav class="flex gap-4 justify-end flex-1">
+  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    </a>
+    <div class="flex items-center gap-4">
+      <nav class="flex gap-4">
         <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/articles/" class="text-white font-semibold">Artículos</a>
         <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
         <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
       </nav>
@@ -85,10 +84,12 @@
         <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
       </form>
     </div>
-  </header>
+  </div>
+</header>
+
   <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">AbortController: cancela operaciones en JavaScript</h1><p class="text-gray-600 text-sm mb-6">15-07-2022</p><p>Hasta ahora, en JavaScript, cuando se lanzaba una llamada a una API con fetch, no resultaba sencillo detenerla. También se podía dar el caso de que quisiéramos detener varias operaciones que se ejecutaban de simultáneamente de forma centralizada, por lo que teníamos que implementar sistemas como el patrón observador.</p>
+    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">AbortController: cancela operaciones en JavaScript</h1><p class="text-gray-400 text-sm mb-6">15-07-2022</p><p>Hasta ahora, en JavaScript, cuando se lanzaba una llamada a una API con fetch, no resultaba sencillo detenerla. También se podía dar el caso de que quisiéramos detener varias operaciones que se ejecutaban de simultáneamente de forma centralizada, por lo que teníamos que implementar sistemas como el patrón observador.</p>
 <p>Pero en la actualidad, estos flujos ahora son más fáciles gracias a la clase <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController">AbortController</a> que viene a proporcionarnos una forma de enviar una señal de parada a todo elemento que lo utilice. Básicamente, tendremos una señal (<code>AbortSignal</code>) que se emitirá cuando queramos cancelar una operación.</p>
 <p>Veamos el uso más básico, y que está en miles de ejemplos:</p>
 <pre><code class="language-javascript">const abortController = new AbortController();
@@ -176,21 +177,22 @@ console.warn(`Stopped ${this.#name} by: ${event.currentTarget.reason}`);
     </article>
   </main>
   <footer class="bg-black text-white py-4 mt-12">
-    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-      <div class="flex gap-4">
-        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-        </a>
-        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-        </a>
-        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-        </a>
-      </div>
-      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+    <div class="flex gap-4">
+      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+      </a>
+      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+      </a>
     </div>
-  </footer>
+    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  </div>
+</footer>
+
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

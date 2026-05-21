@@ -10,7 +10,7 @@
   <meta name="article:published_time" content="2026-03-22T00:00:00.000Z" />
   
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jafs.github.io/articles/posts/20260322.html" />
   <meta property="og:title" content="DDD en un apocalipsis zombi. Parte 4" />
@@ -30,8 +30,9 @@
   <meta name="twitter:image" content="/images/ddd-4.webp" />
   
 
-  <!-- Canonical URL -->
+  <!-- Canonical & RSS -->
   <link rel="canonical" href="https://jafs.github.io/articles/posts/20260322.html" />
+  <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -43,7 +44,6 @@
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
@@ -76,28 +76,29 @@
   </script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-900 text-gray-100">
   <header class="bg-black text-white py-4 shadow-md">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-      <a href="/" class="text-2xl font-bold">
-        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
-      </a>
-      <div class="flex items-center gap-4">
-        <nav class="flex gap-4">
-          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
-          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
-          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
-        </nav>
-        <form action="/search.html" method="get">
-          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
-        </form>
-      </div>
+  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    </a>
+    <div class="flex items-center gap-4">
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-white font-semibold">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+      <form action="/search.html" method="get">
+        <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+      </form>
     </div>
-  </header>
+  </div>
+</header>
+
   <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 4</h1><p class="text-gray-600 text-sm mb-6">22-03-2026</p><p>En las tres entregas anteriores construimos los cimientos del refugio: el <a href="/articles/posts/20260221.html">lenguaje ubicuo y los Bounded Contexts</a> que hacen que todos hablen el mismo idioma, los <a href="/articles/posts/20260228.html">Servicios de Dominio, Repositorios, capa de Aplicación y Eventos de Dominio</a> que conectan el núcleo con el exterior, y las <a href="/articles/posts/20260306.html">Sagas, antipatrones y tests</a> que mantienen la integridad cuando las cosas se complican.</p>
+    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 4</h1><p class="text-gray-400 text-sm mb-6">22-03-2026</p><p>En las tres entregas anteriores construimos los cimientos del refugio: el <a href="/articles/posts/20260221.html">lenguaje ubicuo y los Bounded Contexts</a> que hacen que todos hablen el mismo idioma, los <a href="/articles/posts/20260228.html">Servicios de Dominio, Repositorios, capa de Aplicación y Eventos de Dominio</a> que conectan el núcleo con el exterior, y las <a href="/articles/posts/20260306.html">Sagas, antipatrones y tests</a> que mantienen la integridad cuando las cosas se complican.</p>
 <p>La noche del día 94 descubrimos a las malas, si todo lo aprendido nos había servido. Una horda más grande de lo habitual obligó a una evacuación urgente del Refugio 3 hacia el Refugio 7. El sistema procesó las órdenes, los registros parecían correctos, pero el contexto de Sanidad nunca recibió los avisos: tres supervivientes con heridas abiertas pasaron la noche sin revisión médica. Por la mañana, uno de ellos había infectado a su compañero de litera y hubo que cerrar toda la sala para contener el brote. El código era correcto. La infraestructura, no.</p>
 <p>Hay tres puntos donde casi todos los equipos se estrellan cuando llevan DDD a producción. Este artículo va de esos tres puntos, de cómo construir las defensas que un simulacro no exige pero el ataque de una horda sí, y de ver todo el sistema funcionando de principio a fin.</p>
 <p><img src="/images/20260321/ddd-parte4-portada.webp" alt="Centro de operaciones con múltiples mostrando el estado de los refugios"></p>
@@ -148,7 +149,7 @@ async handle(cmd: AdmitSurvivorCommand): Promise&lt;void&gt; {
   });
 }
 </code></pre>
-<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">🗒️ <strong>NOTA</strong><p>Lo que aparece como <code>this.uow</code> representa el <a href="https://martinfowler.com/eaaCatalog/unitOfWork.html"><strong>patrón Unit of Work</strong></a> que es una abstracción de la capa de aplicación que agrupa varias operaciones en una unidad atómica. El handler lo recibe por inyección de dependencias y solo sabe que <code>uow.run()</code> garantiza que o todo se persiste o nada se persiste. La implementación concreta —la que abre la transacción SQL, conoce Knex o Postgres y pasa el contexto a cada repositorio— vive en infraestructura. Así el caso de uso cumple la regla de dependencia: depende de abstracciones, no de detalles de la base de datos.</p><p>Podéis leer más acerca de él, en el fantástico libro <a href="https://amzn.to/4lMkNFJ">Patterns of Enterprise Application Architecture</a> de Martin Fowler</div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">🗒️ <strong>NOTA</strong><p>Lo que aparece como <code>this.uow</code> representa el <a href="https://martinfowler.com/eaaCatalog/unitOfWork.html"><strong>patrón Unit of Work</strong></a> que es una abstracción de la capa de aplicación que agrupa varias operaciones en una unidad atómica. El handler lo recibe por inyección de dependencias y solo sabe que <code>uow.run()</code> garantiza que o todo se persiste o nada se persiste. La implementación concreta —la que abre la transacción SQL, conoce Knex o Postgres y pasa el contexto a cada repositorio— vive en infraestructura. Así el caso de uso cumple la regla de dependencia: depende de abstracciones, no de detalles de la base de datos.</p><p>Podéis leer más acerca de él, en el fantástico libro <a href="https://amzn.to/4lMkNFJ">Patterns of Enterprise Application Architecture</a> de Martin Fowler</div></p>
 <p>El estado del agregado y el evento quedan atómicamente vinculados. Ahora necesitamos algo que publique esos eventos pendientes.</p>
 <h3>El worker: de la tabla al bus</h3>
 <p>Un proceso en segundo plano lee periódicamente la tabla <code>outbox_events</code> y publica los eventos pendientes al bus:</p>
@@ -218,7 +219,7 @@ eventBus.on(&quot;SurvivorAdmitted&quot;, async (event) =&gt; {
 }
 </code></pre>
 <p>Llevado al terreno del refugio, este identificador único es exactamente la hoja de control del guardia: anota el número de orden del cuartel general cuando procesa la señal. Si ese número ya está anotado, ignora el mensaje y no abre la puerta. La señal puede llegar dos veces; la puerta solo se abre una.</p>
-<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">📚 <strong>PARA SABER MÁS</strong><p>Los conceptos de doble escritura, idempotencia y entrega de al menos una vez están tratados en profundidad en <a href="https://amzn.to/4uIPnnF"><strong>Designing Data-Intensive Applications</strong></a> de Martin Kleppmann, probablemente el mejor libro sobre sistemas distribuidos modernos que existe.</p></div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">📚 <strong>PARA SABER MÁS</strong><p>Los conceptos de doble escritura, idempotencia y entrega de al menos una vez están tratados en profundidad en <a href="https://amzn.to/4uIPnnF"><strong>Designing Data-Intensive Applications</strong></a> de Martin Kleppmann, probablemente el mejor libro sobre sistemas distribuidos modernos que existe.</p></div></p>
 <h3>Una nota sobre 2PC</h3>
 <p>Después de la noche del día 94, alguien en el comité de crisis propuso una solución distinta: que el cuartel general actuara como coordinador central y exigiera confirmación de <em>todos</em> los refugios antes de dar cualquier operación por válida. Primero preguntaría a cada refugio &quot;¿estás listo para comprometerte?&quot; —fase 1— y solo cuando todos respondieran afirmativamente enviaría la orden definitiva de confirmar —fase 2—. Garantía total, en teoría.</p>
 <p>El problema es que mientras cada refugio espera la confirmación final, sus recursos quedan bloqueados: nadie puede entrar ni salir hasta que el coordinador cierre el ciclo. Y si el cuartel general cae entre las dos fases —un corte de luz, un francotirador, un zombis en la salda del generador— todos los refugios se quedan congelados indefinidamente esperando una orden que nunca llega. Lo que era un punto de coordinación se convierte en un punto único de fallo. Además, no todos los refugios hablan el mismo protocolo de radio: exigir que todos lo soporten es una restricción operativa que en pleno apocalipsis nadie puede garantizar.</p>
@@ -428,7 +429,7 @@ export class EvacuationSaga {
 </code></pre>
 <p>Si el servidor cae mientras los supervivientes están en camino, la Saga sabe exactamente por dónde se quedó al reiniciarse: quiénes ya cruzaron, quiénes no, y cuál es el siguiente paso (o la compensación a ejecutar). Esto es lo que convierte a las Sagas en el mecanismo resiliente para operaciones largas: no la lógica en sí, sino el hecho de que esa lógica sobrevive a los reinicios.</p>
 <p><img src="/images/20260321/ddd-parte4-consistencia.webp" alt="Mapa táctico mostrando un superviviente en tránsito entre dos refugios, y la figura de un nómada en el páramo cuando ningún refugio tiene capacidad"></p>
-<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">📚 <strong>PARA SABER MÁS</strong><p>El patrón Saga y la gestión de la consistencia eventual en microservicios están tratados en detalle en <a href="https://amzn.to/3NP7YxX"><strong>Microservices Patterns</strong></a> de Chris Richardson.</p></div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">📚 <strong>PARA SABER MÁS</strong><p>El patrón Saga y la gestión de la consistencia eventual en microservicios están tratados en detalle en <a href="https://amzn.to/3NP7YxX"><strong>Microservices Patterns</strong></a> de Chris Richardson.</p></div></p>
 <h2>3. El patrón Snapshot: persistir sin comprometer la pureza</h2>
 <p>Hay un tercer problema que la noche del día 94 no provocó, pero que habría aparecido tarde o temprano: ¿cómo guarda y recupera el repositorio el estado interno de un agregado sin romper su encapsulación?</p>
 <p>En la segunda parte mostramos el repositorio de PostgreSQL así:</p>
@@ -609,7 +610,7 @@ const shelter = Shelter.reconstitute(snapshot); // carga directamente, sin valid
 <p>El dominio no sabe nada de SQL. La infraestructura no sabe nada de reglas de negocio. La frontera está exactamente donde tiene que estar.</p>
 <p>Este enfoque es una variante del patrón <strong>Data Mapper</strong>: en lugar de que un mapper externo deba conocer la estructura interna del agregado (violando la encapsulación), el propio agregado expone y consume su representación serializable mediante <code>toSnapshot()</code> y <code>reconstitute()</code>. El efecto es el mismo que si usaras DTOs explícitos de mapeo, pero sin acoplar la infraestructura al dominio. El dominio no sabe que existe una tabla SQL; la infraestructura no sabe qué reglas de negocio aplica el dominio.</p>
 <p><img src="/images/20260321/ddd-parte4-snapshot.webp" alt="Diagrama del patrón Snapshot"></p>
-<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">📚 <strong>PARA SABER MÁS</strong><p>El patrón Data Mapper, del que el Snapshot es una variante, está documentado en <a href="https://amzn.to/4lMkNFJ"><strong>Patterns of Enterprise Application Architecture</strong></a> de Martin Fowler (el mismo libro que cubre el patrón Unit of Work mencionado antes).</p></div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">📚 <strong>PARA SABER MÁS</strong><p>El patrón Data Mapper, del que el Snapshot es una variante, está documentado en <a href="https://amzn.to/4lMkNFJ"><strong>Patterns of Enterprise Application Architecture</strong></a> de Martin Fowler (el mismo libro que cubre el patrón Unit of Work mencionado antes).</p></div></p>
 <h2>4. Juntándolo todo: tres días en el refugio</h2>
 <p>Ha llegado el momento del simulacro completo. El código está disponible en <a href="https://github.com/jafs/ddd-zombie-patterns">GitHub</a> con tres escenarios encadenados que cubren todo lo que hemos visto: admisión, transferencia y el caso del Nómada con concurrencia real.</p>
 <p><strong>Día 95 — María y Carlos llegan al Refugio 7</strong></p>
@@ -630,13 +631,12 @@ OutboxWorker → TransferEventHandlers → [Dominio] admit() en destino → Surv
 OutboxWorker → Refugio 8 lleno → SurvivorAdmissionRejected
              → sin alternativa → Pedro registrado en data/nomads/
 </code></pre>
-<h2>El refugio aguanta</h2>
+<h2>5. El refugio aguanta</h2>
 <p>Cuatro artículos después, el sistema ha evolucionado desde un <code>user.status = 2</code> hasta un dominio que habla el idioma del apocalipsis, protege sus invariantes, coordina múltiples contextos sin acoplarse entre sí y persiste su estado sin comprometer su pureza.</p>
 <p>Pero la lección más importante no es técnica. Es que DDD es, ante todo, una conversación continua con el dominio. Las herramientas —Bounded Contexts, Agregados, Repositorios, Outbox, Snapshots— son consecuencia de escuchar bien ese dominio y modelar lo que encuentras, incluyendo los estados incómodos como el superviviente nómada que el sistema cómodo preferiría ignorar.</p>
 <p>Un dominio bien modelado no es el que no tiene casos límite. Es el que los nombra, los gestiona y los convierte en código que cualquiera del equipo puede leer sin abrir la documentación.</p>
 <p>Mantened las puertas cerradas y el código limpio.</p>
 <p>En la próxima y última entrega cerraremos la serie con un artículo de preguntas frecuentes, un checklist rápido de DDD para tener a mano y, quizás lo más importante, una guía honesta sobre cuándo usar DDD y cuándo no merece la pena. Porque no todo apocalipsis necesita un dominio rico.</p>
-
 <p><strong>Otros artículos de la serie</strong></p>
 <ul>
 <li><a href="/articles/posts/20260221.html">Parte 1</a>: Lenguaje ubicuo, bounded contexts, entidades, objetos de valor y agregados.</li>
@@ -648,21 +648,22 @@ OutboxWorker → Refugio 8 lleno → SurvivorAdmissionRejected
     </article>
   </main>
   <footer class="bg-black text-white py-4 mt-12">
-    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-      <div class="flex gap-4">
-        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-        </a>
-        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-        </a>
-        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-        </a>
-      </div>
-      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+    <div class="flex gap-4">
+      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+      </a>
+      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+      </a>
     </div>
-  </footer>
+    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  </div>
+</footer>
+
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

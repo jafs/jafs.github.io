@@ -7,10 +7,10 @@
   <meta name="description" content="En la primera parte establecimos los cimientos: el lenguaje ubicuo que hace que la líder del grupo y el desarrollador hablen el mismo idioma, los Bounded Con..." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, DDD" />
-  <meta name="article:published_time" content="2026-03-06T18:30:00.000Z" />
+  <meta name="article:published_time" content="2026-03-06T00:00:00.000Z" />
   
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jafs.github.io/articles/posts/20260306.html" />
   <meta property="og:title" content="DDD en un apocalipsis zombi. Parte 3" />
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/images/ddd-3.webp" />
   
-  <meta property="article:published_time" content="2026-03-06T18:30:00.000Z" />
+  <meta property="article:published_time" content="2026-03-06T00:00:00.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
@@ -30,8 +30,9 @@
   <meta name="twitter:image" content="/images/ddd-3.webp" />
   
 
-  <!-- Canonical URL -->
+  <!-- Canonical & RSS -->
   <link rel="canonical" href="https://jafs.github.io/articles/posts/20260306.html" />
+  <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -43,7 +44,6 @@
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
@@ -60,7 +60,7 @@
   "description": "En la primera parte establecimos los cimientos: el lenguaje ubicuo que hace que la líder del grupo y el desarrollador hablen el mismo idioma, los Bounded Con...",
   "url": "https://jafs.github.io/articles/posts/20260306.html",
   "inLanguage": "es",
-  "datePublished": "2026-03-06T18:30:00.000Z",
+  "datePublished": "2026-03-06T00:00:00.000Z",
   "image": "/images/ddd-3.webp"
 }
   </script>
@@ -76,17 +76,16 @@
   </script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-900 text-gray-100">
   <header class="bg-black text-white py-4 shadow-md">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between gap-4 flex-wrap">
-      <h1 class="text-2xl font-bold">
-        <a href="/">
-          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
-        </a>
-      </h1>
-      <nav class="flex gap-4 justify-end flex-1">
+  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    </a>
+    <div class="flex items-center gap-4">
+      <nav class="flex gap-4">
         <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/articles/" class="text-white font-semibold">Artículos</a>
         <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
         <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
       </nav>
@@ -94,10 +93,12 @@
         <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
       </form>
     </div>
-  </header>
+  </div>
+</header>
+
   <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 3</h1><p class="text-gray-600 text-sm mb-6">06-03-2026</p><p>En la <a href="/articles/posts/20260221.html">primera parte</a> establecimos los cimientos: el <strong>lenguaje ubicuo</strong> que hace que la líder del grupo y el desarrollador hablen el mismo idioma, los <strong>Bounded Contexts</strong> para que Sanidad, Logística y Comando no se pisen entre sí, y los <strong>Agregados</strong> que actúan como guardián en la puerta del refugio. En la <a href="/articles/posts/20260228.html">segunda parte</a> conectamos ese núcleo con el exterior: <strong>Servicios de Dominio</strong> para lógica que involucra a varios actores, <strong>Repositorios</strong> que mantienen el dominio ajeno a la base de datos, la <strong>capa de Aplicación</strong> como directora de orquesta y los <strong>Eventos de Dominio</strong> que permiten que todo el sistema reaccione sin dependencias directas.</p>
+    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 3</h1><p class="text-gray-400 text-sm mb-6">06-03-2026</p><p>En la <a href="/articles/posts/20260221.html">primera parte</a> establecimos los cimientos: el <strong>lenguaje ubicuo</strong> que hace que la líder del grupo y el desarrollador hablen el mismo idioma, los <strong>Bounded Contexts</strong> para que Sanidad, Logística y Comando no se pisen entre sí, y los <strong>Agregados</strong> que actúan como guardián en la puerta del refugio. En la <a href="/articles/posts/20260228.html">segunda parte</a> conectamos ese núcleo con el exterior: <strong>Servicios de Dominio</strong> para lógica que involucra a varios actores, <strong>Repositorios</strong> que mantienen el dominio ajeno a la base de datos, la <strong>capa de Aplicación</strong> como directora de orquesta y los <strong>Eventos de Dominio</strong> que permiten que todo el sistema reaccione sin dependencias directas.</p>
 <p>Pero hay tres preguntas que todavía están en el aire: ¿qué pasa cuando una sola transacción no basta para coordinar una evacuación completa? ¿Cuáles son los errores más graves que puedes cometer implementando DDD, y cómo los evitas? ¿Y cómo pruebas que todas esas piezas funcionan de verdad antes de que llegue la horda?</p>
 <p>En esta tercera entrega veremos: <strong>consistencia y Sagas</strong>, los <strong>antipatrones</strong> que más daño hacen en producción, y <strong>testing</strong> del dominio.</p>
 <p><img src="/images/20260306/ddd-parte3-portada.webp" alt="Centro de mando coordinando la evacuación"></p>
@@ -111,7 +112,7 @@
 <li>Refugio B debe &quot;admitirlo&quot;</li>
 </ol>
 <p>Aunque técnicamente podrías envolver ambos en una misma transacción de base de datos si comparten infraestructura (y de hecho veremos cuándo puede tener sentido hacerlo), llevarlo a cabo introduce un acoplamiento entre agregados que DDD recomienda evitar. Y si los refugios están en servicios distribuidos distintos, directamente no hay transacción que los cubra a los dos. De todas formas, recordad que hay veces que nos podemos saltar las normas siempre con cuidado, si no, provocaremos una serie de catastróficas desdichas que nos llevarán a ser rodeados por una horda.</p>
-<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">🗒️ <strong>NOTA</strong><br /><a href="/articles/posts/20260221.html">Recordemos</a> que cada agregado es dueño de su propio estado y no debería necesitar al otro para confirmar sus cambios. Si los metes en la misma transacción, los estás atando: si uno falla, arrastra al otro. Y eso es exactamente lo que queríamos evitar cuando les pusimos una frontera.</div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">🗒️ <strong>NOTA</strong><br /><a href="/articles/posts/20260221.html">Recordemos</a> que cada agregado es dueño de su propio estado y no debería necesitar al otro para confirmar sus cambios. Si los metes en la misma transacción, los estás atando: si uno falla, arrastra al otro. Y eso es exactamente lo que queríamos evitar cuando les pusimos una frontera.</div></p>
 <h3>Solución 1: Transacciones locales simples</h3>
 <p>Cuando la operación es simple y los agregados comparten base de datos, puedes usar una transacción local con cuidado:</p>
 <pre><code class="language-typescript">async transferSurvivor(
@@ -401,7 +402,7 @@ describe(&quot;InfectionSpreadService - Cálculo de riesgo&quot;, () =&gt; {
 });
 </code></pre>
 <p>Estos tests son más lentos y requieren setup/teardown de base de datos, así que son menos frecuentes. La estrategia habitual es muchos tests de dominio puro (rápidos, sin dependencias) y pocos tests de integración (lentos, con infraestructura real).</p>
-<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">🗒️ <strong>NOTA</strong><br />No siempre hace falta levantar la base de datos de producción para estos tests. Puedes usar una versión en memoria (SQLite in-memory, bases de datos embebidas como H2 en Java) o un repositorio stub que guarde los agregados en un simple <code>Map</code>. Sería como repasar el protocolo de evacuación en una maqueta del refugio, en lugar de hacerlo en el refugio real: más rápido, más seguro, y si hay errores no pierdes a nadie.</div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">🗒️ <strong>NOTA</strong><br />No siempre hace falta levantar la base de datos de producción para estos tests. Puedes usar una versión en memoria (SQLite in-memory, bases de datos embebidas como H2 en Java) o un repositorio stub que guarde los agregados en un simple <code>Map</code>. Sería como repasar el protocolo de evacuación en una maqueta del refugio, en lugar de hacerlo en el refugio real: más rápido, más seguro, y si hay errores no pierdes a nadie.</div></p>
 <h3>Qué más tiene sentido testear</h3>
 <p>El dominio puro y los repositorios no son lo único que merece atención:</p>
 <p><strong>Handlers de la capa de aplicación</strong>: no verifican reglas de negocio (eso ya lo hacen los tests del dominio), sino que la orquestación es correcta: que el handler carga el agregado, llama al método adecuado y persiste el resultado. El repositorio se sustituye por un mock.</p>
@@ -412,7 +413,6 @@ describe(&quot;InfectionSpreadService - Cálculo de riesgo&quot;, () =&gt; {
 <h2>Continuará</h2>
 <p>En esta tercera parte hemos visto cómo mantener la coherencia cuando una sola transacción no basta, con las <strong>Sagas</strong> coordinando operaciones distribuidas mediante eventos y compensaciones. Hemos repasado los <strong>antipatrones</strong> más peligrosos: el modelo anémico que vacía el dominio de lógica, los agregados gigantes que lo concentran todo, los bounded contexts que son solo carpetas con nombre bonito. Y vimos cómo <strong>testear el dominio puro</strong> sin levantar ninguna base de datos.</p>
 <p>En la <a href="/articles/posts/20260322.html">siguiente entrega</a> aterrizaremos los tres problemas que aparecen cuando intentas llevar este diseño a producción: cómo garantizar que los eventos de dominio llegan aunque el sistema falle a mitad de camino, por qué modificar dos agregados en la misma transacción te va a dar problemas a escala y qué pasa cuando los datos del dominio son privados de verdad y el repositorio necesita guardarlos sin saltarse esa privacidad. Y después de eso, veremos todo el sistema funcionando de principio a fin con un checklist para saber si realmente estás haciendo DDD o solo organizando carpetas.</p>
-
 <p><strong>Otros artículos de la serie</strong></p>
 <ul>
 <li><a href="/articles/posts/20260221.html">Parte 1</a>: Lenguaje ubicuo, bounded contexts, entidades, objetos de valor y agregados.</li>
@@ -424,21 +424,22 @@ describe(&quot;InfectionSpreadService - Cálculo de riesgo&quot;, () =&gt; {
     </article>
   </main>
   <footer class="bg-black text-white py-4 mt-12">
-    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-      <div class="flex gap-4">
-        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-        </a>
-        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-        </a>
-        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-        </a>
-      </div>
-      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+    <div class="flex gap-4">
+      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+      </a>
+      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+      </a>
     </div>
-  </footer>
+    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  </div>
+</footer>
+
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

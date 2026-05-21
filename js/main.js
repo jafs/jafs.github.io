@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function(){
-  // Minimal JS: mark current nav link
   try{
     var links = document.querySelectorAll('nav a');
     links.forEach(function(a){
@@ -8,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function(){
   } catch(e) { /* no-op */ }
 
   if (window.hljs) {
-	window.hljs.highlightAll();
+    window.hljs.highlightAll();
   }
+
 });

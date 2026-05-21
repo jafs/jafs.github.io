@@ -7,10 +7,10 @@
   <meta name="description" content="En la primera entrega de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un lenguaje ubicuo para acabar con la brecha en..." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, DDD" />
-  <meta name="article:published_time" content="2026-02-22T12:30:00.000Z" />
+  <meta name="article:published_time" content="2026-02-28T12:30:00.000Z" />
   
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jafs.github.io/articles/posts/20260228.html" />
   <meta property="og:title" content="DDD en un apocalipsis zombi. Parte 2" />
@@ -30,8 +30,9 @@
   <meta name="twitter:image" content="/images/ddd-2.webp" />
   
 
-  <!-- Canonical URL -->
+  <!-- Canonical & RSS -->
   <link rel="canonical" href="https://jafs.github.io/articles/posts/20260228.html" />
+  <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -43,7 +44,6 @@
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
@@ -67,17 +67,16 @@
 
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-900 text-gray-100">
   <header class="bg-black text-white py-4 shadow-md">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between gap-4 flex-wrap">
-      <h1 class="text-2xl font-bold">
-        <a href="/">
-          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
-        </a>
-      </h1>
-      <nav class="flex gap-4 justify-end flex-1">
+  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    </a>
+    <div class="flex items-center gap-4">
+      <nav class="flex gap-4">
         <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/articles/" class="text-white font-semibold">Artículos</a>
         <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
         <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
       </nav>
@@ -85,10 +84,12 @@
         <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
       </form>
     </div>
-  </header>
+  </div>
+</header>
+
   <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 2</h1><p class="text-gray-600 text-sm mb-6">28-02-2026</p><p>En la <a href="/articles/posts/20260221.html">primera entrega</a> de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un <strong>lenguaje ubicuo</strong> para acabar con la brecha entre lo que dice la líder del grupo y lo que escribe el desarrollador. Dividimos el sistema en <strong>Bounded Contexts</strong> para que Sanidad, Logística y Comando no se pisoteen entre sí. Aprendimos a distinguir <strong>entidades</strong> de <strong>objetos de valor</strong> y, por último, vimos cómo los <strong>agregados</strong> actúan como el guardián en la puerta del refugio: nadie modifica nada sin pasar por él. Te recomiendo leerlo antes, ya que reutilizaremos varias de las clases que definimos en él.</p>
+    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 2</h1><p class="text-gray-400 text-sm mb-6">28-02-2026</p><p>En la <a href="/articles/posts/20260221.html">primera entrega</a> de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un <strong>lenguaje ubicuo</strong> para acabar con la brecha entre lo que dice la líder del grupo y lo que escribe el desarrollador. Dividimos el sistema en <strong>Bounded Contexts</strong> para que Sanidad, Logística y Comando no se pisoteen entre sí. Aprendimos a distinguir <strong>entidades</strong> de <strong>objetos de valor</strong> y, por último, vimos cómo los <strong>agregados</strong> actúan como el guardián en la puerta del refugio: nadie modifica nada sin pasar por él. Te recomiendo leerlo antes, ya que reutilizaremos varias de las clases que definimos en él.</p>
 <p>Todo eso era el interior. El núcleo. La lógica que mantiene el orden dentro de las paredes.</p>
 <p>Pero un refugio necesita algo más para sobrevivir: operaciones que involucran a varios actores a la vez, mecanismos para comunicarse sin crear dependencias directas entre contextos, y una forma de persistir el estado sin que el dominio sepa si estás usando PostgreSQL o cuadernos viejunos. Alguien tiene que coordinar todo eso sin convertirse en la única persona que lo sabe todo y lo controla todo. Ya sabes cómo va esto de los apocalipsis zombi: quien sabe dónde están las llaves del generador, tiene acceso a los suministros críticos y entiende cómo funciona el sistema de ventilación es, invariablemente, la primera persona en convertirse en zombi en el peor momento posible. Y cuando eso pasa, el sistema entero se va a pique porque nadie más sabe cómo funciona.</p>
 <p>En esta segunda parte vamos a ver exactamente eso: <strong>Servicios de Dominio</strong>, <strong>Repositories</strong>, la <strong>capa de Aplicación</strong> y <strong>Eventos de Dominio</strong>.</p>
@@ -533,7 +534,7 @@ public admit(survivor: Survivor): void {
   }
 }
 </code></pre>
-<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">🗒️ <strong>NOTA</strong><br />En sistemas robustos, se suele utilizar el patrón Outbox para garantizar la consistencia de que tras realizar todas las transacciones se publique correctamente el evento. Lo dejaremos fuera del alcance de este artículo. Podéis leer más sobre él en la <a href="/articles/posts/20260322.html">cuarta parte</a> de esta serie de artículos.</div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">🗒️ <strong>NOTA</strong><br />En sistemas robustos, se suele utilizar el patrón Outbox para garantizar la consistencia de que tras realizar todas las transacciones se publique correctamente el evento. Lo dejaremos fuera del alcance de este artículo. Podéis leer más sobre él en la <a href="/articles/posts/20260322.html">cuarta parte</a> de esta serie de artículos.</div></p>
 <h3>¿Quién escucha los eventos?</h3>
 <p>Diferentes partes del sistema pueden suscribirse a los eventos que les interesan:</p>
 <pre><code class="language-typescript">// El servicio de Logística escucha admisiones
@@ -572,7 +573,6 @@ eventBus.on(&quot;QuarantineActivated&quot;, (event) =&gt; {
 <p>Implementar estas capas puede parecer mucho trabajo extra cuando hay zombis golpeando la puerta, pero es lo que diferencia a un grupo de supervivientes organizado de una cena buffet para no-muertos. Gracias a que el equipo médico (Dominio) y la gente encargada de suministros (Infraestructura) hablan el mismo idioma y respetan sus fronteras, Luis está ahora en una zona de aislamiento segura en lugar de estar deambulando por el comedor buscando cerebros.</p>
 <p>Hemos pasado de tener &quot;código que funciona&quot; a tener un sistema que refleja la realidad de nuestra supervivencia.</p>
 <p>En el <a href="/articles/posts/20260306.html">siguiente artículo</a>, daremos el paso final: cómo evitar que todo vuele por los aires cuando varias cosas pasan a la vez (transacciones), qué errores no debes cometer nunca (antipatrones) y cómo probar que nuestro refugio es realmente impenetrable (testing). ¡Mantened las puertas cerradas y el código limpio!</p>
-
 <p><strong>Otros artículos de la serie</strong></p>
 <ul>
 <li><a href="/articles/posts/20260221.html">Parte 1</a>: Lenguaje ubicuo, bounded contexts, entidades, objetos de valor y agregados.</li>
@@ -580,24 +580,26 @@ eventBus.on(&quot;QuarantineActivated&quot;, (event) =&gt; {
 <li><a href="/articles/posts/20260322.html">Parte 4</a>: Patrón Outbox, consistencia eventual entre agregados, el patrón Snapshot.</li>
 <li><a href="/articles/posts/20260402.html">F.A.Q.</a>: Preguntas frecuentes.</li>
 </ul>
+
     </article>
   </main>
   <footer class="bg-black text-white py-4 mt-12">
-    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-      <div class="flex gap-4">
-        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-        </a>
-        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-        </a>
-        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-        </a>
-      </div>
-      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+    <div class="flex gap-4">
+      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+      </a>
+      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+      </a>
     </div>
-  </footer>
+    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  </div>
+</footer>
+
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

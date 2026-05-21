@@ -6,7 +6,7 @@
     <description>Artículos sobre programación, TypeScript, arquitectura de software y desarrollo web.</description>
     <language>es</language>
     <managingEditor>contacto@jafs.github.io (José Antonio Fuentes Santiago)</managingEditor>
-    <lastBuildDate>Sun, 17 May 2026 16:22:43 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 21 May 2026 07:33:53 GMT</lastBuildDate>
     <atom:link href="https://jafs.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://jafs.github.io/favicon-96x96.png</url>
@@ -23,7 +23,7 @@
       <pubDate>Sun, 17 May 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>SDD</category>
-      <media:content url="https://jafs.github.io/images/20260517/SDD-original.webp" medium="image" />
+      <media:content url="https://jafs.github.io/images/20260517/SDD.webp" medium="image" />
     </item>
     <item>
       <title>DDD en un apocalipsis zombi. Preguntas frecuentes</title>

@@ -10,7 +10,7 @@
   <meta name="article:published_time" content="2022-01-24T22:12:52.000Z" />
   
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jafs.github.io/articles/posts/20220124.html" />
   <meta property="og:title" content="Principios SOLID. Capítulo I: Interface-Segregation Principle" />
@@ -30,8 +30,9 @@
   <meta name="twitter:image" content="/images/solid-logo.png" />
   
 
-  <!-- Canonical URL -->
+  <!-- Canonical & RSS -->
   <link rel="canonical" href="https://jafs.github.io/articles/posts/20220124.html" />
+  <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -51,7 +52,6 @@ table td:first-child {
 }
 
   </style>
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
@@ -75,17 +75,16 @@ table td:first-child {
 
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-900 text-gray-100">
   <header class="bg-black text-white py-4 shadow-md">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between gap-4 flex-wrap">
-      <h1 class="text-2xl font-bold">
-        <a href="/">
-          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
-        </a>
-      </h1>
-      <nav class="flex gap-4 justify-end flex-1">
+  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    </a>
+    <div class="flex items-center gap-4">
+      <nav class="flex gap-4">
         <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/articles/" class="text-white font-semibold">Artículos</a>
         <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
         <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
       </nav>
@@ -93,10 +92,12 @@ table td:first-child {
         <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
       </form>
     </div>
-  </header>
+  </div>
+</header>
+
   <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">Principios SOLID. Capítulo I: Interface-Segregation Principle</h1><p class="text-gray-600 text-sm mb-6">24-01-2022</p><p>Si en el capítulo anterior vimos como una mala herencia puede provocar que haya clases con métodos que no deberían implementar, para este cuarto principio tenemos un ejemplo muy parecido, pero con el caso de las interfaces.</p>
+    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Principios SOLID. Capítulo I: Interface-Segregation Principle</h1><p class="text-gray-400 text-sm mb-6">24-01-2022</p><p>Si en el capítulo anterior vimos como una mala herencia puede provocar que haya clases con métodos que no deberían implementar, para este cuarto principio tenemos un ejemplo muy parecido, pero con el caso de las interfaces.</p>
 <p>Su nacimiento se remonta a los tiempos en los que Robert C. Martin trabajaba en la empresa Xerox. Dicha empresa había creado un software que llevaba a cabo la mayor parte de tareas que puede llevar a cabo un sistema de impresión. El problema es que había una sola clase que hacía todo el trabajo, algo que ya también incumplía varios de los principios que hemos visto (como el Principio de Responsabilidad Única). Pues bien, tras ver como cada cambio implicaba cada un mayor tiempo de desarrollo, se optó por crear varias interfaces que acotaran las tareas: grapado, envío de fax, impresión, etc. Y de ahí salió la definición del Principio de Segregación de Interfaces:</p>
 <blockquote>
 <p>Los clientes no deberían estar forzados a depender de interfaces que no van a usar. <br><em>Robert C. Martin</em> ~ <a href="https://web.archive.org/web/20090306160252/http://www.objectmentor.com/resources/articles/isp.pdf">The Interface Segregation Principle</a></p>
@@ -269,21 +270,22 @@ class HermanoMartillo implements IEnemigo, IEnemigoSaltarin {
     </article>
   </main>
   <footer class="bg-black text-white py-4 mt-12">
-    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-      <div class="flex gap-4">
-        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-        </a>
-        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-        </a>
-        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-        </a>
-      </div>
-      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+    <div class="flex gap-4">
+      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+      </a>
+      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+      </a>
     </div>
-  </footer>
+    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  </div>
+</footer>
+
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

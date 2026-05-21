@@ -20,13 +20,12 @@
   }
 }
 
-/* Enlaces azules por defecto, excepto en el header */
 main a,
 footer a:not(header a) {
-	color: #005f78;
+	color: #22d3ee;
 }
 
 main a:hover,
 footer a:not(header a):hover {
-	color: #003f58;
+	color: #67e8f9;
 }

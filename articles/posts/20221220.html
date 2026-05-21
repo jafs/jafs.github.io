@@ -10,7 +10,7 @@
   <meta name="article:published_time" content="2022-12-20T17:18:46.000Z" />
   
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jafs.github.io/articles/posts/20221220.html" />
   <meta property="og:title" content="BDD y Gherkin. Una pequeña introducción" />
@@ -18,18 +18,21 @@
   <meta property="og:site_name" content="JAFS" />
   <meta property="og:locale" content="es_ES" />
   
+  <meta property="og:image" content="/images/bdd-mini.webp" />
   <meta property="article:published_time" content="2022-12-20T17:18:46.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="BDD y Gherkin. Una pequeña introducción" />
   <meta name="twitter:description" content="BDD (Behavior Driven Development) o Desarrollo Dirigido por Comportamiento es una metodología que lleva varios años en el tintero, pero día a día va cobrando..." />
   
+  <meta name="twitter:image" content="/images/bdd-mini.webp" />
 
-  <!-- Canonical URL -->
+  <!-- Canonical & RSS -->
   <link rel="canonical" href="https://jafs.github.io/articles/posts/20221220.html" />
+  <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -41,7 +44,6 @@
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
@@ -58,22 +60,23 @@
   "description": "BDD (Behavior Driven Development) o Desarrollo Dirigido por Comportamiento es una metodología que lleva varios años en el tintero, pero día a día va cobrando...",
   "url": "https://jafs.github.io/articles/posts/20221220.html",
   "inLanguage": "es",
-  "datePublished": "2022-12-20T17:18:46.000Z"
+  "datePublished": "2022-12-20T17:18:46.000Z",
+  "image": "/images/bdd-mini.webp"
 }
   </script>
+
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-900 text-gray-100">
   <header class="bg-black text-white py-4 shadow-md">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between gap-4 flex-wrap">
-      <h1 class="text-2xl font-bold">
-        <a href="/">
-          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
-        </a>
-      </h1>
-      <nav class="flex gap-4 justify-end flex-1">
+  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    </a>
+    <div class="flex items-center gap-4">
+      <nav class="flex gap-4">
         <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/articles/" class="text-white font-semibold">Artículos</a>
         <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
         <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
       </nav>
@@ -81,11 +84,13 @@
         <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
       </form>
     </div>
-  </header>
+  </div>
+</header>
+
   <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">BDD y Gherkin. Una pequeña introducción</h1><p class="text-gray-600 text-sm mb-6">20-12-2022</p><p>BDD (Behavior Driven Development) o Desarrollo Dirigido por Comportamiento es una metodología que lleva varios años en el tintero, pero día a día va cobrando más fuerza. En este artículo aprenderemos más sobre ella.</p>
-<h2 id="historia-de-bdd">Historia de BDD</h2>
+    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">BDD y Gherkin. Una pequeña introducción</h1><p class="text-gray-400 text-sm mb-6">20-12-2022</p><p>BDD (Behavior Driven Development) o Desarrollo Dirigido por Comportamiento es una metodología que lleva varios años en el tintero, pero día a día va cobrando más fuerza. En este artículo aprenderemos más sobre ella.</p>
+<h2>Historia de BDD</h2>
 <p>BDD partió de distintas metodologías ágiles, que primero fueron comentadas sobre los años 2000 por <a href="https://dannorth.net/">Dan North</a>. Posteriormente, Dan publicó un artículo llamado <a href="https://dannorth.net/introducing-bdd/">Introducing BDD</a>, donde comenzó a desarrollar más el tema. Finalmente, el concepto de BDD terminó haciéndose un estándar, con la ayuda de <a href="https://twitter.com/lunivore">Elizabeth Keogh</a> en las charlas que dieron durante la <strong>&quot;Agile specifications, BDD and Testing eXchange&quot;</strong> celebrada en el año 2009.</p>
 <p>Y es que BDD nació como respuesta a los problemas que surgían al empezar con TDD (Desarrollo Dirigido por Pruebas). Ya que la mayoría de programadores y programadoras se encontraban con las mismas preguntas:</p>
 <ul>
@@ -95,7 +100,7 @@
 <li>¿Cómo llamar a las pruebas?</li>
 <li>¿Cómo entender por qué falla una prueba?</li>
 </ul>
-<h2 id="conceptos-de-bdd">Conceptos de BDD</h2>
+<h2>Conceptos de BDD</h2>
 <p>Inicialmente, la idea de nuestros amigos Dan y Liz era que los tests más complejos se definieran de forma similar a las historias de usuario. Por lo que cualquier persona sin conocimientos técnicos podría plantear las pruebas. Es por ello, que partiendo de la típica definición de historia en el desarrollo ágil:</p>
 <pre><code class="language-text">Como [rol que ejecuta la prueba]
 Quiero [pasos a realizar]
@@ -122,7 +127,7 @@ Por lo que [resultado esperado]
 <p>El conjunto de pasos de cada escenario, se pueden relacionar con el sistema de <a href="http://xunitpatterns.com/Four%20Phase%20Test.html">tests en cuatro fases</a> de la forma siguiente:</p>
 <p><img src="/images/bdd-four-phase.webp" alt="BDD and Four Phase Testing"></p>
 <p>Se puede observar como la fase &quot;Tear down&quot;, no existe de base en BDD, lo que no quita que frameworks como Cucumber permitan tener esta fase en BDD.</p>
-<h2 id="ventajas-de-bdd">Ventajas de BDD</h2>
+<h2>Ventajas de BDD</h2>
 <p>Tras haber visto un poco la introducción a BDD, lo siguiente que podéis pensar es ¿qué ventajas puede acarear el definir así las pruebas?</p>
 <ul>
 <li><p><strong>Define un estándar para que negocio y desarrollo puedan entenderse</strong>: Para ello, se utiliza un lenguaje natural, o muy aproximado al lenguaje natural, de forma que cualquiera puede aprenderlo sin tener conocimientos técnicos.</p>
@@ -139,7 +144,7 @@ Por lo que [resultado esperado]
 <li><p><strong>Es muy fácil convertir la definición de una historia en casos BDD y viceversa</strong>: Ya hemos visto que los pasos que definen un escenario partían de la definición estándar de historias en el desarrollo ágil. Es por ello, que la transcripción de una historia a BDD es algo casi automático, si hemos definido la historia de forma correcta.</p>
 </li>
 </ul>
-<h2 id="bdd--tdd">BDD + TDD</h2>
+<h2>BDD + TDD</h2>
 <p>Recapitulando, hemos visto hasta ahora que, con BDD tenemos una forma estándar de poder definir casos de prueba, así como de llevarlos a cabo. Pero ¿cómo encaja esto en un flujo de desarrollo habitual? Pues bien, BDD, se basa en los mismos principios que TDD, es decir, se escribe un caso que falle, se desarrolla y/o se refactoriza hasta hacer que funcione.</p>
 <p><img src="/images/BDDyTDD.webp" alt="BDD y TDD"></p>
 <p>Como podéis ver en la imagen anterior:</p>
@@ -148,7 +153,7 @@ Por lo que [resultado esperado]
 <li>Comenzamos con TDD hasta que todos los tests pasen.</li>
 <li>Una vez que pasen todos los test de lo que podríamos decir, que es la parte TDD, volvemos al escenario para ver si el escenario se prueba correctamente. Si no es así, seguiremos refactorizando.</li>
 </ul>
-<h2 id="bdd-en-la-pirámide-de-tests">BDD en la pirámide de tests</h2>
+<h2>BDD en la pirámide de tests</h2>
 <p>No hemos mandado a BDD de viaje por Egipto como si fuera una historia de Astérix, sino que vamos a ver como se integraría BDD en la famosa pirámide introducida por <a href="https://www.mountaingoatsoftware.com/">Mike Cohn</a> en su libro <a href="https://www.amazon.es/Succeeding-Agile-Software-Development-Signature/dp/0321579364">Succeeding with Agile</a>.</p>
 <p><img src="/images/piramidetests.webp" alt="Pirámide de tests"></p>
 <p>Para aquellas personas que no conozcáis la pirámide de test, básicamente nos indica que peso en la aplicación debe tener cada tipo de test. De forma que, de forma resumida, debe haber más tests unitarios y menos tests manuales. La pirámide de la imagen tiene algunos cambios respecto a la original, basado en mi experiencia, así que la podríamos llamar la pirámide V2.</p>
@@ -163,7 +168,7 @@ Por lo que [resultado esperado]
 <p>Esta pirámide no es algo obligatorio a seguir, incluso dependiendo del tipo de aplicación, puede que se llegue a dar incluso una pirámide invertida, donde los tests de sistema tengan más peso que los unitarios, una en formato trofeo, donde los de integración sean los importantes, etc. Como todo en el mundo de la programación, no viene prefijado y se puede ajustar según necesidad.</p>
 <p>Tras el inciso para hablar de la pirámide, podéis ver que BDD se integraría en los tests de componentes, integración y sistema. No tendrían sentido a nivel de tests unitarios, puesto que tendríamos que definir con BDD hasta el más mínimo comportamiento del método más pequeño, esto sería algo muy engorroso.</p>
 <p>Por otro lado, respecto a los tests manuales, a una persona se le puede dejar los comportamientos de BDD para que los pruebe, pero es mejor evitar guiar a quien testea, puesto que siempre tenderá a ceñirse a los escenarios definidos en BDD. Sobre como plantear los test manuales podemos profundizar más en otro artículo, sí así gustáis.</p>
-<h2 id="gherkin-un-lenguaje-para-dominarlos-a-todos">Gherkin. Un lenguaje para dominarlos a todos</h2>
+<h2>Gherkin. Un lenguaje para dominarlos a todos</h2>
 <p>Una vez que sabemos como proceder, nos falta conocer el estándar. A nivel conceptual con BDD, no es obligatorio casarse con ningún lenguaje, pero prácticamente el que ha prevalecido sobre los demás, es Gherkin. Éste permite definir las pruebas de una forma natural y expresiva. Pero como todo lenguaje tiene ciertas palabras clave. Y estas son:</p>
 <pre><code class="language-bash">Feature: comportamiento a probar.
   Scenario: especifica un casos de uso del comportamiento.
@@ -231,9 +236,9 @@ Feature: Online Files Management
     And download the file
     Then file starts to download
 </code></pre>
-<h2 id="qué-evitar-hacer-en-gherkin">Qué evitar hacer en Gherkin</h2>
+<h2>Qué evitar hacer en Gherkin</h2>
 <p>Para mejorar nuestras definiciones de comportamientos hay dos cosillas que deberíamos evitar siempre:</p>
-<h3 id="usa-lenguaje-de-negocio-no-tecnológico">Usa lenguaje de negocio no tecnológico</h3>
+<h3>Usa lenguaje de negocio no tecnológico</h3>
 <p>Hay que evitar definir los pasos de los escenarios de forma dependiente a la tecnología, es decir, deberiamos evitar frases como &quot;haz click&quot;, &quot;realiza una llamada POST&quot;, etc. Por un lado, porque podremos reutilizar los escenarios entre distintas partes del proyecto; y por otro, y más importante, porque quién defina la historia, ya dijimos que puede que no tenga conocimientos técnicos, de forma que no tiene por qué saber que por ejemplo una llamada va por API REST, por WS, etc.</p>
 <pre><code class="language-bash">  Scenario: create a user
     Given the hability to create users
@@ -243,29 +248,30 @@ Feature: Online Files Management
     Then the user is created
 </code></pre>
 <p>Con el ejemplo anterior podemos ver como el segundo escenario es posible utilizarlo en una parte back y front. En la primera se tomarán credenciales de un rol que pueda crear usuarios y el test terminará realizando una llamada a un API, y en la segunda se realizarán todos los pasos necesarios para crear el usuario desde interfaz.</p>
-<h3 id="evitar-pasos-que-puedan-tener-doble-sentido">Evitar pasos que puedan tener doble sentido</h3>
+<h3>Evitar pasos que puedan tener doble sentido</h3>
 <p>Es importante evitar utilizar nombres de steps que tengan distintos contextos. Si por ejemplo, tenemos un paso con el contenido &quot;se borra el texto&quot;, seguramente dependerá del escenario en qué se use. Es por ello, que es preferible tenemos pasos con contenidos como &quot;se borra el nombre de usuario&quot;, &quot;se borra el título del artículo&quot;, etc. Por un lado, queda mucho más claro qué hace el paso, y por otro permite evitar confusiones.</p>
-<h2 id="antes-de-terminar">Antes de terminar</h2>
+<h2>Antes de terminar</h2>
 <p>Una vez que hemos aprendido algo sobre BDD y Gherkin es manos de ponerse a la obra, así que ¿cómo podemos seguir? Pues, para aplicar esto tenéis frameworks como <a href="https://cucumber.io/">Cucumber</a> que nos ayuda a implementar BDD. Pero, recordad que BDD es una metodología, por lo que no os obliga a casaros con ningún framework y lo podéis implementar libremente.</p>
 
     </article>
   </main>
   <footer class="bg-black text-white py-4 mt-12">
-    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-      <div class="flex gap-4">
-        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-        </a>
-        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-        </a>
-        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-        </a>
-      </div>
-      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+    <div class="flex gap-4">
+      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+      </a>
+      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+      </a>
     </div>
-  </footer>
+    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  </div>
+</footer>
+
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

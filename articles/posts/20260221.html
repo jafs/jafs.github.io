@@ -10,7 +10,7 @@
   <meta name="article:published_time" content="2026-02-22T12:30:00.000Z" />
   
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jafs.github.io/articles/posts/20260221.html" />
   <meta property="og:title" content="DDD en un apocalipsis zombi. Parte 1" />
@@ -30,8 +30,9 @@
   <meta name="twitter:image" content="/images/ddd.webp" />
   
 
-  <!-- Canonical URL -->
+  <!-- Canonical & RSS -->
   <link rel="canonical" href="https://jafs.github.io/articles/posts/20260221.html" />
+  <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -43,7 +44,6 @@
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
@@ -67,17 +67,16 @@
 
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-900 text-gray-100">
   <header class="bg-black text-white py-4 shadow-md">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between gap-4 flex-wrap">
-      <h1 class="text-2xl font-bold">
-        <a href="/">
-          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
-        </a>
-      </h1>
-      <nav class="flex gap-4 justify-end flex-1">
+  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    </a>
+    <div class="flex items-center gap-4">
+      <nav class="flex gap-4">
         <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/articles/" class="text-white font-semibold">Artículos</a>
         <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
         <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
       </nav>
@@ -85,10 +84,12 @@
         <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
       </form>
     </div>
-  </header>
+  </div>
+</header>
+
   <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 1</h1><p class="text-gray-600 text-sm mb-6">22-02-2026</p><p>Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situación es crítica: hay que gestionar refugios, coordinar reabastecimientos, controlar infecciones y tomar decisiones que pueden significar vida o muerte. Decides crear un sistema para ayudar a gestionar todo esto.</p>
+    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 1</h1><p class="text-gray-400 text-sm mb-6">22-02-2026</p><p>Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situación es crítica: hay que gestionar refugios, coordinar reabastecimientos, controlar infecciones y tomar decisiones que pueden significar vida o muerte. Decides crear un sistema para ayudar a gestionar todo esto.</p>
 <p>Meses después, el sistema funciona, pero hay un problema: cada vez que el líder del grupo (nuestro &quot;experto de negocio&quot;) pide un cambio, tú y tu equipo os perdéis en traducciones. Él habla de &quot;supervivientes en cuarentena&quot;, tú piensas en <code>user.status = 3</code>. Él menciona &quot;refugio en capacidad crítica&quot;, tú ves <code>shelter.count &gt;= shelter.max</code>. El código funciona, pero nadie entiende realmente qué hace sin abrir cada archivo y desentrañar la lógica. Y en un apocalipsis zombi, perder tiempo tratando de entender el código puede costarte la vida.</p>
 <p>Este es exactamente el tipo de problema que <strong>Domain-Driven Design</strong> vino a resolver. Y no, <strong>DDD no es una arquitectura</strong> ni un framework mágico que instalas con npm. Es una filosofía de desarrollo que propone algo radical y a la vez obvio: el código debe ser un espejo fiel de cómo funcionan las cosas en el mundo real del negocio (o en nuestro caso, del apocalipsis).</p>
 <p>La idea la plasmó <strong>Eric Evans</strong> en 2003 en su libro <a href="https://amzn.to/4kT4iaG">Domain-Driven Design: Tackling Complexity in the Heart of Software</a>, y aunque ya han pasado más de dos décadas, la premisa sigue siendo igual de potente: si el líder de supervivientes y el desarrollador miran el modelo del sistema, ambos deberían ver lo mismo. Mismos conceptos, mismas palabras, mismas reglas.</p>
@@ -424,8 +425,7 @@ console.log(electricShelter.getSupplies());
 <p>El combatiente en la puerta es la raíz del agregado. No importa quién intente entrar ni cómo de urgente sea la situación, si el refugio está lleno, nadie entra. Las invariantes se respetan siempre. Y si el camión llega con suministros, también pasa por él antes de que las cajas entren al refugio.</p>
 <h2>Continuará</h2>
 <p>En esta primera parte hemos sentado las bases de DDD: el <strong>lenguaje ubicuo</strong> que elimina traducciones mentales, los <strong>Bounded Contexts</strong> que dividen el sistema de forma coherente, las <strong>Entidades y Value Objects</strong> que modelan la identidad y el valor, y los <strong>Agregados</strong> que protegen las invariantes del dominio.</p>
-<p>En la <a href="/articles/posts/20260228.html" title="Segunda parte del artículo">segunda parte</a> veremos cómo conectar todo esto con el exterior: <strong>Servicios de Dominio</strong>, <strong>Eventos</strong>, <strong>Repositorios</strong> y la <strong>capa de Aplicación</strong>. Además, veremos los antipatterns más comunes y cuándo tiene sentido (y cuándo no) aplicar DDD.</p>
-
+<p>En la <a href="/articles/posts/20260228.html">segunda parte</a> veremos cómo conectar todo esto con el exterior: <strong>Servicios de Dominio</strong>, <strong>Eventos</strong>, <strong>Repositorios</strong> y la <strong>capa de Aplicación</strong>. Además, veremos los antipatterns más comunes y cuándo tiene sentido (y cuándo no) aplicar DDD.</p>
 <p><strong>Otros artículos de la serie</strong></p>
 <ul>
 <li><a href="/articles/posts/20260228.html">Parte 2</a>: Servicios de dominio, repositorios, capa de aplicación y eventos de dominio.</li>
@@ -433,24 +433,26 @@ console.log(electricShelter.getSupplies());
 <li><a href="/articles/posts/20260322.html">Parte 4</a>: Patrón Outbox, consistencia eventual entre agregados, el patrón Snapshot.</li>
 <li><a href="/articles/posts/20260402.html">F.A.Q.</a>: Preguntas frecuentes.</li>
 </ul>
+
     </article>
   </main>
   <footer class="bg-black text-white py-4 mt-12">
-    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-      <div class="flex gap-4">
-        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-        </a>
-        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-        </a>
-        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-        </a>
-      </div>
-      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+    <div class="flex gap-4">
+      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+      </a>
+      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+      </a>
     </div>
-  </footer>
+    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  </div>
+</footer>
+
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

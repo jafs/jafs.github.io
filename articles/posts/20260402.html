@@ -10,7 +10,7 @@
   <meta name="article:published_time" content="2026-04-02T00:00:00.000Z" />
   
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jafs.github.io/articles/posts/20260402.html" />
   <meta property="og:title" content="DDD en un apocalipsis zombi. Preguntas frecuentes" />
@@ -30,8 +30,9 @@
   <meta name="twitter:image" content="/images/ddd-faq.webp" />
   
 
-  <!-- Canonical URL -->
+  <!-- Canonical & RSS -->
   <link rel="canonical" href="https://jafs.github.io/articles/posts/20260402.html" />
+  <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -43,7 +44,6 @@
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
@@ -67,28 +67,29 @@
 
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-900 text-gray-100">
   <header class="bg-black text-white py-4 shadow-md">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-      <a href="/" class="text-2xl font-bold">
-        <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
-      </a>
-      <div class="flex items-center gap-4">
-        <nav class="flex gap-4">
-          <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-          <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
-          <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
-          <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
-        </nav>
-        <form action="/search.html" method="get">
-          <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
-        </form>
-      </div>
+  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    </a>
+    <div class="flex items-center gap-4">
+      <nav class="flex gap-4">
+        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
+        <a href="/articles/" class="text-white font-semibold">Artículos</a>
+        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
+        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
+      </nav>
+      <form action="/search.html" method="get">
+        <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
+      </form>
     </div>
-  </header>
+  </div>
+</header>
+
   <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Preguntas frecuentes</h1><p class="text-gray-600 text-sm mb-6">02-04-2026</p><p>En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el <a href="/articles/posts/20260221.html">lenguaje ubicuo</a> y terminamos con patrones más avanzados como <a href="/articles/posts/20260322.html">patrón Outbox</a>. Ha sido un viaje intenso, pero antes de cerrar la puerta del refugio, toca responder a esas dudas que siempre surgen cuando intentas aplicar esto en un proyecto real. Además, veremos una checklist y una pequeña guía que os ayudará a decidir cuándo tiene sentido aplicar DDD y cuándo no.</p>
+    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Preguntas frecuentes</h1><p class="text-gray-400 text-sm mb-6">02-04-2026</p><p>En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el <a href="/articles/posts/20260221.html">lenguaje ubicuo</a> y terminamos con patrones más avanzados como <a href="/articles/posts/20260322.html">patrón Outbox</a>. Ha sido un viaje intenso, pero antes de cerrar la puerta del refugio, toca responder a esas dudas que siempre surgen cuando intentas aplicar esto en un proyecto real. Además, veremos una checklist y una pequeña guía que os ayudará a decidir cuándo tiene sentido aplicar DDD y cuándo no.</p>
 <h2>¿Cómo sé si algo es un Value Object o una Entidad?</h2>
 <p>Si tienes dudas, usaremos el <strong>test de intercambio</strong>. Hazte esta pregunta: ¿Puedo cambiar este objeto por otro igual sin que pase nada?</p>
 <ul>
@@ -182,7 +183,7 @@ class ElasticSurvivorSearchRepository implements SurvivorSearchRepository { ... 
 <li>Qué tipos de error se repiten más.</li>
 </ul>
 <p>Además, puedes establecer alarmas en los casos de que una Saga se queda atascada, si la tasa de compensación sube o si la cola de outbox no deja de crecer. Esos casos indican que algo va mal y conviene mirarlo cuanto antes.</p>
-<p><div class="rounded-md bg-gray-100 p-4 border-t-4 border-t-gray-400">📚 <strong>PARA SABER MÁS</strong><p>El tema de la observabilidad da para mucho. Si quieres profundizar en él, <a href="https://amzn.to/4brsIF9"><strong>Observability Engineering</strong></a> de Charity Majors, Liz Fong-Jones y George Miranda es la referencia más completa sobre el tema.</p></div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">📚 <strong>PARA SABER MÁS</strong><p>El tema de la observabilidad da para mucho. Si quieres profundizar en él, <a href="https://amzn.to/4brsIF9"><strong>Observability Engineering</strong></a> de Charity Majors, Liz Fong-Jones y George Miranda es la referencia más completa sobre el tema.</p></div></p>
 <h2>Checklist rápido de DDD</h2>
 <p>Antes de dar por buena tu implementación, deberías revisar estos puntos:</p>
 <h3>Lenguaje y comunicación</h3>
@@ -266,21 +267,22 @@ class ElasticSurvivorSearchRepository implements SurvivorSearchRepository { ... 
     </article>
   </main>
   <footer class="bg-black text-white py-4 mt-12">
-    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-      <div class="flex gap-4">
-        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-        </a>
-        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-        </a>
-        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-        </a>
-      </div>
-      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+    <div class="flex gap-4">
+      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+      </a>
+      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+      </a>
     </div>
-  </footer>
+    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  </div>
+</footer>
+
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

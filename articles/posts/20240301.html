@@ -6,30 +6,33 @@
   <title>Aritmética binaria — JAFS</title>
   <meta name="description" content="Hoy vamos a ver algo que se sale un poco de la tónica habitual de este blog. Pero, siempre viene bien volver a las bases de la informática. Así que espero qu..." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
-  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, binario, aritmética" />
   <meta name="article:published_time" content="2024-03-01T18:12:04.000Z" />
   
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jafs.github.io/articles/posts/20240301.html" />
   <meta property="og:title" content="Aritmética binaria" />
   <meta property="og:description" content="Hoy vamos a ver algo que se sale un poco de la tónica habitual de este blog. Pero, siempre viene bien volver a las bases de la informática. Así que espero qu..." />
   <meta property="og:site_name" content="JAFS" />
   <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="/images/aritmetica-binaria-mini.webp" />
   
   <meta property="article:published_time" content="2024-03-01T18:12:04.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Aritmética binaria" />
   <meta name="twitter:description" content="Hoy vamos a ver algo que se sale un poco de la tónica habitual de este blog. Pero, siempre viene bien volver a las bases de la informática. Así que espero qu..." />
+  <meta name="twitter:image" content="/images/aritmetica-binaria-mini.webp" />
   
 
-  <!-- Canonical URL -->
+  <!-- Canonical & RSS -->
   <link rel="canonical" href="https://jafs.github.io/articles/posts/20240301.html" />
+  <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -41,7 +44,6 @@
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
@@ -58,22 +60,23 @@
   "description": "Hoy vamos a ver algo que se sale un poco de la tónica habitual de este blog. Pero, siempre viene bien volver a las bases de la informática. Así que espero qu...",
   "url": "https://jafs.github.io/articles/posts/20240301.html",
   "inLanguage": "es",
-  "datePublished": "2024-03-01T18:12:04.000Z"
+  "datePublished": "2024-03-01T18:12:04.000Z",
+  "image": "/images/aritmetica-binaria-mini.webp"
 }
   </script>
+
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-900 text-gray-100">
   <header class="bg-black text-white py-4 shadow-md">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between gap-4 flex-wrap">
-      <h1 class="text-2xl font-bold">
-        <a href="/">
-          <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
-        </a>
-      </h1>
-      <nav class="flex gap-4 justify-end flex-1">
+  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    </a>
+    <div class="flex items-center gap-4">
+      <nav class="flex gap-4">
         <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
+        <a href="/articles/" class="text-white font-semibold">Artículos</a>
         <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
         <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
       </nav>
@@ -81,11 +84,13 @@
         <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
       </form>
     </div>
-  </header>
+  </div>
+</header>
+
   <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">Aritmética binaria</h1><p class="text-gray-600 text-sm mb-6">01-03-2024</p><p>Hoy vamos a ver algo que se sale un poco de la tónica habitual de este blog. Pero, siempre viene bien volver a las bases de la informática. Así que espero que esta pequeña introducción al sistema binario y a su aritmética, pueda serte útil.</p>
-<h2 id="sistemas-de-numeración">Sistemas de Numeración</h2>
+    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
+      <h1 class="text-4xl font-bold mb-2">Aritmética binaria</h1><p class="text-gray-400 text-sm mb-6">01-03-2024</p><p>Hoy vamos a ver algo que se sale un poco de la tónica habitual de este blog. Pero, siempre viene bien volver a las bases de la informática. Así que espero que esta pequeña introducción al sistema binario y a su aritmética, pueda serte útil.</p>
+<h2>Sistemas de Numeración</h2>
 <p>Un sistema de numeración lo podemos definir como un conjunto de reglas y convenios que nos permiten la representación de todos los números mediante varias cifras o símbolos. Los múltiples sistemas de numeración que existen podemos agruparlos principalmente en dos familias:</p>
 <p>Por un lado, están los que se rigen por reglas estrictas sin importar dónde esté la cifra o el símbolo. Estos son los sistemas basados en el <strong>Valor Absoluto</strong>. Un ejemplo de esto es el sistema de numeración romana, que utiliza las letras <code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code> y <code>M</code>. En este sistema, el valor de una letra siempre es el mismo, sin importar su posición dentro del número. Por ejemplo, el valor de <code>C</code> siempre será 100 independientemente de su posición:</p>
 <pre><code class="language-text">  MC = 1000 + (100)
@@ -100,7 +105,7 @@ CDLI = (-100) + 500 + 50 + 1
 4000  + 300   + 50    + 2 =
 4352
 </code></pre>
-<h3 id="sistemas-de-numeración-con-valores-relativos">Sistemas de numeración con valores relativos</h3>
+<h3>Sistemas de numeración con valores relativos</h3>
 <p>La construcción de un sistema de numeración basado en valores relativos seguirá la definición siguiente:</p>
 <blockquote>
 <p>El valor decimal de un número es igual a la suma de los valores de los dígitos o símbolos correspondientes, multiplicados por la base elevada a la potencia definida por su posición.</p>
@@ -120,7 +125,7 @@ T = total de cifras que tiene el número
     369
 </code></pre>
 <p>Con lo que tenemos que el valor decimal del número <code>561</code> en base 8 es <code>369</code>; lo que podemos expresar como <code>591₈ = 369₁₀</code>.</p>
-<h3 id="equivalencias-entre-sistemas-de-valores-relativos">Equivalencias entre sistemas de valores relativos</h3>
+<h3>Equivalencias entre sistemas de valores relativos</h3>
 <p>En la tabla siguiente se pueden observar las equivalencias de distintos sistemas de numeración.</p>
 <table>
 <thead>
@@ -247,7 +252,7 @@ T = total de cifras que tiene el número
 </tbody></table>
 <!-- /wp:table -->
 
-<h2 id="sistema-binario-base-2">Sistema Binario (Base 2)</h2>
+<h2>Sistema Binario (Base 2)</h2>
 <p>El sistema binario, es la piedra angular del mundo de la informática. Es más, sólo nos tenemos que detener en el significado de <strong>bit</strong>, para comprobar como es una abreviatura de &quot;<em>binary digit</em>&quot; o dígito binario.</p>
 <p>Este sistema utiliza solamente dos símbolos diferentes: <code>0</code> y <code>1</code>. En el mundo informático esto es justo lo que representa un bit de información, podemos hablar de <code>verdadero</code> y <code>falso</code>, <code>encendido</code> y <code>apagado</code>, etc.</p>
 <p>Pero, ¿por qué es tan crucial el sistema binario en la programación? Básicamente por dos razones entre otras:</p>
@@ -255,7 +260,7 @@ T = total de cifras que tiene el número
 <li><strong>Eficiencia</strong>: Las computadoras digitales utilizan el sistema binario debido a su eficiencia. Es más fácil construir máquinas que solo necesitan distinguir entre dos estados.</li>
 <li><strong>Operaciones lógicas</strong>: Las operaciones fundamentales de la lógica booleana (<code>AND</code>, <code>OR</code>, <code>NOT</code>, etc.) se pueden representar y manipular fácilmente en el sistema binario.</li>
 </ul>
-<h3 id="conversión-de-decimal-a-binario">Conversión de decimal a binario</h3>
+<h3>Conversión de decimal a binario</h3>
 <p>Para convertir enteros decimales a la notación binaria, tan sólo hay que dividir el número decimal por 2 hasta que el cociente sea cero. Los restos de cada división formarán el número binario equivalente; el primer resto será la cifra que se encuentre más a la derecha mientras que el último resto será la cifra que se encuentre más a la izquierda.</p>
 <p>Como ejemplo, vamos a convertir el número <code>13</code> a su valor binario:</p>
 <pre><code class="language-text">13 : 2 = 6 + (1)
@@ -272,7 +277,7 @@ T = total de cifras que tiene el número
     (0)  3 |_2_
         (1) (1)
 </code></pre>
-<h3 id="conversión-de-binario-a-decimal">Conversión de binario a decimal</h3>
+<h3>Conversión de binario a decimal</h3>
 <p>Al igual que con el resto de sistemas de numeración, cada símbolo tiene un valor en función del lugar que ocupa. Así, por ejemplo, el valor decimal del número 101011₂ es:</p>
 <pre><code class="language-text">N = 1×2⁵ + 0×2⁴ + 1×2³ + 0×2² + 1×2¹ + 1×2⁰ =
     32   +   0  +   8  +   0  +   2  +   1 = 43
@@ -302,8 +307,8 @@ Le sumamos la cifra siguiente: 1010(1)1       |  20  + 1₁ = 21
 Multiplicamos por 2 el nuevo resultado        |  21  × 2  = 42
 Le sumamos la cifra siguiente: 10101(1)       |  42  + 1₀ = 43
 </code></pre>
-<h3 id="fracciones">Fracciones</h3>
-<h4 id="conversión-de-fracciones-decimales-en-binarias">Conversión de fracciones decimales en binarias</h4>
+<h3>Fracciones</h3>
+<h4>Conversión de fracciones decimales en binarias</h4>
 <p>En general el proceso de conversión de un sistema a otro de la parte fraccionaria de un número es diferente al utilizado para la parte entera. Con frecuencia este proceso es el inverso para la fracción.</p>
 <p>Para convertir una fracción decimal en binaria se multiplica la fracción binaria por 2, correspondiendo la parte entera del producto al primer dígito binario. Se repite la operación con la parte decimal del producto anterior obteniendo un nuevo entero que será el siguiente dígito binario. Así sucesivamente hasta que la fracción quede reducida a cero, o se haya quedado una cantidad suficiente de dígitos binarios, en el caso de una fracción periódica.</p>
 <p>Ejemplo: convertir la fracción decimal 0,828125 en fracción binaria.</p>
@@ -335,14 +340,14 @@ Le sumamos la cifra siguiente: 10101(1)       |  42  + 1₀ = 43
 
 134,3125₁₀ = 10000110,0101₂
 </code></pre>
-<h4 id="conversión-de-fracciones-binarias-a-decimales">Conversión de fracciones binarias a decimales</h4>
+<h4>Conversión de fracciones binarias a decimales</h4>
 <p>El método más cómodo de conversión, resulta del desarrollo del número binario en sus respectivas potencias de 2, con exponente negativo descendente de izquierda a derecha.</p>
 <pre><code class="language-text">0,110101₂ = 0×2⁰ + 1×2⁻¹ + 1×2⁻² + 0×2⁻³ + 1×2⁻⁴  + 0×2⁻⁵ + 1×2⁻⁶    =
             0    + 1/2   + 1/4   + 0     + 1/16   + 0     + 1/64     =
             0    + 0,5   + 0,25  + 0     + 0,0625 + 0     + 0,015625 = 0,828125
 0,110101₂ = 0,828125₁₀
 </code></pre>
-<h3 id="suma-binaria">Suma binaria</h3>
+<h3>Suma binaria</h3>
 <p>En esencia, la suma binaria es muy semejante a la suma decimal; la tabla de sumar binaria, es mucho más reducida que la decimal, como se puede observar a continuación.</p>
 <pre><code class="language-text">0 + 0 = 0
 0 + 1 = 1
@@ -363,7 +368,7 @@ Le sumamos la cifra siguiente: 10101(1)       |  42  + 1₀ = 43
 -------
  101110
 </code></pre>
-<h3 id="resta-binaria">Resta binaria</h3>
+<h3>Resta binaria</h3>
 <p>Las reglas de la resta binaria aparecen esquematizadas a continuación:</p>
 <pre><code class="language-text">0 - 0 = 0
 1 - 1 = 0
@@ -406,7 +411,7 @@ Le sumamos la cifra siguiente: 10101(1)       |  42  + 1₀ = 43
 
 # Con esto tenemos que 11101 - 111 = 10110&lt;/pre&gt;
 </code></pre>
-<h3 id="multiplicación-binaria">Multiplicación binaria</h3>
+<h3>Multiplicación binaria</h3>
 <p>Las reglas de multiplicar en binario serían las siguientes:</p>
 <pre><code class="language-text">0 × 0 = 0
 0 × 1 = 0
@@ -425,7 +430,7 @@ Le sumamos la cifra siguiente: 10101(1)       |  42  + 1₀ = 43
  1010110001
 </code></pre>
 <p>Como se puede observar, sólo hay dos casos, o repetir el multiplicando cuando el valor a usar del multiplicador es 1 o tener el valor 0, en caso de que ese sea el valor a usar del multiplicador.</p>
-<h3 id="división-binaria">División binaria</h3>
+<h3>División binaria</h3>
 <p>La división binaria debe hacerse de idéntica manera a como se hace la división decimal con la salvedad de que la diferencia entre la parte correspondiente del dividendo y el producto obtenido al multiplicar el divisor por la cifra correspondiente del cociente, debe hacerse e binario. Veamos un ejemplo:</p>
 <pre><code class="language-text">100010 |_110_
 -110     101
@@ -448,24 +453,26 @@ Le sumamos la cifra siguiente: 10101(1)       |  42  + 1₀ = 43
 ------
 100010
 </code></pre>
+
     </article>
   </main>
   <footer class="bg-black text-white py-4 mt-12">
-    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-      <div class="flex gap-4">
-        <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-          <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-        </a>
-        <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-          <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-        </a>
-        <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-          <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-        </a>
-      </div>
-      <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+    <div class="flex gap-4">
+      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
+        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+      </a>
+      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
+        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
+        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
+      </a>
     </div>
-  </footer>
+    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
+  </div>
+</footer>
+
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

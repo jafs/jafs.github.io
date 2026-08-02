@@ -6,7 +6,7 @@
     <description>Artículos sobre programación, TypeScript, arquitectura de software y desarrollo web.</description>
     <language>es</language>
     <managingEditor>contacto@jafs.github.io (José Antonio Fuentes Santiago)</managingEditor>
-    <lastBuildDate>Sun, 02 Aug 2026 11:08:19 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2026 11:18:24 GMT</lastBuildDate>
     <atom:link href="https://jafs.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://jafs.github.io/favicon-96x96.png</url>
@@ -19,7 +19,7 @@
       <title>El Bueno, El Feo y El Malo: Cómo poner a pelear a tres agentes para que escriban tu código por ti</title>
       <link>https://jafs.github.io/articles/posts/20260802.html</link>
       <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260802.html</guid>
-      <description>!Explicación gráfica</description>
+      <description>Recuerdo aquellas tardes en casa de mis padres en las que se hacían omnipresentes los westerns. No había tarde en la que no se viera a John Wayne haciendo de lo que hoy llamaríamos &quot;chulito de playa&quot;. Y la verdad es que ese tipo de películas no me apasionan, pero ¿y si te dijera que podemos montar un western a la hora de desarrollar software gracias a la IA?</description>
       <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>IA</category>

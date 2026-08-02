@@ -70,8 +70,9 @@
 <body class="bg-gray-900 text-gray-100">
   <header class="bg-black text-white py-4 shadow-md">
   <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-    <a href="/" class="text-2xl font-bold">
-      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    <a href="/" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago" class="flex items-center text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="" class="w-8 h-8 mr-2" />
+      <span>JAFS</span>
     </a>
     <div class="flex items-center gap-4">
       <nav class="flex gap-4">
@@ -106,7 +107,7 @@ npm install @faker-js/faker --save-dev
 }
 </code></pre>
 <p>Listo. Ya podemos comenzar a generar datos realistas.</p>
-<h2 id="uso-básico">Uso básico</h2>
+<h2>Uso básico</h2>
 <pre><code class="language-typescript">import { faker } from &quot;@faker-js/faker&quot;;
 
 // Si necesitas usar un idioma en específico, por ejemplo, en español puedes
@@ -140,7 +141,7 @@ console.log(faker.science.chemicalElement());
 // /media/fine.kar
 console.log(faker.system.filePath());
 </code></pre>
-<h2 id="ejemplo-realista-generar-usuarios-para-una-api-o-demo">Ejemplo realista: generar usuarios para una API o demo</h2>
+<h2>Ejemplo realista: generar usuarios para una API o demo</h2>
 <p>Imagina que quieres poblar una base de datos local o simular un backend para una demo de frontend. Necesitas 20 usuarios <strong>coherentes</strong>, con su nombre, email, imagen de avatar, dirección completa y un rol laboral.</p>
 <p>Con Faker es tan sencillo como esto:</p>
 <pre><code class="language-typescript">import { faker } from &quot;@faker-js/faker&quot;;
@@ -206,7 +207,7 @@ console.log(JSON.stringify(usuarios, null, 2));
 <li>Quieres simular peticiones a una API con datos realistas.</li>
 <li>Vas a preparar demos sin datos personales reales.</li>
 </ul>
-<h2 id="conclusión">Conclusión</h2>
+<h2>Conclusión</h2>
 <p>Hemos podido ver como Faker es una herramienta imprescindible para demos, prototipos y testing. Te ahorra tiempo, te evita tener que inventar datos y te permite trabajar con ejemplos mucho más naturales. Además, de añadir un punto de aletoriedad que puede venir bien a la hora de testear el código.</p>
 <p>Aún hay muchas más funciones a utilizar. Pero lo mejor es dar una vuelta a la <a href="https://fakerjs.dev/api/">documentación</a> para descubrirlas todas. Espero que de ahora en adelante, puedas enriquecer los datos simulados gracias a esta librería.</p>
 

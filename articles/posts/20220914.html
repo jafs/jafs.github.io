@@ -70,8 +70,9 @@
 <body class="bg-gray-900 text-gray-100">
   <header class="bg-black text-white py-4 shadow-md">
   <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-    <a href="/" class="text-2xl font-bold">
-      <img src="/images/logo-mini.webp" alt="JAFS" class="inline-block w-8 h-8 mr-2 align-middle" />
+    <a href="/" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago" class="flex items-center text-2xl font-bold">
+      <img src="/images/logo-mini.webp" alt="" class="w-8 h-8 mr-2" />
+      <span>JAFS</span>
     </a>
     <div class="flex items-center gap-4">
       <nav class="flex gap-4">
@@ -93,7 +94,7 @@
 <p>Para solventar ese problema, se dispone de los <a href="https://developer.mozilla.org/es/docs/Web/API/Web_Workers_API/Using_web_workers">Web Workers</a>, que permiten ejecutar código JavaScript en hilos que se lanzan en segundo plano. Cabe destacar que estos workers utilizan un contexto global distinto al de la ventana (o worker) que lo lanza. Como consejo puedes usar <code>globalThis</code> para reducir dependencias de usar <code>window</code>, <code>self</code>, etc.</p>
 <p>El método de comunicación del worker con su creador es a través de mensajes gestionados como eventos. De forma muy parecida al sistema de comunicación entre iframes.</p>
 <p>Pero como siempre, será mejor que veamos el funcionamiento de los workers con varios ejemplos.</p>
-<h2 id="hola-mundo-de-los-workers">Hola mundo de los workers</h2>
+<h2>Hola mundo de los workers</h2>
 <pre><code class="language-javascript">// Fichero index.js
 // El constructor del worker recibe la ruta en la que se encuentra el fichero de
 // JavaScript con el código del worker.
@@ -110,7 +111,7 @@ postMessage(&quot;Hello from the worker&quot;);
 <p>En el código superior se puede ver lo sencillo que es crear un Web Worker. La ejecución del código terminará mostrando en la consola: <code>&quot;Message received from worker: Hello from the worker&quot;</code>.</p>
 <p>A la hora de definir un worker, se especifica la ruta en la que se encuentra el script que se ejecutará en segundo plano.</p>
 <p>Posteriormente, se pasa a escuchar los mensajes que envíe el worker asignando un callback al atributo <code>onmessage</code>. El callback asignado, recibirá como un objeto como parámetro que contendrá el atributo <code>data</code> con el contenido del mensaje enviado por el worker. Este contenido puede ser de cualquier tipo de dato.</p>
-<h2 id="mensajería-entre-worker-y-creador">Mensajería entre Worker y creador</h2>
+<h2>Mensajería entre Worker y creador</h2>
 <p>En el caso de enviar un objeto en los mensajes, no hay problema de recursos compartidos, ya que se hace automáticamente un deep clone de dicho objeto. Este clonado se lleva a cabo gracias a la función <a href="https://developer.mozilla.org/en-US/docs/Web/API/structuredClone"><code>structuredClone</code></a>, que por si la desconoces, permite clonar objetos.</p>
 <p>Todo esto lo veremos con un ejemplo que incluye algo de sobreingeniería, pero nos servirá para verificar que no hay paso de objetos por referencia.</p>
 <pre><code class="language-javascript">// Fichero index.js
@@ -134,7 +135,7 @@ onmessage = function(event) {
 };
 </code></pre>
 <p>Al ejecutar el código anterior, se podrá comprobar como en <code>result</code> se recibe un objeto con atributo value igual a 123; por otro lado el objeto <code>data</code> sigue teniendo el atributo value con valor 3. Esto es por lo que hemos comentado al principio de este apartado, los valores de los mensajes se pasan por valor y no por referencia.</p>
-<h2 id="control-de-errores">Control de errores</h2>
+<h2>Control de errores</h2>
 <p>Aparte de la mensajería estándar, es posible capturar aquellos errores que generen los Web Workers. Para ello asignaremos al atributo <code>onerror</code> del worker un callback que recibirá el evento con el error.</p>
 <pre><code class="language-javascript">// Fichero index.js
 const worker = new Worker(&quot;worker.js&quot;);
@@ -187,11 +188,11 @@ Error on worker {
 }
 </code></pre>
 <p>Como se puede apreciar, se recibe aparte del error generado, el fichero, así como la línea y columna en la que éste ha ocurrido.</p>
-<h2 id="finalizar-un-worker">Finalizar un worker</h2>
+<h2>Finalizar un worker</h2>
 <p>En el caso que queramos dar por finalizado un worker desde el creador, llamaremos al método <code>terminate()</code>, de forma que en este caso se termine la ejecución del worker, sin darle tiempo a realizar un &quot;cierre ordenado&quot;.</p>
 <p>Por otro lado, un worker puede indicar que ha terminado llamando a <code>globalThis.close()</code> (o <code>self.close()</code>).</p>
 <p>En ambos casos, aunque se intenten enviar mensajes entre creado y worker, ya se habrá cerrado ese canal de comunicación.</p>
-<h2 id="conclusión">Conclusión</h2>
+<h2>Conclusión</h2>
 <p>Los Web Worker permiten llevar a cabo tareas pesadas fuera del hilo principal de JavaScript, y como habréis podido comprobar, es posible definirlos de  forma muy sencilla. Tan sólo hay que especificar el fichero a utilizar como worker, y comunicar el creador y el worker con mensajes.</p>
 <p>Finalmente, tan sólo remarcar, que no todos los objetos globales están disponibles en los Web Workers, puedes encontrar el listado completo en <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers">MDN</a>.</p>
 

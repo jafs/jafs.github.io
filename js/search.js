@@ -138,18 +138,16 @@
             </figure>`
         : '';
 
-        console.log(article);
-
-      return `<li class="py-2 border-b border-gray-200">
+      return `<li class="py-2 border-b border-gray-700">
           <article class="flex gap-4">
             ${imageHtml}
             <div class="flex-1">
               <header>
-                <a href="${escapeHtml(article.url)}" class="font-semibold text-lg hover:text-cyan-700">${escapeHtml(article.title)}</a>
-                <span class="text-gray-400">—</span>
-                <time datetime="${escapeHtml(article.date)}" class="text-gray-600 text-sm">${escapeHtml(article.date)}</time>
+                <a href="${escapeHtml(article.url)}" class="font-semibold text-lg hover:text-cyan-400">${escapeHtml(article.title)}</a>
+                <span class="text-gray-500">—</span>
+                <time datetime="${escapeHtml(article.date)}" class="text-gray-400 text-sm">${escapeHtml(article.date)}</time>
               </header>
-              <p class="text-gray-700 leading-relaxed mt-1">${escapeHtml(article.description)}</p>
+              <p class="text-gray-300 leading-relaxed mt-1">${escapeHtml(article.description)}</p>
             </div>
           </article>
         </li>`;
@@ -168,7 +166,7 @@
 
     // Previous button
     if (currentPage > 1) {
-      buttons.push(`<button class="px-4 py-2 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors" data-page="${currentPage - 1}">← Anterior</button>`);
+      buttons.push(`<button class="px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 transition-colors" data-page="${currentPage - 1}">← Anterior</button>`);
     }
 
     // Page numbers (show current, prev, next, first, last)
@@ -180,13 +178,13 @@
 
       // Add ellipsis if there's a gap
       if (page - lastPage > 1) {
-        buttons.push(`<span class="px-2 py-2 text-gray-500">...</span>`);
+        buttons.push(`<span class="px-2 py-2 text-gray-400">...</span>`);
       }
 
       const isActive = page === currentPage;
       const buttonClass = isActive
         ? 'px-4 py-2 bg-cyan-700 text-white rounded font-semibold'
-        : 'px-4 py-2 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors';
+        : 'px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 transition-colors';
 
       buttons.push(`<button class="${buttonClass}" data-page="${page}" ${isActive ? 'disabled' : ''}>${page}</button>`);
       lastPage = page;
@@ -194,7 +192,7 @@
 
     // Next button
     if (currentPage < totalPages) {
-      buttons.push(`<button class="px-4 py-2 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors" data-page="${currentPage + 1}">Siguiente →</button>`);
+      buttons.push(`<button class="px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 transition-colors" data-page="${currentPage + 1}">Siguiente →</button>`);
     }
 
     elements.pagination.innerHTML = buttons.join('');

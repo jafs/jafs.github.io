@@ -6,7 +6,7 @@
     <description>Artículos sobre programación, TypeScript, arquitectura de software y desarrollo web.</description>
     <language>es</language>
     <managingEditor>contacto@jafs.github.io (José Antonio Fuentes Santiago)</managingEditor>
-    <lastBuildDate>Fri, 07 Aug 2026 16:47:37 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 09 Aug 2026 16:14:45 GMT</lastBuildDate>
     <atom:link href="https://jafs.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://jafs.github.io/favicon-96x96.png</url>
@@ -15,6 +15,16 @@
       <width>96</width>
       <height>96</height>
     </image>
+    <item>
+      <title>El Listo, El Bueno, El Feo y El Malo: cuando SRP se une a GBU</title>
+      <link>https://jafs.github.io/articles/posts/20260809.html</link>
+      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260809.html</guid>
+      <description>El patrón GBU evoluciona: un nuevo agente que planifica, verificadores aislados de verdad y una implementación completa con Claude Code que también sabe huir a LangGraph.</description>
+      <pubDate>Sun, 09 Aug 2026 00:00:00 GMT</pubDate>
+      <category>Programación</category>
+      <category>IA</category>
+      <media:content url="https://jafs.github.io/resources/20260809/gbu-2.webp" medium="image" />
+    </item>
     <item>
       <title>El Bueno, El Feo y El Malo: Cómo poner a pelear a tres agentes para que escriban tu código por ti</title>
       <link>https://jafs.github.io/articles/posts/20260802.html</link>
@@ -200,19 +210,6 @@
       <pubDate>Wed, 14 Sep 2022 13:55:26 GMT</pubDate>
       <category>JavaScript</category>
       <media:content url="https://jafs.github.io/images/web-worker-mini.webp" medium="image" />
-    </item>
-    <item>
-      <title>Faker: usa datos realistas en tus pruebas y demos</title>
-      <link>https://jafs.github.io/articles/posts/20220912.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20220912.html</guid>
-      <description>¿Te has cansado de usar siempre John Doe o Juanita Banana como nombre en tus pruebas? ¿Sientes que los tests no tienen datos realistas? ¿Quieres hacer una demo con datos que parezcan completamente auténticos?</description>
-      <pubDate>Mon, 12 Sep 2022 09:59:10 GMT</pubDate>
-      <category>librerías</category>
-      <category>JavaScript</category>
-      <category>TypeScript</category>
-      <category>programación</category>
-      <category>testing</category>
-      <media:content url="https://jafs.github.io/images/faker-mini.webp" medium="image" />
     </item>
   </channel>
 </rss>

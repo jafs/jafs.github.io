@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>El Bueno, El Feo y El Malo: Cómo poner a pelear a tres agentes para que escriban tu código por ti — JAFS</title>
-  <meta name="description" content="Recuerdo aquellas tardes en casa de mis padres en las que se hacían omnipresentes los westerns. No había tarde en la que no se viera a John Wayne haciendo de..." />
+  <meta name="description" content="Patrón GBU: orquesta tres agentes de IA —implementador, revisor y saboteador— para revisar el código generado por IA sin leerlo línea a línea." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
-  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, IA" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, IA, Agentes IA, patrón GBU, agentes de IA, multiagente, revisión de código con IA, code review automático, prompts para agentes, desarrollo asistido por IA" />
   <meta name="article:published_time" content="2026-08-02T00:00:00.000Z" />
   
 
@@ -14,7 +14,7 @@
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jafs.github.io/articles/posts/20260802.html" />
   <meta property="og:title" content="El Bueno, El Feo y El Malo: Cómo poner a pelear a tres agentes para que escriban tu código por ti" />
-  <meta property="og:description" content="Recuerdo aquellas tardes en casa de mis padres en las que se hacían omnipresentes los westerns. No había tarde en la que no se viera a John Wayne haciendo de..." />
+  <meta property="og:description" content="Patrón GBU: orquesta tres agentes de IA —implementador, revisor y saboteador— para revisar el código generado por IA sin leerlo línea a línea." />
   <meta property="og:site_name" content="JAFS" />
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/resources/20260802/bueno-feo-malo.webp" />
@@ -26,7 +26,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="El Bueno, El Feo y El Malo: Cómo poner a pelear a tres agentes para que escriban tu código por ti" />
-  <meta name="twitter:description" content="Recuerdo aquellas tardes en casa de mis padres en las que se hacían omnipresentes los westerns. No había tarde en la que no se viera a John Wayne haciendo de..." />
+  <meta name="twitter:description" content="Patrón GBU: orquesta tres agentes de IA —implementador, revisor y saboteador— para revisar el código generado por IA sin leerlo línea a línea." />
   <meta name="twitter:image" content="/resources/20260802/bueno-feo-malo.webp" />
   
 
@@ -57,7 +57,7 @@
     "@type": "Person",
     "name": "José Antonio Fuentes Santiago"
   },
-  "description": "Recuerdo aquellas tardes en casa de mis padres en las que se hacían omnipresentes los westerns. No había tarde en la que no se viera a John Wayne haciendo de...",
+  "description": "Patrón GBU: orquesta tres agentes de IA —implementador, revisor y saboteador— para revisar el código generado por IA sin leerlo línea a línea.",
   "url": "https://jafs.github.io/articles/posts/20260802.html",
   "inLanguage": "es",
   "datePublished": "2026-08-02T00:00:00.000Z",
@@ -111,7 +111,7 @@
 <p><img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWlscDMycjR5OXJjb3Mxa3dland4aW9zMjNxeXh4dHk3M256cXM0ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7ZgBm32jWGn72/giphy.gif" alt="Duelo al atardecer"></p>
 <p>Y tú donde estás en este reparto. Pues eres el o la sheriff, te encargas de que se haga cumplir la ley. Pero gracias a tus ayudantes, sólo debes revisar por encima sus informes desde tu oficina.</p>
 <p>A todo esto le podríamos llamar el patrón: el Bueno, el Feo y el Malo&quot; o si lo nombramos por sus siglas en inglés: GBU (the Good the Bad and the Ugly).</p>
-<h2>Asignando los roles en el Saloon</h2>
+<h2>Asignando los roles en el Saloon: los prompts de cada agente</h2>
 <p>Para que este trío de agentes no termine convirtiéndose en un circo de alucinaciones, cada uno necesitará de prompt que deje las cosillas claras, con límites bien definidos y una personalidad que constructiva.</p>
 <h3>🤠 El Bueno (El desarrollador optimista)</h3>
 <p>Ya viste que es el agente encargado de la implementación. Es el primer ayudante del sheriff. Así que lee la especificación que redactaste en la fase anterior y se pone manos a la obra. Es constructivo, conoce los patrones de diseño y busca siempre la solución más limpia y elegante.</p>
@@ -193,6 +193,9 @@
 <p>Con este sistema, la IA deja de ser ese compañero entusiasta que te dice a todo que sí con una sonrisa mientras las vacas escapan por el río. Gracias al fiscalizador (El Feo) y al destructor (El Malo), obligas a El Bueno a autoregularse basándose en el único pilar que no debe admitir ambigüedades: la especificación inicial.</p>
 <p>Así que la próxima vez que vayas a pedirle a un LLM que te monte un módulo completo, no le dispares órdenes sueltas. Prepárale un buen wéstern, dale a cada agente su papel, sírvete algo fresco y deja que se muelan a palos mientras tú te encargas de lo que realmente importa: asegurar que se cumple la ley de las reglas del negocio.</p>
 <p>Para terminar, si quieres que veamos un ejemplo práctico de como se puede montar todo esto, avisa en LinkedIn o Instagram y lo vemos.</p>
+<blockquote>
+<p>🤠 <strong>ACTUALIZACIÓN</strong> <br>Avisasteis, y aquí está: en <a href="/articles/posts/20260809.html">El Listo, El Bueno, El Feo y El Malo</a> el patrón gana un cuarto agente que planifica y verás la implementación completa con Claude Code, comando a comando.</p>
+</blockquote>
 
     </article>
   </main>

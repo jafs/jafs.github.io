@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>El Listo, El Bueno, El Feo y El Malo: cuando SRP se une a GBU — JAFS</title>
-  <meta name="description" content="El patrón GBU evoluciona: un nuevo agente que planifica, verificadores aislados de verdad y una implementación completa con Claude Code que también sabe huir..." />
+  <meta name="description" content="Patrón GBU + SRP: cuatro agentes de IA (planificador, implementador, revisor y saboteador) implementados paso a paso con Claude Code y LangGraph." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
-  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, IA" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, IA, Agentes IA, patrón GBU, subagentes Claude Code, LangGraph, agentes de IA, SRP, arquitectura multiagente, revisión de código con IA" />
   <meta name="article:published_time" content="2026-08-09T00:00:00.000Z" />
   
 
@@ -14,7 +14,7 @@
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jafs.github.io/articles/posts/20260809.html" />
   <meta property="og:title" content="El Listo, El Bueno, El Feo y El Malo: cuando SRP se une a GBU" />
-  <meta property="og:description" content="El patrón GBU evoluciona: un nuevo agente que planifica, verificadores aislados de verdad y una implementación completa con Claude Code que también sabe huir..." />
+  <meta property="og:description" content="Patrón GBU + SRP: cuatro agentes de IA (planificador, implementador, revisor y saboteador) implementados paso a paso con Claude Code y LangGraph." />
   <meta property="og:site_name" content="JAFS" />
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/resources/20260809/gbu-2.webp" />
@@ -26,7 +26,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="El Listo, El Bueno, El Feo y El Malo: cuando SRP se une a GBU" />
-  <meta name="twitter:description" content="El patrón GBU evoluciona: un nuevo agente que planifica, verificadores aislados de verdad y una implementación completa con Claude Code que también sabe huir..." />
+  <meta name="twitter:description" content="Patrón GBU + SRP: cuatro agentes de IA (planificador, implementador, revisor y saboteador) implementados paso a paso con Claude Code y LangGraph." />
   <meta name="twitter:image" content="/resources/20260809/gbu-2.webp" />
   
 
@@ -57,7 +57,7 @@
     "@type": "Person",
     "name": "José Antonio Fuentes Santiago"
   },
-  "description": "El patrón GBU evoluciona: un nuevo agente que planifica, verificadores aislados de verdad y una implementación completa con Claude Code que también sabe huir...",
+  "description": "Patrón GBU + SRP: cuatro agentes de IA (planificador, implementador, revisor y saboteador) implementados paso a paso con Claude Code y LangGraph.",
   "url": "https://jafs.github.io/articles/posts/20260809.html",
   "inLanguage": "es",
   "datePublished": "2026-08-09T00:00:00.000Z",
@@ -167,7 +167,7 @@ Por cada paso pendiente del plan:
 <p>Una de las ventajas de usar algunas herramientas para los papeles es que esos actores que no usan la IA son <strong>deterministas</strong>. Así que para una misma entrada, siempre darán un mismo veredicto, con lo que nos ahorramos alucinaciones y gasto de tokens. Además, un papel tampoco tiene por qué ser representado por un único actor: nada te impide un reparto donde El Malo esté compuesto por la Banda del Patio: un agente LLM, un fuzzer y una batería property-based todos trabajando en conjunto; o donde El Feo sea Sonar más un agente que interpreta aquello que esté por debajo de un warning. En esos casos, el veredicto del papel es el del conjunto, por lo que la salida seguirá siendo <code>SOBREVIVIO_AL_MALO</code> si nadie consigue romper nada.</p>
 <p>Al final el patrón solo exige tres cosas de cada papel: <strong>que exista</strong>, que <strong>esté aislado de quien implementa</strong> y que <strong>entregue un veredicto claro</strong>.</p>
 <p>Tras toda esta amplicación, pasaremos a ver <strong>mi</strong> reparto personal para trabajar con Claude Code. Todos los papeles son interpretados por agentes LLM, con un Sheriff orquestando. Por ello, es una implementación de referencia, montada para un flujo de trabajo en cuestión. Eres libre de copiarla si te encaja, pero tienes libertad absoluta para ajustar cada paso. Además, dejé los prompts escritos en español, así evito dejar cualquier parte compleja a una posible interpretación por un error a la hora de traducir al inglés. Como todo, escribe los tuyos en el idioma que prefieras.</p>
-<h2>Bienvenidos a Code City: los comandos</h2>
+<h2>Bienvenidos a Code City: cómo implementar el patrón GBU en Claude Code</h2>
 <p>Ahora sí, toca bajarse del caballo. El patrón vive en un puñado de ficheros markdown que puedes copiar a cualquier proyecto. Los tienes completos en el <a href="https://github.com/jafs/gbu">repositorio gbu</a>.</p>
 <pre><code class="language-text">tu-proyecto/
 └── .claude/

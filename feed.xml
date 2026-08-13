@@ -6,7 +6,7 @@
     <description>Artículos sobre programación, TypeScript, arquitectura de software y desarrollo web.</description>
     <language>es</language>
     <managingEditor>contacto@jafs.github.io (José Antonio Fuentes Santiago)</managingEditor>
-    <lastBuildDate>Sun, 09 Aug 2026 16:14:45 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2026 11:40:42 GMT</lastBuildDate>
     <atom:link href="https://jafs.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://jafs.github.io/favicon-96x96.png</url>
@@ -19,20 +19,22 @@
       <title>El Listo, El Bueno, El Feo y El Malo: cuando SRP se une a GBU</title>
       <link>https://jafs.github.io/articles/posts/20260809.html</link>
       <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260809.html</guid>
-      <description>El patrón GBU evoluciona: un nuevo agente que planifica, verificadores aislados de verdad y una implementación completa con Claude Code que también sabe huir a LangGraph.</description>
+      <description>Patrón GBU + SRP: cuatro agentes de IA (planificador, implementador, revisor y saboteador) implementados paso a paso con Claude Code y LangGraph.</description>
       <pubDate>Sun, 09 Aug 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>IA</category>
+      <category>Agentes IA</category>
       <media:content url="https://jafs.github.io/resources/20260809/gbu-2.webp" medium="image" />
     </item>
     <item>
       <title>El Bueno, El Feo y El Malo: Cómo poner a pelear a tres agentes para que escriban tu código por ti</title>
       <link>https://jafs.github.io/articles/posts/20260802.html</link>
       <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260802.html</guid>
-      <description>Recuerdo aquellas tardes en casa de mis padres en las que se hacían omnipresentes los westerns. No había tarde en la que no se viera a John Wayne haciendo de lo que hoy llamaríamos &quot;chulito de playa&quot;. Y la verdad es que ese tipo de películas no me apasionan, pero ¿y si te dijera que podemos montar un western a la hora de desarrollar software gracias a la IA?</description>
+      <description>Patrón GBU: orquesta tres agentes de IA —implementador, revisor y saboteador— para revisar el código generado por IA sin leerlo línea a línea.</description>
       <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>IA</category>
+      <category>Agentes IA</category>
       <media:content url="https://jafs.github.io/resources/20260802/bueno-feo-malo.webp" medium="image" />
     </item>
     <item>

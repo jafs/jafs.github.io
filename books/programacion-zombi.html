@@ -3,132 +3,145 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Guía de Programación en un Apocalipsis Zombi (2ª edición) — JAFS</title>
-  <meta name="description" content="Aprende TypeScript mientras sobrevives al fin del mundo." />
+  <title>Guía de Programación en un Apocalipsis Zombi — JAFS</title>
+  <meta name="description" content="Aprende TypeScript mientras sobrevives al fin del mundo. Guía de programación desde cero ambientada en un apocalipsis zombi, segunda edición." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
-  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS" />
+  <meta name="keywords" content="TypeScript, aprender a programar, programación desde cero, apocalipsis zombi" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://jafs.github.io/books/programacion-zombi.html" />
-  <meta property="og:title" content="Guía de Programación en un Apocalipsis Zombi (2ª edición)" />
-  <meta property="og:description" content="Aprende TypeScript mientras sobrevives al fin del mundo." />
+  <meta property="og:title" content="Guía de Programación en un Apocalipsis Zombi — JAFS" />
+  <meta property="og:description" content="Aprende TypeScript mientras sobrevives al fin del mundo. Guía de programación desde cero ambientada en un apocalipsis zombi, segunda edición." />
   <meta property="og:site_name" content="JAFS" />
   <meta property="og:locale" content="es_ES" />
-  <meta property="og:image" content="/images/survive-zombi.webp" />
+  <meta property="og:image" content="https://jafs.github.io/images/survive-zombi.webp" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Guía de Programación en un Apocalipsis Zombi (2ª edición)" />
-  <meta name="twitter:description" content="Aprende TypeScript mientras sobrevives al fin del mundo." />
-  <meta name="twitter:image" content="/images/survive-zombi.webp" />
+  <meta name="twitter:title" content="Guía de Programación en un Apocalipsis Zombi — JAFS" />
+  <meta name="twitter:description" content="Aprende TypeScript mientras sobrevives al fin del mundo. Guía de programación desde cero ambientada en un apocalipsis zombi, segunda edición." />
+  <meta name="twitter:image" content="https://jafs.github.io/images/survive-zombi.webp" />
 
-  <!-- Canonical & RSS -->
+  <!-- Canonical, idiomas y RSS -->
   <link rel="canonical" href="https://jafs.github.io/books/programacion-zombi.html" />
+  <link rel="alternate" hreflang="es" href="https://jafs.github.io/books/programacion-zombi.html" />
+  <link rel="alternate" hreflang="en" href="https://jafs.github.io/books/en/programming-guide.html" />
+  <link rel="alternate" hreflang="x-default" href="https://jafs.github.io/books/programacion-zombi.html" />
   <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
-  <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <link rel="stylesheet" href="/css/dist.css">
-  <link rel="stylesheet" href="/css/github-dark.min.css">
+  <link rel="stylesheet" href="/css/books.css">
 
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
   "@type": "Book",
-  "name": "Guía de Programación en un Apocalipsis Zombi (2ª edición)",
+  "name": "Guía de Programación en un Apocalipsis Zombi",
   "author": {
     "@type": "Person",
     "name": "José Antonio Fuentes Santiago"
   },
-  "description": "Aprende TypeScript mientras sobrevives al fin del mundo.",
+  "description": "Aprende TypeScript mientras sobrevives al fin del mundo. Guía de programación desde cero ambientada en un apocalipsis zombi, segunda edición.",
   "url": "https://jafs.github.io/books/programacion-zombi.html",
   "inLanguage": "es",
+  "image": "https://jafs.github.io/images/survive-zombi.webp",
+  "isPartOf": {
+    "@type": "BookSeries",
+    "name": "Programación en un Apocalipsis Zombi",
+    "position": 1
+  },
   "datePublished": "2025-11-13T00:00:00.000Z",
-  "image": "/images/survive-zombi.webp"
+  "workTranslation": "https://jafs.github.io/books/en/programming-guide.html"
 }
   </script>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-900 text-gray-100">
-  <header class="bg-black text-white py-4 shadow-md">
-  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-    <a href="/" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago" class="flex items-center text-2xl font-bold">
-      <img src="/images/logo-mini.webp" alt="" class="w-8 h-8 mr-2" />
-      <span>JAFS</span>
-    </a>
-    <div class="flex items-center gap-4">
-      <nav class="flex gap-4">
-        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
-        <a href="/books/" class="text-white font-semibold">Libros</a>
-        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
-      </nav>
-      <form action="/search.html" method="get">
-        <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
-      </form>
+<body>
+<div class="crt"><div class="envoltorio">
+
+  <header class="cabecera">
+    <div class="marca">
+      <span class="marca-nombre">TERMINAL DEL REFUGIO</span>
+      <span class="marca-sub">archivo de libros · sector C-3 · Z-DAY +21</span>
     </div>
+    <div class="controles">
+      <div class="idioma" role="group" aria-label="IDIOMA">
+        <span>IDIOMA</span><a href="/books/" hreflang="es" data-lang="es" aria-current="true">ES</a><a href="/books/en/" hreflang="en" data-lang="en" aria-current="false">EN</a>
+      </div>
+      <a class="salir" href="/">[ salir a jafs.github.io ]</a>
+    </div>
+  </header>
+
+  <div class="estado">
+    <span><b>SISTEMA:</b> en línea</span>
+    <span><b>ARCHIVO:</b> 3 volúmenes · 1 en preparación</span>
+    <span><b>AMENAZA:</b> <span class="amenaza"><i><b class="on"></b><b class="on"></b><b class=""></b></i>INTERMEDIO</span></span>
   </div>
-</header>
 
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
-      <div class="flex flex-col md:flex-row gap-6 mb-8">
-  <img src="/images/survive-zombi.webp" alt="Portada del libro" class="shadow-lg rounded not-prose" style="width: 292px; height: 400px" />
-  <div class="flex-1"><h1 class="text-4xl font-bold mb-2">Guía de Programación en un Apocalipsis Zombi (2ª edición)</h1><p><em>Aprende TypeScript mientras sobrevives al fin del mundo.</em></p>
-<iframe width="100%" height="280" src="https://www.youtube.com/embed/OsQmyImCLyI?si=HVbLq-u5RgkPHWAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <section id="aviso-idioma" class="aviso-idioma" role="status" hidden>
+    <p><b>EN:</b> This terminal is showing the Spanish version, but your browser prefers English. Switch to the English version? This device will remember your choice.</p>
+    <div class="acciones">
+      <a class="boton-ambar principal" id="aviso-si" href="/books/en/" hreflang="en">Switch to English</a>
+      <button class="boton-ambar" type="button" id="aviso-no">Stay in Spanish</button>
+    </div>
+  </section>
 
-<p>Cuando el mundo colapsa y los sistemas dejan de funcionar, solo una cosa puede salvarte: el conocimiento. Esta guía transforma el aprendizaje de <strong>TypeScript</strong> en una experiencia inmersiva de <strong>supervivencia en un apocalipsis zombi</strong>. Cada capítulo combina narrativa, práctica y metáforas visuales para que aprendas a programar como quien prepara su mochila antes de huir de la ciudad.</p>
-<p>A través de tres grandes bloques —Equipo Básico de Supervivencia, Arsenal Avanzado y Arquitectura de Supervivencia— aprenderás los fundamentos de la programación moderna, desde variables, funciones y arrays hasta la Programación Orientada a Objetos con clases, herencia e interfaces.</p>
-<p>Entre cada lección encontrarás Consejos de Superviviente, Notas en la Cabaña, ejercicios prácticos y desafíos que pondrán a prueba tu ingenio.</p>
-<p>En esta segunda edición se ha mejorado todo esto:</p>
-<ul>
-<li>Un nuevo bloque en el que se habla de errores y excepciones, asincronía y tareas simultáneas, y tests unitarios. Además con su correspondiente desafío.</li>
-<li>Dos apéndices, el primero recoge los errores frecuentes de TypeScript explicados y el segundo explica cómo podrías usar la inteligencia artificial para aprender mientras programas.</li>
-<li>Una nueva sección de bibliografía.</li>
-<li>Ahora el glosario tiene sólo los términos importantes y hay un índice nuevo de palabras clave.</li>
-<li>El capítulo 12 añade la explicación de tipos de interfaces, propiedades opcionales, uniones de literales, el operador spread, desestructuración de objetos y JSON.</li>
-<li>El 11 incorpora los Set y los operadores ?. y ??.</li>
-<li>El 14 recoge el uso de override, los getters y setters y los campos privados.</li>
-<li>Además se ha revisado todo el código de ejemplo y se han optimizado los ejercicios.</li>
-</ul>
-<h2>Edición en inglés</h2>
-<p>La segunda edición también está disponible en inglés, traducida al completo, como <em>Programming Guide for a Zombie Apocalypse</em>. Tiene el mismo contenido que la española: los cuatro bloques, los desafíos, los apéndices y la bibliografía. Los enlaces de compra están más abajo, junto a los de la edición en español.</p>
-</div>
-</div><h4>Descargas gratuitas</h4>
-<div class="flex flex-wrap gap-2"><a href="/resources/guia_programacion_apocalipsis_zombi_demo.pdf" data-umami-event="download" data-umami-event-file="guia_programacion_apocalipsis_zombi_demo.pdf" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-flex items-center gap-2 not-prose"><img src="/images/icons/pdf.svg" alt="Leer un fragmento" class="inline-block w-6 h-6 mr-1 align-middle not-prose" /><span>Leer un fragmento</span></a></div><h4>Compras</h4>
-<div class="flex flex-wrap gap-2"><a href="https://amzn.eu/d/07tpmpQt" title="Compra la 2ª edición en tapa blanda en Amazon" data-umami-event="purchase" data-umami-event-product="Guía de Programación en un Apocalipsis Zombi - Tapa Blanda" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-flex items-center gap-2 not-prose"><img src="/images/icons/shopping-cart.svg" alt="2ª Edición en tapa blanda" class="inline-block w-6 h-6 mr-1 align-middle not-prose" /><span>2ª Edición en tapa blanda</span></a>
-<a href="https://amzn.eu/d/04ES1Y9t" title="Compra la 2ª edición del eBook en Amazon" data-umami-event="purchase" data-umami-event-product="Guía de Programación en un Apocalipsis Zombi - eBook" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-flex items-center gap-2 not-prose"><img src="/images/icons/shopping-cart.svg" alt="2ª Edición eBook" class="inline-block w-6 h-6 mr-1 align-middle not-prose" /><span>2ª Edición eBook</span></a>
-<a href="https://www.amazon.com/dp/B0HLKVGN4V" title="Compra la edición en inglés en tapa blanda en Amazon" data-umami-event="purchase" data-umami-event-product="Programming Guide for a Zombie Apocalypse - Paperback" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-flex items-center gap-2 not-prose"><img src="/images/icons/shopping-cart.svg" alt="Edición en inglés: tapa blanda" class="inline-block w-6 h-6 mr-1 align-middle not-prose" /><span>Edición en inglés: tapa blanda</span></a>
-<a href="https://www.amazon.com/dp/B0HLL12NKD" title="Compra el eBook de la edición en inglés en Amazon" data-umami-event="purchase" data-umami-event-product="Programming Guide for a Zombie Apocalypse - eBook" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-flex items-center gap-2 not-prose"><img src="/images/icons/shopping-cart.svg" alt="Edición en inglés: eBook" class="inline-block w-6 h-6 mr-1 align-middle not-prose" /><span>Edición en inglés: eBook</span></a></div>
-    </article>
+  <main class="caja">
+    <div class="cabecera-caja">
+      <p class="prompt">book_info --id=001 --lang=es</p>
+      <nav class="navegacion" aria-label="ficha del volumen"><a href="/books/">[ volver al archivo ]</a><a href="/books/ddd-zombi.html" title="Domain-Driven Design en un Apocalipsis Zombi">[ vol. 002 > ]</a></nav>
+    </div>
+    <div class="ficha">
+      <div class="portada">
+        <a class="ampliar" href="/images/books/survive-zombi-large.webp" data-visor="visor-portada" title="Ver la portada en grande"><img src="/images/survive-zombi.webp" alt="Portada de Guía de Programación en un Apocalipsis Zombi" width="292" height="400"></a>
+        <p class="otra-edicion">También publicado en inglés: <a href="/books/en/programming-guide.html" data-lang="en" hreflang="en">ver edición EN</a></p>
+      </div>
+      <div class="datos">
+        <div>
+          <h1 class="titulo-libro">Guía de Programación en un Apocalipsis Zombi</h1>
+          <p class="subtitulo">2ª edición · Aprende TypeScript mientras sobrevives al fin del mundo.</p>
+        </div>
+        <dl class="campos">
+          <dt>AUTOR</dt><dd>José Antonio Fuentes Santiago</dd>
+          <dt>IDIOMA</dt><dd>Español</dd>
+          <dt>ESTADO</dt><dd>publicado</dd>
+          <dt>AMENAZA</dt><dd><span class="amenaza"><i><b class="on"></b><b class=""></b><b class=""></b></i>PRINCIPIANTE</span></dd>
+          <dt>FORMATO</dt><dd>Tapa blanda / Kindle</dd>
+          <dt>TEMA</dt><dd>TypeScript</dd>
+        </dl>
+        <div class="secciones">
+          <section class="seccion destacada"><h3>consíguelo en Amazon</h3><div class="compras"><a class="compra" href="https://amzn.eu/d/07tpmpQt" title="Compra la 2ª edición en tapa blanda en Amazon" data-umami-event="purchase" data-umami-event-product="Guía de Programación en un Apocalipsis Zombi - Tapa Blanda"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="0" width="8" height="1"/><rect x="2" y="9" width="8" height="1"/><rect x="2" y="0" width="1" height="10"/><rect x="9" y="0" width="1" height="10"/><rect x="4" y="0" width="1" height="10"/><rect x="10" y="1" width="1" height="10"/><rect x="3" y="10" width="8" height="1"/><rect x="6" y="3" width="2" height="1"/><rect x="6" y="5" width="2" height="1"/></svg><b>Tapa blanda</b><span>Amazon España</span></a><a class="compra" href="https://amzn.eu/d/04ES1Y9t" title="Compra la 2ª edición del eBook en Amazon" data-umami-event="purchase" data-umami-event-product="Guía de Programación en un Apocalipsis Zombi - eBook"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="0" width="8" height="1"/><rect x="2" y="11" width="8" height="1"/><rect x="2" y="0" width="1" height="12"/><rect x="9" y="0" width="1" height="12"/><rect x="4" y="2" width="4" height="1"/><rect x="4" y="4" width="3" height="1"/><rect x="4" y="6" width="4" height="1"/><rect x="4" y="8" width="2" height="1"/><rect x="5" y="10" width="2" height="1"/></svg><b>eBook Kindle</b><span>Amazon España</span></a><a class="compra gratis" href="/resources/guia_programacion_apocalipsis_zombi_demo.pdf" data-umami-event="download" data-umami-event-file="guia_programacion_apocalipsis_zombi_demo.pdf"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="0" width="6" height="1"/><rect x="2" y="11" width="8" height="1"/><rect x="2" y="0" width="1" height="12"/><rect x="9" y="3" width="1" height="9"/><rect x="8" y="0" width="1" height="1"/><rect x="8" y="1" width="1" height="1"/><rect x="9" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="4" y="5" width="4" height="1"/><rect x="4" y="7" width="4" height="1"/><rect x="4" y="9" width="2" height="1"/></svg><b>Leer un fragmento</b><span>PDF gratuito</span></a></div></section><section class="seccion"><h3>sinopsis</h3><p>Cuando el mundo se viene abajo y los sistemas dejan de funcionar, lo único que te queda es lo que sabes. Esta guía enseña <strong>TypeScript</strong> desde cero mientras sobrevives a un <strong>apocalipsis zombi</strong>: cada capítulo parte de un problema del refugio y lo resuelve con código, para que aprendas a programar como quien prepara su mochila antes de huir de la ciudad.</p>
+<p>En cuatro bloques recorrerás los fundamentos de la programación moderna: variables, funciones y arrays; programación orientada a objetos con clases, herencia e interfaces; y, para terminar, errores, asincronía y tests.</p>
+<p>Entre lección y lección hay Consejos de Superviviente, Notas en la Cabaña, ejercicios prácticos y un desafío al final de cada bloque para poner a prueba lo aprendido.</p>
+</section><section class="seccion"><h3>índice</h3><ul class="indice"><li><span class="num">B1</span><span>Fundamentos de programación<span class="cap">comentarios, variables, tipos, operadores, condicionales, bucles · Desafío: simulador de supervivencia de 7 días</span></span></li><li><span class="num">B2</span><span>Funciones y estructuras de datos<span class="cap">funciones, matemáticas, arrays, cadenas, diccionarios, otros tipos · Desafío: sistema de gestión de refugios</span></span></li><li><span class="num">B3</span><span>Programación orientada a objetos<span class="cap">clases, herencia, miembros estáticos, clases abstractas e interfaces, polimorfismo, asociación · Desafío: torres de defensa de la cárcel</span></span></li><li><span class="num">B4</span><span>El primer invierno en la cárcel<span class="cap">errores y excepciones, asincronía, tests · Desafío: la noche del muro norte</span></span></li><li><span class="num">A</span><span>Cuando el detector de metales pita<span class="cap">errores frecuentes</span></span></li><li><span class="num">B</span><span>Aprender a programar con una IA al lado</span></li><li><span class="num">+</span><span>Glosario, bibliografía e índice de palabras clave</span></li></ul></section><section class="seccion"><h3>sobre esta edición</h3><ul><li>Segunda edición, revisada y ampliada. Cuatro bloques, cuatro desafíos, dos apéndices.</li><li>Nuevo bloque sobre errores y excepciones, asincronía y tareas simultáneas, y tests unitarios, con su propio desafío.</li><li>Dos apéndices: los errores frecuentes de TypeScript explicados y cómo usar la inteligencia artificial para aprender mientras programas.</li><li>Nueva sección de bibliografía, glosario reducido a los términos importantes e índice de palabras clave.</li><li>Los capítulos 11, 12 y 14 incorporan Set, los operadores ?. y ??, tipos de interfaces, propiedades opcionales, uniones de literales, spread, desestructuración, JSON, override, getters y setters y campos privados.</li><li>Todo el código de ejemplo revisado y los ejercicios afinados.</li></ul></section>
+        </div>
+      </div>
+    </div>
   </main>
-  <footer class="bg-black text-white py-4 mt-12">
-  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-    <div class="flex gap-4">
-      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-      </a>
-      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-      </a>
-      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-      </a>
-      <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="GitHub">
-        <img src="/images/github.svg" alt="GitHub" class="w-6 h-6" />
-      </a>
-    </div>
-    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
-  </div>
-</footer>
 
-  <script src="/js/highlight.min.js"></script>
-  <script src="/js/main.js"></script>
+  <dialog id="visor-portada" class="visor" aria-label="Guía de Programación en un Apocalipsis Zombi">
+    <form method="dialog" class="visor-marco">
+      <div class="cabecera-caja">
+        <p class="prompt">view_cover --id=001</p>
+        <button class="enlace" type="submit" autofocus>[ cerrar ]</button>
+      </div>
+      <img src="/images/books/survive-zombi-large.webp" alt="Portada de Guía de Programación en un Apocalipsis Zombi" loading="lazy">
+      <p class="pista">Esc o clic fuera para cerrar</p>
+    </form>
+  </dialog>
+
+  <footer class="pie">
+    <span>Otros archivos fuera de la saga: <a href="/books/tokens.html">Tokens</a> (relato)</span>
+    <span class="cursor">fin de la transmisión</span>
+  </footer>
+
+</div></div>
+<script src="/js/books.js"></script>
 </body>
 </html>

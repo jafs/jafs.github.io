@@ -3,137 +3,149 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Libros y Relatos — JAFS</title>
-  <meta name="description" content="Libros y relatos publicados por José Antonio Fuentes Santiago." />
+  <title>Programación en un Apocalipsis Zombi — JAFS</title>
+  <meta name="description" content="Programación en un Apocalipsis Zombi: la saga de libros de José Antonio Fuentes Santiago para aprender TypeScript, Domain-Driven Design y desarrollo con IA s..." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
-  <meta name="keywords" content="José Antonio Fuentes Santiago, libros programación, TypeScript, Guía de Programación en un Apocalipsis Zombi" />
+  <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, libros programación, apocalipsis zombi, TypeScript, Domain-Driven Design, desarrollo con IA" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://jafs.github.io/books/" />
-  <meta property="og:title" content="Libros y Relatos — JAFS" />
-  <meta property="og:description" content="Libros y relatos publicados por José Antonio Fuentes Santiago." />
+  <meta property="og:title" content="Programación en un Apocalipsis Zombi — JAFS" />
+  <meta property="og:description" content="Programación en un Apocalipsis Zombi: la saga de libros de José Antonio Fuentes Santiago para aprender TypeScript, Domain-Driven Design y desarrollo con IA s..." />
   <meta property="og:site_name" content="JAFS" />
   <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="https://jafs.github.io/images/survive-zombi.webp" />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Libros y Relatos — JAFS" />
-  <meta name="twitter:description" content="Libros y relatos publicados por José Antonio Fuentes Santiago." />
-  
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Programación en un Apocalipsis Zombi — JAFS" />
+  <meta name="twitter:description" content="Programación en un Apocalipsis Zombi: la saga de libros de José Antonio Fuentes Santiago para aprender TypeScript, Domain-Driven Design y desarrollo con IA s..." />
+  <meta name="twitter:image" content="https://jafs.github.io/images/survive-zombi.webp" />
 
-  <!-- Canonical & RSS -->
+  <!-- Canonical, idiomas y RSS -->
   <link rel="canonical" href="https://jafs.github.io/books/" />
+  <link rel="alternate" hreflang="es" href="https://jafs.github.io/books/" />
+  <link rel="alternate" hreflang="en" href="https://jafs.github.io/books/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://jafs.github.io/books/" />
   <link rel="alternate" type="application/rss+xml" title="JAFS" href="/feed.xml" />
 
-  <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/books.css">
 
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "Libros y Relatos",
-  "description": "Libros y relatos publicados por José Antonio Fuentes Santiago",
+  "name": "Programación en un Apocalipsis Zombi",
+  "description": "Programación en un Apocalipsis Zombi: la saga de libros de José Antonio Fuentes Santiago para aprender TypeScript, Domain-Driven Design y desarrollo con IA s...",
   "url": "https://jafs.github.io/books/",
+  "inLanguage": "es",
   "author": {
     "@type": "Person",
     "name": "José Antonio Fuentes Santiago"
+  },
+  "mainEntity": {
+    "@type": "BookSeries",
+    "name": "Programación en un Apocalipsis Zombi",
+    "author": {
+      "@type": "Person",
+      "name": "José Antonio Fuentes Santiago"
+    },
+    "hasPart": [
+      {
+        "@type": "Book",
+        "name": "Guía de Programación en un Apocalipsis Zombi",
+        "url": "https://jafs.github.io/books/programacion-zombi.html",
+        "inLanguage": "es"
+      },
+      {
+        "@type": "Book",
+        "name": "Domain-Driven Design en un Apocalipsis Zombi",
+        "url": "https://jafs.github.io/books/ddd-zombi.html",
+        "inLanguage": "es"
+      },
+      {
+        "@type": "Book",
+        "name": "Desarrollo con IA en un Apocalipsis Zombi",
+        "url": "https://jafs.github.io/books/ia-zombi.html",
+        "inLanguage": "es"
+      }
+    ]
   }
 }
   </script>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-900 text-gray-100">
-  <header class="bg-black text-white py-4 shadow-md">
-  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-    <a href="/" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago" class="flex items-center text-2xl font-bold">
-      <img src="/images/logo-mini.webp" alt="" class="w-8 h-8 mr-2" />
-      <span>JAFS</span>
-    </a>
-    <div class="flex items-center gap-4">
-      <nav class="flex gap-4">
-        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
-        <a href="/books/" class="text-white font-semibold">Libros</a>
-        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
-      </nav>
-      <form action="/search.html" method="get">
-        <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
-      </form>
-    </div>
-  </div>
-</header>
+<body>
+<div class="crt"><div class="envoltorio">
 
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <section class="py-8">
-      <h1 class="text-3xl font-bold mb-6">Libros y relatos publicados</h1>
-      <ul class="list-none space-y-8">
-        <li class="bg-gray-800 border border-gray-700 rounded-lg p-6 shadow-sm">
-          <div class="flex flex-col md:flex-row gap-6">
-            <a href="/books/ddd-zombi.html" class="flex-shrink-0 mx-auto md:mx-0">
-              <img src="/images/books/ddd-zombi.webp" alt="Domain-Driven Design en un Apocalipsis Zombi" class="shadow-lg rounded hover:scale-110 transition-transform" style="width:146px;height:200px" />
-            </a>
-            <div class="flex-1">
-              <h3 class="text-2xl font-bold mb-2"><a href="/books/ddd-zombi.html" class="hover:text-cyan-400">Domain-Driven Design en un Apocalipsis Zombi</a></h3>
-              <p class="text-gray-400 italic mb-2">Aprende DDD mientras preparas un refugio para resistir a los zombis.</p>
-              <p class="text-gray-300 leading-relaxed mb-4">¿Un libro de programación en la era de la IA? Pues sí. Vivimos en una época en la que la Inteligencia Artificial puede ayudar a crear en días (incluso en horas) proyectos que antes llevaban meses. Pero cuando ese proyecto empiece a crecer y aparezcan problemas, descubrirás que si no analizaste el trabajo que hizo la IA te tocará entender, organizar y controlar todo lo que ha creado.</p>
-            </div>
-          </div>
-        </li>
-        <li class="bg-gray-800 border border-gray-700 rounded-lg p-6 shadow-sm">
-          <div class="flex flex-col md:flex-row gap-6">
-            <a href="/books/tokens.html" class="flex-shrink-0 mx-auto md:mx-0">
-              <img src="/images/books/tokens.webp" alt="Tokens" class="shadow-lg rounded hover:scale-110 transition-transform" style="width:146px;height:200px" />
-            </a>
-            <div class="flex-1">
-              <h3 class="text-2xl font-bold mb-2"><a href="/books/tokens.html" class="hover:text-cyan-400">Tokens</a></h3>
-              <p class="text-gray-400 italic mb-2">Una historia de ciencia ficción sobre la dependencia de la Inteligencia Artificial.</p>
-              <p class="text-gray-300 leading-relaxed mb-4">¿Y si el mundo hubiera perdido su humanidad y sus pensamientos para delegarlos a la Inteligencia Artificial? En un futuro no tan lejano, la sociedad se ha vuelto completamente dependiente de los sistemas inteligentes, entregando su autonomía a cambio de comodidad.</p>
-            </div>
-          </div>
-        </li>
-        <li class="bg-gray-800 border border-gray-700 rounded-lg p-6 shadow-sm">
-          <div class="flex flex-col md:flex-row gap-6">
-            <a href="/books/programacion-zombi.html" class="flex-shrink-0 mx-auto md:mx-0">
-              <img src="/images/survive-zombi.webp" alt="Guía de Programación en un Apocalipsis Zombi (2ª edición)" class="shadow-lg rounded hover:scale-110 transition-transform" style="width:146px;height:200px" />
-            </a>
-            <div class="flex-1">
-              <h3 class="text-2xl font-bold mb-2"><a href="/books/programacion-zombi.html" class="hover:text-cyan-400">Guía de Programación en un Apocalipsis Zombi (2ª edición)</a></h3>
-              <p class="text-gray-400 italic mb-2">Aprende TypeScript mientras sobrevives al fin del mundo.</p>
-              <p class="text-gray-300 leading-relaxed mb-4">Cuando el mundo colapsa y los sistemas dejan de funcionar, solo una cosa puede salvarte: el conocimiento. Esta guía transforma el aprendizaje de TypeScript en una experiencia inmersiva de supervivencia en un apocalipsis zombi. Cada capítulo combina narrativa, práctica y metáforas visuales para que aprendas a programar como quien prepara su mochila antes de huir de la ciudad.</p>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </section>
+  <header class="cabecera">
+    <div class="marca">
+      <span class="marca-nombre">TERMINAL DEL REFUGIO</span>
+      <span class="marca-sub">archivo de libros · sector C-3 · Z-DAY +21</span>
+    </div>
+    <div class="controles">
+      <div class="idioma" role="group" aria-label="IDIOMA">
+        <span>IDIOMA</span><a href="/books/" hreflang="es" data-lang="es" aria-current="true">ES</a><a href="/books/en/" hreflang="en" data-lang="en" aria-current="false">EN</a>
+      </div>
+      <a class="salir" href="/">[ salir a jafs.github.io ]</a>
+    </div>
+  </header>
+
+  <div class="estado">
+    <span><b>SISTEMA:</b> en línea</span>
+    <span><b>ARCHIVO:</b> 3 volúmenes · 1 en preparación</span>
+    <span><b>AMENAZA:</b> <span class="amenaza"><i><b class="on"></b><b class="on"></b><b class=""></b></i>INTERMEDIO</span></span>
+  </div>
+
+  <section id="aviso-idioma" class="aviso-idioma" role="status" hidden>
+    <p><b>EN:</b> This terminal is showing the Spanish version, but your browser prefers English. Switch to the English version? This device will remember your choice.</p>
+    <div class="acciones">
+      <a class="boton-ambar principal" id="aviso-si" href="/books/en/" hreflang="en">Switch to English</a>
+      <button class="boton-ambar" type="button" id="aviso-no">Stay in Spanish</button>
+    </div>
+  </section>
+
+  <main class="caja">
+    <p class="prompt">access saga --id=zombie</p>
+    <h1 class="saga-titulo">Programación en un Apocalipsis Zombi</h1>
+    <p class="saga-intro">Una serie de libros para aprender a programar mientras el mundo se viene abajo. Cada volumen es independiente: elige tu nivel de amenaza y empieza por donde quieras.</p>
+    <ul class="catalogo">
+        <li><a href="/books/programacion-zombi.html">
+          <img src="/images/survive-zombi.webp" alt="" loading="lazy" width="64" height="88">
+          <span><span class="id">[001]</span><span class="nombre">Guía de Programación en un Apocalipsis Zombi</span>
+            <span class="meta"><span class="sello ok">publicado</span><span class="tema">TypeScript</span><span class="amenaza"><i><b class="on"></b><b class=""></b><b class=""></b></i>PRINCIPIANTE</span></span></span>
+        </a></li>
+        <li><a href="/books/ddd-zombi.html">
+          <img src="/images/books/ddd-zombi.webp" alt="" loading="lazy" width="64" height="88">
+          <span><span class="id">[002]</span><span class="nombre">Domain-Driven Design en un Apocalipsis Zombi</span>
+            <span class="meta"><span class="sello ok">publicado</span><span class="tema">Domain-Driven Design</span><span class="amenaza"><i><b class="on"></b><b class="on"></b><b class=""></b></i>INTERMEDIO</span></span></span>
+        </a></li>
+        <li><a href="/books/ia-zombi.html">
+          <img src="/images/books/ia-zombi.webp" alt="" loading="lazy" width="64" height="88">
+          <span><span class="id">[003]</span><span class="nombre">Desarrollo con IA en un Apocalipsis Zombi</span>
+            <span class="meta"><span class="sello progreso">en preparación</span><span class="tema">Desarrollo con IA</span><span class="amenaza"><i><b class="on"></b><b class="on"></b><b class=""></b></i>INTERMEDIO</span></span></span>
+        </a></li>
+    </ul>
+    <section class="seccion sobre-saga"><h2>sobre la saga</h2><p>Todo empezó con el caos. En la <em>Guía de Programación</em> huyes de una ciudad en ruinas, encuentras un grupo de supervivientes, conseguís sobrevivir en una central eléctrica abandonada y tras una huida precipitada acabáis defendiendo una cárcel durante su primer invierno. Por el camino aprenderás TypeScript desde cero, que no es lo primero que alguien haría en un apocalipsis, pero aquí es lo que toca.</p>
+<p>Los siguientes volúmenes cambian de amenaza. En <em>Domain-Driven Design</em> el peligro ya no es solo la horda, sino un refugio que crece hasta que nadie entiende cómo funciona por dentro. Y en <em>Desarrollo con IA</em> aparecen los Despiertos: máquinas que escriben código más rápido de lo que tú puedes leerlo, y alguien tendrá que decidir qué y cuánto se les deja hacer.</p>
+<p>Eres libre de leer cada tomo por separado, pero todos comparten ambientación, personajes y una pequeña historia que se va hilando poco a poco. Además la estructura es similar: primero se plantea una situación, después viene el código, y entre medias los Consejos de Superviviente y las Notas en la Cabaña llegan al rescate para darte consejos y resolver las dudas más habituales.</p>
+<p>Elige un volumen, mira su nivel de amenaza y, si te convence, hazte con él antes de que llegue el fin del mundo.</p>
+</section>
   </main>
-  <footer class="bg-black text-white py-4 mt-12">
-  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-    <div class="flex gap-4">
-      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-      </a>
-      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-      </a>
-      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-      </a>
-      <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="GitHub">
-        <img src="/images/github.svg" alt="GitHub" class="w-6 h-6" />
-      </a>
-    </div>
-    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
-  </div>
-</footer>
 
-  <script src="/js/main.js"></script>
+  <footer class="pie">
+    <span>Otros archivos fuera de la saga: <a href="/books/tokens.html">Tokens</a> (relato)</span>
+    <span class="cursor">fin de la transmisión</span>
+  </footer>
+
+</div></div>
+<script src="/js/books.js"></script>
 </body>
 </html>

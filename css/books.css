@@ -1,59 +1,19 @@
-/* Terminal del refugio: hoja propia de la sección /books/.
-   No pasa por Tailwind ni por build:css. Hereda el lenguaje visual de la terminal
-   del artículo de Laya (fósforo verde, ámbar para avisos, CRT sutil). */
-:root {
-  --fondo: #020402;
-  --panel: #040904;
-  --relleno: #0b1f0d;
-  --fosforo: #46c553;
-  --fosforo-vivo: #7cf087;
-  --fosforo-tenue: #2a7a33;
-  --linea: #1d5a24;
-  --linea-viva: #2f8f3a;
-  --ambar: #d6a23c;
-  --ambar-tenue: #6b5220;
-  --ambar-fondo: #17120a;
-  --alerta: #e0503f;
-  --brillo: 0 0 3px rgba(70, 197, 83, .35);
-  --mono: "Cascadia Mono", "JetBrains Mono", "IBM Plex Mono", "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
-  color-scheme: dark;
-  scrollbar-color: var(--linea-viva) var(--fondo);
-}
-
-* { box-sizing: border-box; }
-[hidden] { display: none !important; }
-html, body { margin: 0; min-height: 100%; background: var(--fondo); }
-body { color: var(--fosforo); font: 14px/1.55 var(--mono); text-shadow: var(--brillo); }
-a { color: var(--fosforo-vivo); text-decoration: none; }
-a:hover { text-decoration: underline; }
-:focus-visible { outline: 1px solid var(--fosforo-vivo); outline-offset: 2px; }
+/* Terminal del refugio: lo propio de la sección /books/.
+   La base (paleta, tipografía, tubo CRT, cabecera, pie, cajas, prompt, estado) vive en
+   terminal.css, común a toda la web; esta hoja se carga después. No pasa por Tailwind. */
 button { font: inherit; color: inherit; text-shadow: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
-img { max-width: 100%; }
 
-/* Líneas de barrido y viñeta del tubo. */
-.crt { position: relative; min-height: 100vh; }
-.crt::before, .crt::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50; }
-.crt::before { background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, .2) 2px 3px); }
-.crt::after { background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, .5) 100%); }
-
-.envoltorio { max-width: 1100px; margin: 0 auto; padding: 0 16px 48px; display: flex; flex-direction: column; gap: 16px; }
-
-/* ---------------------------------------------------------------- cabecera */
-.cabecera { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 0; border-bottom: 1px solid var(--linea); }
-.marca { display: flex; flex-direction: column; }
-.marca-nombre { color: var(--fosforo-vivo); font-weight: 600; letter-spacing: .12em; }
-.marca-sub { color: var(--fosforo-tenue); font-size: 12px; }
-.controles { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 12px; }
-.salir { color: var(--fosforo-tenue); }
-.salir:hover { color: var(--fosforo-vivo); }
-.idioma { display: inline-flex; border: 1px solid var(--linea); border-radius: 4px; overflow: hidden; }
+/* ---------------------------------------------------------------- barra de la sección */
+.barra-seccion { display: flex; justify-content: space-between; align-items: center; gap: 10px 16px; flex-wrap: wrap; border: 1px solid var(--linea); border-radius: 6px; background: var(--panel); padding: 8px 14px; }
+.barra-marca { display: flex; flex-direction: column; }
+.barra-nombre { color: var(--fosforo-vivo); font-weight: 600; letter-spacing: .12em; }
+.barra-sub { color: var(--fosforo-tenue); font-size: 12px; }
+.idioma { display: inline-flex; border: 1px solid var(--linea); border-radius: 4px; overflow: hidden; font-size: 12px; }
 .idioma span { padding: 3px 8px; color: var(--fosforo-tenue); }
 .idioma a { padding: 3px 10px; border-left: 1px solid var(--linea); color: var(--fosforo); }
 .idioma a:hover { text-decoration: none; color: var(--fosforo-vivo); }
 .idioma a[aria-current="true"] { background: var(--relleno); color: var(--fosforo-vivo); }
-
-.estado { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--fosforo-tenue); }
-.estado b { color: var(--fosforo); font-weight: 500; }
+.otros-archivos { margin: 0; font-size: 12px; color: var(--fosforo-tenue); }
 
 /* ---------------------------------------------------------------- aviso de idioma (ámbar) */
 .aviso-idioma { border: 1px dashed var(--ambar); border-radius: 6px; background: var(--ambar-fondo); color: var(--ambar); text-shadow: none; padding: 12px 16px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
@@ -63,15 +23,9 @@ img { max-width: 100%; }
 .boton-ambar:hover { filter: brightness(1.15); text-decoration: none; }
 .boton-ambar.principal { background: var(--ambar); color: #1a1206; font-weight: 600; }
 
-/* ---------------------------------------------------------------- cajas */
-.caja { border: 1px solid var(--linea-viva); border-radius: 6px; background: var(--panel); padding: 16px 18px; box-shadow: 0 0 6px rgba(47, 143, 58, .15), inset 0 0 12px rgba(47, 143, 58, .05); min-width: 0; }
-h1, h2, h3 { margin: 0; font-weight: 600; color: var(--fosforo-vivo); letter-spacing: .04em; }
+/* ---------------------------------------------------------------- títulos de la ficha */
 h2 { font-size: 15px; }
 h3 { font-size: 13px; }
-.prompt { margin: 0; color: var(--fosforo-tenue); }
-.prompt::before { content: "> "; }
-.cabecera-caja { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-.pista { font-size: 11px; color: var(--fosforo-tenue); }
 
 /* ---------------------------------------------------------------- saga */
 .saga-titulo { font-size: clamp(18px, 3.4vw, 30px); line-height: 1.15; color: var(--fosforo-vivo); text-shadow: 0 0 8px rgba(124, 240, 135, .35); margin: 4px 0 6px; letter-spacing: .06em; text-transform: uppercase; font-weight: 700; }
@@ -161,13 +115,7 @@ h3 { font-size: 13px; }
 .navegacion a { color: var(--fosforo-tenue); }
 .navegacion a:hover { color: var(--fosforo-vivo); text-decoration: none; }
 
-/* ---------------------------------------------------------------- pie */
-.pie { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--fosforo-tenue); border-top: 1px solid var(--linea); padding-top: 12px; }
-.cursor::after { content: "_"; animation: parpadeo 1s steps(1) infinite; }
-@keyframes parpadeo { 50% { opacity: 0; } }
-
 @media (prefers-reduced-motion: reduce) {
-  .cursor::after { animation: none; }
   .compra { transition: none; }
   .compra:hover { transform: none; }
 }

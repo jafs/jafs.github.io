@@ -43,6 +43,7 @@
 
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
+  <link rel="stylesheet" href="/css/terminal.css">
 
   <script type="application/ld+json">
   {
@@ -67,30 +68,30 @@
 
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-900 text-gray-100">
-  <header class="bg-black text-white py-4 shadow-md">
-  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-    <a href="/" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago" class="flex items-center text-2xl font-bold">
-      <img src="/images/logo-mini.webp" alt="" class="w-8 h-8 mr-2" />
-      <span>JAFS</span>
-    </a>
-    <div class="flex items-center gap-4">
-      <nav class="flex gap-4">
-        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-white font-semibold">Artículos</a>
-        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
-        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
-      </nav>
-      <form action="/search.html" method="get">
-        <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
-      </form>
-    </div>
+<body>
+<div class="crt"><div class="envoltorio">
+  <header class="cabecera">
+  <a href="/" class="marca" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago, inicio">
+    <img src="/images/logo-mini.webp" alt="" width="40" height="40" />
+    <span><span class="marca-nombre">JAFS</span><span class="marca-sub">José Antonio Fuentes Santiago</span></span>
+  </a>
+  <div class="controles">
+    <nav class="menu" aria-label="Principal">
+      <a href="/index.html" class="">inicio</a>
+      <a href="/articles/" class="activo">artículos</a>
+      <a href="/books/" class="">libros</a>
+      <a href="/about.html" class="">sobre mí</a>
+    </nav>
+    <form action="/search.html" method="get" class="buscar" role="search">
+      <label for="buscar-cabecera">grep</label>
+      <input type="search" id="buscar-cabecera" name="q" placeholder="buscar..." aria-label="Buscar artículos" />
+    </form>
   </div>
 </header>
 
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 1</h1><p class="text-gray-400 text-sm mb-6">22-02-2026</p><p>Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situación es crítica: hay que gestionar refugios, coordinar reabastecimientos, controlar infecciones y tomar decisiones que pueden significar vida o muerte. Decides crear un sistema para ayudar a gestionar todo esto.</p>
+  <main>
+    <article class="articulo prose caja">
+      <h1>DDD en un apocalipsis zombi. Parte 1</h1><p class="fecha-articulo">22-02-2026</p><p>Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situación es crítica: hay que gestionar refugios, coordinar reabastecimientos, controlar infecciones y tomar decisiones que pueden significar vida o muerte. Decides crear un sistema para ayudar a gestionar todo esto.</p>
 <p>Meses después, el sistema funciona, pero hay un problema: cada vez que el líder del grupo (nuestro &quot;experto de negocio&quot;) pide un cambio, tú y tu equipo os perdéis en traducciones. Él habla de &quot;supervivientes en cuarentena&quot;, tú piensas en <code>user.status = 3</code>. Él menciona &quot;refugio en capacidad crítica&quot;, tú ves <code>shelter.count &gt;= shelter.max</code>. El código funciona, pero nadie entiende realmente qué hace sin abrir cada archivo y desentrañar la lógica. Y en un apocalipsis zombi, perder tiempo tratando de entender el código puede costarte la vida.</p>
 <p>Este es exactamente el tipo de problema que <strong>Domain-Driven Design</strong> vino a resolver. Y no, <strong>DDD no es una arquitectura</strong> ni un framework mágico que instalas con npm. Es una filosofía de desarrollo que propone algo radical y a la vez obvio: el código debe ser un espejo fiel de cómo funcionan las cosas en el mundo real del negocio (o en nuestro caso, del apocalipsis).</p>
 <p>La idea la plasmó <strong>Eric Evans</strong> en 2003 en su libro <a href="https://amzn.to/4kT4iaG">Domain-Driven Design: Tackling Complexity in the Heart of Software</a>, y aunque ya han pasado más de dos décadas, la premisa sigue siendo igual de potente: si el líder de supervivientes y el desarrollador miran el modelo del sistema, ambos deberían ver lo mismo. Mismos conceptos, mismas palabras, mismas reglas.</p>
@@ -437,26 +438,18 @@ console.log(electricShelter.getSupplies());
 
     </article>
   </main>
-  <footer class="bg-black text-white py-4 mt-12">
-  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-    <div class="flex gap-4">
-      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-      </a>
-      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-      </a>
-      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-      </a>
-      <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="GitHub">
-        <img src="/images/github.svg" alt="GitHub" class="w-6 h-6" />
-      </a>
-    </div>
-    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
-  </div>
+  <footer class="pie">
+  <nav aria-label="Redes">
+    <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer">[ linkedin ]</a>
+    <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer">[ youtube ]</a>
+    <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer">[ instagram ]</a>
+    <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer">[ github ]</a>
+    <a href="/feed.xml">[ rss ]</a>
+  </nav>
+  <span class="cursor">© 2025 José Antonio Fuentes Santiago · fin de la transmisión</span>
 </footer>
 
+</div></div>
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

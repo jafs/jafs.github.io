@@ -35,6 +35,7 @@
   <link rel="manifest" href="/site.webmanifest" />
 
   <link rel="stylesheet" href="/css/dist.css">
+  <link rel="stylesheet" href="/css/terminal.css">
 
   <script type="application/ld+json">
   {
@@ -52,146 +53,151 @@
   </script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-900 text-gray-100">
-  <header class="bg-black text-white py-4 shadow-md">
-  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-    <a href="/" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago" class="flex items-center text-2xl font-bold">
-      <img src="/images/logo-mini.webp" alt="" class="w-8 h-8 mr-2" />
-      <span>JAFS</span>
-    </a>
-    <div class="flex items-center gap-4">
-      <nav class="flex gap-4">
-        <a href="/index.html" class="text-white font-semibold">Inicio</a>
-        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
-        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
-        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
-      </nav>
-      <form action="/search.html" method="get">
-        <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
-      </form>
-    </div>
+<body>
+<div class="crt"><div class="envoltorio">
+  <header class="cabecera">
+  <a href="/" class="marca" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago, inicio">
+    <img src="/images/logo-mini.webp" alt="" width="40" height="40" />
+    <span><span class="marca-nombre">JAFS</span><span class="marca-sub">José Antonio Fuentes Santiago</span></span>
+  </a>
+  <div class="controles">
+    <nav class="menu" aria-label="Principal">
+      <a href="/index.html" class="activo">inicio</a>
+      <a href="/articles/" class="">artículos</a>
+      <a href="/books/" class="">libros</a>
+      <a href="/about.html" class="">sobre mí</a>
+    </nav>
+    <form action="/search.html" method="get" class="buscar" role="search">
+      <label for="buscar-cabecera">grep</label>
+      <input type="search" id="buscar-cabecera" name="q" placeholder="buscar..." aria-label="Buscar artículos" />
+    </form>
   </div>
 </header>
 
-  <main class="max-w-4xl mx-auto px-4 py-8">
-
-    <section class="mb-4">
-      <h3 class="text-2xl font-bold mb-6">Últimos libros y relatos</h3>
-      <div class="bg-gradient-to-r from-gray-800 to-gray-900 border-l-4 border-cyan-500 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-      <div class="flex flex-col md:flex-row gap-6 p-6">
-        <a href="/books/ddd-zombi.html" class="flex-shrink-0 mx-auto md:mx-0">
-          <img src="/images/books/ddd-zombi.webp" alt="Domain-Driven Design en un Apocalipsis Zombi" class="shadow-lg rounded hover:scale-110 transition-transform" style="width:146px;height:200px" />
-        </a>
-        <div class="flex-1">
-          <h2 class="text-2xl font-bold text-gray-100"><a href="/books/ddd-zombi.html" class="hover:text-cyan-400">Domain-Driven Design en un Apocalipsis Zombi</a></h2>
-          <p class="text-gray-400 italic mb-2">Aprende DDD mientras preparas un refugio para resistir a los zombis.</p>
-          <p class="text-gray-400 mb-4">¿Un libro de programación en la era de la IA? Pues sí. Vivimos en una época en la que la Inteligencia Artificial puede ayudar a crear en días (incluso en horas) proyectos que antes llevaban meses. Pero cuando ese proyecto empiece a crecer y aparezcan problemas, descubrirás que si no analizaste el trabajo que hizo la IA te tocará entender, organizar y controlar todo lo que ha creado.</p>
+  <div class="estado">
+    <span><b>SISTEMA:</b> en línea</span>
+    <span><b>ARCHIVO:</b> 65 artículos · 2 libros</span>
+    <span><b>ÚLTIMA ENTRADA:</b> 26-09-2026</span>
+  </div>
+  <main class="envoltorio" style="padding:0">
+    <section class="caja presentacion">
+      <img class="retrato" src="/images/retrato-terminal.webp" alt="Retrato de José Antonio Fuentes Santiago en píxeles verdes" width="150" height="182" />
+      <div>
+        <p class="prompt">whoami</p>
+        <h1>José Antonio Fuentes Santiago</h1>
+        <p>Desarrollador de software y escritor. Escribo sobre programación, TypeScript, arquitectura de software e inteligencia artificial.</p>
+        <p>Y, de vez en cuando, enseño a programar en mitad de un apocalipsis zombi.</p>
+        <div class="accesos">
+          <a href="/articles/">[ leer artículos ]</a>
+          <a href="/books/">[ ver libros ]</a>
+          <a href="/about.html">[ sobre mí ]</a>
         </div>
-      </div>
-      <div class="flex flex-col md:flex-row gap-6 p-6">
-        <a href="/books/programacion-zombi.html" class="flex-shrink-0 mx-auto md:mx-0">
-          <img src="/images/survive-zombi.webp" alt="Guía de Programación en un Apocalipsis Zombi" class="shadow-lg rounded hover:scale-110 transition-transform" style="width:146px;height:200px" />
-        </a>
-        <div class="flex-1">
-          <h2 class="text-2xl font-bold text-gray-100"><a href="/books/programacion-zombi.html" class="hover:text-cyan-400">Guía de Programación en un Apocalipsis Zombi</a></h2>
-          <p class="text-gray-400 italic mb-2">2ª edición · Aprende TypeScript mientras sobrevives al fin del mundo.</p>
-          <p class="text-gray-400 mb-4">Cuando el mundo colapsa y los sistemas dejan de funcionar, solo una cosa puede salvarte: el conocimiento. Esta guía transforma el aprendizaje de TypeScript en una experiencia inmersiva de supervivencia en un apocalipsis zombi. Cada capítulo combina narrativa, práctica y metáforas visuales para que aprendas a programar como quien prepara su mochila antes de huir de la ciudad.</p>
-        </div>
-      </div>
       </div>
     </section>
-    <section class="py-8">
-      <h3 class="text-2xl font-bold mb-6">Últimos artículos</h3>
-      <div class="flex gap-2 flex-col">
-        <article class="border border-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow bg-gray-800 flex gap-4">
-          <figure class="w-24 h-24">
-            <img src="/resources/20260926/laya-mini.webp" alt="Modelos de decisión: introducción a Laya" class="object-cover rounded w-full h-full" />
-          </figure>
-          <div class="flex-1">
-            <header>
-              <a href="/articles/posts/20260926.html" class="font-semibold text-lg">Modelos de decisión: introducción a Laya</a>
-              <span class="text-gray-500">—</span>
-              <time datetime="2026-09-26" class="text-gray-400 text-sm">26-09-2026</time>
-            </header>
-            <p class="text-gray-300 leading-relaxed mt-1">Llevábamos tres semanas en el refugio de la vieja central eléctrica. Necesitaba un poco de aire así que salí a la terraza. Allí estaba Julia anotando observaciones en un desgastado bloc de notas. Me invitó a que me acercara en silencio.</p>
-          </div>
-        </article>
-        <article class="border border-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow bg-gray-800 flex gap-4">
-          <figure class="w-24 h-24">
-            <img src="/resources/20260809/gbu-2-mini.webp" alt="El Listo, El Bueno, El Feo y El Malo: cuando SRP se une a GBU" class="object-cover rounded w-full h-full" />
-          </figure>
-          <div class="flex-1">
-            <header>
-              <a href="/articles/posts/20260809.html" class="font-semibold text-lg">El Listo, El Bueno, El Feo y El Malo: cuando SRP se une a GBU</a>
-              <span class="text-gray-500">—</span>
-              <time datetime="2026-08-09" class="text-gray-400 text-sm">09-08-2026</time>
-            </header>
-            <p class="text-gray-300 leading-relaxed mt-1">En el artículo anterior había una pequeña limitación que no aprecié hasta empezar a usar el patrón más a menudo y en proyectos más complejos.</p>
-          </div>
-        </article>
-        <article class="border border-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow bg-gray-800 flex gap-4">
-          <figure class="w-24 h-24">
-            <img src="/resources/20260802/bueno-feo-malo-mini.webp" alt="El Bueno, El Feo y El Malo: Cómo poner a pelear a tres agentes para que escriban tu código por ti" class="object-cover rounded w-full h-full" />
-          </figure>
-          <div class="flex-1">
-            <header>
-              <a href="/articles/posts/20260802.html" class="font-semibold text-lg">El Bueno, El Feo y El Malo: Cómo poner a pelear a tres agentes para que escriban tu código por ti</a>
-              <span class="text-gray-500">—</span>
-              <time datetime="2026-08-02" class="text-gray-400 text-sm">02-08-2026</time>
-            </header>
-            <p class="text-gray-300 leading-relaxed mt-1">Recuerdo aquellas tardes en casa de mis padres en las que se hacían omnipresentes los westerns. No había tarde en la que no se viera a John Wayne haciendo de lo que hoy llamaríamos "chulito de playa". Y la verdad es que ese tipo de películas no me apasionan, pero ¿y si te dijera que podemos montar un western a la hora de desarrollar software gracias a la IA?</p>
-          </div>
-        </article>
-        <article class="border border-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow bg-gray-800 flex gap-4">
-          <figure class="w-24 h-24">
-            <img src="/images/20260517/SDD-mini.webp" alt="SDD: Del caos del vibe coding al rigor de la arquitectura" class="object-cover rounded w-full h-full" />
-          </figure>
-          <div class="flex-1">
-            <header>
-              <a href="/articles/posts/20260517.html" class="font-semibold text-lg">SDD: Del caos del vibe coding al rigor de la arquitectura</a>
-              <span class="text-gray-500">—</span>
-              <time datetime="2026-05-17" class="text-gray-400 text-sm">17-05-2026</time>
-            </header>
-            <p class="text-gray-300 leading-relaxed mt-1">En el principio, el programador picaba código línea a línea. Y el software estaba desordenado y lleno de bugs. Las tinieblas del código legacy acechaban los despliegues de los viernes. Pero entonces llegaron los modelos de lenguaje y los agentes de IA, y la comunidad exclamó: "¡Hágase el prompt!". De repente, pasamos al fascinante mundo del vibe coding: tirarle tres frases informales a Cursor o a Claude, mirar cómo se autocompletan quinientas líneas de código por arte de magia y rezar para que compile a la primera.</p>
-          </div>
-        </article>
-        <article class="border border-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow bg-gray-800 flex gap-4">
-          <figure class="w-24 h-24">
-            <img src="/images/ddd-mini-faq.webp" alt="DDD en un apocalipsis zombi. Preguntas frecuentes" class="object-cover rounded w-full h-full" />
-          </figure>
-          <div class="flex-1">
-            <header>
-              <a href="/articles/posts/20260402.html" class="font-semibold text-lg">DDD en un apocalipsis zombi. Preguntas frecuentes</a>
-              <span class="text-gray-500">—</span>
-              <time datetime="2026-04-02" class="text-gray-400 text-sm">02-04-2026</time>
-            </header>
-            <p class="text-gray-300 leading-relaxed mt-1">En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el lenguaje ubicuo y terminamos con patrones más avanzados como patrón Outbox. Ha sido un viaje intenso, pero antes de cerrar la puerta del refugio, toca responder a esas dudas que siempre surgen cuando intentas aplicar esto en un proyecto real. Además, veremos una checklist y una pequeña guía que os ayudará a decidir cuándo tiene sentido aplicar DDD y cuándo no.</p>
-          </div>
-        </article>
-        <a href="/articles/" class="mt-2">Ver más...</a>
+
+    <section class="caja">
+      <div class="cabecera-caja">
+        <div>
+          <p class="prompt">ls ./libros</p>
+          <h2>Últimos libros y relatos</h2>
+        </div>
+        <a href="/books/" class="pista">[ abrir el archivo ]</a>
       </div>
+      <ul class="estanteria">
+        <li><a href="/books/ddd-zombi.html">
+          <img src="/images/books/ddd-zombi.webp" alt="" loading="lazy" width="64" height="88">
+          <span><span class="nombre">Domain-Driven Design en un Apocalipsis Zombi</span><span class="sub">Aprende DDD mientras preparas un refugio para resistir a los zombis.</span></span>
+        </a></li>
+        <li><a href="/books/programacion-zombi.html">
+          <img src="/images/survive-zombi.webp" alt="" loading="lazy" width="64" height="88">
+          <span><span class="nombre">Guía de Programación en un Apocalipsis Zombi</span><span class="sub">2ª edición · Aprende TypeScript mientras sobrevives al fin del mundo.</span></span>
+        </a></li>
+      </ul>
+    </section>
+    <section class="caja">
+      <div class="cabecera-caja">
+        <div>
+          <p class="prompt">tail ./articulos</p>
+          <h2>Últimos artículos</h2>
+        </div>
+      </div>
+      <ul class="entradas">
+        <li>
+          <article class="entrada">
+            <a href="/articles/posts/20260926.html" class="miniatura" tabindex="-1" aria-hidden="true">
+              <img src="/resources/20260926/laya-mini.webp" alt="" loading="lazy" />
+            </a>
+            <div>
+              <time datetime="2026-09-26">26-09-2026</time>
+              <h3><a href="/articles/posts/20260926.html">Modelos de decisión: introducción a Laya</a></h3>
+              <p>Llevábamos tres semanas en el refugio de la vieja central eléctrica. Necesitaba un poco de aire así que salí a la terraza. Allí estaba Julia anotando observaciones en un desgastado bloc de notas. Me invitó a que me acercara en silencio.</p>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="entrada">
+            <a href="/articles/posts/20260809.html" class="miniatura" tabindex="-1" aria-hidden="true">
+              <img src="/resources/20260809/gbu-2-mini.webp" alt="" loading="lazy" />
+            </a>
+            <div>
+              <time datetime="2026-08-09">09-08-2026</time>
+              <h3><a href="/articles/posts/20260809.html">El Listo, El Bueno, El Feo y El Malo: cuando SRP se une a GBU</a></h3>
+              <p>En el artículo anterior había una pequeña limitación que no aprecié hasta empezar a usar el patrón más a menudo y en proyectos más complejos.</p>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="entrada">
+            <a href="/articles/posts/20260802.html" class="miniatura" tabindex="-1" aria-hidden="true">
+              <img src="/resources/20260802/bueno-feo-malo-mini.webp" alt="" loading="lazy" />
+            </a>
+            <div>
+              <time datetime="2026-08-02">02-08-2026</time>
+              <h3><a href="/articles/posts/20260802.html">El Bueno, El Feo y El Malo: Cómo poner a pelear a tres agentes para que escriban tu código por ti</a></h3>
+              <p>Recuerdo aquellas tardes en casa de mis padres en las que se hacían omnipresentes los westerns. No había tarde en la que no se viera a John Wayne haciendo de lo que hoy llamaríamos "chulito de playa". Y la verdad es que ese tipo de películas no me apasionan, pero ¿y si te dijera que podemos montar un western a la hora de desarrollar software gracias a la IA?</p>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="entrada">
+            <a href="/articles/posts/20260517.html" class="miniatura" tabindex="-1" aria-hidden="true">
+              <img src="/images/20260517/SDD-mini.webp" alt="" loading="lazy" />
+            </a>
+            <div>
+              <time datetime="2026-05-17">17-05-2026</time>
+              <h3><a href="/articles/posts/20260517.html">SDD: Del caos del vibe coding al rigor de la arquitectura</a></h3>
+              <p>En el principio, el programador picaba código línea a línea. Y el software estaba desordenado y lleno de bugs. Las tinieblas del código legacy acechaban los despliegues de los viernes. Pero entonces llegaron los modelos de lenguaje y los agentes de IA, y la comunidad exclamó: "¡Hágase el prompt!". De repente, pasamos al fascinante mundo del vibe coding: tirarle tres frases informales a Cursor o a Claude, mirar cómo se autocompletan quinientas líneas de código por arte de magia y rezar para que compile a la primera.</p>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="entrada">
+            <a href="/articles/posts/20260402.html" class="miniatura" tabindex="-1" aria-hidden="true">
+              <img src="/images/ddd-mini-faq.webp" alt="" loading="lazy" />
+            </a>
+            <div>
+              <time datetime="2026-04-02">02-04-2026</time>
+              <h3><a href="/articles/posts/20260402.html">DDD en un apocalipsis zombi. Preguntas frecuentes</a></h3>
+              <p>En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el lenguaje ubicuo y terminamos con patrones más avanzados como patrón Outbox. Ha sido un viaje intenso, pero antes de cerrar la puerta del refugio, toca responder a esas dudas que siempre surgen cuando intentas aplicar esto en un proyecto real. Además, veremos una checklist y una pequeña guía que os ayudará a decidir cuándo tiene sentido aplicar DDD y cuándo no.</p>
+            </div>
+          </article>
+        </li>
+      </ul>
+      <a href="/articles/" class="ver-mas">[ ver todos los artículos ]</a>
     </section>
   </main>
-  <footer class="bg-black text-white py-4 mt-12">
-  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-    <div class="flex gap-4">
-      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-      </a>
-      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-      </a>
-      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-      </a>
-      <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="GitHub">
-        <img src="/images/github.svg" alt="GitHub" class="w-6 h-6" />
-      </a>
-    </div>
-    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
-  </div>
+  <footer class="pie">
+  <nav aria-label="Redes">
+    <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer">[ linkedin ]</a>
+    <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer">[ youtube ]</a>
+    <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer">[ instagram ]</a>
+    <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer">[ github ]</a>
+    <a href="/feed.xml">[ rss ]</a>
+  </nav>
+  <span class="cursor">© 2025 José Antonio Fuentes Santiago · fin de la transmisión</span>
 </footer>
 
+</div></div>
   <script src="/js/main.js"></script>
 </body>
 </html>

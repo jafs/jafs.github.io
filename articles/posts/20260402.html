@@ -43,6 +43,7 @@
 
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
+  <link rel="stylesheet" href="/css/terminal.css">
 
   <script type="application/ld+json">
   {
@@ -67,30 +68,30 @@
 
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-900 text-gray-100">
-  <header class="bg-black text-white py-4 shadow-md">
-  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-    <a href="/" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago" class="flex items-center text-2xl font-bold">
-      <img src="/images/logo-mini.webp" alt="" class="w-8 h-8 mr-2" />
-      <span>JAFS</span>
-    </a>
-    <div class="flex items-center gap-4">
-      <nav class="flex gap-4">
-        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-white font-semibold">Artículos</a>
-        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
-        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
-      </nav>
-      <form action="/search.html" method="get">
-        <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
-      </form>
-    </div>
+<body>
+<div class="crt"><div class="envoltorio">
+  <header class="cabecera">
+  <a href="/" class="marca" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago, inicio">
+    <img src="/images/logo-mini.webp" alt="" width="40" height="40" />
+    <span><span class="marca-nombre">JAFS</span><span class="marca-sub">José Antonio Fuentes Santiago</span></span>
+  </a>
+  <div class="controles">
+    <nav class="menu" aria-label="Principal">
+      <a href="/index.html" class="">inicio</a>
+      <a href="/articles/" class="activo">artículos</a>
+      <a href="/books/" class="">libros</a>
+      <a href="/about.html" class="">sobre mí</a>
+    </nav>
+    <form action="/search.html" method="get" class="buscar" role="search">
+      <label for="buscar-cabecera">grep</label>
+      <input type="search" id="buscar-cabecera" name="q" placeholder="buscar..." aria-label="Buscar artículos" />
+    </form>
   </div>
 </header>
 
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Preguntas frecuentes</h1><p class="text-gray-400 text-sm mb-6">02-04-2026</p><p>En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el <a href="/articles/posts/20260221.html">lenguaje ubicuo</a> y terminamos con patrones más avanzados como <a href="/articles/posts/20260322.html">patrón Outbox</a>. Ha sido un viaje intenso, pero antes de cerrar la puerta del refugio, toca responder a esas dudas que siempre surgen cuando intentas aplicar esto en un proyecto real. Además, veremos una checklist y una pequeña guía que os ayudará a decidir cuándo tiene sentido aplicar DDD y cuándo no.</p>
+  <main>
+    <article class="articulo prose caja">
+      <h1>DDD en un apocalipsis zombi. Preguntas frecuentes</h1><p class="fecha-articulo">02-04-2026</p><p>En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el <a href="/articles/posts/20260221.html">lenguaje ubicuo</a> y terminamos con patrones más avanzados como <a href="/articles/posts/20260322.html">patrón Outbox</a>. Ha sido un viaje intenso, pero antes de cerrar la puerta del refugio, toca responder a esas dudas que siempre surgen cuando intentas aplicar esto en un proyecto real. Además, veremos una checklist y una pequeña guía que os ayudará a decidir cuándo tiene sentido aplicar DDD y cuándo no.</p>
 <h2>¿Cómo sé si algo es un Value Object o una Entidad?</h2>
 <p>Si tienes dudas, usaremos el <strong>test de intercambio</strong>. Hazte esta pregunta: ¿Puedo cambiar este objeto por otro igual sin que pase nada?</p>
 <ul>
@@ -184,7 +185,7 @@ class ElasticSurvivorSearchRepository implements SurvivorSearchRepository { ... 
 <li>Qué tipos de error se repiten más.</li>
 </ul>
 <p>Además, puedes establecer alarmas en los casos de que una Saga se queda atascada, si la tasa de compensación sube o si la cola de outbox no deja de crecer. Esos casos indican que algo va mal y conviene mirarlo cuanto antes.</p>
-<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">📚 <strong>PARA SABER MÁS</strong><p>El tema de la observabilidad da para mucho. Si quieres profundizar en él, <a href="https://amzn.to/4brsIF9"><strong>Observability Engineering</strong></a> de Charity Majors, Liz Fong-Jones y George Miranda es la referencia más completa sobre el tema.</p></div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="0" width="8" height="1"/><rect x="2" y="9" width="8" height="1"/><rect x="2" y="0" width="1" height="10"/><rect x="9" y="0" width="1" height="10"/><rect x="4" y="0" width="1" height="10"/><rect x="10" y="1" width="1" height="10"/><rect x="3" y="10" width="8" height="1"/><rect x="6" y="3" width="2" height="1"/><rect x="6" y="5" width="2" height="1"/></svg><strong>PARA SABER MÁS</strong><p>El tema de la observabilidad da para mucho. Si quieres profundizar en él, <a href="https://amzn.to/4brsIF9"><strong>Observability Engineering</strong></a> de Charity Majors, Liz Fong-Jones y George Miranda es la referencia más completa sobre el tema.</p></div></p>
 <h2>Checklist rápido de DDD</h2>
 <p>Antes de dar por buena tu implementación, deberías revisar estos puntos:</p>
 <h3>Lenguaje y comunicación</h3>
@@ -267,26 +268,18 @@ class ElasticSurvivorSearchRepository implements SurvivorSearchRepository { ... 
 
     </article>
   </main>
-  <footer class="bg-black text-white py-4 mt-12">
-  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-    <div class="flex gap-4">
-      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-      </a>
-      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-      </a>
-      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-      </a>
-      <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="GitHub">
-        <img src="/images/github.svg" alt="GitHub" class="w-6 h-6" />
-      </a>
-    </div>
-    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
-  </div>
+  <footer class="pie">
+  <nav aria-label="Redes">
+    <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer">[ linkedin ]</a>
+    <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer">[ youtube ]</a>
+    <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer">[ instagram ]</a>
+    <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer">[ github ]</a>
+    <a href="/feed.xml">[ rss ]</a>
+  </nav>
+  <span class="cursor">© 2025 José Antonio Fuentes Santiago · fin de la transmisión</span>
 </footer>
 
+</div></div>
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

@@ -36,6 +36,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
+  <link rel="stylesheet" href="/css/terminal.css">
   <link rel="stylesheet" href="/css/books.css">
 
   <script type="application/ld+json">
@@ -66,17 +67,34 @@
 <div class="crt"><div class="envoltorio">
 
   <header class="cabecera">
-    <div class="marca">
-      <span class="marca-nombre">SHELTER TERMINAL</span>
-      <span class="marca-sub">book archive · sector C-3 · Z-DAY +21</span>
+  <a href="/" class="marca" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago, home">
+    <img src="/images/logo-mini.webp" alt="" width="40" height="40" />
+    <span><span class="marca-nombre">JAFS</span><span class="marca-sub">José Antonio Fuentes Santiago</span></span>
+  </a>
+  <div class="controles">
+    <nav class="menu" aria-label="Main">
+      <a href="/index.html" class="">home</a>
+      <a href="/articles/" class="">articles (es)</a>
+      <a href="/books/en/" class="activo">books</a>
+      <a href="/about.html" class="">about (es)</a>
+    </nav>
+    <form action="/search.html" method="get" class="buscar" role="search">
+      <label for="buscar-cabecera">grep</label>
+      <input type="search" id="buscar-cabecera" name="q" placeholder="search..." aria-label="Search articles (Spanish)" />
+    </form>
+  </div>
+</header>
+
+
+  <div class="barra-seccion">
+    <div class="barra-marca">
+      <span class="barra-nombre">SHELTER TERMINAL</span>
+      <span class="barra-sub">book archive · sector C-3 · Z-DAY +21</span>
     </div>
-    <div class="controles">
-      <div class="idioma" role="group" aria-label="LANGUAGE">
-        <span>LANGUAGE</span><a href="/books/" hreflang="es" data-lang="es" aria-current="false">ES</a><a href="/books/en/" hreflang="en" data-lang="en" aria-current="true">EN</a>
-      </div>
-      <a class="salir" href="/">[ exit to jafs.github.io ]</a>
+    <div class="idioma" role="group" aria-label="LANGUAGE">
+      <span>LANGUAGE</span><a href="/books/" hreflang="es" data-lang="es" aria-current="false">ES</a><a href="/books/en/" hreflang="en" data-lang="en" aria-current="true">EN</a>
     </div>
-  </header>
+  </div>
 
   <div class="estado">
     <span><b>SYSTEM:</b> online</span>
@@ -129,10 +147,19 @@
     </form>
   </dialog>
 
+  <p class="otros-archivos">Other files outside the series: <a href="/books/tokens.html" hreflang="es">Tokens</a> (short story, Spanish only)</p>
+
   <footer class="pie">
-    <span>Other files outside the series: <a href="/books/tokens.html" hreflang="es">Tokens</a> (short story, Spanish only)</span>
-    <span class="cursor">end of transmission</span>
-  </footer>
+  <nav aria-label="Social">
+    <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer">[ linkedin ]</a>
+    <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer">[ youtube ]</a>
+    <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer">[ instagram ]</a>
+    <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer">[ github ]</a>
+    <a href="/feed.xml">[ rss ]</a>
+  </nav>
+  <span class="cursor">© 2025 José Antonio Fuentes Santiago · end of transmission</span>
+</footer>
+
 
 </div></div>
 <script src="/js/books.js"></script>

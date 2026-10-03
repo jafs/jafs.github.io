@@ -43,6 +43,7 @@
 
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
+  <link rel="stylesheet" href="/css/terminal.css">
 
   <script type="application/ld+json">
   {
@@ -67,30 +68,30 @@
 
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-900 text-gray-100">
-  <header class="bg-black text-white py-4 shadow-md">
-  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-    <a href="/" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago" class="flex items-center text-2xl font-bold">
-      <img src="/images/logo-mini.webp" alt="" class="w-8 h-8 mr-2" />
-      <span>JAFS</span>
-    </a>
-    <div class="flex items-center gap-4">
-      <nav class="flex gap-4">
-        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-white font-semibold">Artículos</a>
-        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
-        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
-      </nav>
-      <form action="/search.html" method="get">
-        <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
-      </form>
-    </div>
+<body>
+<div class="crt"><div class="envoltorio">
+  <header class="cabecera">
+  <a href="/" class="marca" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago, inicio">
+    <img src="/images/logo-mini.webp" alt="" width="40" height="40" />
+    <span><span class="marca-nombre">JAFS</span><span class="marca-sub">José Antonio Fuentes Santiago</span></span>
+  </a>
+  <div class="controles">
+    <nav class="menu" aria-label="Principal">
+      <a href="/index.html" class="">inicio</a>
+      <a href="/articles/" class="activo">artículos</a>
+      <a href="/books/" class="">libros</a>
+      <a href="/about.html" class="">sobre mí</a>
+    </nav>
+    <form action="/search.html" method="get" class="buscar" role="search">
+      <label for="buscar-cabecera">grep</label>
+      <input type="search" id="buscar-cabecera" name="q" placeholder="buscar..." aria-label="Buscar artículos" />
+    </form>
   </div>
 </header>
 
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">DDD en un apocalipsis zombi. Parte 2</h1><p class="text-gray-400 text-sm mb-6">28-02-2026</p><p>En la <a href="/articles/posts/20260221.html">primera entrega</a> de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un <strong>lenguaje ubicuo</strong> para acabar con la brecha entre lo que dice la líder del grupo y lo que escribe el desarrollador. Dividimos el sistema en <strong>Bounded Contexts</strong> para que Sanidad, Logística y Comando no se pisoteen entre sí. Aprendimos a distinguir <strong>entidades</strong> de <strong>objetos de valor</strong> y, por último, vimos cómo los <strong>agregados</strong> actúan como el guardián en la puerta del refugio: nadie modifica nada sin pasar por él. Te recomiendo leerlo antes, ya que reutilizaremos varias de las clases que definimos en él.</p>
+  <main>
+    <article class="articulo prose caja">
+      <h1>DDD en un apocalipsis zombi. Parte 2</h1><p class="fecha-articulo">28-02-2026</p><p>En la <a href="/articles/posts/20260221.html">primera entrega</a> de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un <strong>lenguaje ubicuo</strong> para acabar con la brecha entre lo que dice la líder del grupo y lo que escribe el desarrollador. Dividimos el sistema en <strong>Bounded Contexts</strong> para que Sanidad, Logística y Comando no se pisoteen entre sí. Aprendimos a distinguir <strong>entidades</strong> de <strong>objetos de valor</strong> y, por último, vimos cómo los <strong>agregados</strong> actúan como el guardián en la puerta del refugio: nadie modifica nada sin pasar por él. Te recomiendo leerlo antes, ya que reutilizaremos varias de las clases que definimos en él.</p>
 <p>Todo eso era el interior. El núcleo. La lógica que mantiene el orden dentro de las paredes.</p>
 <p>Pero un refugio necesita algo más para sobrevivir: operaciones que involucran a varios actores a la vez, mecanismos para comunicarse sin crear dependencias directas entre contextos, y una forma de persistir el estado sin que el dominio sepa si estás usando PostgreSQL o cuadernos viejunos. Alguien tiene que coordinar todo eso sin convertirse en la única persona que lo sabe todo y lo controla todo. Ya sabes cómo va esto de los apocalipsis zombi: quien sabe dónde están las llaves del generador, tiene acceso a los suministros críticos y entiende cómo funciona el sistema de ventilación es, invariablemente, la primera persona en convertirse en zombi en el peor momento posible. Y cuando eso pasa, el sistema entero se va a pique porque nadie más sabe cómo funciona.</p>
 <p>En esta segunda parte vamos a ver exactamente eso: <strong>Servicios de Dominio</strong>, <strong>Repositories</strong>, la <strong>capa de Aplicación</strong> y <strong>Eventos de Dominio</strong>.</p>
@@ -535,7 +536,7 @@ public admit(survivor: Survivor): void {
   }
 }
 </code></pre>
-<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">🗒️ <strong>NOTA</strong><br />En sistemas robustos, se suele utilizar el patrón Outbox para garantizar la consistencia de que tras realizar todas las transacciones se publique correctamente el evento. Lo dejaremos fuera del alcance de este artículo. Podéis leer más sobre él en la <a href="/articles/posts/20260322.html">cuarta parte</a> de esta serie de artículos.</div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="8" height="1"/><rect x="2" y="11" width="8" height="1"/><rect x="2" y="1" width="1" height="11"/><rect x="9" y="1" width="1" height="11"/><rect x="3" y="0" width="1" height="2"/><rect x="5" y="0" width="1" height="2"/><rect x="7" y="0" width="1" height="2"/><rect x="4" y="4" width="4" height="1"/><rect x="4" y="6" width="4" height="1"/><rect x="4" y="8" width="3" height="1"/></svg><strong>NOTA</strong><br />En sistemas robustos, se suele utilizar el patrón Outbox para garantizar la consistencia de que tras realizar todas las transacciones se publique correctamente el evento. Lo dejaremos fuera del alcance de este artículo. Podéis leer más sobre él en la <a href="/articles/posts/20260322.html">cuarta parte</a> de esta serie de artículos.</div></p>
 <h3>¿Quién escucha los eventos?</h3>
 <p>Diferentes partes del sistema pueden suscribirse a los eventos que les interesan:</p>
 <pre><code class="language-typescript">// El servicio de Logística escucha admisiones
@@ -584,26 +585,18 @@ eventBus.on(&quot;QuarantineActivated&quot;, (event) =&gt; {
 
     </article>
   </main>
-  <footer class="bg-black text-white py-4 mt-12">
-  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-    <div class="flex gap-4">
-      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-      </a>
-      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-      </a>
-      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-      </a>
-      <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="GitHub">
-        <img src="/images/github.svg" alt="GitHub" class="w-6 h-6" />
-      </a>
-    </div>
-    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
-  </div>
+  <footer class="pie">
+  <nav aria-label="Redes">
+    <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer">[ linkedin ]</a>
+    <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer">[ youtube ]</a>
+    <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer">[ instagram ]</a>
+    <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer">[ github ]</a>
+    <a href="/feed.xml">[ rss ]</a>
+  </nav>
+  <span class="cursor">© 2025 José Antonio Fuentes Santiago · fin de la transmisión</span>
 </footer>
 
+</div></div>
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

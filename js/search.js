@@ -132,22 +132,20 @@
     const pageResults = allResults.slice(start, end);
 
     elements.resultsList.innerHTML = pageResults.map(article => {
+      const url = escapeHtml(article.url);
       const imageHtml = article.imageMini
-        ? `<figure class="w-24 h-24">
-              <img src="${escapeHtml(article.imageMini)}" alt="${escapeHtml(article.title)}" class="object-cover rounded w-full h-full" />
-            </figure>`
+        ? `<a href="${url}" class="miniatura" tabindex="-1" aria-hidden="true">
+              <img src="${escapeHtml(article.imageMini)}" alt="" loading="lazy" />
+            </a>`
         : '';
 
-      return `<li class="py-2 border-b border-gray-700">
-          <article class="flex gap-4">
+      return `<li>
+          <article class="entrada${article.imageMini ? '' : ' sin-imagen'}">
             ${imageHtml}
-            <div class="flex-1">
-              <header>
-                <a href="${escapeHtml(article.url)}" class="font-semibold text-lg hover:text-cyan-400">${escapeHtml(article.title)}</a>
-                <span class="text-gray-500">—</span>
-                <time datetime="${escapeHtml(article.date)}" class="text-gray-400 text-sm">${escapeHtml(article.date)}</time>
-              </header>
-              <p class="text-gray-300 leading-relaxed mt-1">${escapeHtml(article.description)}</p>
+            <div>
+              <time datetime="${escapeHtml(article.date)}">${escapeHtml(article.date)}</time>
+              <h2><a href="${url}">${escapeHtml(article.title)}</a></h2>
+              <p>${escapeHtml(article.description)}</p>
             </div>
           </article>
         </li>`;
@@ -166,7 +164,7 @@
 
     // Previous button
     if (currentPage > 1) {
-      buttons.push(`<button class="px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 transition-colors" data-page="${currentPage - 1}">← Anterior</button>`);
+      buttons.push(`<button class="boton" data-page="${currentPage - 1}">&lt; anterior</button>`);
     }
 
     // Page numbers (show current, prev, next, first, last)
@@ -178,21 +176,17 @@
 
       // Add ellipsis if there's a gap
       if (page - lastPage > 1) {
-        buttons.push(`<span class="px-2 py-2 text-gray-400">...</span>`);
+        buttons.push(`<span class="pista">...</span>`);
       }
 
       const isActive = page === currentPage;
-      const buttonClass = isActive
-        ? 'px-4 py-2 bg-cyan-700 text-white rounded font-semibold'
-        : 'px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 transition-colors';
-
-      buttons.push(`<button class="${buttonClass}" data-page="${page}" ${isActive ? 'disabled' : ''}>${page}</button>`);
+      buttons.push(`<button class="boton" data-page="${page}" ${isActive ? 'disabled' : ''}>${page}</button>`);
       lastPage = page;
     });
 
     // Next button
     if (currentPage < totalPages) {
-      buttons.push(`<button class="px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 transition-colors" data-page="${currentPage + 1}">Siguiente →</button>`);
+      buttons.push(`<button class="boton" data-page="${currentPage + 1}">siguiente &gt;</button>`);
     }
 
     elements.pagination.innerHTML = buttons.join('');

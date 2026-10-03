@@ -36,6 +36,7 @@
 
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
+  <link rel="stylesheet" href="/css/terminal.css">
 
   <script type="application/ld+json">
   {
@@ -55,32 +56,32 @@
   </script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-900 text-gray-100">
-  <header class="bg-black text-white py-4 shadow-md">
-  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-    <a href="/" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago" class="flex items-center text-2xl font-bold">
-      <img src="/images/logo-mini.webp" alt="" class="w-8 h-8 mr-2" />
-      <span>JAFS</span>
-    </a>
-    <div class="flex items-center gap-4">
-      <nav class="flex gap-4">
-        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-gray-300 hover:text-white transition-colors">Artículos</a>
-        <a href="/books/" class="text-white font-semibold">Libros</a>
-        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
-      </nav>
-      <form action="/search.html" method="get">
-        <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
-      </form>
-    </div>
+<body>
+<div class="crt"><div class="envoltorio">
+  <header class="cabecera">
+  <a href="/" class="marca" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago, inicio">
+    <img src="/images/logo-mini.webp" alt="" width="40" height="40" />
+    <span><span class="marca-nombre">JAFS</span><span class="marca-sub">José Antonio Fuentes Santiago</span></span>
+  </a>
+  <div class="controles">
+    <nav class="menu" aria-label="Principal">
+      <a href="/index.html" class="">inicio</a>
+      <a href="/articles/" class="">artículos</a>
+      <a href="/books/" class="activo">libros</a>
+      <a href="/about.html" class="">sobre mí</a>
+    </nav>
+    <form action="/search.html" method="get" class="buscar" role="search">
+      <label for="buscar-cabecera">grep</label>
+      <input type="search" id="buscar-cabecera" name="q" placeholder="buscar..." aria-label="Buscar artículos" />
+    </form>
   </div>
 </header>
 
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
+  <main>
+    <article class="articulo prose caja">
       <div class="flex flex-col md:flex-row gap-6 mb-8">
   <img src="/images/books/tokens.webp" alt="Portada del libro" class="shadow-lg rounded not-prose" style="width: 292px; height: 400px" />
-  <div class="flex-1"><h1 class="text-4xl font-bold mb-2">Tokens</h1><p><em>Una historia de ciencia ficción sobre la dependencia de la Inteligencia Artificial.</em></p>
+  <div class="flex-1"><h1>Tokens</h1><p><em>Una historia de ciencia ficción sobre la dependencia de la Inteligencia Artificial.</em></p>
 <p>¿Y si el mundo hubiera perdido su humanidad y sus pensamientos para delegarlos a la Inteligencia Artificial? En un futuro no tan lejano, la sociedad se ha vuelto completamente dependiente de los sistemas inteligentes, entregando su autonomía a cambio de comodidad.</p>
 <p>A través de los ojos de Marta, una chica que pertenece al grupo de los que llaman «sincronizados», exploramos un mundo donde las emociones y la creatividad tienen un coste computacional. Y donde el pensamiento crítico es una quimera del pasado.</p>
 </div>
@@ -92,26 +93,18 @@
 <a href="https://www.wattpad.com/story/409098881-tokens" data-umami-event="download" data-umami-event-file="tokens-wattpad" class="mt-2 p-2 bg-cyan-800 hover:bg-cyan-500 text-white hover:text-white rounded box-border inline-flex items-center gap-2 not-prose"><img src="/images/icons/wattpad.svg" alt="Leer en Wattpad" class="inline-block w-6 h-6 mr-1 align-middle not-prose" /><span>Leer en Wattpad</span></a></div>
     </article>
   </main>
-  <footer class="bg-black text-white py-4 mt-12">
-  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-    <div class="flex gap-4">
-      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-      </a>
-      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-      </a>
-      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-      </a>
-      <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="GitHub">
-        <img src="/images/github.svg" alt="GitHub" class="w-6 h-6" />
-      </a>
-    </div>
-    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
-  </div>
+  <footer class="pie">
+  <nav aria-label="Redes">
+    <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer">[ linkedin ]</a>
+    <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer">[ youtube ]</a>
+    <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer">[ instagram ]</a>
+    <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer">[ github ]</a>
+    <a href="/feed.xml">[ rss ]</a>
+  </nav>
+  <span class="cursor">© 2025 José Antonio Fuentes Santiago · fin de la transmisión</span>
 </footer>
 
+</div></div>
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

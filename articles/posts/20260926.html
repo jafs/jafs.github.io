@@ -43,6 +43,7 @@
 
   <link rel="stylesheet" href="/css/dist.css">
   <link rel="stylesheet" href="/css/github-dark.min.css">
+  <link rel="stylesheet" href="/css/terminal.css">
 
   <script type="application/ld+json">
   {
@@ -67,30 +68,30 @@
 
   <script defer src="https://cloud.umami.is/script.js" data-website-id="56549d62-265c-4a48-886d-5538b68e16ed"></script>
 </head>
-<body class="bg-gray-900 text-gray-100">
-  <header class="bg-black text-white py-4 shadow-md">
-  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-    <a href="/" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago" class="flex items-center text-2xl font-bold">
-      <img src="/images/logo-mini.webp" alt="" class="w-8 h-8 mr-2" />
-      <span>JAFS</span>
-    </a>
-    <div class="flex items-center gap-4">
-      <nav class="flex gap-4">
-        <a href="/index.html" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="/articles/" class="text-white font-semibold">Artículos</a>
-        <a href="/books/" class="text-gray-300 hover:text-white transition-colors">Libros</a>
-        <a href="/about.html" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
-      </nav>
-      <form action="/search.html" method="get">
-        <input type="search" name="q" placeholder="Buscar..." class="px-3 py-2 rounded bg-gray-800 text-white text-sm placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-40" aria-label="Buscar artículos" />
-      </form>
-    </div>
+<body>
+<div class="crt"><div class="envoltorio">
+  <header class="cabecera">
+  <a href="/" class="marca" title="José Antonio Fuentes Santiago" aria-label="José Antonio Fuentes Santiago, inicio">
+    <img src="/images/logo-mini.webp" alt="" width="40" height="40" />
+    <span><span class="marca-nombre">JAFS</span><span class="marca-sub">José Antonio Fuentes Santiago</span></span>
+  </a>
+  <div class="controles">
+    <nav class="menu" aria-label="Principal">
+      <a href="/index.html" class="">inicio</a>
+      <a href="/articles/" class="activo">artículos</a>
+      <a href="/books/" class="">libros</a>
+      <a href="/about.html" class="">sobre mí</a>
+    </nav>
+    <form action="/search.html" method="get" class="buscar" role="search">
+      <label for="buscar-cabecera">grep</label>
+      <input type="search" id="buscar-cabecera" name="q" placeholder="buscar..." aria-label="Buscar artículos" />
+    </form>
   </div>
 </header>
 
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="prose prose-lg prose-invert max-w-none bg-gray-800 rounded-lg shadow-sm p-8">
-      <h1 class="text-4xl font-bold mb-2">Modelos de decisión: introducción a Laya</h1><p class="text-gray-400 text-sm mb-6">26-09-2026</p><h2>El cerebro de un zombi es un modelo de decisión</h2>
+  <main>
+    <article class="articulo prose caja">
+      <h1>Modelos de decisión: introducción a Laya</h1><p class="fecha-articulo">26-09-2026</p><h2>El cerebro de un zombi es un modelo de decisión</h2>
 <p>Llevábamos tres semanas en el refugio de la vieja central eléctrica. Necesitaba un poco de aire así que salí a la terraza. Allí estaba Julia anotando observaciones en un desgastado bloc de notas. Me invitó a que me acercara en silencio.</p>
 <p>—Ven —dijo susurrando—. Tienes que ver esto.</p>
 <p>En el parking inferior se veía al típico infectado de manual, con una desgarrada camisa de oficinista y media pierna destrozada, lo que le provocaba una cojera ya irreparable. Julia tiró una lata vacía a su izquierda, sobre un grupo de bolsas de basura, lo que amortiguó parte del sonido. El zombi giró la cabeza y terminó ignorando el sonido. Luego tiró otra lata a la derecha sobre el asfalto, lo que provocó que comenzase a rodar. El zombi se quedó quieto un instante y echó a cojear rápidamente hacia la segunda lata.</p>
@@ -110,7 +111,7 @@
 <p>TypeSafe lo resume en una frase: <em>«unstructured state in, typed probabilistic decisions out»</em>. Si lo traducimos para evitar que uses el Sistema 2: le das una descripción desordenada de la situación y te devuelve una decisión, de entre las que tú hayas permitido, acompañada de su probabilidad.</p>
 <p>Pero, ahí no acaba la cosa. Tres días después, el 18 de septiembre, Convai Innovations, una empresa india dirigida por Nandakishor Mukkunnoth, publicó <a href="https://laya.convaiinnovations.com/"><strong>Laya</strong></a>. Prácticamente, parte de la misma idea, pero con una diferencia que para nuestro refugio con conexión inestable se agradece mucho: los pesos son abiertos, la licencia es Apache 2.0 y además funciona casi en una cafetera.</p>
 <p>Laya es el que usaremos más adelante para simular el cerebro del zombi. Pero antes toca entender qué diantres es todo esto.</p>
-<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">🎓 <strong>CURIOSIDAD IRRELEVANTE</strong><p>Para que te hagas una idea, he conseguido moverlo en CPU, una vieja i7-6500U. Y el tiempo que tarda en responder es inferior al segundo para operaciones sencillas, y con operaciones múltiples menos de dos segundos.</p></div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="4" y="2" width="4" height="1"/><rect x="2" y="3" width="8" height="1"/><rect x="0" y="4" width="12" height="1"/><rect x="2" y="5" width="8" height="1"/><rect x="4" y="6" width="4" height="1"/><rect x="3" y="7" width="6" height="2"/><rect x="11" y="5" width="1" height="5"/></svg><strong>CURIOSIDAD IRRELEVANTE</strong><p>Para que te hagas una idea, he conseguido moverlo en CPU, una vieja i7-6500U. Y el tiempo que tarda en responder es inferior al segundo para operaciones sencillas, y con operaciones múltiples menos de dos segundos.</p></div></p>
 <h2>Qué es un modelo de decisión</h2>
 <p>Ya lo comenté antes, pero aquí vuelve el cansino. Un LLM escribe su respuesta poco a poco: cada palabra depende de las que ya ha escrito y, hasta que no pone el punto final, como con las cajas de bombones, nunca sabes lo que te va a tocar.</p>
 <p>Pero, un <strong>modelo de decisión</strong> no escribe nada. Actúa como cuando era joven (ah, que recuerdos), y me tocaba hacer un examen tipo test. Leía el enunciado entero de un vistazo, miraba las opciones y marcaba la casilla que creía más probable.</p>
@@ -151,12 +152,10 @@
 <p>Lo primero que se nota cuando los pruebas es la velocidad. Laya responde a una pregunta en unos 40 milisegundos en una tarjeta gráfica de servidor de las modestas, y como ya indiqué antes, en un portátil sin tarjeta gráfica tarda entre medio y un segundo. Además, todas las preguntas de una misma llamada se resuelven a la vez, así que tiene la ventaja de que preguntarle diez cosas no tarda diez veces más.</p>
 <p>Si no fuera poco lo anterior, todo eso ocurre en tu PC. Ya que es un modelo de unos cientos de megas que corre en tu máquina y no depende de ninguna API, ni de la conexión (bueno para descargarlo sí, como es obvio). Créeme, cuando estás en un refugio cuya antena de la azotea está sujeta con cinta americana, esto no es un detalle menor.</p>
 <p>Pero una de las cosas que más me gusta es que nunca, pero de verdad que nunca, te va a responder con algo que no esté en la lista que le has proporcionado. El propio texto de presentación de Laya justamente presume de que no hay nada que alucinar (<em>nothing to hallucinate</em>). Así que se acabó el JSON con saludo incluido o el «atacár» con tilde que rompía el <code>switch</code>.</p>
-<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">🗒️ <strong>NOTA EN LA CABAÑA</strong><p>Ojo, que no alucine no quiere decir que acierte. Ya que se equivoca, y bastante más de lo que me gustaría (lo veremos más adelante), pero al menos siempre que se equivoca es proporcionado los valores de tu lista.</p></div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="8" height="1"/><rect x="2" y="11" width="8" height="1"/><rect x="2" y="1" width="1" height="11"/><rect x="9" y="1" width="1" height="11"/><rect x="3" y="0" width="1" height="2"/><rect x="5" y="0" width="1" height="2"/><rect x="7" y="0" width="1" height="2"/><rect x="4" y="4" width="4" height="1"/><rect x="4" y="6" width="4" height="1"/><rect x="4" y="8" width="3" height="1"/></svg><strong>NOTA EN LA CABAÑA</strong><p>Ojo, que no alucine no quiere decir que acierte. Ya que se equivoca, y bastante más de lo que me gustaría (lo veremos más adelante), pero al menos siempre que se equivoca es proporcionado los valores de tu lista.</p></div></p>
 <h2>Hacer pensar al zombi: ingeniería de decisiones</h2>
 <p>Con un LLM hacemos lo que se ha dado en llamar <em>prompt engineering</em>. Escribes instrucciones cada vez más largas, pero si algo falla pones en mayúsculas lo IMPORTANTE y cruzas los dedos. Con un modelo de decisión eso sirve de poco, porque no hay instrucciones largas que leer. El trabajo está en diseñar bien las preguntas, algo que podríamos llamar <strong>ingeniería de decisiones</strong>.</p>
 <p>Esa noche, con la central a oscuras y una linterna de dinamo que había que recargar cada diez minutos (Julia y yo nos íbamos turnando porque era un rollo estar con la manivela todo el rato), nos pusimos a pensar en el posible diseño que simulara el cerebro del zombi que habíamos estado observando.</p>
-<!-- IMAGEN: Julia y el narrador (en sombra) de noche en la central, con el bloc y la linterna de dinamo. Prompt pendiente. -->
-
 <h3>Lo que percibe</h3>
 <p>Lo primero es el <strong>estado</strong>, es decir, todo lo que el zombi percibe en un momento dado. Puede ser texto libre, pero siempre es recomendable tener un diccionario, porque te obliga a pensar qué información es la importante:</p>
 <pre><code class="language-python">estado = {
@@ -169,7 +168,7 @@
 <p>—¿Por qué pones «unos 8 metros» y no un 8 y ya está? —preguntó Julia.</p>
 <p>Esto es debido a que tras las pruebas vimos que el cerebro del zombi lee, pero no es capaz de hacer cálculos. Un <code>8.2</code> suelto le dice bastante menos que «unos 8 metros». Las descripciones legibles funcionan mejor en estos casos. Es por ello que cuando haya que comparar números, lo ideal es hacerlo mediante código (en un momento vamos con eso).</p>
 <p>Además, cabe destacar que el nombre de cada campo también lo lee. Con exactamente la misma escena, el zombi ataca con un 94 % de seguridad si la distancia va en un campo <code>distancia_presa</code> y con un 81 % si el campo se llama <code>vista</code>. Así que es buena idea elegir nombres que representen bien a qué corresponde cada campo.</p>
-<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">🗒️ <strong>NOTA EN LA CABAÑA</strong><p>Una vez que hayas escogido los nombres y veas que el modelo actúa bien con esa combinación en la mayor parte de casos, evita cambiar los nombres, ya que cada cambio mueve los porcentajes.</p></div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="8" height="1"/><rect x="2" y="11" width="8" height="1"/><rect x="2" y="1" width="1" height="11"/><rect x="9" y="1" width="1" height="11"/><rect x="3" y="0" width="1" height="2"/><rect x="5" y="0" width="1" height="2"/><rect x="7" y="0" width="1" height="2"/><rect x="4" y="4" width="4" height="1"/><rect x="4" y="6" width="4" height="1"/><rect x="4" y="8" width="3" height="1"/></svg><strong>NOTA EN LA CABAÑA</strong><p>Una vez que hayas escogido los nombres y veas que el modelo actúa bien con esa combinación en la mayor parte de casos, evita cambiar los nombres, ya que cada cambio mueve los porcentajes.</p></div></p>
 <h3>Lo que decide</h3>
 <p>Ya tienes el estado que debe analizarse, lo siguiente es saber será preparar la lista de decisiones. Es decir, sobré qué quieres obtener los datos probabilísticos. Cada decisión pasa así a convertirse en una pregunta.</p>
 <p>Julia estuvo dándole vueltas y al final pensó en esta lista: qué hace el zombi a continuación, cuánta hambre tiene y si hay un humano cerca.</p>
@@ -311,32 +310,24 @@ print(respuesta[&quot;answers&quot;][&quot;accion&quot;][&quot;choice&quot;])   
 <h2>De vuelta en la terraza</h2>
 <p>Unas semanas después volví a subir a la terraza. Julia seguía allí, con el bloc lleno de estados, criterios y porcentajes tachados. Abajo, en el parking, el oficinista de la media pierna perseguía una lata que había arrastrado el viento.</p>
 <p>—Este no falla tanto como nuestra simulación —dijo sin levantar la vista—. Cada vez que suena algo, sale disparado a la zona del ruido. <br>—Me da que es porque su cerebro al final es más simple y solo se hace una pregunta con dos respuestas posibles. <br>—Bueno, hay muchos supervivientes así —reflexionó Julia—. Sólo ven blanco o negro pero se pierden los matices de gris.</p>
-<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">🗒️ <strong>NOTA EN LA CABAÑA</strong><p>Todo lo que has visto en la terminal está hecho con el modelo tal como se descarga, sin entrenarlo. Para seis situaciones y un puñado de opciones da para jugar, y a ratos para algo más. Pero si en tu refugio las decisiones son más complejas, o simplemente necesitas que acierte más de lo que acierta, toca hacer lo que dice la model card: especializarlo con tus datos. El proyecto incluye <a href="https://github.com/NandhaKishorM/laya/blob/main/notebooks/laya_finetune_typed_decisions_2xT4_kaggle.ipynb">un cuaderno</a> que te explica como hacer todo el proceso.</p></div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="8" height="1"/><rect x="2" y="11" width="8" height="1"/><rect x="2" y="1" width="1" height="11"/><rect x="9" y="1" width="1" height="11"/><rect x="3" y="0" width="1" height="2"/><rect x="5" y="0" width="1" height="2"/><rect x="7" y="0" width="1" height="2"/><rect x="4" y="4" width="4" height="1"/><rect x="4" y="6" width="4" height="1"/><rect x="4" y="8" width="3" height="1"/></svg><strong>NOTA EN LA CABAÑA</strong><p>Todo lo que has visto en la terminal está hecho con el modelo tal como se descarga, sin entrenarlo. Para seis situaciones y un puñado de opciones da para jugar, y a ratos para algo más. Pero si en tu refugio las decisiones son más complejas, o simplemente necesitas que acierte más de lo que acierta, toca hacer lo que dice la model card: especializarlo con tus datos. El proyecto incluye <a href="https://github.com/NandhaKishorM/laya/blob/main/notebooks/laya_finetune_typed_decisions_2xT4_kaggle.ipynb">un cuaderno</a> que te explica como hacer todo el proceso.</p></div></p>
 <p>Desde entonces, antes de pedirle nada a una IA me hago la pregunta que quedó apuntada en la primera página del bloc: ¿necesito una respuesta o una decisión? Si es una respuesta, que la escriba un LLM. Si es una decisión y es determinista la programo y si no uso un <strong>modelo de decisión</strong>.</p>
 <p>Con todo esto, hemos aprendido que nunca puedes fiarte de un zombi que dice estar seguro al 95%. Y menos si habla jemer.</p>
 
     </article>
   </main>
-  <footer class="bg-black text-white py-4 mt-12">
-  <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-    <div class="flex gap-4">
-      <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="LinkedIn">
-        <img src="/images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-      </a>
-      <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube">
-        <img src="/images/youtube.svg" alt="YouTube" class="w-6 h-6" />
-      </a>
-      <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram">
-        <img src="/images/instagram.svg" alt="Instagram" class="w-6 h-6" />
-      </a>
-      <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="GitHub">
-        <img src="/images/github.svg" alt="GitHub" class="w-6 h-6" />
-      </a>
-    </div>
-    <div class="text-center">© 2025 — José Antonio Fuentes Santiago</div>
-  </div>
+  <footer class="pie">
+  <nav aria-label="Redes">
+    <a href="https://www.linkedin.com/in/joseafs/" target="_blank" rel="noopener noreferrer">[ linkedin ]</a>
+    <a href="https://www.youtube.com/@jafsdeveloper" target="_blank" rel="noopener noreferrer">[ youtube ]</a>
+    <a href="https://www.instagram.com/jafs_developer/" target="_blank" rel="noopener noreferrer">[ instagram ]</a>
+    <a href="https://github.com/jafs" target="_blank" rel="noopener noreferrer">[ github ]</a>
+    <a href="/feed.xml">[ rss ]</a>
+  </nav>
+  <span class="cursor">© 2025 José Antonio Fuentes Santiago · fin de la transmisión</span>
 </footer>
 
+</div></div>
   <script src="/js/highlight.min.js"></script>
   <script src="/js/main.js"></script>
 </body>

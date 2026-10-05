@@ -191,6 +191,24 @@ h1, h2, h3 { margin: 0; font-weight: 600; color: var(--fosforo-vivo); letter-spa
 .articulo :is(.hljs-addition) { color: var(--fosforo-vivo); background: var(--relleno); }
 .articulo :is(.hljs-deletion) { color: var(--alerta); background: #1a0806; }
 
+/* ---------------------------------------------------------------- visor de imágenes
+   <dialog> nativo con el mismo tubo: portadas de los libros (books.js) e imágenes de los artículos (main.js). */
+.visor { border: 0; padding: 0; background: transparent; max-width: none; max-height: none; width: 100vw; height: 100vh; overflow: auto; display: grid; place-items: center; }
+.visor:not([open]) { display: none; }
+.visor::backdrop { background: rgba(2, 4, 2, .9); }
+.visor-marco { margin: 16px; padding: 14px 16px; border: 1px solid var(--linea-viva); border-radius: 6px; background: var(--panel); box-shadow: 0 0 24px rgba(47, 143, 58, .35), inset 0 0 12px rgba(47, 143, 58, .05); display: flex; flex-direction: column; gap: 8px; max-width: 100%; }
+.visor-marco .cabecera-caja { margin-bottom: 0; }
+.visor-marco img { display: block; max-width: calc(100vw - 68px); max-height: calc(100vh - 140px); width: auto; height: auto; margin: 0 auto; border: 1px solid var(--linea); }
+.visor .pista { text-align: center; margin: 0; }
+.visor-pie { max-width: calc(100vw - 68px); margin: 0; font-size: 13px; color: var(--fosforo); text-align: center; }
+.visor-pie:empty { display: none; }
+.visor-mandos { display: flex; gap: 14px; }
+.enlace { font: inherit; font-size: 12px; color: var(--fosforo-tenue); background: none; border: 0; padding: 0; cursor: pointer; text-shadow: inherit; }
+.enlace:hover { color: var(--fosforo-vivo); }
+.enlace[hidden] { display: none; }
+.articulo img.ampliable { cursor: zoom-in; transition: box-shadow .2s ease; }
+.articulo img.ampliable:hover, .articulo img.ampliable:focus-visible { box-shadow: 0 0 14px rgba(124, 240, 135, .35); outline: 0; }
+
 /* ---------------------------------------------------------------- búsqueda */
 .campo-busqueda { display: flex; align-items: center; gap: 8px; border: 1px solid var(--linea-viva); border-radius: 5px; background: var(--relleno); padding: 10px 12px; margin: 12px 0 8px; }
 .campo-busqueda:focus-within { border-color: var(--fosforo-vivo); box-shadow: 0 0 10px rgba(124, 240, 135, .25); }
@@ -213,5 +231,5 @@ h1, h2, h3 { margin: 0; font-weight: 600; color: var(--fosforo-vivo); letter-spa
 
 @media (prefers-reduced-motion: reduce) {
   .cursor::after { animation: none; }
-  .miniatura img { transition: none; }
+  .miniatura img, .articulo img.ampliable { transition: none; }
 }

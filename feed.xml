@@ -6,7 +6,7 @@
     <description>Artículos sobre programación, TypeScript, arquitectura de software y desarrollo web.</description>
     <language>es</language>
     <managingEditor>contacto@jafs.github.io (José Antonio Fuentes Santiago)</managingEditor>
-    <lastBuildDate>Sat, 26 Sep 2026 15:04:21 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 05 Oct 2026 16:45:13 GMT</lastBuildDate>
     <atom:link href="https://jafs.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://jafs.github.io/favicon-96x96.png</url>
@@ -15,6 +15,16 @@
       <width>96</width>
       <height>96</height>
     </image>
+    <item>
+      <title>Entrenando modelos de decisión: caso práctico con Laya</title>
+      <link>https://jafs.github.io/articles/posts/20261005.html</link>
+      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20261005.html</guid>
+      <description>Cómo calibramos y entrenamos con LoRA a Laya en un PC con una gráfica de hace años, cuánto mejoró y en qué nos estuvo engañando por el camino.</description>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <category>Programación</category>
+      <category>IA</category>
+      <media:content url="https://jafs.github.io/resources/20261005/laya-entrenamiento.webp" medium="image" />
+    </item>
     <item>
       <title>Modelos de decisión: introducción a Laya</title>
       <link>https://jafs.github.io/articles/posts/20260926.html</link>
@@ -203,16 +213,6 @@
       <category>testing</category>
       <category>TDD</category>
       <media:content url="https://jafs.github.io/images/tdd-mini.webp" medium="image" />
-    </item>
-    <item>
-      <title>Cosas que quizás no sabías de CSS</title>
-      <link>https://jafs.github.io/articles/posts/20221029.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20221029.html</guid>
-      <description>Con la reciente encuesta del estado de CSS, vamos a comentar algunas características que pueden ser menos conocidas de CSS. Espero que os sirva de ayuda &amp;#x1f603;.</description>
-      <pubDate>Sat, 29 Oct 2022 17:15:30 GMT</pubDate>
-      <category>Programación</category>
-      <category>CSS</category>
-      <media:content url="https://jafs.github.io/images/css-mini.webp" medium="image" />
     </item>
   </channel>
 </rss>

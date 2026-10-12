@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', function(){
 // pasar a las demás. Usa el mismo <dialog class="visor"> que las portadas de los libros.
 function visorDeImagenes() {
   var imagenes = Array.prototype.filter.call(document.querySelectorAll('.articulo img'), function (img) {
-    return !img.closest('a');   // si la imagen es un enlace, manda el enlace
+    // Si la imagen es un enlace, manda el enlace; en una tabla son iconos o sprites, no se amplían.
+    return !img.closest('a, td, th');
   });
   var prueba = document.createElement('dialog');
   if (!imagenes.length || typeof prueba.showModal !== 'function') return;

@@ -7,7 +7,7 @@
   <meta name="description" content="En el principio Dahl y Nygaard crearon la programación orientada a objetos. Y esta se encontraba desordenada y vacía, y las tinieblas estaban sobre la faz de..." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, diseño y arquitectura, SOLID" />
-  <meta name="article:published_time" content="2022-01-07T12:00:19.000Z" />
+  <meta name="article:published_time" content="2022-01-07T00:00:00.000Z" />
   
 
   <!-- Open Graph -->
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/images/solid-logo.png" />
   
-  <meta property="article:published_time" content="2022-01-07T12:00:19.000Z" />
+  <meta property="article:published_time" content="2022-01-07T00:00:00.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
@@ -61,7 +61,7 @@
   "description": "En el principio Dahl y Nygaard crearon la programación orientada a objetos. Y esta se encontraba desordenada y vacía, y las tinieblas estaban sobre la faz de...",
   "url": "https://jafs.github.io/articles/posts/20220107.html",
   "inLanguage": "es",
-  "datePublished": "2022-01-07T12:00:19.000Z",
+  "datePublished": "2022-01-07T00:00:00.000Z",
   "image": "/images/solid-logo.png"
 }
   </script>
@@ -93,9 +93,7 @@
     <article class="articulo prose caja">
       <h1>Principios SOLID. Capítulo S: Single Responsibility Principle</h1><p class="fecha-articulo">07-01-2022</p><h2>Introducción</h2>
 <p>En el principio <a href="https://es.wikipedia.org/wiki/Ole-Johan_Dahl">Dahl</a> y <a href="https://es.wikipedia.org/wiki/Kristen_Nygaard">Nygaard</a> crearon la programación orientada a objetos. Y esta se encontraba desordenada y vacía, y las tinieblas estaban sobre la faz de la programación. Pero entonces <a href="https://es.wikipedia.org/wiki/Robert_C._Martin">Robert C. Martin</a>, habló a los congregados y les dijo:</p>
-<blockquote>
-<p>&quot;Aquí tenéis los 5 mandamientos de la programación orientada a objetos. No son verdades absolutas y no siempre podrán vivir conjuntamente. Usadlos con mi beneplácito&quot;.</p>
-</blockquote>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="3" y="1" width="2" height="1"/><rect x="2" y="2" width="2" height="1"/><rect x="1" y="3" width="2" height="2"/><rect x="1" y="5" width="4" height="4"/><rect x="9" y="1" width="2" height="1"/><rect x="8" y="2" width="2" height="1"/><rect x="7" y="3" width="2" height="2"/><rect x="7" y="5" width="4" height="4"/></svg><strong>CITA</strong><blockquote><p>Aquí tenéis los 5 mandamientos de la programación orientada a objetos. No son verdades absolutas y no siempre podrán vivir conjuntamente. Usadlos con mi beneplácito.</p></blockquote><cite>Robert C. Martin (versión apócrifa)</cite></div></p>
 <p>Ejem.... perdón, que quería realizar una idealización de nuestro pasado en la programación. Así que dejemos las introducciones grandilocuentes para comenzar a hablar de <a href="http://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html">SOLID</a>. ¿Qué es? ¿Con que fin nace?.</p>
 <p>SOLID es un conjunto de prácticas propuestas por Robert C. Martin con el fin de resolver los problemas existentes en las aplicaciones desarrolladas mediante programación orientada a objetos (POO), y así hacerlas más sencillas de leer, mantener y testear. El acrónimo se compone de las iniciales de cada uno de los cinco principios o prácticas que lo conforman:</p>
 <ul>
@@ -106,13 +104,9 @@
 <li><strong class="text-violet-500">D</strong>: <a href="/articles/posts/20220131.html">Dependency Inversion Principle o Principio de inversión de dependencias</a></li>
 </ul>
 <p>En muchas ocasiones, al buscar información sobre estos principios en la red, se encuentran datos poco claros o artículos demasiado extensos que generan más dudas que respuestas. Por esta razón, hemos creado una serie de cinco artículos en los que explicaremos cada uno de los principios de forma clara y práctica, para que puedas saber cuándo, cómo y por qué aplicarlos en tus proyectos.</p>
-<blockquote>
-<p>Cabe destacar que estos principios, no quedan relegados a las clases, se puede aplicar a otros ámbitos.</p>
-</blockquote>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="8" height="1"/><rect x="2" y="11" width="8" height="1"/><rect x="2" y="1" width="1" height="11"/><rect x="9" y="1" width="1" height="11"/><rect x="3" y="0" width="1" height="2"/><rect x="5" y="0" width="1" height="2"/><rect x="7" y="0" width="1" height="2"/><rect x="4" y="4" width="4" height="1"/><rect x="4" y="6" width="4" height="1"/><rect x="4" y="8" width="3" height="1"/></svg><strong>NOTA EN LA CABAÑA</strong><p>Cabe destacar que estos principios, no quedan relegados a las clases, se puede aplicar a otros ámbitos.</p></div></p>
 <h2>(<strong class="text-red-500"><code>S</code></strong>) Principio de responsabilidad única</h2>
-<blockquote>
-<p>&quot;Una clase debería tener una, y sólo una, razón para cambiar&quot; <br><em>Robert C. Martin</em></p>
-</blockquote>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="3" y="1" width="2" height="1"/><rect x="2" y="2" width="2" height="1"/><rect x="1" y="3" width="2" height="2"/><rect x="1" y="5" width="4" height="4"/><rect x="9" y="1" width="2" height="1"/><rect x="8" y="2" width="2" height="1"/><rect x="7" y="3" width="2" height="2"/><rect x="7" y="5" width="4" height="4"/></svg><strong>CITA</strong><blockquote><p>Una clase debería tener una, y sólo una, razón para cambiar.</p></blockquote><cite>Robert C. Martin</cite></div></p>
 <p>Una clase sólo debería hacer una única cosa, es decir, tener sólo una responsabilidad. Si hacemos que una clase se encargue de todo, cualquier cambio en la funcionalidad requerirá de modificaciones en dicha clase, e incluso en partes en las que no debería cambiar.</p>
 <p>Para detectar si estamos cumpliendo este principio, podemos hacernos varias preguntas:</p>
 <ul>

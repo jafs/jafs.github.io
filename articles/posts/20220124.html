@@ -7,7 +7,7 @@
   <meta name="description" content="Si en el capítulo anterior vimos como una mala herencia puede provocar que haya clases con métodos que no deberían implementar, para este cuarto principio te..." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, diseño y arquitectura, SOLID" />
-  <meta name="article:published_time" content="2022-01-24T22:12:52.000Z" />
+  <meta name="article:published_time" content="2022-01-24T00:00:00.000Z" />
   
 
   <!-- Open Graph -->
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/images/solid-logo.png" />
   
-  <meta property="article:published_time" content="2022-01-24T22:12:52.000Z" />
+  <meta property="article:published_time" content="2022-01-24T00:00:00.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
@@ -69,7 +69,7 @@ table td:first-child {
   "description": "Si en el capítulo anterior vimos como una mala herencia puede provocar que haya clases con métodos que no deberían implementar, para este cuarto principio te...",
   "url": "https://jafs.github.io/articles/posts/20220124.html",
   "inLanguage": "es",
-  "datePublished": "2022-01-24T22:12:52.000Z",
+  "datePublished": "2022-01-24T00:00:00.000Z",
   "image": "/images/solid-logo.png"
 }
   </script>
@@ -101,9 +101,7 @@ table td:first-child {
     <article class="articulo prose caja">
       <h1>Principios SOLID. Capítulo I: Interface-Segregation Principle</h1><p class="fecha-articulo">24-01-2022</p><p>Si en el capítulo anterior vimos como una mala herencia puede provocar que haya clases con métodos que no deberían implementar, para este cuarto principio tenemos un ejemplo muy parecido, pero con el caso de las interfaces.</p>
 <p>Su nacimiento se remonta a los tiempos en los que Robert C. Martin trabajaba en la empresa Xerox. Dicha empresa había creado un software que llevaba a cabo la mayor parte de tareas que puede llevar a cabo un sistema de impresión. El problema es que había una sola clase que hacía todo el trabajo, algo que ya también incumplía varios de los principios que hemos visto (como el Principio de Responsabilidad Única). Pues bien, tras ver como cada cambio implicaba cada un mayor tiempo de desarrollo, se optó por crear varias interfaces que acotaran las tareas: grapado, envío de fax, impresión, etc. Y de ahí salió la definición del Principio de Segregación de Interfaces:</p>
-<blockquote>
-<p>Los clientes no deberían estar forzados a depender de interfaces que no van a usar. <br><em>Robert C. Martin</em> ~ <a href="https://web.archive.org/web/20090306160252/http://www.objectmentor.com/resources/articles/isp.pdf">The Interface Segregation Principle</a></p>
-</blockquote>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="3" y="1" width="2" height="1"/><rect x="2" y="2" width="2" height="1"/><rect x="1" y="3" width="2" height="2"/><rect x="1" y="5" width="4" height="4"/><rect x="9" y="1" width="2" height="1"/><rect x="8" y="2" width="2" height="1"/><rect x="7" y="3" width="2" height="2"/><rect x="7" y="5" width="4" height="4"/></svg><strong>CITA</strong><blockquote><p>Los clientes no deberían estar forzados a depender de interfaces que no van a usar.</p></blockquote><cite>Robert C. Martin, <a href="https://web.archive.org/web/20090306160252/http://www.objectmentor.com/resources/articles/isp.pdf">The Interface Segregation Principle</a></cite></div></p>
 <p>Y como siempre, vamos a intentar definir de una forma más &quot;mundana&quot; este principio. En este caso, lo que viene a decir, es que las clases no deberían implementar métodos de interfaces que no van a usar; algo muy parecido al problema que provocaba el que tuviéramos que usar el Principio de Sustitución de Liskov, pero aplicado a relaciones con interfaces, en lugar de con herencia de clases.</p>
 <p>En nuestro ejemplo, partiremos de un ejemplo videojueguil que casi todo el mundo conoceréis.</p>
 <p>En Super Mario tenemos entre otros estos enemigos:</p>

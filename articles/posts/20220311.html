@@ -7,7 +7,7 @@
   <meta name="description" content="Peleándome un poco con los canvas de JavaScript, estuve viendo que era posible extraer la información de color de cada pixel. Por lo que pensé ¿y si conviert..." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, TypeScript, programación" />
-  <meta name="article:published_time" content="2022-03-11T19:20:29.000Z" />
+  <meta name="article:published_time" content="2022-03-11T00:00:00.000Z" />
   
 
   <!-- Open Graph -->
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/images/ascii.png" />
   
-  <meta property="article:published_time" content="2022-03-11T19:20:29.000Z" />
+  <meta property="article:published_time" content="2022-03-11T00:00:00.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
@@ -61,7 +61,7 @@
   "description": "Peleándome un poco con los canvas de JavaScript, estuve viendo que era posible extraer la información de color de cada pixel. Por lo que pensé ¿y si conviert...",
   "url": "https://jafs.github.io/articles/posts/20220311.html",
   "inLanguage": "es",
-  "datePublished": "2022-03-11T19:20:29.000Z",
+  "datePublished": "2022-03-11T00:00:00.000Z",
   "image": "/images/ascii.png"
 }
   </script>
@@ -143,9 +143,7 @@ function canvasToString(canvas: HTMLCanvasElement, characters: string[]): string
   return text;
 }
 </code></pre>
-<blockquote>
 <p>La función anterior es la que realiza todo el trabajo, y espero haber incluido comentarios descriptivos que os hayan podido ayudar a comprenderla. De todas formas, para cualquier duda podéis escribir en los comentarios.</p>
-</blockquote>
 <p>Para terminar tenemos otras tres funciones que se encargan de obtener el canvas que usaremos para pintar la imagen temporalmente antes de convertirla:</p>
 <pre><code class="language-typescript">export function imageToString(
   imageElement: HTMLImageElement, columns: number, rows: number,

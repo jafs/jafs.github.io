@@ -7,7 +7,7 @@
   <meta name="description" content="Para bien o para mal, la Inteligencia Artificial hoy está en todas partes. Muchas personas se centran en explicar los distintos modelos, pero en este artícul..." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, IA, neurona artificial" />
-  <meta name="article:published_time" content="2025-06-22T18:12:04.000Z" />
+  <meta name="article:published_time" content="2025-06-22T00:00:00.000Z" />
   
 
   <!-- Open Graph -->
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/images/neuronas-artificiales-mini.webp" />
   
-  <meta property="article:published_time" content="2025-06-22T18:12:04.000Z" />
+  <meta property="article:published_time" content="2025-06-22T00:00:00.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
@@ -61,7 +61,7 @@
   "description": "Para bien o para mal, la Inteligencia Artificial hoy está en todas partes. Muchas personas se centran en explicar los distintos modelos, pero en este artícul...",
   "url": "https://jafs.github.io/articles/posts/20250622.html",
   "inLanguage": "es",
-  "datePublished": "2025-06-22T18:12:04.000Z",
+  "datePublished": "2025-06-22T00:00:00.000Z",
   "image": "/images/neuronas-artificiales-mini.webp"
 }
   </script>
@@ -193,9 +193,7 @@
 <li>Finalmente, <strong>ajusta pesos y sesgo</strong>.</li>
 </ul>
 <p>Para este ajuste de pesos tenemos el método privado <code>#adjust</code>.</p>
-<blockquote>
-<p>NOTA <br>En JavaScript los atributos y métodos privados usan como prefijo la almohadilla <code>#</code>.</p>
-</blockquote>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="8" height="1"/><rect x="2" y="11" width="8" height="1"/><rect x="2" y="1" width="1" height="11"/><rect x="9" y="1" width="1" height="11"/><rect x="3" y="0" width="1" height="2"/><rect x="5" y="0" width="1" height="2"/><rect x="7" y="0" width="1" height="2"/><rect x="4" y="4" width="4" height="1"/><rect x="4" y="6" width="4" height="1"/><rect x="4" y="8" width="3" height="1"/></svg><strong>NOTA EN LA CABAÑA</strong><p>En JavaScript los atributos y métodos privados usan como prefijo la almohadilla <code>#</code>.</p></div></p>
 <pre><code class="language-javascript">#adjust(inputs, adjustValue, learningRate) {
   for (let i = 0; i &lt; this.#inputsNumber; i++) {
     this.#weights[i] += inputs[i] * adjustValue * learningRate;

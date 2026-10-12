@@ -7,7 +7,7 @@
   <meta name="description" content="Una función generadora es aquella que devuelve un generador. Si no has leído el artículo anterior estarás pensando: “Pues me he quedado igual” &#x1f602;, así..." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, JavaScript" />
-  <meta name="article:published_time" content="2021-12-28T21:00:00.000Z" />
+  <meta name="article:published_time" content="2021-12-28T00:00:00.000Z" />
   
 
   <!-- Open Graph -->
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/images/javascript.png" />
   
-  <meta property="article:published_time" content="2021-12-28T21:00:00.000Z" />
+  <meta property="article:published_time" content="2021-12-28T00:00:00.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
@@ -61,7 +61,7 @@
   "description": "Una función generadora es aquella que devuelve un generador. Si no has leído el artículo anterior estarás pensando: “Pues me he quedado igual” &#x1f602;, así...",
   "url": "https://jafs.github.io/articles/posts/20211228.html",
   "inLanguage": "es",
-  "datePublished": "2021-12-28T21:00:00.000Z",
+  "datePublished": "2021-12-28T00:00:00.000Z",
   "image": "/images/javascript.png"
 }
   </script>
@@ -93,9 +93,7 @@
     <article class="articulo prose caja">
       <h1>Iteradores en JavaScript. Parte 2. Funciones generadoras</h1><p class="fecha-articulo">28-12-2021</p><p>Una función generadora es aquella que devuelve un generador. Si no has leído el <a href="/articles/posts/20211226.html">artículo anterior</a> estarás pensando: “Pues me he quedado igual” &#x1f602;, así que te recomiendo que le des una vuelta para ir poniéndote en situación.</p>
 <p>Si pasamos a hacer una definición más formal:</p>
-<blockquote>
-<p>Una función generadora es aquella que actúa como un iterador con distintos puntos de salida. Esto es, al instanciarla, podemos ir llamando al método next() del iterador, que nos devolverá un valor y el estado para poder saber si hay más valores en ese iterador.</p>
-</blockquote>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="3" y="0" width="4" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="1" y="2" width="1" height="4"/><rect x="8" y="2" width="1" height="4"/><rect x="2" y="6" width="1" height="1"/><rect x="7" y="6" width="1" height="1"/><rect x="3" y="7" width="4" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="8" y="8" width="2" height="2"/><rect x="10" y="10" width="2" height="2"/></svg><strong>DEFINICIÓN</strong><p>Una función generadora es aquella que actúa como un iterador con distintos puntos de salida. Esto es, al instanciarla, podemos ir llamando al método next() del iterador, que nos devolverá un valor y el estado para poder saber si hay más valores en ese iterador.</p></div></p>
 <p>Esto lo vamos a entender mejor con un ejemplo:</p>
 <pre><code class="language-javascript">function* simpleGenerator() {
   yield 1;

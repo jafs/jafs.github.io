@@ -7,7 +7,7 @@
   <meta name="description" content="En la primera entrega de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un lenguaje ubicuo para acabar con la brecha en..." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, DDD" />
-  <meta name="article:published_time" content="2026-02-28T12:30:00.000Z" />
+  <meta name="article:published_time" content="2026-02-28T00:00:00.000Z" />
   
 
   <!-- Open Graph -->
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/images/ddd-2.webp" />
   
-  <meta property="article:published_time" content="2026-02-28T12:30:00.000Z" />
+  <meta property="article:published_time" content="2026-02-28T00:00:00.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
@@ -61,7 +61,7 @@
   "description": "En la primera entrega de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un lenguaje ubicuo para acabar con la brecha en...",
   "url": "https://jafs.github.io/articles/posts/20260228.html",
   "inLanguage": "es",
-  "datePublished": "2026-02-28T12:30:00.000Z",
+  "datePublished": "2026-02-28T00:00:00.000Z",
   "image": "/images/ddd-2.webp"
 }
   </script>
@@ -536,7 +536,7 @@ public admit(survivor: Survivor): void {
   }
 }
 </code></pre>
-<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="8" height="1"/><rect x="2" y="11" width="8" height="1"/><rect x="2" y="1" width="1" height="11"/><rect x="9" y="1" width="1" height="11"/><rect x="3" y="0" width="1" height="2"/><rect x="5" y="0" width="1" height="2"/><rect x="7" y="0" width="1" height="2"/><rect x="4" y="4" width="4" height="1"/><rect x="4" y="6" width="4" height="1"/><rect x="4" y="8" width="3" height="1"/></svg><strong>NOTA</strong><br />En sistemas robustos, se suele utilizar el patrón Outbox para garantizar la consistencia de que tras realizar todas las transacciones se publique correctamente el evento. Lo dejaremos fuera del alcance de este artículo. Podéis leer más sobre él en la <a href="/articles/posts/20260322.html">cuarta parte</a> de esta serie de artículos.</div></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="8" height="1"/><rect x="2" y="11" width="8" height="1"/><rect x="2" y="1" width="1" height="11"/><rect x="9" y="1" width="1" height="11"/><rect x="3" y="0" width="1" height="2"/><rect x="5" y="0" width="1" height="2"/><rect x="7" y="0" width="1" height="2"/><rect x="4" y="4" width="4" height="1"/><rect x="4" y="6" width="4" height="1"/><rect x="4" y="8" width="3" height="1"/></svg><strong>NOTA EN LA CABAÑA</strong><p>En sistemas robustos, se suele utilizar el patrón Outbox para garantizar la consistencia de que tras realizar todas las transacciones se publique correctamente el evento. Lo dejaremos fuera del alcance de este artículo. Podéis leer más sobre él en la <a href="/articles/posts/20260322.html">cuarta parte</a> de esta serie de artículos.</p></div></p>
 <h3>¿Quién escucha los eventos?</h3>
 <p>Diferentes partes del sistema pueden suscribirse a los eventos que les interesan:</p>
 <pre><code class="language-typescript">// El servicio de Logística escucha admisiones
@@ -571,9 +571,11 @@ eventBus.on(&quot;QuarantineActivated&quot;, (event) =&gt; {
 </ol>
 <p>Los eventos son la columna vertebral de sistemas complejos bien diseñados. En DDD, son el pegamento que mantiene unidos los Bounded Contexts sin crear dependencias directas entre ellos.</p>
 <p><img src="/images/20260228/ddd-parte2-eventos.webp" alt="Reacción en cadena al detectar una brecha zombi: cada equipo reacciona al mismo evento sin que nadie los coordine directamente"></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="0" width="8" height="1"/><rect x="2" y="9" width="8" height="1"/><rect x="2" y="0" width="1" height="10"/><rect x="9" y="0" width="1" height="10"/><rect x="4" y="0" width="1" height="10"/><rect x="10" y="1" width="1" height="10"/><rect x="3" y="10" width="8" height="1"/><rect x="6" y="3" width="2" height="1"/><rect x="6" y="5" width="2" height="1"/></svg><strong>PARA SABER MÁS</strong><p>En el capítulo 9 de <a href="/books/ddd-zombi.html" data-umami-event="book-saber-mas" data-umami-event-book="ddd"><strong>Domain-Driven Design en un Apocalipsis Zombi</strong></a>, «Eventos de dominio», los eventos llegan bastante más lejos: dónde debe nacer el evento, la diferencia entre eventos de dominio y eventos de integración, cómo pasar de un evento a una proyección y el Event Sourcing como caja negra del refugio.</p></div></p>
 <h2>Para terminar</h2>
 <p>Implementar estas capas puede parecer mucho trabajo extra cuando hay zombis golpeando la puerta, pero es lo que diferencia a un grupo de supervivientes organizado de una cena buffet para no-muertos. Gracias a que el equipo médico (Dominio) y la gente encargada de suministros (Infraestructura) hablan el mismo idioma y respetan sus fronteras, Luis está ahora en una zona de aislamiento segura en lugar de estar deambulando por el comedor buscando cerebros.</p>
 <p>Hemos pasado de tener &quot;código que funciona&quot; a tener un sistema que refleja la realidad de nuestra supervivencia.</p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="0" width="8" height="1"/><rect x="2" y="9" width="8" height="1"/><rect x="2" y="0" width="1" height="10"/><rect x="9" y="0" width="1" height="10"/><rect x="4" y="0" width="1" height="10"/><rect x="10" y="1" width="1" height="10"/><rect x="3" y="10" width="8" height="1"/><rect x="6" y="3" width="2" height="1"/><rect x="6" y="5" width="2" height="1"/></svg><strong>PARA SABER MÁS</strong><p>Si quieres ver cómo encajan todas estas capas en una arquitectura hexagonal, con el dominio en el centro, los adaptadores alrededor y la estructura de carpetas, lo cuento en el capítulo 10 de <a href="/books/ddd-zombi.html" data-umami-event="book-saber-mas" data-umami-event-book="ddd"><strong>Domain-Driven Design en un Apocalipsis Zombi</strong></a>, «Arquitectura hexagonal».</p></div></p>
 <p>En el <a href="/articles/posts/20260306.html">siguiente artículo</a>, daremos el paso final: cómo evitar que todo vuele por los aires cuando varias cosas pasan a la vez (transacciones), qué errores no debes cometer nunca (antipatrones) y cómo probar que nuestro refugio es realmente impenetrable (testing). ¡Mantened las puertas cerradas y el código limpio!</p>
 <p><strong>Otros artículos de la serie</strong></p>
 <ul>

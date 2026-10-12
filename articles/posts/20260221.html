@@ -7,7 +7,7 @@
   <meta name="description" content="Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situac..." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, Programación, DDD" />
-  <meta name="article:published_time" content="2026-02-22T12:30:00.000Z" />
+  <meta name="article:published_time" content="2026-02-22T00:00:00.000Z" />
   
 
   <!-- Open Graph -->
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/images/ddd.webp" />
   
-  <meta property="article:published_time" content="2026-02-22T12:30:00.000Z" />
+  <meta property="article:published_time" content="2026-02-22T00:00:00.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
@@ -61,7 +61,7 @@
   "description": "Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situac...",
   "url": "https://jafs.github.io/articles/posts/20260221.html",
   "inLanguage": "es",
-  "datePublished": "2026-02-22T12:30:00.000Z",
+  "datePublished": "2026-02-22T00:00:00.000Z",
   "image": "/images/ddd.webp"
 }
   </script>
@@ -181,6 +181,7 @@ superviviente.ponerEnCuarentena();
 <p>Por ejemplo, cuando Sanidad emite el evento <code>BroteDetectado</code>, Comando no necesita conocer los detalles médicos internos. Solo recibe la información que le importa: qué refugio está afectado y cuántas personas están en riesgo.</p>
 <p><img src="/images/ddd-context-communications.webp" alt="Diagrama de comunicación entre Sanidad, Logística y Comando"></p>
 <p><em>Diagrama de comunicación entre Sanidad, Logística y Comando</em></p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="0" width="8" height="1"/><rect x="2" y="9" width="8" height="1"/><rect x="2" y="0" width="1" height="10"/><rect x="9" y="0" width="1" height="10"/><rect x="4" y="0" width="1" height="10"/><rect x="10" y="1" width="1" height="10"/><rect x="3" y="10" width="8" height="1"/><rect x="6" y="3" width="2" height="1"/><rect x="6" y="5" width="2" height="1"/></svg><strong>PARA SABER MÁS</strong><p>Cómo se relacionan los contextos entre sí tiene su propio mapa. En el capítulo 3 de <a href="/books/ddd-zombi.html" data-umami-event="book-saber-mas" data-umami-event-book="ddd"><strong>Domain-Driven Design en un Apocalipsis Zombi</strong></a>, «Mapa de contextos», verás quién va aguas arriba y quién aguas abajo, las formas de relacionarse (Shared Kernel, Cliente-Proveedor, Conformista, Anti-Corruption Layer, Open Host) y el mapa completo del refugio.</p></div></p>
 <h2>3. Entidades y Objetos de Valor</h2>
 <p>Una de las distinciones más importantes en DDD es entender la diferencia entre algo que &quot;es&quot; y algo que &quot;tiene&quot;. Suena filosófico, pero tiene implicaciones muy prácticas en cómo diseñamos nuestro código.</p>
 <h3>Entidad (Entity): lo que importa es quién ES</h3>
@@ -425,6 +426,7 @@ console.log(electricShelter.getSupplies());
 <p>Y si lo llevamos al mundo físico del apocalipsis, la analogía es perfecta:</p>
 <p><img src="/images/ddd-agregado.webp" alt="El Refugio como Agregado: el guardián controla quién entra"></p>
 <p>El combatiente en la puerta es la raíz del agregado. No importa quién intente entrar ni cómo de urgente sea la situación, si el refugio está lleno, nadie entra. Las invariantes se respetan siempre. Y si el camión llega con suministros, también pasa por él antes de que las cajas entren al refugio.</p>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="0" width="8" height="1"/><rect x="2" y="9" width="8" height="1"/><rect x="2" y="0" width="1" height="10"/><rect x="9" y="0" width="1" height="10"/><rect x="4" y="0" width="1" height="10"/><rect x="10" y="1" width="1" height="10"/><rect x="3" y="10" width="8" height="1"/><rect x="6" y="3" width="2" height="1"/><rect x="6" y="5" width="2" height="1"/></svg><strong>PARA SABER MÁS</strong><p>El capítulo 5 de <a href="/books/ddd-zombi.html" data-umami-event="book-saber-mas" data-umami-event-book="ddd"><strong>Domain-Driven Design en un Apocalipsis Zombi</strong></a>, «Agregados», va más allá: factorías para las construcciones complejas, dónde debe vivir la lógica y cuándo te basta una entidad con una lista en lugar de un agregado.</p></div></p>
 <h2>Continuará</h2>
 <p>En esta primera parte hemos sentado las bases de DDD: el <strong>lenguaje ubicuo</strong> que elimina traducciones mentales, los <strong>Bounded Contexts</strong> que dividen el sistema de forma coherente, las <strong>Entidades y Value Objects</strong> que modelan la identidad y el valor, y los <strong>Agregados</strong> que protegen las invariantes del dominio.</p>
 <p>En la <a href="/articles/posts/20260228.html">segunda parte</a> veremos cómo conectar todo esto con el exterior: <strong>Servicios de Dominio</strong>, <strong>Eventos</strong>, <strong>Repositorios</strong> y la <strong>capa de Aplicación</strong>. Además, veremos los antipatterns más comunes y cuándo tiene sentido (y cuándo no) aplicar DDD.</p>

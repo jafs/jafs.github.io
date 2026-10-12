@@ -7,7 +7,7 @@
   <meta name="description" content="Para hablar del patrón Observer, antes deberíamos "empezar por el principio" (me encanta cuando la gente utiliza esa expresión redudante). En la teoría del s..." />
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, patrón observer, diseño y arquitectura, patrones de diseño, programación" />
-  <meta name="article:published_time" content="2022-04-14T10:23:53.000Z" />
+  <meta name="article:published_time" content="2022-04-14T00:00:00.000Z" />
   
 
   <!-- Open Graph -->
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/images/patron-observer.webp" />
   
-  <meta property="article:published_time" content="2022-04-14T10:23:53.000Z" />
+  <meta property="article:published_time" content="2022-04-14T00:00:00.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
@@ -61,7 +61,7 @@
   "description": "Para hablar del patrón Observer, antes deberíamos \"empezar por el principio\" (me encanta cuando la gente utiliza esa expresión redudante). En la teoría del s...",
   "url": "https://jafs.github.io/articles/posts/20220414.html",
   "inLanguage": "es",
-  "datePublished": "2022-04-14T10:23:53.000Z",
+  "datePublished": "2022-04-14T00:00:00.000Z",
   "image": "/images/patron-observer.webp"
 }
   </script>
@@ -101,9 +101,7 @@
 <p>En el artículo de hoy, aprenderemos en qué consiste el Patrón Observer, atendiendo primero a su definición estricta, y luego viendo un ejemplo del mundo real. Como siempre, cualquier duda, comentario o corrección que queráis hacer la podéis dejar en comentarios.</p>
 <h2>Teoría del patrón Observer</h2>
 <p>Si atendemos a la definición estricta. Este patrón:</p>
-<blockquote>
-<p>Define una dependencia uno a muchos entre objetos. De forma que cuando un objeto (subject) cambie de estado, este cambio se notificará a aquellos otros objetos (observers) que estén &quot;suscritos&quot; a él.</p>
-</blockquote>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="3" y="1" width="2" height="1"/><rect x="2" y="2" width="2" height="1"/><rect x="1" y="3" width="2" height="2"/><rect x="1" y="5" width="4" height="4"/><rect x="9" y="1" width="2" height="1"/><rect x="8" y="2" width="2" height="1"/><rect x="7" y="3" width="2" height="2"/><rect x="7" y="5" width="4" height="4"/></svg><strong>CITA</strong><blockquote><p>Define una dependencia uno a muchos entre objetos. De forma que cuando un objeto (subject) cambie de estado, este cambio se notificará a aquellos otros objetos (observers) que estén &quot;suscritos&quot; a él.</p></blockquote><cite>Erich Gamma, Richard Helm, Ralph Johnson y John Vlissides, Design Patterns</cite></div></p>
 <p><img src="/images/observer-diagram-01.png" alt="Diagrama de clases del Patrón Observer"></p>
 <p>En el diagrama superior podemos distinguir las siguientes clases:</p>
 <ul>
@@ -184,11 +182,13 @@ sujeto.setName(&quot;Pepito&quot;);
 <p>Se puede ver como en cuanto realizamos un cambio de estado en el sujeto, este notifica a todos los observadores que se hayan suscrito. Así que, aunque hemos visto el patrón de forma muy simplificada, creo que os puede dar una pista de como es su funcionamiento.</p>
 <h2>Un ejemplo del mundo real</h2>
 <p>Si eres una persona nueva en el mundo de la programación, más exactamente si acabas de empezar con JavaScript, quizás no sepas que has estado usando el patrón observer de forma continua. Y lo has usado cuando has llamado al método <code>addEventListener()</code>.</p>
-<blockquote>
+<div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700">
+<p><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="8" height="1"/><rect x="2" y="11" width="8" height="1"/><rect x="2" y="1" width="1" height="11"/><rect x="9" y="1" width="1" height="11"/><rect x="3" y="0" width="1" height="2"/><rect x="5" y="0" width="1" height="2"/><rect x="7" y="0" width="1" height="2"/><rect x="4" y="4" width="4" height="1"/><rect x="4" y="6" width="4" height="1"/><rect x="4" y="8" width="3" height="1"/></svg><strong>NOTA EN LA CABAÑA</strong></p>
 <p>Para gente que lo desconozca, hacemos un breve inciso. En JavaScript podemos escuchar eventos que se lancen sobre un componente HTML, por ejemplo, podemos escuchar el evento &quot;click&quot; sobre un botón, de forma que cada vez que se haga clic en dicho botón, seamos notificados. Esto lo conseguimos con este tipo de llamadas:</p>
-<p><code>elementoHTML.addEventListener(&quot;tipoDeEvento&quot;, funcionALaQueNotificar);</code></p>
+<pre><code class="language-javascript">elementoHTML.addEventListener(&quot;tipoDeEvento&quot;, funcionALaQueNotificar);
+</code></pre>
 <p>Y seguimos tras esta breve aclaración &#x1f609;.</p>
-</blockquote>
+</div>
 <p>El sistema que se utiliza en JavaScript para ser notificados cuando ocurre un evento, podríamos decir que es una patrón Observer &quot;mutado&quot;, ya que tiene cuatro diferencias principalmente:</p>
 <ul>
 <li>Por un lado, la suscripción se realiza sobre un &quot;cambio&quot; concreto del sujeto, en lugar de realizar una suscripción general. En este caso te suscribes al evento para el que quieres ser notificado.</li>

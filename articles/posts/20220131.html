@@ -7,7 +7,7 @@
   <meta name="description" content="Terminamos los principios SOLID con el Principio de Inversión de Dependencias, que viene a decir:" />
   <meta name="author" content="José Antonio Fuentes Santiago" />
   <meta name="keywords" content="José Antonio Fuentes Santiago, JAFS, programación, diseño y arquitectura, SOLID" />
-  <meta name="article:published_time" content="2022-01-31T22:17:23.000Z" />
+  <meta name="article:published_time" content="2022-01-31T00:00:00.000Z" />
   
 
   <!-- Open Graph -->
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="/images/solid-logo.png" />
   
-  <meta property="article:published_time" content="2022-01-31T22:17:23.000Z" />
+  <meta property="article:published_time" content="2022-01-31T00:00:00.000Z" />
   
   <meta property="article:author" content="José Antonio Fuentes Santiago" />
 
@@ -61,7 +61,7 @@
   "description": "Terminamos los principios SOLID con el Principio de Inversión de Dependencias, que viene a decir:",
   "url": "https://jafs.github.io/articles/posts/20220131.html",
   "inLanguage": "es",
-  "datePublished": "2022-01-31T22:17:23.000Z",
+  "datePublished": "2022-01-31T00:00:00.000Z",
   "image": "/images/solid-logo.png"
 }
   </script>
@@ -92,11 +92,7 @@
   <main>
     <article class="articulo prose caja">
       <h1>Principios SOLID. Capítulo D: Dependency Inversion Principle</h1><p class="fecha-articulo">31-01-2022</p><p>Terminamos los principios SOLID con el Principio de Inversión de Dependencias, que viene a decir:</p>
-<blockquote>
-<p>Los módulos de alto nivel no deberían depender de los módulos de bajo nivel. Ambos deberían depender de abstracciones.</p>
-<p>Las abstracciones no deberían depender de los detalles. Los detalles deben depender de abstracciones.</p>
-<p><em>Robert C. Martin</em> ~ <a href="https://web.archive.org/web/20110714224327/http://www.objectmentor.com/resources/articles/dip.pdf">The Dependency Inversion Principle</a></p>
-</blockquote>
+<p><div class="rounded-md bg-gray-700 p-4 border-t-4 border-t-gray-700"><svg class="icono-pixel" viewBox="0 0 12 12" aria-hidden="true"><rect x="3" y="1" width="2" height="1"/><rect x="2" y="2" width="2" height="1"/><rect x="1" y="3" width="2" height="2"/><rect x="1" y="5" width="4" height="4"/><rect x="9" y="1" width="2" height="1"/><rect x="8" y="2" width="2" height="1"/><rect x="7" y="3" width="2" height="2"/><rect x="7" y="5" width="4" height="4"/></svg><strong>CITA</strong><blockquote><p>Los módulos de alto nivel no deberían depender de los módulos de bajo nivel. Ambos deberían depender de abstracciones.</p><p>Las abstracciones no deberían depender de los detalles. Los detalles deben depender de abstracciones.</p></blockquote><cite>Robert C. Martin, <a href="https://web.archive.org/web/20110714224327/http://www.objectmentor.com/resources/articles/dip.pdf">The Dependency Inversion Principle</a></cite></div></p>
 <p>Aunque parezca un trabalenguas, lo que viene a decir el tío Bob en esta ocasión es que las clases que utilizan otras no deberían depender de como funcionen. Estas a su vez, tendrán interfaces genéricas que no hagan depender a la clase de alto nivel de cada una.</p>
 <p>Pero como siempre veamos todo con un ejemplo.</p>
 <p>Imaginad una clase para compartir datos que en su inicio sólo sirva para compartir por Bluetooth:</p>
@@ -140,7 +136,7 @@
 }
 </code></pre>
 <p>Esto quedaría con un esquema del tipo:</p>
-<p><img src="/images/diagrama_solid_d.png" alt="Diagrama"></p>
+<p><img src="/images/diagrama_solid_d.jpg" alt="Diagrama"></p>
 <p>¿Y al final en qué se traduce todo esto? Pues que en nuestro ejemplo, hemos hecho que la clase ShareAction, al recibir sus dependencias del exterior deje de depender de la implementación de dichas clases. Permitiéndonos poder cambiar de un tipo de conexión a otra sin que ShareAction se vea modificada. Si el día de mañana se añade otro tipo de conexión, sólo hay que pasar en el constructor la referencia al nuevo adaptador y listo.</p>
 <p>Por otro lado, no necesitamos las clases &quot;reales&quot; para testear, podemos usar mocks que pasaremos a la clase ShareAction, de forma que si hay un fallo en un test sabremos que es de la clase ShareAction y no de la dependencia que le hemos pasamdo.</p>
 <p>Finalmente, cabe aclarar que la inyección de dependencias no es lo mismo que la inversión de dependencias. La primera es una herramienta con la que conseguir la segunda.</p>

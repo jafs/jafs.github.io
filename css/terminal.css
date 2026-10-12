@@ -172,6 +172,8 @@ h1, h2, h3 { margin: 0; font-weight: 600; color: var(--fosforo-vivo); letter-spa
 .articulo :not(pre) > code { background: var(--relleno); border: 1px solid var(--linea); border-radius: 3px; padding: .1em .35em; font-weight: 500; }
 .articulo pre { border: 1px solid var(--linea); border-radius: 4px; }
 .articulo img { border: 1px solid var(--linea); border-radius: 3px; }
+/* Las imágenes dentro de tablas son iconos o sprites (los enemigos de 20220124): sin marco. */
+.articulo td img { border: 0; border-radius: 0; }
 .articulo blockquote { font-style: normal; background: var(--panel); padding: .2em 1em; }
 .articulo table { font-size: 13px; }
 .articulo input[type="checkbox"] { accent-color: var(--fosforo); }
@@ -179,6 +181,13 @@ h1, h2, h3 { margin: 0; font-weight: 600; color: var(--fosforo-vivo); letter-spa
 /* Cajas de las directivas (📚 PARA SABER MÁS…): mismas clases de Tailwind, piel de terminal. */
 .articulo .bg-gray-700 { background: var(--relleno); border: 1px solid var(--linea-viva); border-top: 3px solid var(--fosforo); border-radius: 5px; color: var(--fosforo); }
 .articulo .bg-gray-700 strong { color: var(--fosforo-vivo); letter-spacing: .04em; }
+/* Caja de bloque (:::div): el título va en un <p> y no debe sumar margen arriba. */
+.articulo .bg-gray-700 > p:first-child { margin-top: 0; }
+/* Caja ❝ CITA: el texto citado en cursiva y el autor (<cite>) aparte, alineado a la derecha. */
+.articulo .bg-gray-700 blockquote { margin: .8em 0 0; padding: 0; border: 0; background: none; font-style: italic; color: var(--fosforo); }
+.articulo .bg-gray-700 blockquote p::before, .articulo .bg-gray-700 blockquote p::after { content: none; }
+.articulo .bg-gray-700 cite { display: block; margin-top: .6em; text-align: right; font-style: normal; color: var(--fosforo-tenue); }
+.articulo .bg-gray-700 cite::before { content: "— "; }
 /* Icono de píxeles que el plugin `callouts` pone en lugar del emoji. */
 .articulo .icono-pixel { display: inline-block; width: 1.5em; height: 1.5em; vertical-align: -.35em; margin-right: .5em; fill: var(--fosforo-vivo); shape-rendering: crispEdges; filter: drop-shadow(0 0 2px rgba(124, 240, 135, .5)); }
 

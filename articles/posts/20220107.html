@@ -116,10 +116,10 @@
 <li><strong>¿Por qué tengo que configurar medio entorno para testear sólo esta clase?</strong> A excepción de que quisieras hacer una prueba de la clase que carga toda tu aplicación, en la clase Usuario no debería ser necesario configurar o mockear una gran cantidad de elementos para crear pruebas unitarias.</li>
 </ul>
 <p>Para ilustrar este punto, podemos tomar como ejemplo una clase mal diseñada llamada TextDocument, que contiene las propiedades de un documento y también se encarga de compartirlos:</p>
-<p><img src="/images/solid-s-01-03.png" alt="Clase TextDocument"></p>
+<p><img src="/images/solid-s-01-03.jpg" alt="Clase TextDocument"></p>
 <p>La clase presenta un problema al tener dos responsabilidades. Por un lado, gestiona el documento y, por otro, se encarga de compartirlo. ¿Realmente es algo que el documento debe saber? Y es que el compartir no es algo relativo a las propiedades de un documento, sino es una acción para realizar otro fin, por lo que esta responsabilidad no debería ser del documento. Es más, esta parte estaría muy acoplada a la forma de compartir, no es lo mismo enviar por correo electrónico que compartir por Bluetooth. Por lo que volvemos a preguntarnos, ¿un documento debe saber que hay correo electrónico y Bluetooth en nuestro proyecto? La respuesta es bien sencilla, no debe saber nada del exterior o de lo que puedan hacer con él. Debe vivir en su mundo aislado cual hikikomori.</p>
 <p>Para solucionar este problema, dejamos que TextDocument tenga sólo la responsabilidad de operar con un documento, y además creamos una clase que se encargue exclusivamente de compartir documentos. Yendo más allá, En lugar de tener una sola clase, podemos separar las responsabilidades en diferentes clases, como EmailSharer y BluetoothSharer. De esta forma, tenemos una estructura que se puede probar fácilmente y que además está desacoplada por funcionalidades.</p>
-<p><img src="/images/solid-s-02-02.png" alt="Clase TexDocument e interfaz ISharer"></p>
+<p><img src="/images/solid-s-02-02.jpg" alt="Clase TexDocument e interfaz ISharer"></p>
 <p>En resumen, el Principio de Responsabilidad Única nos ayuda a crear clases más cohesivas y modulares, lo que facilita la comprensión, mantenimiento y prueba de nuestro código.</p>
 <hr>
 <p>En el siguiente artículo pasaremos a la letra <strong class="text-orange-500">O</strong>: Open/Closed Principle.</p>

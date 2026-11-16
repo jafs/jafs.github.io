@@ -2,217 +2,217 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>JAFS — José Antonio Fuentes Santiago</title>
-    <link>https://jafs.github.io</link>
+    <link>https://jafs.es</link>
     <description>Artículos sobre programación, TypeScript, arquitectura de software y desarrollo web.</description>
     <language>es</language>
-    <managingEditor>contacto@jafs.github.io (José Antonio Fuentes Santiago)</managingEditor>
-    <lastBuildDate>Sat, 17 Oct 2026 09:24:39 GMT</lastBuildDate>
-    <atom:link href="https://jafs.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>contact@jafs.es (José Antonio Fuentes Santiago)</managingEditor>
+    <lastBuildDate>Mon, 16 Nov 2026 13:05:58 GMT</lastBuildDate>
+    <atom:link href="https://jafs.es/feed.xml" rel="self" type="application/rss+xml" />
     <image>
-      <url>https://jafs.github.io/favicon-96x96.png</url>
+      <url>https://jafs.es/favicon-96x96.png</url>
       <title>JAFS — José Antonio Fuentes Santiago</title>
-      <link>https://jafs.github.io</link>
+      <link>https://jafs.es</link>
       <width>96</width>
       <height>96</height>
     </image>
     <item>
       <title>Entrenando modelos de decisión: caso práctico con Laya</title>
-      <link>https://jafs.github.io/articles/posts/20261005.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20261005.html</guid>
+      <link>https://jafs.es/articles/posts/20261005.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20261005.html</guid>
       <description>Cómo calibramos y entrenamos con LoRA a Laya en un PC con una gráfica de hace años, cuánto mejoró y en qué nos estuvo engañando por el camino.</description>
       <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>IA</category>
-      <media:content url="https://jafs.github.io/resources/20261005/laya-entrenamiento.webp" medium="image" />
+      <media:content url="https://jafs.es/resources/20261005/laya-entrenamiento.webp" medium="image" />
     </item>
     <item>
       <title>Modelos de decisión: introducción a Laya</title>
-      <link>https://jafs.github.io/articles/posts/20260926.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260926.html</guid>
+      <link>https://jafs.es/articles/posts/20260926.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20260926.html</guid>
       <description>Qué son los modelos de decisión como Laya o Jev, cómo obligan a cambiar la forma de preguntar a una IA y cómo montar el cerebro de un zombi con Laya en tu propio portátil.</description>
       <pubDate>Sat, 26 Sep 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>IA</category>
-      <media:content url="https://jafs.github.io/resources/20260926/laya.webp" medium="image" />
+      <media:content url="https://jafs.es/resources/20260926/laya.webp" medium="image" />
     </item>
     <item>
       <title>El Listo, El Bueno, El Feo y El Malo: cuando SRP se une a GBU</title>
-      <link>https://jafs.github.io/articles/posts/20260809.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260809.html</guid>
+      <link>https://jafs.es/articles/posts/20260809.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20260809.html</guid>
       <description>Patrón GBU + SRP: cuatro agentes de IA (planificador, implementador, revisor y saboteador) implementados paso a paso con Claude Code y LangGraph.</description>
       <pubDate>Sun, 09 Aug 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>IA</category>
       <category>Agentes IA</category>
-      <media:content url="https://jafs.github.io/resources/20260809/gbu-2.webp" medium="image" />
+      <media:content url="https://jafs.es/resources/20260809/gbu-2.webp" medium="image" />
     </item>
     <item>
       <title>El Bueno, El Feo y El Malo: Cómo poner a pelear a tres agentes para que escriban tu código por ti</title>
-      <link>https://jafs.github.io/articles/posts/20260802.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260802.html</guid>
+      <link>https://jafs.es/articles/posts/20260802.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20260802.html</guid>
       <description>Patrón GBU: orquesta tres agentes de IA —implementador, revisor y saboteador— para revisar el código generado por IA sin leerlo línea a línea.</description>
       <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>IA</category>
       <category>Agentes IA</category>
-      <media:content url="https://jafs.github.io/resources/20260802/bueno-feo-malo.webp" medium="image" />
+      <media:content url="https://jafs.es/resources/20260802/bueno-feo-malo.webp" medium="image" />
     </item>
     <item>
       <title>SDD: Del caos del vibe coding al rigor de la arquitectura</title>
-      <link>https://jafs.github.io/articles/posts/20260517.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260517.html</guid>
+      <link>https://jafs.es/articles/posts/20260517.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20260517.html</guid>
       <description>En el principio, el programador picaba código línea a línea. Y el software estaba desordenado y lleno de bugs. Las tinieblas del código legacy acechaban los despliegues de los viernes. Pero entonces llegaron los modelos de lenguaje y los agentes de IA, y la comunidad exclamó: &quot;¡Hágase el prompt!&quot;. De repente, pasamos al fascinante mundo del vibe coding: tirarle tres frases informales a Cursor o a Claude, mirar cómo se autocompletan quinientas líneas de código por arte de magia y rezar para que compile a la primera.</description>
       <pubDate>Sun, 17 May 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>SDD</category>
-      <media:content url="https://jafs.github.io/images/20260517/SDD.webp" medium="image" />
+      <media:content url="https://jafs.es/images/20260517/SDD.webp" medium="image" />
     </item>
     <item>
       <title>DDD en un apocalipsis zombi. Preguntas frecuentes</title>
-      <link>https://jafs.github.io/articles/posts/20260402.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260402.html</guid>
+      <link>https://jafs.es/articles/posts/20260402.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20260402.html</guid>
       <description>En las entregas anteriores comenzamos construyendo el vocabulario del refugio usando el lenguaje ubicuo y terminamos con patrones más avanzados como patrón Outbox. Ha sido un viaje intenso, pero antes de cerrar la puerta del refugio, toca responder a esas dudas que siempre surgen cuando intentas aplicar esto en un proyecto real. Además, veremos una checklist y una pequeña guía que os ayudará a decidir cuándo tiene sentido aplicar DDD y cuándo no.</description>
       <pubDate>Thu, 02 Apr 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>DDD</category>
-      <media:content url="https://jafs.github.io/images/ddd-faq.webp" medium="image" />
+      <media:content url="https://jafs.es/images/ddd-faq.webp" medium="image" />
     </item>
     <item>
       <title>DDD en un apocalipsis zombi. Parte 4</title>
-      <link>https://jafs.github.io/articles/posts/20260322.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260322.html</guid>
+      <link>https://jafs.es/articles/posts/20260322.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20260322.html</guid>
       <description>En las tres entregas anteriores construimos los cimientos del refugio: el lenguaje ubicuo y los Bounded Contexts que hacen que todos hablen el mismo idioma, los Servicios de Dominio, Repositorios, capa de Aplicación y Eventos de Dominio que conectan el núcleo con el exterior, y las Sagas, antipatrones y tests que mantienen la integridad cuando las cosas se complican.</description>
       <pubDate>Sun, 22 Mar 2026 00:00:00 GMT</pubDate>
       <category>Programación</category>
       <category>DDD</category>
-      <media:content url="https://jafs.github.io/images/ddd-4.webp" medium="image" />
+      <media:content url="https://jafs.es/images/ddd-4.webp" medium="image" />
     </item>
     <item>
       <title>DDD en un apocalipsis zombi. Parte 3</title>
-      <link>https://jafs.github.io/articles/posts/20260306.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260306.html</guid>
+      <link>https://jafs.es/articles/posts/20260306.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20260306.html</guid>
       <description>En la primera parte establecimos los cimientos: el lenguaje ubicuo que hace que la líder del grupo y el desarrollador hablen el mismo idioma, los Bounded Contexts para que Sanidad, Logística y Comando no se pisen entre sí, y los Agregados que actúan como guardián en la puerta del refugio. En la segunda parte conectamos ese núcleo con el exterior: Servicios de Dominio para lógica que involucra a varios actores, Repositorios que mantienen el dominio ajeno a la base de datos, la capa de Aplicación como directora de orquesta y los Eventos de Dominio que permiten que todo el sistema reaccione sin dependencias directas.</description>
       <pubDate>Fri, 06 Mar 2026 18:30:00 GMT</pubDate>
       <category>Programación</category>
       <category>DDD</category>
-      <media:content url="https://jafs.github.io/images/ddd-3.webp" medium="image" />
+      <media:content url="https://jafs.es/images/ddd-3.webp" medium="image" />
     </item>
     <item>
       <title>DDD en un apocalipsis zombi. Parte 2</title>
-      <link>https://jafs.github.io/articles/posts/20260228.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260228.html</guid>
+      <link>https://jafs.es/articles/posts/20260228.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20260228.html</guid>
       <description>En la primera entrega de esta serie, sentamos las bases para integrar DDD en nuestro campamento. Establecimos un lenguaje ubicuo para acabar con la brecha entre lo que dice la líder del grupo y lo que escribe el desarrollador. Dividimos el sistema en Bounded Contexts para que Sanidad, Logística y Comando no se pisoteen entre sí. Aprendimos a distinguir entidades de objetos de valor y, por último, vimos cómo los agregados actúan como el guardián en la puerta del refugio: nadie modifica nada sin pasar por él. Te recomiendo leerlo antes, ya que reutilizaremos varias de las clases que definimos en él.</description>
       <pubDate>Sat, 28 Feb 2026 12:30:00 GMT</pubDate>
       <category>Programación</category>
       <category>DDD</category>
-      <media:content url="https://jafs.github.io/images/ddd-2.webp" medium="image" />
+      <media:content url="https://jafs.es/images/ddd-2.webp" medium="image" />
     </item>
     <item>
       <title>DDD en un apocalipsis zombi. Parte 1</title>
-      <link>https://jafs.github.io/articles/posts/20260221.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20260221.html</guid>
+      <link>https://jafs.es/articles/posts/20260221.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20260221.html</guid>
       <description>Imaginemos que estamos en pleno apocalipsis zombi. Tu grupo de supervivientes ha encontrado refugio en una vieja central eléctrica abandonada, pero la situación es crítica: hay que gestionar refugios, coordinar reabastecimientos, controlar infecciones y tomar decisiones que pueden significar vida o muerte. Decides crear un sistema para ayudar a gestionar todo esto.</description>
       <pubDate>Sun, 22 Feb 2026 12:30:00 GMT</pubDate>
       <category>Programación</category>
       <category>DDD</category>
-      <media:content url="https://jafs.github.io/images/ddd.webp" medium="image" />
+      <media:content url="https://jafs.es/images/ddd.webp" medium="image" />
     </item>
     <item>
       <title>Introducción a las redes neuronales</title>
-      <link>https://jafs.github.io/articles/posts/20250720.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20250720.html</guid>
+      <link>https://jafs.es/articles/posts/20250720.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20250720.html</guid>
       <description>En el artículo anterior pudimos revisar en qué consisten las neuronas artificiales, y además vimos cómo poder implementar una neurona en JavaScript. Si aún no lo has leído, te recomiendo que empieces por ahí para entender la base de lo que vamos a ver ahora.</description>
       <pubDate>Sun, 20 Jul 2025 18:12:04 GMT</pubDate>
       <category>Programación</category>
-      <media:content url="https://jafs.github.io/images/redes-neuronales.webp" medium="image" />
+      <media:content url="https://jafs.es/images/redes-neuronales.webp" medium="image" />
     </item>
     <item>
       <title>Introducción a las neuronas artificiales</title>
-      <link>https://jafs.github.io/articles/posts/20250622.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20250622.html</guid>
+      <link>https://jafs.es/articles/posts/20250622.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20250622.html</guid>
       <description>Para bien o para mal, la Inteligencia Artificial hoy está en todas partes. Muchas personas se centran en explicar los distintos modelos, pero en este artículo me gustaría que llegáramos hasta el nivel más bajo de este mundillo, lo que es la mínima unidad de inteligencia artificial: una neurona.</description>
       <pubDate>Sun, 22 Jun 2025 18:12:04 GMT</pubDate>
       <category>Programación</category>
       <category>IA</category>
       <category>neurona artificial</category>
-      <media:content url="https://jafs.github.io/images/neuronas-artificiales-mini.webp" medium="image" />
+      <media:content url="https://jafs.es/images/neuronas-artificiales-mini.webp" medium="image" />
     </item>
     <item>
       <title>Aritmética binaria</title>
-      <link>https://jafs.github.io/articles/posts/20240301.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20240301.html</guid>
+      <link>https://jafs.es/articles/posts/20240301.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20240301.html</guid>
       <description>Hoy vamos a ver algo que se sale un poco de la tónica habitual de este blog. Pero, siempre viene bien volver a las bases de la informática. Así que espero que esta pequeña introducción al sistema binario y a su aritmética, pueda serte útil.</description>
       <pubDate>Fri, 01 Mar 2024 18:12:04 GMT</pubDate>
       <category>programación</category>
       <category>binario</category>
       <category>aritmética</category>
-      <media:content url="https://jafs.github.io/images/aritmetica-binaria-mini.webp" medium="image" />
+      <media:content url="https://jafs.es/images/aritmetica-binaria-mini.webp" medium="image" />
     </item>
     <item>
       <title>Hablemos de acoplamiento y cohesión. Parte 2. Cohesión</title>
-      <link>https://jafs.github.io/articles/posts/20230625.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20230625.html</guid>
+      <link>https://jafs.es/articles/posts/20230625.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20230625.html</guid>
       <description>En el artículo anterior estuvimos viendo un poco por encima en qué consisten los conceptos de acoplamiento y cohesión. En esta segunda parte nos centraremos es ver los distintos tipos de cohesión que hay. Eso sí, dependiendo del autor o autora, puede variar la lista, así que he intentado unificar lo máximo posible para poner los tipos que hay en común.</description>
       <pubDate>Sun, 25 Jun 2023 08:50:00 GMT</pubDate>
       <category>Diseño y arquitectura</category>
-      <media:content url="https://jafs.github.io/images/acoplamiento-cohesion-mini.webp" medium="image" />
+      <media:content url="https://jafs.es/images/acoplamiento-cohesion-mini.webp" medium="image" />
     </item>
     <item>
       <title>Hablemos de acoplamiento y cohesión. Parte 1</title>
-      <link>https://jafs.github.io/articles/posts/20230324.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20230324.html</guid>
+      <link>https://jafs.es/articles/posts/20230324.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20230324.html</guid>
       <description>Ya hemos hablado del Principio de Responsabilidad Única, y no, no es una idea original de Robert C. Martin, sino que este principio parte del concepto de &quot;cohesión&quot;. Es más, el Principio de Inversión de Dependencias, tampoco es algo original y lo que nos habla es de &quot;acoplamiento&quot;.</description>
       <pubDate>Fri, 24 Mar 2023 17:36:47 GMT</pubDate>
       <category>Diseño y arquitectura</category>
-      <media:content url="https://jafs.github.io/images/acoplamiento-cohesion-mini.webp" medium="image" />
+      <media:content url="https://jafs.es/images/acoplamiento-cohesion-mini.webp" medium="image" />
     </item>
     <item>
       <title>Caso práctico TDD</title>
-      <link>https://jafs.github.io/articles/posts/20230310.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20230310.html</guid>
+      <link>https://jafs.es/articles/posts/20230310.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20230310.html</guid>
       <description>Por poner el broche de oro a esta mini-serie de artículos sobre TDD, vamos a ver un caso práctico con algo muy sencillo que todos conocéis: una pila. Por si queda algún despistado o despistada, una pila es una lista ordenada que permite almacenar y recuperar valores. El acceso a estos datos sigue el patrón LIFO (del inglés Last In, First Out, &quot;el último en entrar es el primero en salir&quot;). Básicamente, podéis pensar en la típica pila de platos, en la que el último plato que se pone encima, será el primero que quitemos.</description>
       <pubDate>Fri, 10 Mar 2023 20:24:00 GMT</pubDate>
       <category>Testing</category>
-      <media:content url="https://jafs.github.io/images/caso-practico-tdd-mini.webp" medium="image" />
+      <media:content url="https://jafs.es/images/caso-practico-tdd-mini.webp" medium="image" />
     </item>
     <item>
       <title>Testing y TDD. Algunos consejos</title>
-      <link>https://jafs.github.io/articles/posts/20230225.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20230225.html</guid>
+      <link>https://jafs.es/articles/posts/20230225.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20230225.html</guid>
       <description>Tras la introducción a TDD que tuvimos hace un tiempo, he creído conveniente ampliar un poco la información del anterior artículo, para exponer algunas anotaciones sobre esta técnica.</description>
       <pubDate>Sat, 25 Feb 2023 10:50:26 GMT</pubDate>
       <category>testing</category>
       <category>TDD</category>
-      <media:content url="https://jafs.github.io/images/tdd-consejos-mini.webp" medium="image" />
+      <media:content url="https://jafs.es/images/tdd-consejos-mini.webp" medium="image" />
     </item>
     <item>
       <title>BDD y Gherkin. Una pequeña introducción</title>
-      <link>https://jafs.github.io/articles/posts/20221220.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20221220.html</guid>
+      <link>https://jafs.es/articles/posts/20221220.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20221220.html</guid>
       <description>BDD (Behavior Driven Development) o Desarrollo Dirigido por Comportamiento es una metodología que lleva varios años en el tintero, pero día a día va cobrando más fuerza. En este artículo aprenderemos más sobre ella.</description>
       <pubDate>Tue, 20 Dec 2022 17:18:46 GMT</pubDate>
       <category>Testing</category>
-      <media:content url="https://jafs.github.io/images/bdd-mini.webp" medium="image" />
+      <media:content url="https://jafs.es/images/bdd-mini.webp" medium="image" />
     </item>
     <item>
       <title>Plantilla de proyecto TypeScript</title>
-      <link>https://jafs.github.io/articles/posts/20221218.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20221218.html</guid>
+      <link>https://jafs.es/articles/posts/20221218.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20221218.html</guid>
       <description>A la hora de comenzar un nuevo proyecto, suele costar bastante configurar todo. Es por ello, que por simplificar un poco las cosas, acabo de crear una plantilla, basada en TypeScript, Vite y Jest. Para usarla, podéis crear un fork o descargar el código y ajustarlo a vuestras necesidades libremente. Este código lo podéis encontrar en GitHub. Esta plantilla necesita de node en su versión 16.0.0 como mínimo.</description>
       <pubDate>Sun, 18 Dec 2022 18:10:29 GMT</pubDate>
       <category>TypeScript</category>
       <category>plantilla</category>
-      <media:content url="https://jafs.github.io/images/tsvitejest-mini.webp" medium="image" />
+      <media:content url="https://jafs.es/images/tsvitejest-mini.webp" medium="image" />
     </item>
     <item>
       <title>Testing y TDD</title>
-      <link>https://jafs.github.io/articles/posts/20221211.html</link>
-      <guid isPermaLink="true">https://jafs.github.io/articles/posts/20221211.html</guid>
+      <link>https://jafs.es/articles/posts/20221211.html</link>
+      <guid isPermaLink="true">https://jafs.es/articles/posts/20221211.html</guid>
       <description>A día de hoy, muchas veces el software falla porque lo programan personas, por lo que es factible que tenga errores. Así que como desarrolladores y desarrolladoras, debemos siempre intentar minimizar esos fallos. Para ello disponemos de varias herramientas, y una de las más útiles son los tests. Estos pueden ser automáticos o manuales.</description>
       <pubDate>Sun, 11 Dec 2022 17:59:11 GMT</pubDate>
       <category>testing</category>
       <category>TDD</category>
-      <media:content url="https://jafs.github.io/images/tdd-mini.webp" medium="image" />
+      <media:content url="https://jafs.es/images/tdd-mini.webp" medium="image" />
     </item>
   </channel>
 </rss>

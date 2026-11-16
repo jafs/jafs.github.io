@@ -439,7 +439,7 @@
   {
     "slug": "20220209.html",
     "title": "Métodos del objeto Promise en JavaScript",
-    "description": ":div[❝ **CITA**Había permanecido en la sombra, esperando, sin prisa, a que alguna fuerza lo trajese de nuevo al mundo de los vivos. Y nada tiene tanta fuerza como una promesa…Carlos Ruiz Zafón, El Príncipe de la Niebla]{.rounded-md.bg-gray-700.p-4.border-t-4.border-t-gray-700}",
+    "description": "Como hasta ahora no hemos hablado de promesas en este blog, vamos a comenzar haciendo una pequeña introducción a la breve pero apasionante historia de las promesas en JavaScript, para a continuación ver los distintos métodos para trabajar con promesas.",
     "url": "/articles/posts/20220209.html",
     "date": "2022-02-09",
     "categories": [
